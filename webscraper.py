@@ -96,20 +96,24 @@ def jsonPrettyDict(dict_data):
     return json.dumps(dict_data, sort_keys=True, indent=4, separators=(',', ': '))
 
 #Scrape a company
-def scrapeOrganizationPeople(company_name):
+def scrapeOrganization(company_name):
     
-    print("Scraping company "+company_name)
-    html_file = "./company/html/"+company_name+".html"
+    print("Scraping company people "+company_name)
+    html_file_people = "./company/html/"+company_name+"_people.html"
+    html_file_advisors = "./company/html/"+company_name+"_board.html"
     json_file = "./company/json/"+company_name+".json"
     
-    soup = getPageSoup('https://www.crunchbase.com/organization/'+company_name+'/people', html_file)
-    if(soup is False):
+    soup_people = getPageSoup('https://www.crunchbase.com/organization/'+company_name+'/people', html_file_people)
+    if(soup_people is False):
         return False
-    #print(soup)
+    
+    soup_advisors = getPageSoup('https://www.crunchbase.com/organization/'+company_name+'/advisors', html_file_advisors)
+    if(soup_advisors is False):
+        return False
     
     #Get people
-    people = dict()
-    for div in soup.find_all('div',class_='people'):
+    people = list()
+    for div in soup_people.find_all('div',class_='people'):
         for ul in div.find_all('ul'):
             for li in ul.find_all('li'):
                 info_block = li.find('div',class_='info-block')
@@ -119,10 +123,19 @@ def scrapeOrganizationPeople(company_name):
                 name = a.get('data-name')
                 link = a.get('href')
                 role = h5.text
-                people.update({ name: { 'link': link, 'role':role }  })
+                people.append([name, link, role])
+                
+    #Get main advisors + more advisors
+    advisors = list()
+    for div_advisors in soup_advisors.find_all('div',class_='advisors'):
+        for info_block in div_advisors.find_all('div',class_='info-block'):
+            name = info_block.h4.text
+            primary_role = info_block.h5.text #the primary role of this person (may not be related to the company at hand)
+            role_in_bod = info_block.h6.text #his role in our company's BoD
+            advisors.append([name, primary_role, role_in_bod])
                 
     #Save to file
-    company_data = {'people':people}
+    company_data = {'people':people, 'advisors': advisors}
     writeToFile(json_file, jsonPrettyDict(company_data))
     return company_data
     
@@ -145,35 +158,35 @@ def scrapePerson(person_link):
     
     if overview_content is not None:
         
-        #primary role
+        # Primary role
         tag = overview_content.find('dt', string='Primary Role')
         if tag is not None:
-            role_arr = tag.next_sibling.text.split('@')
+            role_arr = tag.find_next('dd').text.split('@')
             overview['primary_role'] = dict()
             overview['primary_role']['role'] = role_arr[0].strip()
             overview['primary_role']['firm'] = role_arr[1].strip()
             
-        #born date
+        # Born date
         tag = overview_content.find('dt', string='Born:')
         if tag is not None:
-            overview['born'] = tag.next_sibling.text
+            overview['born'] = tag.find_next('dd').text
         
-        #gender
+        # Gender
         tag = overview_content.find('dt', string='Gender:')
         if tag is not None:
-            overview['gender'] = tag.next_sibling.text
+            overview['gender'] = tag.find_next('dd').text
 
-        #location
+        # ocation
         tag = overview_content.find('dt', string='Location:')
         if tag is not None:
-            overview['location'] = tag.next_sibling.text
+            overview['location'] = tag.find_next('dd').text
         
         #Social links
         overview['social'] = dict()
         tag = overview_content.find('dt', text=re.compile('Social:.*'))
         if tag:
-            social_links = tag.next_sibling
-        
+            social_links = tag.findNext('dd')
+            
             a_tag = social_links.find('a',{'data-icons':'facebook'})
             if a_tag is not None:
                 overview['social']['facebook'] = a_tag.get('href')
@@ -218,11 +231,11 @@ def scrapePerson(person_link):
             if info_row.find('div',class_=['header','footer'], recursive=False) is not None:
                 #print("HEADER OR FOOTER FOUND")
                 continue            
-            childs = list(info_row.findChildren())
-            date_start = childs[0].text
-            date_end = childs[1].text
-            title = childs[2].text
-            company = childs[3].text            
+            date_start_child = info_row.find('div',class_='date')
+            date_start = date_start_child.text
+            date_end = date_start_child.find_next('div',class_='date').text
+            title = info_row.find('div',class_='title').text
+            company = info_row.find('div',class_='company').text        
             past_jobs.append([
                     company,
                     title,
@@ -253,15 +266,18 @@ def scrapePerson(person_link):
     #Get education
     education = list()
     for edu in soup.find_all('div', class_='education'):
-        for info_block in edu.find_all('div',class_='infoblock'):
+        for info_block in edu.find_all('div',class_='info-block'):
             institute = info_block.h4.a.text
-            subject = info_block.h5.text
+            subject = info_block.h5.text            
+            date_start, date_end = '',''
             date_int = info_block.h5.next_sibling
-            date_int_c = DateInterval()
-            date_int_c.fromText(date_int)
-            date_start = date_int_c.getStart()
-            date_end = date_int_c.getEnd()
-            education.append ([institute, subject, date_start, date_end])
+            if date_int is not None:
+                date_int_c = DateInterval()
+                date_int_c.fromText(date_int)
+                date_start, date_end = date_int_c.getStart(), date_int_c.getEnd()
+            edu_items = [institute, subject, date_start, date_end]
+            #print("Found education "+str(edu_items))
+            education.append (edu_items)
     
     #Build complete data set
     person_data = {
@@ -278,10 +294,9 @@ def scrapePerson(person_link):
     fileh.write(jsonPrettyDict(person_data))
     fileh.close()    
 
-#company = "ip-access"
-#company_data = scrapeOrganizationPeople(company)#
+company = "ip-access"
+company_data = scrapeOrganization("facebook")
+
 #if(company_data is not False):
 #    for key,value in company_data['people'].items():
 #        scrapePerson(value['link'])
-
-scrapePerson('/person/mark-zuckerberg')
