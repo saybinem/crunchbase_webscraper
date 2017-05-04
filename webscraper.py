@@ -70,11 +70,9 @@ def getPageSoup(url, filepath):
     #print(html_headers)
     
     sleep_sec = random.randrange(2,6)
-    print("Sleeping for "+sleep_sec+"seconds...")
+    print("Requesting the page to the website. Before sleeping for "+str(sleep_sec)+" secs...")
     time.sleep(sleep_sec)
-        
-    print("Requesting the page to the website. Before sleeping for "+sleep_sec+" secs...")
-    
+  
     res = requests.get(url, headers=html_headers)
 
     #print(res.status_code)
@@ -195,40 +193,65 @@ def scrapePerson(person_link):
         person_details = div_description.text
     
     #Get current jobs
-    current_jobs = dict()
+    current_jobs = list()
     for current_job in soup.find_all('div',class_='current_job'):
         info_block = current_job.find('div',class_='info-block')
         role = info_block.h4.text
         follow_card = info_block.find('a',class_='follow_card')
-        firm = follow_card.text
-        current_jobs.update({firm: {'role':role}})
+        company = follow_card.text        
+        job_items = [role,company]        
         date = info_block.find('h5',class_='date')
+        date_start, date_end = '', ''
         if(date is not None):
             date_text = date.text
             date_int = DateInterval()
             date_int.fromText(date_text)
-            current_jobs[firm].update({'from':date_int.getStart(),'to':date_int.getEnd()})
+            date_start, date_end = date_int.getStart(), date_int.getEnd()
+        current_jobs.append([role,company, date_start, date_end])    
     
+    #Get past jobs
+    past_jobs = list()
+    for div_past_job in soup.find_all('div',class_='past_job'):        
+        #recursive=False finds only DIRECT children of the div
+        for info_row in div_past_job.find_all('div',class_='info-row', recursive=False):            
+            #skip header and footer
+            if info_row.find('div',class_=['header','footer'], recursive=False) is not None:
+                #print("HEADER OR FOOTER FOUND")
+                continue            
+            childs = list(info_row.findChildren())
+            date_start = childs[0].text
+            date_end = childs[1].text
+            title = childs[2].text
+            company = childs[3].text            
+            past_jobs.append([
+                    company,
+                    title,
+                    date_start,
+                    date_end
+                    ])            
+            #print("Found past job: "+str(past_job_dict))
+                        
     #Get advisory roles
-    adv_roles = dict()
+    adv_roles = list()
     for advisory_role in soup.find_all('div',class_='advisory_roles'):
         advisory_role_ul = advisory_role.ul
         if advisory_role_ul is not None:
-            for li in advisory_role.ul.find_all('li'):
+            for li in advisory_role_ul.find_all('li'):
                 info_block = li.div
                 role = info_block.h5.text
-                firm = info_block.h4.a.text
-                adv_roles.update({firm: {'role':role}})
+                company = info_block.h4.a.text
                 date = info_block.find('h5',class_='date')
+                date_start, date_end = '', ''
                 if(date is not None):
                     date_text = date.text
                     if date_text:
                         date_int = DateInterval()
                         date_int.fromText(date_text)
-                        adv_roles[firm].update({'from':date_int.getStart(),'to':date_int.getEnd()})
+                        date_start, date_end = date_int.getStart(), date_int.getEnd()
+                adv_roles.append([role, company, date_start, date_end])    
     
     #Get education
-    education = ()
+    education = list()
     for edu in soup.find_all('div', class_='education'):
         for info_block in edu.find_all('div',class_='infoblock'):
             institute = info_block.h4.a.text
@@ -238,13 +261,14 @@ def scrapePerson(person_link):
             date_int_c.fromText(date_int)
             date_start = date_int_c.getStart()
             date_end = date_int_c.getEnd()
-            education['institute'] = {'subject':subject, 'start':date_start, 'end':date_end}
+            education.append ([institute, subject, date_start, date_end])
     
     #Build complete data set
     person_data = {
             'overview':overview, 
             'person_details':person_details, 
             'current_jobs':current_jobs, 
+            'past_jobs':past_jobs,
             'advisory_roles':adv_roles,
             'education':education
             }
@@ -260,4 +284,4 @@ def scrapePerson(person_link):
 #    for key,value in company_data['people'].items():
 #        scrapePerson(value['link'])
 
-scrapePerson('/person/chris-rees')
+scrapePerson('/person/mark-zuckerberg')
