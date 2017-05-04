@@ -4,6 +4,7 @@ import os
 import json
 import re
 import time
+import random
 
 #class DateInterval
 class DateInterval(object):
@@ -35,12 +36,15 @@ def wasRobotDetected(content):
 def getPageSoup(url, filepath):
     
     if os.path.isfile(filepath):
-        filecont = readFromFile(filepath)
+        filecont = ''
+        with open(filepath,'r') as fileh:
+            filecont = fileh.read()
+            
         if(wasRobotDetected(filecont)):
-            print("[getPage] Pre-saved file contains robot. Removing it...")
+            print("\t[getPage] Pre-saved file contains robot. Removing it...")
             os.unlink(filepath)
         else:
-            print("[getPage] Returning content from pre-saved file "+filepath)
+            print("\t[getPage] Returning content from pre-saved file "+filepath)
             return bs.BeautifulSoup(filecont,'lxml')
     
     # Get a copy of the default headers that requests would use
@@ -65,6 +69,12 @@ def getPageSoup(url, filepath):
     
     #print(html_headers)
     
+    sleep_sec = random.randrange(2,6)
+    print("Sleeping for "+sleep_sec+"seconds...")
+    time.sleep(sleep_sec)
+        
+    print("Requesting the page to the website. Before sleeping for "+sleep_sec+" secs...")
+    
     res = requests.get(url, headers=html_headers)
 
     #print(res.status_code)
@@ -75,27 +85,14 @@ def getPageSoup(url, filepath):
     soup = bs.BeautifulSoup(cont,'lxml')
     #print(soup)
     
-    fileh = open(filepath,'w')
-    fileh.write(str(soup))
-    fileh.close()
+    with open(filepath,'w') as fileh:
+        fileh.write(str(soup))
     
     if(wasRobotDetected(filepath)):
         print("[getPage] I have downloaded a file that contains robot detection: "+filepath)
         return False
     else:
         return soup
-
-def readFromFile(file):
-    fileh = open(file,'r')
-    str = fileh.read()
-    fileh.close()
-    return str
-
-def writeToFile(file, content):
-    fileh = open(file,'w')
-    fileh.write(content)
-    fileh.close()
-    return str
 
 def jsonPrettyDict(dict_data):
     return json.dumps(dict_data, sort_keys=True, indent=4, separators=(',', ': '))
@@ -150,6 +147,14 @@ def scrapePerson(person_link):
     
     if overview_content is not None:
         
+        #primary role
+        tag = overview_content.find('dt', string='Primary Role')
+        if tag is not None:
+            role_arr = tag.next_sibling.text.split('@')
+            overview['primary_role'] = dict()
+            overview['primary_role']['role'] = role_arr[0].strip()
+            overview['primary_role']['firm'] = role_arr[1].strip()
+            
         #born date
         tag = overview_content.find('dt', string='Born:')
         if tag is not None:
@@ -183,6 +188,12 @@ def scrapePerson(person_link):
             if a_tag is not None:
                 overview['social']['twitter'] = a_tag.get('href')
 
+    #Get personal details (in HTML code they are called 'description')
+    person_details = ''
+    div_description = soup.find('div',{"id": "description"})
+    if div_description is not None:
+        person_details = div_description.text
+    
     #Get current jobs
     current_jobs = dict()
     for current_job in soup.find_all('div',class_='current_job'):
@@ -216,19 +227,37 @@ def scrapePerson(person_link):
                         date_int.fromText(date_text)
                         adv_roles[firm].update({'from':date_int.getStart(),'to':date_int.getEnd()})
     
+    #Get education
+    education = ()
+    for edu in soup.find_all('div', class_='education'):
+        for info_block in edu.find_all('div',class_='infoblock'):
+            institute = info_block.h4.a.text
+            subject = info_block.h5.text
+            date_int = info_block.h5.next_sibling
+            date_int_c = DateInterval()
+            date_int_c.fromText(date_int)
+            date_start = date_int_c.getStart()
+            date_end = date_int_c.getEnd()
+            education['institute'] = {'subject':subject, 'start':date_start, 'end':date_end}
+    
     #Build complete data set
-    person_data = {'overview':overview, 'current_jobs':current_jobs, 'advisory_roles':adv_roles}
+    person_data = {
+            'overview':overview, 
+            'person_details':person_details, 
+            'current_jobs':current_jobs, 
+            'advisory_roles':adv_roles,
+            'education':education
+            }
     
     #Save to file
     fileh = open(json_file,'w')
     fileh.write(jsonPrettyDict(person_data))
     fileh.close()    
 
-company = "ip-access"
-company_data = scrapeOrganizationPeople(company)
+#company = "ip-access"
+#company_data = scrapeOrganizationPeople(company)#
+#if(company_data is not False):
+#    for key,value in company_data['people'].items():
+#        scrapePerson(value['link'])
 
-if(company_data is not False):
-    for key,value in company_data['people'].items():
-        print("Sleeping...")
-        time.sleep(5)
-        scrapePerson(value['link'])
+scrapePerson('/person/chris-rees')
