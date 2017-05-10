@@ -33,7 +33,7 @@ def scrapeOrganization(org_data):
         return False
     
     # Get the page "people"
-    people_url = 'https://www.crunchbase.com/organization/'+company_name+'/people'
+    people_url = 'https://www.crunchbase.com/organization/'+company_name+'#/people'
     print("\tGetting company people ("+people_url+")")    
     soup_people = cbscraper.common.getPageSoup(people_url, html_file_people, overview_url, cookie_data)
     if(soup_people is False):
@@ -41,7 +41,7 @@ def scrapeOrganization(org_data):
         return False
     
     # Get page "advisors"
-    advisor_url = 'https://www.crunchbase.com/organization/'+company_name+'/advisors'
+    advisor_url = 'https://www.crunchbase.com/organization/'+company_name+'#/advisors'
     print("\tGetting company advisors ("+advisor_url+")")
     soup_advisors = cbscraper.common.getPageSoup(advisor_url, html_file_advisors, overview_url, cookie_data)
     if(soup_advisors is False):
@@ -123,7 +123,8 @@ def scrapeOrganization(org_data):
             emp_str = tag.find_next('dd').text
             emp_arr = emp_str.split("|")
             company_details['employees_num'] = emp_arr[0].strip()
-            company_details['employees_found'] = emp_arr[1].strip()
+            if len(emp_arr) > 1:
+                company_details['employees_found'] = emp_arr[1].strip()
             
         #Phone number
         tag = company_details_tag.find('span', class_='description')

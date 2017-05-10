@@ -23,13 +23,20 @@ def getHtmlHeader(url, origin_url, cookie_data):
              'Accept-Encoding':'gzip, deflate, sdch, br',
              'Accept-Language':'en-US,en;q=0.8,it-IT;q=0.6,it;q=0.4,de;q=0.2,nl;q=0.2,es;q=0.2,ar;q=0.2,pt;q=0.2,fr;q=0.2,ko;q=0.2,sl;q=0.2,cs;q=0.2',
              'Cache-Control':'max-age=0',
-             'Connection':'keep-alive',
-             'Cookie':cookie_data,
+             'Connection':'keep-alive',             
              'Host':'www.crunchbase.com',
              'Referer':origin_url,
              'Upgrade-Insecure-Requests':'1',
-             'User-Agent':ua.random
-             }
+             #'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36'
+             'User-Agent' : ua.random
+                 }
+    
+    if(cookie_data != ''):
+        header['Cookie'] = cookie_data
+    
+    print("Header: ")
+    pprint(header)
+    
     return header
     
 #check robots
