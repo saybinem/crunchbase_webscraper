@@ -3,24 +3,32 @@ import re
 import os
 import json
 from pprint import pprint
+import cbscraper.DateInterval
 
 def getPersonIdFromLink(link):
     return link.split("/")[2]
 
 #Scrape a single person    
 #e.g. person_link="/person/gavin-ray"    
-def scrapePerson(person_id, html_files, json_file, origin_url, rescrape = True):
+def scrapePerson(data):
+    
+    # Get vars
+    person_id = data['id']
+    overview_html = data['overview']
+    cookie_data = data['cookie']
+    json_file = data['json']
+    origin_url = data['origin_url']
+    rescrape = data['rescrape']
     
     if(os.path.isfile(json_file) and not rescrape):
-        print("[scrapePerson] Person already scraped")
+        print("[scrapePerson] Person \""+person_id+"\" already scraped")
         return True
     
-    print("[scrapePerson] Scraping person: "+person_id)
+    print("[scrapePerson] Scraping person: \""+person_id+"\"")
     person_link = "/person/"+person_id
-    print("[scrapePerson] Person link: "+person_link)
     
     # Get person overview
-    soup = cbscraper.common.getPageSoup('https://www.crunchbase.com'+person_link, html_files['overview'], origin_url)
+    soup = cbscraper.common.getPageSoup('https://www.crunchbase.com'+person_link, overview_html, origin_url, cookie_data)
     if(soup is False):
         print("Error during person overview soup")
         return False
@@ -90,7 +98,7 @@ def scrapePerson(person_id, html_files, json_file, origin_url, rescrape = True):
         date_start, date_end = '', ''
         if(date is not None):
             date_text = date.text
-            date_int = cbscraper.common.DateInterval()
+            date_int = cbscraper.DateInterval.DateInterval()
             date_int.fromText(date_text)
             date_start, date_end = date_int.getStart(), date_int.getEnd()
         current_jobs.append([role,company, date_start, date_end])    
@@ -131,7 +139,7 @@ def scrapePerson(person_id, html_files, json_file, origin_url, rescrape = True):
                 if(date is not None):
                     date_text = date.text
                     if date_text:
-                        date_int = cbscraper.common.DateInterval()
+                        date_int = cbscraper.DateInterval.DateInterval()
                         date_int.fromText(date_text)
                         date_start, date_end = date_int.getStart(), date_int.getEnd()
                 adv_roles.append([role, company, date_start, date_end])    
@@ -156,7 +164,7 @@ def scrapePerson(person_id, html_files, json_file, origin_url, rescrape = True):
             if info_block.h5 is not None:
                 date_int = info_block.h5.next_sibling            
                 if date_int is not None:
-                    date_int_c = cbscraper.common.DateInterval()
+                    date_int_c = cbscraper.DateInterval.DateInterval()
                     date_int_c.fromText(date_int)
                     date_start, date_end = date_int_c.getStart(), date_int_c.getEnd()
                     
