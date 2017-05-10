@@ -42,9 +42,11 @@ with open("cookie.txt") as cookie_file:
     
 # Scrape company
 
-import pandas
-frame = pandas.read_excel("C:/data/tesi/pilot_project/vico_sub2.xlsx", index_col=None, header=0, sheetname="CB_HC")
-ids = [str(x) for x in frame['CB_ID'] if x==x] #if x==x will remove the NaNs. A NaN is not equal to itself
+# import pandas
+# frame = pandas.read_excel("C:/data/tesi/pilot_project/vico_sub2.xlsx", index_col=None, header=0, sheetname="CB_HC")
+# ids = [str(x) for x in frame['CB_ID'] if x==x] #if x==x will remove the NaNs. A NaN is not equal to itself
+
+ids = ['cambridge-broadband-networks']
 
 for company_name in ids:
     
@@ -68,7 +70,7 @@ for company_name in ids:
         
         print("[main] Scraping persons")
         scrapePersons(company_data, 'people', cookie_data)
-        
+            
         print("[main] Scraping advisors")  
         scrapePersons(company_data, 'advisors', cookie_data)
 

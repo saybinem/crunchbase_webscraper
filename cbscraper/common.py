@@ -8,8 +8,12 @@ import requests
 import codecs
 from pprint import pprint
 
-from fake_useragent import UserAgent
-ua = UserAgent()
+#Selenium imports
+from selenium import webdriver
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 
 def myTextStrip(str):
     return str.replace('\n','').strip()
@@ -17,28 +21,6 @@ def myTextStrip(str):
 def jsonPretty(dict_data):
     return json.dumps(dict_data, sort_keys=False, indent=4, separators=(',', ': '))
 
-def getHtmlHeader(url, origin_url, cookie_data):
-    header = {
-             'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-             'Accept-Encoding':'gzip, deflate, sdch, br',
-             'Accept-Language':'en-US,en;q=0.8,it-IT;q=0.6,it;q=0.4,de;q=0.2,nl;q=0.2,es;q=0.2,ar;q=0.2,pt;q=0.2,fr;q=0.2,ko;q=0.2,sl;q=0.2,cs;q=0.2',
-             'Cache-Control':'max-age=0',
-             'Connection':'keep-alive',             
-             'Host':'www.crunchbase.com',
-             'Referer':origin_url,
-             'Upgrade-Insecure-Requests':'1',
-             #'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36'
-             'User-Agent' : ua.random
-                 }
-    
-    if(cookie_data != ''):
-        header['Cookie'] = cookie_data
-    
-    print("Header: ")
-    pprint(header)
-    
-    return header
-    
 #check robots
 def wasRobotDetected(content):
     
@@ -59,35 +41,56 @@ def wasRobotDetected(content):
     return False
 
 #Requesting page with random delay and custom headers
-def myRequest(url, origin_url, cookie_data):
-    html_headers = getHtmlHeader(url, origin_url, cookie_data)
-    sleep_sec = random.randrange(10, 25)
+def myRequest(url):
     
-    if myRequest.counter > 0:
-        print("\t[getPageSoup] Waiting "+str(sleep_sec)+" secs")
-        time.sleep(sleep_sec)
+    if(url.find("person") >= 0 ):
+        type="person"
+    elif(url.find("people") >= 0 ):
+        type="org-people"
+    elif(url.find("advisors") >= 0 ):
+        type="org-advisors"
+    elif(url.find("organization") >= 0 ):
+        type="org"
     else:
-        print("\t[getPageSoup] NO Waiting")
-        
-    myRequest.counter += 1
+        print("ERROR: url type not recognized "+url)
+        exit()
     
-    #Use requests
-    print("\t[getPageSoup] I am using REQUESTS")
-    res = requests.get(url, headers=html_headers)
-    cont = res.content
+    sleep_sec = random.randrange(5, 10)
+    #sleep_sec = 0
+    
+    print("\t[getPageSoup] Waiting "+str(sleep_sec)+" secs")
+    time.sleep(sleep_sec)
+
+    #Use selenium
+    print("\t[getPageSoup] Running Selenium")
+    browser = webdriver.Firefox()
+    browser.get(url)
+    
+#     timeout = 10 # seconds
+#     try:
+#         element_present = EC.presence_of_element_located((By.ID, 'profile_header_heading'))
+#         WebDriverWait(browser, timeout).until(element_present)
+#     except TimeoutException:
+#         print("Timed out waiting for page to load") 
+    
+    sleep_time = 15
+    print("\t[getPageSoup] Waiting "+str(sleep_time)+" secs")
+    time.sleep(sleep_time)
+ 
+    cont = browser.page_source
+    browser.quit()
+    
     return cont
 
 #Get a webpage and save to file (avoid another request). Return the page soup
-def getPageSoup(url, filepath, origin_url, cookie_data):
+def getPageSoup(url, filepath):
     
     if os.path.isfile(filepath):
         
-        with open(filepath,'rb') as fileh:
+        with open(filepath,'r') as fileh:
             filecont = fileh.read()
         
-        filecont_dec = filecont.decode()
-        
-        if(wasRobotDetected(filecont_dec)):
+        if(wasRobotDetected(filecont)):
             print("\t[getPageSoup] Pre-saved file contains robot. Removing it...")
             os.unlink(filepath)
         else:
@@ -99,26 +102,22 @@ def getPageSoup(url, filepath, origin_url, cookie_data):
     #myRequest(origin_url)
     
     print("\t[getPageSoup] Requesting actual url "+url)
-    cont = myRequest(url, origin_url, cookie_data)
-    
-    if cont is False:
-        return False
+    cont = myRequest(url)
         
     #Get the soup
     
     #print("type(cont): "+str(type(cont)))
     
-    soup = bs.BeautifulSoup(cont,'lxml')   
-    cont_str = soup.decode('utf8')
+    soup = bs.BeautifulSoup(cont,'lxml')       
+    cont_str = cont
     
-    # Write binary content to file
-    with codecs.open(filepath,'wb') as fileh:
+    with open(filepath, "w") as fileh:
         fileh.write(cont)
-    
+            
     # Check for robot detection
     if wasRobotDetected(cont_str):
         print("\t[getPageSoup] ROBOT: I have downloaded a file that contains robot detection: "+filepath)
-        return False
+        exit()
     else:
         print("\t[getPageSoup] File downloaded")
         return soup

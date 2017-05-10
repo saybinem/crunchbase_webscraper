@@ -4,14 +4,69 @@ import re
 import json
 from pprint import pprint
 
+#Scrape organization advisors
+def scrapeOrgAdvisors(company_name, html_file_advisors):
+    
+    # Get the page
+    advisor_url = 'https://www.crunchbase.com/organization/'+company_name+'#/advisors'
+    print("\tGetting company advisors ("+advisor_url+")")
+    soup_advisors = cbscraper.common.getPageSoup(advisor_url, html_file_advisors)
+    if(soup_advisors is False):
+        print("\tError while making advisory soup")
+        return False
+                    
+    # Scrape page "advisors" (get both main advisors and additional one with the same code)
+    advisors = list()
+    for div_advisors in soup_advisors.find_all('div',class_='advisors'):
+        for info_block in div_advisors.find_all('div',class_='info-block'):
+            follow_card = info_block.find('a',class_='follow_card')
+            name = follow_card.get('data-name')
+            link = follow_card.get('data-permalink')
+            primary_role = info_block.h5.text #the primary role of this person (may not be related to the company at hand)
+            role_in_bod = info_block.h6.text #his role in our company's BoD
+            
+            name = cbscraper.common.myTextStrip(name)
+            primary_role = cbscraper.common.myTextStrip(primary_role)
+            role_in_bod = cbscraper.common.myTextStrip(role_in_bod)
+            
+            advisors.append([name, link, role_in_bod, primary_role])
+            
+    return advisors       
+
+#Scrape organization people
+def scrapeOrgPeople(company_name, html_file_people):
+    # Get the page
+    people_url = 'https://www.crunchbase.com/organization/'+company_name+'#/people'
+    print("\tGetting company people ("+people_url+")")    
+    soup_people = cbscraper.common.getPageSoup(people_url, html_file_people)
+    if(soup_people is False):
+        print("\tError in making people soup")
+        return False
+    
+    #Scrape
+    people = list()
+    for div_people in soup_people.find_all('div',class_='people'):
+        for info_block in div_people.find_all('div',class_='info-block'):
+            h4 = info_block.find('h4')
+            a = h4.a   
+            name = a.get('data-name')
+            link = a.get('href')
+            role = info_block.find('h5').text
+            
+            name = cbscraper.common.myTextStrip(name)
+            role = cbscraper.common.myTextStrip(role)
+            
+            people.append([name, link, role])
+                        
+    return people
+
 #Scrape a company
 def scrapeOrganization(org_data):
     
-    #
+    #Get variables
     company_name = org_data['name']
     json_file = org_data['json']
     rescrape = org_data['rescrape']
-    cookie_data = org_data['cookie']
     html_file_overview = org_data['overview_html']
     html_file_people = org_data['people_html']
     html_file_advisors = org_data['board_html']
@@ -27,25 +82,9 @@ def scrapeOrganization(org_data):
     # Get the page "overview"
     overview_url = 'https://www.crunchbase.com/organization/'+company_name
     print("\tGetting company overview ("+overview_url+")")    
-    soup_overview = cbscraper.common.getPageSoup(overview_url, html_file_overview, 'http://wwww.crunchbase.com', cookie_data)
+    soup_overview = cbscraper.common.getPageSoup(overview_url, html_file_overview)
     if(soup_overview is False):
         print("\tError in making overview soup")
-        return False
-    
-    # Get the page "people"
-    people_url = 'https://www.crunchbase.com/organization/'+company_name+'#/people'
-    print("\tGetting company people ("+people_url+")")    
-    soup_people = cbscraper.common.getPageSoup(people_url, html_file_people, overview_url, cookie_data)
-    if(soup_people is False):
-        print("\tError in making people soup")
-        return False
-    
-    # Get page "advisors"
-    advisor_url = 'https://www.crunchbase.com/organization/'+company_name+'#/advisors'
-    print("\tGetting company advisors ("+advisor_url+")")
-    soup_advisors = cbscraper.common.getPageSoup(advisor_url, html_file_advisors, overview_url, cookie_data)
-    if(soup_advisors is False):
-        print("\tError while making advisory soup")
         return False
     
     #Scrape page "overview"
@@ -55,6 +94,18 @@ def scrapeOrganization(org_data):
     # Scrape section overview->overview
     overview = {}
     
+    #Do we have a team?
+    has_team = False
+    tag = soup_overview.find('h2', {'id':'current_team'} )
+    if tag is not None:
+        has_team = True
+        
+    #Do we have advisors?
+    has_advisors = False
+    tag = soup_overview.find('h2', {'id':'board_members_and_advisors'} )
+    if tag is not None:
+        has_advisors = True
+        
     # Headquarters
     tag = soup_overview.find('dt', string='Headquarters:')
     if tag is not None:
@@ -132,35 +183,16 @@ def scrapeOrganization(org_data):
             company_details['description'] = tag.text
 
     # Scrape page "people"
-    people = list()
-    for div_people in soup_people.find_all('div',class_='people'):
-        for info_block in div_people.find_all('div',class_='info-block'):
-            h4 = info_block.find('h4')
-            a = h4.a   
-            name = a.get('data-name')
-            link = a.get('href')
-            role = info_block.find('h5').text
+    people = {}
+    if has_team:
+        print("\tWe have a team and we scrape it")
+        people = scrapeOrgPeople(company_name, html_file_people)    
             
-            name = cbscraper.common.myTextStrip(name)
-            role = cbscraper.common.myTextStrip(role)
-            
-            people.append([name, link, role])
-                
-    # Scrape page "advisors" (get both main advisors and additional one with the same code)
-    advisors = list()
-    for div_advisors in soup_advisors.find_all('div',class_='advisors'):
-        for info_block in div_advisors.find_all('div',class_='info-block'):
-            follow_card = info_block.find('a',class_='follow_card')
-            name = follow_card.get('data-name')
-            link = follow_card.get('data-permalink')
-            primary_role = info_block.h5.text #the primary role of this person (may not be related to the company at hand)
-            role_in_bod = info_block.h6.text #his role in our company's BoD
-            
-            name = cbscraper.common.myTextStrip(name)
-            primary_role = cbscraper.common.myTextStrip(primary_role)
-            role_in_bod = cbscraper.common.myTextStrip(role_in_bod)
-            
-            advisors.append([name, link, role_in_bod, primary_role])
+    # Scrape page "advisors"
+    advisors = {}
+    if has_team:
+        print("\tWe have advisors and we scrape it")
+        advisors = scrapeOrgAdvisors(company_name, html_file_advisors)    
                 
     #Return data
     company_data = {'id' : company_name, 'overview' : overview, "company_details" : company_details, 'people' : people, 'advisors' : advisors}

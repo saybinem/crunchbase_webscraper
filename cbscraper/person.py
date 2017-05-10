@@ -28,7 +28,7 @@ def scrapePerson(data):
     person_link = "/person/"+person_id
     
     # Get person overview
-    soup = cbscraper.common.getPageSoup('https://www.crunchbase.com'+person_link, overview_html, origin_url, cookie_data)
+    soup = cbscraper.common.getPageSoup('https://www.crunchbase.com'+person_link, overview_html)
     if(soup is False):
         print("Error during person overview soup")
         return False
