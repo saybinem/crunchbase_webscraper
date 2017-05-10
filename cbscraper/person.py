@@ -1,17 +1,28 @@
-import common
+import cbscraper.common
 import re
+import os
+import json
+from pprint import pprint
+
+def getPersonIdFromLink(link):
+    return link.split("/")[2]
 
 #Scrape a single person    
 #e.g. person_link="/person/gavin-ray"    
-def scrapePerson(person_link):
-    print("Scraping person: "+person_link)
-    person_name = person_link.split('/')[2]
-
-    html_file = "./person/html/"+person_name+".html"
-    json_file = "./person/json/"+person_name+".json" #output file
+def scrapePerson(person_id, html_files, json_file, origin_url, rescrape = True):
     
-    soup = common.getPageSoup('https://www.crunchbase.com'+person_link, html_file)
+    if(os.path.isfile(json_file) and not rescrape):
+        print("[scrapePerson] Person already scraped")
+        return True
+    
+    print("[scrapePerson] Scraping person: "+person_id)
+    person_link = "/person/"+person_id
+    print("[scrapePerson] Person link: "+person_link)
+    
+    # Get person overview
+    soup = cbscraper.common.getPageSoup('https://www.crunchbase.com'+person_link, html_files['overview'], origin_url)
     if(soup is False):
+        print("Error during person overview soup")
         return False
     
     #Get overview information
@@ -38,7 +49,7 @@ def scrapePerson(person_link):
         if tag is not None:
             overview['gender'] = tag.find_next('dd').text
 
-        # ocation
+        # Location
         tag = overview_content.find('dt', string='Location:')
         if tag is not None:
             overview['location'] = tag.find_next('dd').text
@@ -79,7 +90,7 @@ def scrapePerson(person_link):
         date_start, date_end = '', ''
         if(date is not None):
             date_text = date.text
-            date_int = common.DateInterval()
+            date_int = cbscraper.common.DateInterval()
             date_int.fromText(date_text)
             date_start, date_end = date_int.getStart(), date_int.getEnd()
         current_jobs.append([role,company, date_start, date_end])    
@@ -120,7 +131,7 @@ def scrapePerson(person_link):
                 if(date is not None):
                     date_text = date.text
                     if date_text:
-                        date_int = common.DateInterval()
+                        date_int = cbscraper.common.DateInterval()
                         date_int.fromText(date_text)
                         date_start, date_end = date_int.getStart(), date_int.getEnd()
                 adv_roles.append([role, company, date_start, date_end])    
@@ -129,17 +140,28 @@ def scrapePerson(person_link):
     education = list()
     for edu in soup.find_all('div', class_='education'):
         for info_block in edu.find_all('div',class_='info-block'):
-            institute = info_block.h4.a.text
-            subject = info_block.h5.text            
-            date_start, date_end = '',''
-            date_int = info_block.h5.next_sibling
-            print("Education date_int="+repr(date_int)+"("+str(type(date_int))+")")
-            if date_int is not None:
-                date_int_c = common.DateInterval()
-                date_int_c.fromText(date_int)
-                date_start, date_end = date_int_c.getStart(), date_int_c.getEnd()
-            edu_items = [institute, subject, date_start, date_end]
-            #print("Found education "+str(edu_items))
+            
+            # School
+            institute = ''
+            if info_block.h4 is not None:
+                institute = info_block.h4.a.text
+            
+            # Subject
+            subject = ''
+            if info_block.h5 is not None:
+                subject = info_block.h5.text   
+            
+            # Date             
+            date_start, date_end = '',''            
+            if info_block.h5 is not None:
+                date_int = info_block.h5.next_sibling            
+                if date_int is not None:
+                    date_int_c = cbscraper.common.DateInterval()
+                    date_int_c.fromText(date_int)
+                    date_start, date_end = date_int_c.getStart(), date_int_c.getEnd()
+                    
+            #Put in list       
+            edu_items = [institute, subject, date_start, date_end]            
             education.append (edu_items)
     
     #Build complete data set
@@ -152,7 +174,11 @@ def scrapePerson(person_link):
             'education':education
             }
     
-    #Save to file
+    # Save to JSON file
     with open(json_file,'w') as fileh:
-        fileh.write(common.jsonPrettyDict(person_data))
+        fileh.write(cbscraper.common.jsonPretty(person_data))
+        
+    #Return
+    return person_data
+
         
