@@ -9,7 +9,7 @@ def buildDirs():
     os.makedirs("./data/company/html",exist_ok=True)
     os.makedirs("./data/company/json",exist_ok=True)
     
-def scrapePersons(company_data, key, cookie_data):
+def scrapePersons(company_data, key):
     company_id = company_data['id']
     
     if(key=='people'):
@@ -24,14 +24,9 @@ def scrapePersons(company_data, key, cookie_data):
             "id" : person_id,
             "overview" : "./data/person/html/"+person_id+".html",
             "json" : "./data/person/json/"+person_id+".json",
-            "cookie" : cookie_data,
-            "origin_url" : origin_url,
-            "rescrape" : False
+            "rescrape" : True
             }
         person_res = cbscraper.person.scrapePerson(person_data)
-        if person_res is False:
-            print("Exiting...")
-            exit()
         
 #MAIN
 cbscraper.common.myRequest.counter = 0
@@ -42,16 +37,20 @@ with open("cookie.txt") as cookie_file:
     
 # Scrape company
 
-# import pandas
-# frame = pandas.read_excel("C:/data/tesi/pilot_project/vico_sub2.xlsx", index_col=None, header=0, sheetname="CB_HC")
-# ids = [str(x) for x in frame['CB_ID'] if x==x] #if x==x will remove the NaNs. A NaN is not equal to itself
+import pandas
+frame = pandas.read_excel("C:/data/tesi/pilot_project/vico_sub2.xlsx", index_col=None, header=0, sheetname="CB_HC")
+ids = [str(x) for x in frame['CB_ID'] if x==x] #if x==x will remove the NaNs. A NaN is not equal to itself
 
-ids = ['cambridge-broadband-networks']
+#ids = ['cambridge-broadband-networks']
+
+counter = 1
+ids_len = len(ids)
 
 for company_name in ids:
-    
-    print("[main] Company: "+company_name)
-    
+    percent = round((counter / ids_len) * 100,2)
+    print("[main] Company: " + company_name + " ("+str(counter)+"/"+str(ids_len)+" - "+str(percent)+"%)")
+    counter += 1
+        
     org_data = {
         "name" : company_name,
         "overview_html" : "./data/company/html/"+company_name+"_overview.html",
@@ -59,7 +58,7 @@ for company_name in ids:
         "people_html" : "./data/company/html/"+company_name+"_people.html",
         "json" : "./data/company/json/"+company_name+".json",
         "cookie" : cookie_data,
-        "rescrape" : False
+        "rescrape" : True
         }
     
     company_data = cbscraper.company.scrapeOrganization(org_data)
@@ -69,9 +68,9 @@ for company_name in ids:
     if(company_data is not False):
         
         print("[main] Scraping persons")
-        scrapePersons(company_data, 'people', cookie_data)
+        scrapePersons(company_data, 'people')
             
         print("[main] Scraping advisors")  
-        scrapePersons(company_data, 'advisors', cookie_data)
+        scrapePersons(company_data, 'advisors')
 
 print("END!")

@@ -4,6 +4,7 @@ import os
 import json
 from pprint import pprint
 import cbscraper.DateInterval
+import codecs
 
 def getPersonIdFromLink(link):
     return link.split("/")[2]
@@ -15,9 +16,7 @@ def scrapePerson(data):
     # Get vars
     person_id = data['id']
     overview_html = data['overview']
-    cookie_data = data['cookie']
     json_file = data['json']
-    origin_url = data['origin_url']
     rescrape = data['rescrape']
     
     if(os.path.isfile(json_file) and not rescrape):
@@ -183,7 +182,7 @@ def scrapePerson(data):
             }
     
     # Save to JSON file
-    with open(json_file,'w') as fileh:
+    with codecs.open(json_file,'w', "utf-8") as fileh:
         fileh.write(cbscraper.common.jsonPretty(person_data))
         
     #Return

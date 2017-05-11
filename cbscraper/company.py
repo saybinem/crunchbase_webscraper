@@ -3,12 +3,13 @@ import os
 import re
 import json
 from pprint import pprint
+import codecs
 
 #Scrape organization advisors
 def scrapeOrgAdvisors(company_name, html_file_advisors):
     
     # Get the page
-    advisor_url = 'https://www.crunchbase.com/organization/'+company_name+'#/advisors'
+    advisor_url = 'https://www.crunchbase.com/organization/'+company_name+'/advisors'
     print("\tGetting company advisors ("+advisor_url+")")
     soup_advisors = cbscraper.common.getPageSoup(advisor_url, html_file_advisors)
     if(soup_advisors is False):
@@ -36,7 +37,7 @@ def scrapeOrgAdvisors(company_name, html_file_advisors):
 #Scrape organization people
 def scrapeOrgPeople(company_name, html_file_people):
     # Get the page
-    people_url = 'https://www.crunchbase.com/organization/'+company_name+'#/people'
+    people_url = 'https://www.crunchbase.com/organization/'+company_name+'/people'
     print("\tGetting company people ("+people_url+")")    
     soup_people = cbscraper.common.getPageSoup(people_url, html_file_people)
     if(soup_people is False):
@@ -184,21 +185,19 @@ def scrapeOrganization(org_data):
 
     # Scrape page "people"
     people = {}
-    if has_team:
-        print("\tWe have a team and we scrape it")
-        people = scrapeOrgPeople(company_name, html_file_people)    
+    print("\tScraping people...")
+    people = scrapeOrgPeople(company_name, html_file_people)    
             
     # Scrape page "advisors"
     advisors = {}
-    if has_team:
-        print("\tWe have advisors and we scrape it")
-        advisors = scrapeOrgAdvisors(company_name, html_file_advisors)    
+    print("\tScraping advisors...")
+    advisors = scrapeOrgAdvisors(company_name, html_file_advisors)    
                 
     #Return data
     company_data = {'id' : company_name, 'overview' : overview, "company_details" : company_details, 'people' : people, 'advisors' : advisors}
     
     #Write to file
-    with open(json_file,'w') as fileh:
+    with codecs.open(json_file,'w','utf-8') as fileh:
         fileh.write(cbscraper.common.jsonPretty(company_data))
     
     return company_data

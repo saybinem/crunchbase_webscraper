@@ -55,7 +55,7 @@ def myRequest(url):
         print("ERROR: url type not recognized "+url)
         exit()
     
-    sleep_sec = random.randrange(5, 10)
+    sleep_sec = random.randrange(0, 5)
     #sleep_sec = 0
     
     print("\t[getPageSoup] Waiting "+str(sleep_sec)+" secs")
@@ -73,7 +73,7 @@ def myRequest(url):
 #     except TimeoutException:
 #         print("Timed out waiting for page to load") 
     
-    sleep_time = 15
+    sleep_time = 18
     print("\t[getPageSoup] Waiting "+str(sleep_time)+" secs")
     time.sleep(sleep_time)
  
@@ -87,16 +87,23 @@ def getPageSoup(url, filepath):
     
     if os.path.isfile(filepath):
         
-        with open(filepath,'r') as fileh:
-            filecont = fileh.read()
+        with codecs.open(filepath, 'r', 'utf-8') as fileh:
+            try:
+                filecont = fileh.read()
+            except UnicodeDecodeError:
+                print("UnicodeDecodeError on "+filepath+" redownloading it...")
+                fileh.close()
+                os.unlink(filepath)
+                filecont = ''
         
-        if(wasRobotDetected(filecont)):
-            print("\t[getPageSoup] Pre-saved file contains robot. Removing it...")
-            os.unlink(filepath)
-        else:
-            print("\t[getPageSoup] Returning content from pre-saved file "+filepath)
-            soup = bs.BeautifulSoup(filecont,'lxml')
-            return soup
+        if filecont != '':
+            if(wasRobotDetected(filecont)):
+                print("\t[getPageSoup] Pre-saved file contains robot. Removing it...")
+                os.unlink(filepath)
+            else:
+                print("\t[getPageSoup] Returning content from pre-saved file "+filepath)
+                soup = bs.BeautifulSoup(filecont,'lxml')
+                return soup
     
     #print("\t[getPageSoup] Requesting origin "+origin_url)
     #myRequest(origin_url)
@@ -111,7 +118,7 @@ def getPageSoup(url, filepath):
     soup = bs.BeautifulSoup(cont,'lxml')       
     cont_str = cont
     
-    with open(filepath, "w") as fileh:
+    with codecs.open(filepath, 'w', 'utf-8') as fileh:
         fileh.write(cont)
             
     # Check for robot detection
