@@ -19,7 +19,7 @@ def myTextStrip(str):
     return str.replace('\n','').strip()
 
 def jsonPretty(dict_data):
-    return json.dumps(dict_data, sort_keys=False, indent=4, separators=(',', ': '))
+    return json.dumps(dict_data, sort_keys=True, indent=4, separators=(',', ': '))
 
 #check robots
 def wasRobotDetected(content):
@@ -41,29 +41,20 @@ def wasRobotDetected(content):
     return False
 
 #Requesting page with random delay and custom headers
-def myRequest(url):
+def myRequest(url, sleep_after, browser):
     
-    if(url.find("person") >= 0 ):
-        type="person"
-    elif(url.find("people") >= 0 ):
-        type="org-people"
-    elif(url.find("advisors") >= 0 ):
-        type="org-advisors"
-    elif(url.find("organization") >= 0 ):
-        type="org"
-    else:
-        print("ERROR: url type not recognized "+url)
-        exit()
-    
-    sleep_sec = random.randrange(0, 5)
-    #sleep_sec = 0
+    #sleep_sec = random.randrange(0, 5)
+    sleep_sec = 0
     
     print("\t[getPageSoup] Waiting "+str(sleep_sec)+" secs")
     time.sleep(sleep_sec)
 
     #Use selenium
     print("\t[getPageSoup] Running Selenium")
-    browser = webdriver.Firefox()
+    
+    if(browser is None):
+        browser = webdriver.Firefox()
+        
     browser.get(url)
     
 #     timeout = 10 # seconds
@@ -73,9 +64,8 @@ def myRequest(url):
 #     except TimeoutException:
 #         print("Timed out waiting for page to load") 
     
-    sleep_time = 18
-    print("\t[getPageSoup] Waiting "+str(sleep_time)+" secs")
-    time.sleep(sleep_time)
+    print("\t[getPageSoup] Waiting "+str(sleep_after)+" secs")
+    time.sleep(sleep_after)
  
     cont = browser.page_source
     browser.quit()
@@ -83,7 +73,7 @@ def myRequest(url):
     return cont
 
 #Get a webpage and save to file (avoid another request). Return the page soup
-def getPageSoup(url, filepath):
+def getPageSoup(url, filepath, sleep_after = 18, selenium_driver = None):
     
     if os.path.isfile(filepath):
         
@@ -109,7 +99,7 @@ def getPageSoup(url, filepath):
     #myRequest(origin_url)
     
     print("\t[getPageSoup] Requesting actual url "+url)
-    cont = myRequest(url)
+    cont = myRequest(url, sleep_after, selenium_driver)
         
     #Get the soup
     

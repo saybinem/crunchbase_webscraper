@@ -19,6 +19,9 @@ def scrapePerson(data):
     json_file = data['json']
     rescrape = data['rescrape']
     
+    company_cb_id = data['company_id_cb']
+    company_vico_id = data['company_id_vico']
+    
     if(os.path.isfile(json_file) and not rescrape):
         print("[scrapePerson] Person \""+person_id+"\" already scraped")
         return True
@@ -173,6 +176,8 @@ def scrapePerson(data):
     
     #Build complete data set
     person_data = {
+            'company_id_cb':company_cb_id,
+            'company_id_vico':company_vico_id,
             'overview':overview, 
             'person_details':person_details, 
             'current_jobs':current_jobs, 

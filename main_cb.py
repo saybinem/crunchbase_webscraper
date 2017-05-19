@@ -3,28 +3,30 @@ import cbscraper.company
 import cbscraper.person
 import os
 
+#make data dirs if they do not exists
 def buildDirs():
     os.makedirs("./data/person/html",exist_ok=True)
     os.makedirs("./data/person/json",exist_ok=True)
     os.makedirs("./data/company/html",exist_ok=True)
     os.makedirs("./data/company/json",exist_ok=True)
     
+#Give a company, scrape the team and the advisors
+#company_data = a dict returned by cbscraper.company.scrapeOrganization()
+#key = the dictionary key that contains the list of lists of company persons
 def scrapePersons(company_data, key):
-    company_id = company_data['id']
     
-    if(key=='people'):
-        origin_url = "www.crunchbase.com/company/"+company_name+"/people"
+    company_cb_id = company_data['company_id_cb']
+    company_vico_id = company_data['company_id_vico']
     
-    if(key=='advisors'):    
-        origin_url = "www.crunchbase.com/company/"+company_name+"/advisors"
-        
     for p in company_data[key]:
         person_id = cbscraper.person.getPersonIdFromLink(p[1])
         person_data = {
             "id" : person_id,
             "overview" : "./data/person/html/"+person_id+".html",
             "json" : "./data/person/json/"+person_id+".json",
-            "rescrape" : True
+            "rescrape" : True,
+            'company_id_cb': company_cb_id,
+            'company_id_vico' : company_vico_id
             }
         person_res = cbscraper.person.scrapePerson(person_data)
         
@@ -32,33 +34,43 @@ def scrapePersons(company_data, key):
 cbscraper.common.myRequest.counter = 0
 buildDirs()
 
-with open("cookie.txt") as cookie_file:
-    cookie_data = cookie_file.read()
-    
 # Scrape company
 
 import pandas
 frame = pandas.read_excel("C:/data/tesi/pilot_project/vico_sub2.xlsx", index_col=None, header=0, sheetname="CB_HC")
-ids = [str(x) for x in frame['CB_ID'] if x==x] #if x==x will remove the NaNs. A NaN is not equal to itself
+
+frame = frame[['CB_ID', 'CompanyID']]
+
+#print(str(frame))
+
+frame = frame.loc[frame['CB_ID'] == frame['CB_ID']] #remove NaNs
+frame.reset_index(inplace=True, drop=True)
+
+#print(str(frame))
+#exit()
 
 #ids = ['cambridge-broadband-networks']
 
 counter = 1
-ids_len = len(ids)
+ids_len = frame.shape[0]
 
-for company_name in ids:
+for index, row in frame.iterrows():
+    
+    company_vico_id = row['CompanyID'] 
+    company_cb_id = row['CB_ID']
+    
     percent = round((counter / ids_len) * 100,2)
-    print("[main] Company: " + company_name + " ("+str(counter)+"/"+str(ids_len)+" - "+str(percent)+"%)")
+    print("[main] Company: " + company_cb_id + " ("+str(counter)+"/"+str(ids_len)+" - "+str(percent)+"%)")
     counter += 1
         
     org_data = {
-        "name" : company_name,
-        "overview_html" : "./data/company/html/"+company_name+"_overview.html",
-        "board_html" : "./data/company/html/"+company_name+"_board.html",
-        "people_html" : "./data/company/html/"+company_name+"_people.html",
-        "json" : "./data/company/json/"+company_name+".json",
-        "cookie" : cookie_data,
-        "rescrape" : True
+        "cb_id" : company_cb_id,
+        "vico_id" : company_vico_id,
+        "overview_html" : "./data/company/html/"+company_cb_id+"_overview.html",
+        "board_html" : "./data/company/html/"+company_cb_id+"_board.html",
+        "people_html" : "./data/company/html/"+company_cb_id+"_people.html",
+        "json" : "./data/company/json/"+company_cb_id+".json",
+        "rescrape" : True,
         }
     
     company_data = cbscraper.company.scrapeOrganization(org_data)
