@@ -176,6 +176,7 @@ def scrapePerson(data):
     
     #Build complete data set
     person_data = {
+            'person_id_cb':person_id,
             'company_id_cb':company_cb_id,
             'company_id_vico':company_vico_id,
             'overview':overview, 
