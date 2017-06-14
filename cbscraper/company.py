@@ -61,6 +61,39 @@ def scrapeOrgPeople(company_cb_id, html_file_people):
                         
     return people
 
+#Scrape organization people
+def scrapeOrgPastPeople(company_cb_id, html_file_people):
+    
+    # Get the page
+    people_url = 'https://www.crunchbase.com/organization/'+company_cb_id+'/past_people'
+    print("\t[scrapeOrgPastPeople]Getting company past_people ("+people_url+")")    
+    soup_people = cbscraper.common.getPageSoup(people_url, html_file_people)
+    if(soup_people is False):
+        print("\tError in making past_people soup")
+        return False
+    
+    #Scrape
+    people = list()
+    for div_people in soup_people.find_all('div',class_='past_people'):
+        for info_block in div_people.find_all('div',class_='info-block'):
+            h4 = info_block.find('h4')
+            a = h4.a   
+            name = a.get('data-name')
+            print("[scrapeOrgPastPeople]Found "+name)
+            link = a.get('href')
+            
+            role=''
+            h5_tag = info_block.find('h5')
+            if h5_tag is not None:
+                role = h5_tag.text
+            
+            name = cbscraper.common.myTextStrip(name)
+            role = cbscraper.common.myTextStrip(role)
+            
+            people.append([name, link, role])
+                        
+    return people
+
 #Scrape a company
 def scrapeOrganization(org_data):
     
@@ -69,6 +102,7 @@ def scrapeOrganization(org_data):
     rescrape = org_data['rescrape']
     html_file_overview = org_data['overview_html']
     html_file_people = org_data['people_html']
+    html_file_past_people = org_data['past_people_html']
     html_file_advisors = org_data['board_html']
     company_vico_id = org_data['vico_id']
     company_cb_id = org_data['cb_id']
@@ -98,16 +132,22 @@ def scrapeOrganization(org_data):
     overview = {}
     
     #Do we have a team?
-    has_team = False
+    has_current_team = False
     tag = soup_overview.find('h2', {'id':'current_team'} )
     if tag is not None:
-        has_team = True
+        has_current_team = True
         
     #Do we have advisors?
     has_advisors = False
     tag = soup_overview.find('h2', {'id':'board_members_and_advisors'} )
     if tag is not None:
         has_advisors = True
+        
+    #Do we have past_people?
+    has_past_people = False
+    tag = soup_overview.find('h2', {'id':'past_team'} )
+    if tag is not None:
+        has_past_people = True
         
     # Headquarters
     tag = soup_overview.find('dt', string='Headquarters:')
@@ -186,15 +226,23 @@ def scrapeOrganization(org_data):
             company_details['description'] = tag.text
 
     # Scrape page "people"
-    people = {}
-    print("\tScraping people...")
-    people = scrapeOrgPeople(company_cb_id, html_file_people)    
+    people = []
+    if has_current_team:
+        print("\tScraping current team...")
+        people = scrapeOrgPeople(company_cb_id, html_file_people)    
             
     # Scrape page "advisors"
-    advisors = {}
-    print("\tScraping advisors...")
-    advisors = scrapeOrgAdvisors(company_cb_id, html_file_advisors)    
-                
+    advisors = []
+    if has_advisors:
+        print("\tScraping advisors...")
+        advisors = scrapeOrgAdvisors(company_cb_id, html_file_advisors)    
+    
+    # Scrape page "past people"
+    past_people = []
+    if has_past_people:
+        print("\tScraping past people...")
+        past_people = scrapeOrgPastPeople(company_cb_id, html_file_past_people)    
+    
     #Return data
     company_data = {
         'company_id_vico' : company_vico_id, 
@@ -202,7 +250,8 @@ def scrapeOrganization(org_data):
         'overview' : overview, 
         'company_details' : company_details, 
         'people' : people, 
-        'advisors' : advisors
+        'advisors' : advisors,
+        'past_people' : past_people
         }
     
     #Write to file

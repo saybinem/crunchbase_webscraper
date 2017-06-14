@@ -18,6 +18,7 @@ def scrapePerson(data):
     overview_html = data['overview']
     json_file = data['json']
     rescrape = data['rescrape']
+    type = data['type']
     
     company_cb_id = data['company_id_cb']
     company_vico_id = data['company_id_vico']
@@ -29,11 +30,14 @@ def scrapePerson(data):
     print("[scrapePerson] Scraping person: \""+person_id+"\"")
     person_link = "/person/"+person_id
     
-    # Get person overview
+    # Get the soup
     soup = cbscraper.common.getPageSoup('https://www.crunchbase.com'+person_link, overview_html)
     if(soup is False):
-        print("Error during person overview soup")
+        print("Error during person soup")
         return False
+    
+    #Get name
+    name = soup.find(id='profile_header_heading').text
     
     #Get overview information
     overview = dict()
@@ -103,7 +107,7 @@ def scrapePerson(data):
             date_int = cbscraper.DateInterval.DateInterval()
             date_int.fromText(date_text)
             date_start, date_end = date_int.getStart(), date_int.getEnd()
-        current_jobs.append([role,company, date_start, date_end])    
+        current_jobs.append([role, company, date_start, date_end])    
     
     #Get past jobs
     past_jobs = list()
@@ -119,12 +123,7 @@ def scrapePerson(data):
             date_end = date_start_child.find_next('div',class_='date').text
             title = info_row.find('div',class_='title').text
             company = info_row.find('div',class_='company').text        
-            past_jobs.append([
-                    company,
-                    title,
-                    date_start,
-                    date_end
-                    ])            
+            past_jobs.append([company, title, date_start, date_end])            
             #print("Found past job: "+str(past_job_dict))
                         
     #Get advisory roles
@@ -176,6 +175,8 @@ def scrapePerson(data):
     
     #Build complete data set
     person_data = {
+            'name': name,
+            'type': type,
             'person_id_cb':person_id,
             'company_id_cb':company_cb_id,
             'company_id_vico':company_vico_id,

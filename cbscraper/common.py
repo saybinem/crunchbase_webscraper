@@ -53,10 +53,22 @@ def myRequest(url, sleep_after, browser):
     print("\t[getPageSoup] Running Selenium")
     
     if(browser is None):
-        browser = webdriver.Firefox()
-        
-    browser.get(url)
+        profile_path = r"C:\Users\raffa\AppData\Roaming\Mozilla\Firefox\Profiles\4ai6x5sv.default"
+        profile = webdriver.FirefoxProfile()
+        browser = webdriver.Firefox(firefox_profile=profile)
     
+    #get age
+    try:
+        #set page timeout
+        browser.set_page_load_timeout(30);
+        browser.get(url)
+    except TimeoutException:
+        pass
+    except:
+        print("UNEXPECTED EXCEPTION. EXITING...")
+        raise
+        sys.exit()
+        
 #     timeout = 10 # seconds
 #     try:
 #         element_present = EC.presence_of_element_located((By.ID, 'profile_header_heading'))
@@ -95,9 +107,6 @@ def getPageSoup(url, filepath, sleep_after = 18, selenium_driver = None):
                 soup = bs.BeautifulSoup(filecont,'lxml')
                 return soup
     
-    #print("\t[getPageSoup] Requesting origin "+origin_url)
-    #myRequest(origin_url)
-    
     print("\t[getPageSoup] Requesting actual url "+url)
     cont = myRequest(url, sleep_after, selenium_driver)
         
@@ -118,4 +127,3 @@ def getPageSoup(url, filepath, sleep_after = 18, selenium_driver = None):
     else:
         print("\t[getPageSoup] File downloaded")
         return soup
-    
