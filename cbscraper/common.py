@@ -1,115 +1,170 @@
 import codecs
 import json
+import logging
 import os
-import sys
 import time
+import random
 import bs4 as bs
-# Selenium imports
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+
+# Global vriables
+browser = None
+browser_quit = True #if True, quit the browser after retrieving the page. This may mitigate problem of robot detection
 
 def myTextStrip(str):
     return str.replace('\n', '').strip()
 
+
 def jsonPretty(dict_data):
     return json.dumps(dict_data, sort_keys=True, indent=4, separators=(',', ': '))
 
+
 # check robots
 def wasRobotDetected(content):
-    if (content.find('"ROBOTS"') >= 0
-        and content.find('"NOINDEX, NOFOLLOW"') >= 0):
-        print("Robot detected by test 1")
+    if (content.find('"ROBOTS"') >= 0 and content.find('"NOINDEX, NOFOLLOW"') >= 0):
+        logging.warning("Robot detected by test 1")
         return True
 
-    if (content.find('"robots"') >= 0
-        and content.find('"noindex, nofollow"') >= 0):
-        print("Robot detected by test 2")
+    if (content.find('"robots"') >= 0 and content.find('"noindex, nofollow"') >= 0):
+        logging.warning("Robot detected by test 2")
         return True
 
     if (content.find('Pardon Our Interruption...') >= 0):
-        print("Robot detected by test 3")
+        logging.warning("Robot detected by test 3")
         return True
 
     return False
 
 
 # Requesting page with random delay and custom headers
-def myRequest(url, sleep_after, browser):
+def getPageSourceCode(url, by_condition, by_value):
+    global browser
+
     # Use selenium
-    print("\t[getPageSoup] Running Selenium")
+    logging.info("\t[getPageSourceCode] Running Selenium")
 
     if (browser is None):
-        profile_path = r"C:\Users\raffa\AppData\Roaming\Mozilla\Firefox\Profiles\4ai6x5sv.default"
-        profile = webdriver.FirefoxProfile()
-        browser = webdriver.Firefox(firefox_profile=profile)
+        # Chrome
+        chrome_profile = r"C:\Users\raffa\AppData\Local\Google\Chrome\User Data"
+        chrome_driver = r"C:\data\bin\chromedriver.exe"
+        options = webdriver.ChromeOptions()
+        options.add_argument("user-data-dir=" + chrome_profile)  # Path to your chrome profile
+        #options.add_argument("--incognito") #run in incognito mode
+        options.add_argument("--start-maximized")
+        #browser = webdriver.Chrome(executable_path=chrome_driver, chrome_options=options)
 
-    # get age
+        # Firefox (user profile)
+        #profile_path = r"C:\Users\raffa\AppData\Roaming\Mozilla\Firefox\Profiles\4ai6x5sv.default"
+        #profile = webdriver.FirefoxProfile()
+        #browser = webdriver.Firefox(firefox_profile=profile)
+
+        #Firefox new profile
+        browser = webdriver.Firefox()
+
+    # Sleep to avoid robots
+    sec = random.randint(5, 20)
+    logging.info("Sleeping for " + str(sec) + " to avoid robot detection...")
+    time.sleep(sec)
+
+    # Get page
     try:
-        # set page timeout
-        browser.set_page_load_timeout(30);
+        browser.set_page_load_timeout(30)
         browser.get(url)
     except TimeoutException:
+        logging.warning("Timeout exception during page load. Try to continue.")
         pass
     except:
-        print("UNEXPECTED EXCEPTION. EXITING...")
+        logging.error("Unexpected exception during page load. Exiting.")
         raise
-        sys.exit()
+    else:
+        logging.debug("browser.get() returned without exceptions")
 
-    #     timeout = 10 # seconds
-    #     try:
-    #         element_present = EC.presence_of_element_located((By.ID, 'profile_header_heading'))
-    #         WebDriverWait(browser, timeout).until(element_present)
-    #     except TimeoutException:
-    #         print("Timed out waiting for page to load")
+    # Sleep to avoid robots
+    sec = 20
+    logging.info("post loading sleep for " + str(sec))
+    time.sleep(sec)
 
-    print("\t[getPageSoup] Waiting " + str(sleep_after) + " secs")
-    time.sleep(sleep_after)
+    # Wait until condition occur
+    #if by_condition is not None:
+    if False:
+        timeout = 30  # seconds
+        try:
+            by = ''
+            if by_condition == 'class_name':
+                by = By.CLASS_NAME
+            elif by_condition == 'xpath':
+                by = By.XPATH
+            elif by_condition == 'id':
+                by = By.ID
+            else:
+                logging.error("By condition is not valid")
+                exit()
 
+            condition_str = "("+by+","+by_value+")"
+            logging.info("Waiting for presence of " + condition_str)
+            condition = EC.presence_of_element_located((by, by_value))
+            WebDriverWait(browser, timeout).until(condition)
+        except TimeoutException:
+            logging.error("Timed out waiting for page element "+condition_str+". Exiting")
+            raise
+        except:
+            logging.error("Unexpected exception waiting for page element "+condition_str+". Exiting")
+            raise
+        else:
+            logging.debug("Page element "+condition_str+" found")
+
+    # Get page source code and return it
     cont = browser.page_source
-    browser.quit()
-
+    if browser_quit:
+        browser.quit()
     return cont
 
 
 # Get a webpage and save to file (avoid another request). Return the page soup
-def getPageSoup(url, filepath, sleep_after=18, selenium_driver=None):
+def getPageSoup(url, filepath, by_condition, by_value):
+    # Check if HTML file already exist
     if os.path.isfile(filepath):
 
+        # Check if we can read from the file
         with codecs.open(filepath, 'r', 'utf-8') as fileh:
             try:
                 filecont = fileh.read()
             except UnicodeDecodeError:
-                print("UnicodeDecodeError on " + filepath + " redownloading it...")
+                logging.error("UnicodeDecodeError on " + filepath + " redownloading it...")
                 fileh.close()
                 os.unlink(filepath)
                 filecont = ''
 
+        # Check if the page served was the one for robots
         if filecont != '':
             if (wasRobotDetected(filecont)):
-                print("\t[getPageSoup] Pre-saved file contains robot. Removing it...")
+                logging.warning("\t[getPageSoup] Pre-saved file contains robot. Removing it...")
                 os.unlink(filepath)
             else:
-                print("\t[getPageSoup] Returning content from pre-saved file " + filepath)
+                logging.info("\t[getPageSoup] Returning content from pre-saved file " + filepath)
                 soup = bs.BeautifulSoup(filecont, 'lxml')
                 return soup
 
-    print("\t[getPageSoup] Requesting actual url " + url)
-    cont = myRequest(url, sleep_after, selenium_driver)
+    # Get actual source code
+    logging.info("\t[getPageSoup] calling getPageSourceCode( " + url + ")")
+    cont = getPageSourceCode(url, by_condition, by_value)
 
     # Get the soup
-
     # print("type(cont): "+str(type(cont)))
-
     soup = bs.BeautifulSoup(cont, 'lxml')
-    cont_str = cont
 
+    # Save HTML code in file
     with codecs.open(filepath, 'w', 'utf-8') as fileh:
         fileh.write(cont)
 
     # Check for robot detection
-    if wasRobotDetected(cont_str):
-        print("\t[getPageSoup] ROBOT: I have downloaded a file that contains robot detection: " + filepath)
+    if wasRobotDetected(cont):
+        logging.error("\t[getPageSoup] ROBOT: I have downloaded a file that contains robot detection: " + filepath)
         exit()
     else:
-        print("\t[getPageSoup] File downloaded")
+        logging.debug("\t[getPageSoup] File downloaded successfully")
         return soup

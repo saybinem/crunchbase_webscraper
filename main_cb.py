@@ -1,4 +1,5 @@
 import os
+import logging
 
 import cbscraper.common
 import cbscraper.company
@@ -23,7 +24,7 @@ def scrapePersons(company_data, key):
     p_list = company_data[key]
 
     if not p_list:
-        print("[scrapePersons]List is empty")
+        logging.warning("[scrapePersons]List is empty")
 
     for p in p_list:
         person_id = cbscraper.person.getPersonIdFromLink(p[1])
@@ -46,32 +47,37 @@ def main():
     # Scrape company
 
     import pandas
-    frame = pandas.read_excel("C:/data/tesi/pilot_project/vico_sub2.xlsx", index_col=None, header=0, sheetname="CB_HC")
-    frame = frame[['CB_ID', 'CompanyID']]  # get only interesting columns
-    frame = frame.loc[frame['CB_ID'] == frame['CB_ID']]  # remove NaNs
-    frame.reset_index(inplace=True, drop=True)  # drop index
+    excel_file = r"C:\data\tesi\VICO\ID Crunchbase_ID VICO.xlsx"
+    frame = pandas.read_excel(excel_file, index_col=None, header=0, sheetname="Firm")
+
+    #VICO DATABASE FILE
+    #frame = frame[['CB_ID', 'CompanyID']]  # get only interesting columns
+    #frame = frame.loc[frame['CB_ID'] == frame['CB_ID']]  # remove NaNs
+    #frame.reset_index(inplace=True, drop=True)  # drop index
+
+    #VICO->Crunchbase file
+    frame = frame.loc[frame['CB'] == frame['CB']]  # remove NaNs
 
     # DEBUG
     # frame = pandas.DataFrame({'CB_ID':['actility'],'CompanyID':['VICO_CIAO']})
 
     counter = 1  # keep count of the current firm
-    ids_len = frame.shape[0]
+    ids_len = frame.shape[0] #get row number
 
     for index, row in frame.iterrows():
 
-        company_vico_id = row['CompanyID']
-        company_cb_id = row['CB_ID']
+        company_vico_id = row['VICO']
+        company_cb_id = row['CB'].replace("/organization/","")
 
         percent = round((counter / ids_len) * 100, 2)
-        print(
-            "[main] Company: " + company_cb_id + " (" + str(counter) + "/" + str(ids_len) + " - " + str(percent) + "%)")
+        logging.info("[main] Company: " + company_cb_id + " (" + str(counter) + "/" + str(ids_len) + " - " + str(percent) + "%)")
         counter += 1
 
         org_data = {
             "cb_id": company_cb_id,
             "vico_id": company_vico_id,
             "overview_html": "./data/company/html/" + company_cb_id + "_overview.html",
-            "board_html": "./data/company/html/" + company_cb_id + "_board.html",
+            "advisors_html": "./data/company/html/" + company_cb_id + "_board.html",
             "people_html": "./data/company/html/" + company_cb_id + "_people.html",
             "past_people_html": "./data/company/html/" + company_cb_id + "_past_people.html",
             "json": "./data/company/json/" + company_cb_id + ".json",
@@ -83,17 +89,21 @@ def main():
         # Scrape persons of the company
 
         if (company_data is not False):
-            print("[main] Scraping persons")
+            logging.info("[main] Scraping persons")
             scrapePersons(company_data, 'people')
 
-            print("[main] Scraping advisors")
+            logging.info("[main] Scraping advisors")
             scrapePersons(company_data, 'advisors')
 
-            print("[main] Scraping past_people")
+            logging.info("[main] Scraping past_people")
             scrapePersons(company_data, 'past_people')
+        else:
+            logging.error("No company_data")
 
-    print("END!")
+    logging.info("ENDED!")
 
 
 if __name__ == "__main__":
+    root = logging.getLogger()
+    root.setLevel(logging.DEBUG)
     main()
