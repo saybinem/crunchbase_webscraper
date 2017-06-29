@@ -1,10 +1,12 @@
 import os
-import logging
-
+import logging, logging.handlers
+import time
 import cbscraper.common
 import cbscraper.company
 import cbscraper.person
 
+#GLOBALS
+rescrape = True
 
 # make data dirs if they do not exists
 def buildDirs():
@@ -14,17 +16,19 @@ def buildDirs():
     os.makedirs("./data/company/json", exist_ok=True)
 
 
-# Give a company, scrape the team and the advisors
+# Give a company, scrape current people, past people and advisors
 # company_data = a dict returned by cbscraper.company.scrapeOrganization()
 # key = the dictionary key that contains the list of lists of company persons
 def scrapePersons(company_data, key):
+    logger = logging.getLogger("scrapePersons")
+
     company_cb_id = company_data['company_id_cb']
     company_vico_id = company_data['company_id_vico']
 
     p_list = company_data[key]
 
     if not p_list:
-        logging.warning("[scrapePersons]List is empty")
+        logger.warning("List "+key+" is empty for "+company_cb_id)
 
     for p in p_list:
         person_id = cbscraper.person.getPersonIdFromLink(p[1])
@@ -32,7 +36,7 @@ def scrapePersons(company_data, key):
             "id": person_id,
             "overview": "./data/person/html/" + person_id + ".html",
             "json": "./data/person/json/" + person_id + ".json",
-            "rescrape": True,
+            "rescrape": rescrape,
             'company_id_cb': company_cb_id,
             'company_id_vico': company_vico_id,
             'type': key  # allow to distinguish among "team", "advisors" and "past_people"
@@ -42,6 +46,7 @@ def scrapePersons(company_data, key):
 
 # MAIN
 def main():
+    logger = logging.getLogger("main")
     buildDirs()
 
     # Scrape company
@@ -70,7 +75,7 @@ def main():
         company_cb_id = row['CB'].replace("/organization/","")
 
         percent = round((counter / ids_len) * 100, 2)
-        logging.info("[main] Company: " + company_cb_id + " (" + str(counter) + "/" + str(ids_len) + " - " + str(percent) + "%)")
+        logger.info("Company: " + company_cb_id + " (" + str(counter) + "/" + str(ids_len) + " - " + str(percent) + "%)")
         counter += 1
 
         org_data = {
@@ -81,7 +86,7 @@ def main():
             "people_html": "./data/company/html/" + company_cb_id + "_people.html",
             "past_people_html": "./data/company/html/" + company_cb_id + "_past_people.html",
             "json": "./data/company/json/" + company_cb_id + ".json",
-            "rescrape": True,
+            "rescrape": rescrape,
         }
 
         company_data = cbscraper.company.scrapeOrganization(org_data)
@@ -89,21 +94,36 @@ def main():
         # Scrape persons of the company
 
         if (company_data is not False):
-            logging.info("[main] Scraping persons")
+            logger.info("Scraping persons")
             scrapePersons(company_data, 'people')
 
-            logging.info("[main] Scraping advisors")
+            logger.info("Scraping advisors")
             scrapePersons(company_data, 'advisors')
 
-            logging.info("[main] Scraping past_people")
+            logger.info("Scraping past_people")
             scrapePersons(company_data, 'past_people')
         else:
-            logging.error("No company_data")
+            logger.error("No company_data")
 
-    logging.info("ENDED!")
+    logger.info("ENDED!")
 
 
 if __name__ == "__main__":
-    root = logging.getLogger()
-    root.setLevel(logging.DEBUG)
+
+    FORMAT = "%(asctime)s - %(levelname)-7s - [%(module)s:%(lineno)d:%(funcName)s] %(message)s"
+    fmt = logging.Formatter(FORMAT, datefmt='%H:%M:%S')
+
+    #console handler
+    console_handler = logging.StreamHandler()
+    console_handler.setFormatter(fmt)
+    console_handler.setLevel(logging.INFO)
+    logging.getLogger().addHandler(console_handler)
+
+    #add file log
+    handler = logging.handlers.RotatingFileHandler('cbscraper.log', maxBytes=1024000, backupCount=5)
+    handler.setFormatter(fmt)
+    logging.getLogger().addHandler(handler)
+
+    logging.getLogger().setLevel(logging.DEBUG)
+    logging.info("Starting at: "+time.strftime("%Y-%m-%d"))
     main()

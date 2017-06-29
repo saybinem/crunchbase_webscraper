@@ -1,16 +1,22 @@
 import codecs
+import logging
 import os
 import re
+
 import cbscraper.DateInterval
 import cbscraper.common
+
 
 def getPersonIdFromLink(link):
     return link.split("/")[2]
 
+
 # Scrape a single person
 # e.g. person_link="/person/gavin-ray"
 def scrapePerson(data):
-    # Get vars
+    logger = logging.getLogger("scrapePerson")
+
+    # Get input vars
     person_id = data['id']
     overview_html = data['overview']
     json_file = data['json']
@@ -21,16 +27,17 @@ def scrapePerson(data):
     company_vico_id = data['company_id_vico']
 
     if (os.path.isfile(json_file) and not rescrape):
-        print("[scrapePerson] Person \"" + person_id + "\" already scraped")
+        logger.info("Person \"" + person_id + "\" already scraped")
         return True
 
-    print("[scrapePerson] Scraping person: \"" + person_id + "\"")
+    logger.info("Scraping person: \"" + person_id + "\"")
     person_link = "/person/" + person_id
 
     # Get the soup
-    soup = cbscraper.common.getPageSoup('https://www.crunchbase.com' + person_link, overview_html, 'id', 'profile_header_heading')
+    soup = cbscraper.common.getPageSoup('https://www.crunchbase.com' + person_link, overview_html, 'id',
+                                        'profile_header_heading')
     if (soup is False):
-        print("Error during person soup")
+        logger.error("Error during person soup")
         return False
 
     # Get name
@@ -89,14 +96,13 @@ def scrapePerson(data):
     if div_description is not None:
         person_details = div_description.text
 
-    # Get current jobs
+    # Current jobs  (experiences -> card-content -> current_job)
     current_jobs = list()
     for current_job in soup.find_all('div', class_='current_job'):
         info_block = current_job.find('div', class_='info-block')
         role = info_block.h4.text
         follow_card = info_block.find('a', class_='follow_card')
         company = follow_card.text
-        job_items = [role, company]
         date = info_block.find('h5', class_='date')
         date_start, date_end = '', ''
         if (date is not None):
@@ -106,7 +112,7 @@ def scrapePerson(data):
             date_start, date_end = date_int.getStart(), date_int.getEnd()
         current_jobs.append([role, company, date_start, date_end])
 
-    # Get past jobs
+    # Past jobs (experiences -> card-content -> past_job)
     past_jobs = list()
     for div_past_job in soup.find_all('div', class_='past_job'):
         # recursive=False finds only DIRECT children of the div
@@ -121,9 +127,9 @@ def scrapePerson(data):
             title = info_row.find('div', class_='title').text
             company = info_row.find('div', class_='company').text
             past_jobs.append([company, title, date_start, date_end])
-            # print("Found past job: "+str(past_job_dict))
+            # logger.info("Found past job: "+str(past_job_dict))
 
-    # Get advisory roles
+    # Advisory roles
     adv_roles = list()
     for advisory_role in soup.find_all('div', class_='advisory_roles'):
         advisory_role_ul = advisory_role.ul
@@ -142,7 +148,7 @@ def scrapePerson(data):
                         date_start, date_end = date_int.getStart(), date_int.getEnd()
                 adv_roles.append([role, company, date_start, date_end])
 
-    # Get education
+    # Education
     education = list()
     for edu in soup.find_all('div', class_='education'):
         for info_block in edu.find_all('div', class_='info-block'):
@@ -170,6 +176,25 @@ def scrapePerson(data):
             edu_items = [institute, subject, date_start, date_end]
             education.append(edu_items)
 
+    # Investments
+    inv_list = list()
+    inv_has_more = False
+    inv_div = soup.find('div', class_='investments')
+    if (inv_div is not None):
+        inv_has_more = inv_div.find('a', {'title', 'All Investments'}) is not None
+        logging.info("Has more investments: " + str(inv_has_more))
+        for tr in inv_div.table.tbody.find_all('tr'):
+            td = tr.find('td')
+            date = td.text
+            td2 = td.find_next('td')
+            invested_in = td2.text
+            td3 = td2.find_next('td')
+            round = td3.text
+            td4 = td3.find_next('td')
+            details = td4.text
+            inv_list.append([date, invested_in, round, details])
+            logging.info("Found investment: "+date + " "+invested_in + " " + round + " " + details)
+
     # Build complete data set
     person_data = {
         'name': name,
@@ -182,7 +207,9 @@ def scrapePerson(data):
         'current_jobs': current_jobs,
         'past_jobs': past_jobs,
         'advisory_roles': adv_roles,
-        'education': education
+        'education': education,
+        'investments': inv_list,
+        'inv_has_more' : inv_has_more
     }
 
     # Save to JSON file
