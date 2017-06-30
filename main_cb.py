@@ -7,6 +7,10 @@ import cbscraper.person
 
 #GLOBALS
 rescrape = True
+excel_file = r"C:\data\tesi\VICO\ID Crunchbase_ID VICO.xlsx"
+excel_sheet = 'Firm'
+excel_col_cb = 'CB'
+excel_col_vico = 'VICO'
 
 # make data dirs if they do not exists
 def buildDirs():
@@ -20,21 +24,19 @@ def buildDirs():
 # company_data = a dict returned by cbscraper.company.scrapeOrganization()
 # key = the dictionary key that contains the list of lists of company persons
 def scrapePersons(company_data, key):
-    logger = logging.getLogger("scrapePersons")
-
     company_cb_id = company_data['company_id_cb']
     company_vico_id = company_data['company_id_vico']
-
     p_list = company_data[key]
 
     if not p_list:
-        logger.warning("List "+key+" is empty for "+company_cb_id)
+        logging.warning("List "+key+" is empty for "+company_cb_id)
 
     for p in p_list:
         person_id = cbscraper.person.getPersonIdFromLink(p[1])
         person_data = {
             "id": person_id,
             "overview": "./data/person/html/" + person_id + ".html",
+            "investment_html": "./data/person/html/" + person_id + "_investments.html",
             "json": "./data/person/json/" + person_id + ".json",
             "rescrape": rescrape,
             'company_id_cb': company_cb_id,
@@ -42,7 +44,6 @@ def scrapePersons(company_data, key):
             'type': key  # allow to distinguish among "team", "advisors" and "past_people"
         }
         person_res = cbscraper.person.scrapePerson(person_data)
-
 
 # MAIN
 def main():
@@ -52,16 +53,12 @@ def main():
     # Scrape company
 
     import pandas
-    excel_file = r"C:\data\tesi\VICO\ID Crunchbase_ID VICO.xlsx"
-    frame = pandas.read_excel(excel_file, index_col=None, header=0, sheetname="Firm")
 
-    #VICO DATABASE FILE
-    #frame = frame[['CB_ID', 'CompanyID']]  # get only interesting columns
-    #frame = frame.loc[frame['CB_ID'] == frame['CB_ID']]  # remove NaNs
-    #frame.reset_index(inplace=True, drop=True)  # drop index
+    frame = pandas.read_excel(excel_file, index_col=None, header=0, sheetname=excel_sheet)
 
     #VICO->Crunchbase file
-    frame = frame.loc[frame['CB'] == frame['CB']]  # remove NaNs
+    frame = frame[[excel_col_cb, excel_col_vico]]  # get only interesting columns
+    frame = frame.loc[frame[excel_col_cb] == frame[excel_col_cb]]  # remove NaNs
 
     # DEBUG
     # frame = pandas.DataFrame({'CB_ID':['actility'],'CompanyID':['VICO_CIAO']})
@@ -71,8 +68,8 @@ def main():
 
     for index, row in frame.iterrows():
 
-        company_vico_id = row['VICO']
-        company_cb_id = row['CB'].replace("/organization/","")
+        company_vico_id = row[excel_col_vico]
+        company_cb_id = row[excel_col_cb].replace("/organization/","")
 
         percent = round((counter / ids_len) * 100, 2)
         logger.info("Company: " + company_cb_id + " (" + str(counter) + "/" + str(ids_len) + " - " + str(percent) + "%)")

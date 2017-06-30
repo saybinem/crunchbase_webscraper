@@ -5,14 +5,20 @@ import cbscraper.common
 import logging
 
 # Scrape organization advisors
-def scrapeOrgAdvisors(company_cb_id, html_file_advisors):
-    # Get the page
-    advisor_url = 'https://www.crunchbase.com/organization/' + company_cb_id + '/advisors'
-    logging.info("Getting company advisors (" + advisor_url + ")")
-    soup_advisors = cbscraper.common.getPageSoup(advisor_url, html_file_advisors, 'class_name', 'advisors')
-    if (soup_advisors is False):
-        logging.error("Cannot extract advisory soup")
-        return False
+def scrapeOrgAdvisors(soup_overview, company_cb_id, html_file_advisors):
+
+    link_more = soup_overview.find('a', {'title', 'All Board Members and Advisors'})
+
+    if(link_more is not None):
+        # Get the page
+        advisor_url = 'https://www.crunchbase.com' + link_more.get('href')
+        logging.info("Company has more advisors. Getting '" + advisor_url + "'")
+        soup_advisors = cbscraper.common.getPageSoup(advisor_url, html_file_advisors, 'class_name', 'advisors')
+        if (soup_advisors is False):
+            logging.error("Cannot extract advisory soup")
+            return False
+    else:
+        soup_advisors = soup_overview
 
     # Scrape page "advisors" (get both main advisors and additional ones with the same code)
     advisors = list()
@@ -34,14 +40,20 @@ def scrapeOrgAdvisors(company_cb_id, html_file_advisors):
 
 
 # Scrape organization current people
-def scrapeOrgCurrentPeople(company_cb_id, html_file_people):
-    # Get the page
-    people_url = 'https://www.crunchbase.com/organization/' + company_cb_id + '/people'
-    logging.info("Getting company people (" + people_url + ")")
-    soup_people = cbscraper.common.getPageSoup(people_url, html_file_people, 'class_name', 'people')
-    if (soup_people is False):
-        logging.error("Error in making people soup")
-        return False
+def scrapeOrgCurrentPeople(soup_overview, company_cb_id, html_file_people):
+
+    link_more = soup_overview.find('a', {'title', 'All Current Team'})
+
+    if(link_more is not None):
+        # Get the page
+        people_url = 'https://www.crunchbase.com' + link_more.get('href')
+        logging.info("ompany has more current_people. Getting: '" + people_url + "'")
+        soup_people = cbscraper.common.getPageSoup(people_url, html_file_people, 'class_name', 'people')
+        if (soup_people is False):
+            logging.error("Error in making people soup")
+            return False
+    else:
+        soup_people = soup_overview
 
     # Scrape
     people = list()
@@ -62,18 +74,24 @@ def scrapeOrgCurrentPeople(company_cb_id, html_file_people):
 
 
 # Scrape organization past people
-def scrapeOrgPastPeople(company_cb_id, html_file_people):
-    # Get the page
-    people_url = 'https://www.crunchbase.com/organization/' + company_cb_id + '/past_people'
-    logging.info("Getting company past_people (" + people_url + ")")
-    soup_people = cbscraper.common.getPageSoup(people_url, html_file_people, 'class_name', 'past_people')
-    if (soup_people is False):
-        logging.error("Error in making past_people soup")
-        return False
+def scrapeOrgPastPeople(soup_overview, company_cb_id, html_file_people):
+
+    link_more = soup_overview.find('a', {'title', 'All Past Team'})
+
+    if(link_more is not None):
+        # Get the page
+        past_people_url = 'https://www.crunchbase.com' + link_more.get('href')
+        logging.info("Company has more past_people. Getting: '" + past_people_url + "'")
+        soup = cbscraper.common.getPageSoup(past_people_url, html_file_people, 'class_name', 'past_people')
+        if (soup is False):
+            logging.error("Error in making past_people soup")
+            return False
+    else:
+        soup = soup_overview
 
     # Scrape
     people = list()
-    for div_people in soup_people.find_all('div', class_='past_people'):
+    for div_people in soup.find_all('div', class_='past_people'):
         for info_block in div_people.find_all('div', class_='info-block'):
             h4 = info_block.find('h4')
             a = h4.a
@@ -118,8 +136,8 @@ def scrapeOrganization(org_data):
     # Get the page "overview"
     overview_url = 'https://www.crunchbase.com/organization/' + company_cb_id
     logging.info("Getting company overview (" + overview_url + ")")
-    soup_overview = cbscraper.common.getPageSoup(overview_url, html_file_overview, 'class_name', 'info-card')
-    if (soup_overview is False):
+    soup = cbscraper.common.getPageSoup(overview_url, html_file_overview, 'class_name', 'info-card')
+    if (soup is False):
         logging.error("Error in making overview soup")
         return False
 
@@ -130,53 +148,35 @@ def scrapeOrganization(org_data):
     # Scrape section overview->overview
     overview = {}
 
-    # Do we have a team?
-    has_current_team = False
-    tag = soup_overview.find('h2', {'id': 'current_team'})
-    if tag is not None:
-        has_current_team = True
-
-    # Do we have advisors?
-    has_advisors = False
-    tag = soup_overview.find('h2', {'id': 'board_members_and_advisors'})
-    if tag is not None:
-        has_advisors = True
-
-    # Do we have past_people?
-    has_past_people = False
-    tag = soup_overview.find('h2', {'id': 'past_team'})
-    if tag is not None:
-        has_past_people = True
-
     # Headquarters
-    tag = soup_overview.find('dt', string='Headquarters:')
+    tag = soup.find('dt', string='Headquarters:')
     if tag is not None:
         overview['headquarters'] = tag.find_next('dd').text
 
     # Description
-    tag = soup_overview.find('dt', string='Description:')
+    tag = soup.find('dt', string='Description:')
     if tag is not None:
         overview['description'] = tag.find_next('dd').text
 
     # Founders
-    tag = soup_overview.find('dt', string='Founders:')
+    tag = soup.find('dt', string='Founders:')
     if tag is not None:
         founders_list = tag.find_next('dd').text.split(",")
         overview['founders'] = [x.strip() for x in founders_list]
 
     # Categories
-    tag = soup_overview.find('dt', string='Categories:')
+    tag = soup.find('dt', string='Categories:')
     if tag is not None:
         categories_list = tag.find_next('dd').text.split(",")
         overview['categories'] = [x.strip() for x in categories_list]
 
     # Website
-    tag = soup_overview.find('dt', string='Website:')
+    tag = soup.find('dt', string='Website:')
     if tag is not None:
         overview['website'] = tag.find_next('dd').text
 
     # Social
-    tag = soup_overview.find('dd', class_="social-links")
+    tag = soup.find('dd', class_="social-links")
     if tag is not None:
 
         overview['social'] = {}
@@ -191,7 +191,7 @@ def scrapeOrganization(org_data):
 
     # Scrape section overview->company details
     company_details = {}
-    company_details_tag = soup_overview.find('div', class_="base info-tab description")
+    company_details_tag = soup.find('div', class_="base info-tab description")
 
     if company_details_tag is not None:
 
@@ -225,22 +225,13 @@ def scrapeOrganization(org_data):
             company_details['description'] = tag.text
 
     # Scrape page "people"
-    people = []
-    if has_current_team:
-        logging.info("Scraping current team...")
-        people = scrapeOrgCurrentPeople(company_cb_id, html_file_people)
+    people = scrapeOrgCurrentPeople(soup, company_cb_id, html_file_people)
 
     # Scrape page "advisors"
-    advisors = []
-    if has_advisors:
-        logging.info("Scraping advisors...")
-        advisors = scrapeOrgAdvisors(company_cb_id, html_file_advisors)
+    advisors = scrapeOrgAdvisors(soup, company_cb_id, html_file_advisors)
 
     # Scrape page "past people"
-    past_people = []
-    if has_past_people:
-        logging.info("Scraping past people...")
-        past_people = scrapeOrgPastPeople(company_cb_id, html_file_past_people)
+    past_people = scrapeOrgPastPeople(soup, company_cb_id, html_file_past_people)
 
     # Return data
     company_data = {

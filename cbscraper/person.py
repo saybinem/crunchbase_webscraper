@@ -19,6 +19,7 @@ def scrapePerson(data):
     # Get input vars
     person_id = data['id']
     overview_html = data['overview']
+    investment_html = data['investment_html']
     json_file = data['json']
     rescrape = data['rescrape']
     type = data['type']
@@ -178,11 +179,15 @@ def scrapePerson(data):
 
     # Investments
     inv_list = list()
-    inv_has_more = False
     inv_div = soup.find('div', class_='investments')
     if (inv_div is not None):
         inv_has_more = inv_div.find('a', {'title', 'All Investments'}) is not None
         logging.info("Has more investments: " + str(inv_has_more))
+
+        if(inv_has_more):
+            inv_soup = cbscraper.common.getPageSoup('https://www.crunchbase.com' + person_link + "/investments", investment_html, 'class_name', 'investments')
+            inv_div = inv_soup.find('div', class_='investments')
+
         for tr in inv_div.table.tbody.find_all('tr'):
             td = tr.find('td')
             date = td.text
@@ -208,8 +213,7 @@ def scrapePerson(data):
         'past_jobs': past_jobs,
         'advisory_roles': adv_roles,
         'education': education,
-        'investments': inv_list,
-        'inv_has_more' : inv_has_more
+        'investments': inv_list
     }
 
     # Save to JSON file
