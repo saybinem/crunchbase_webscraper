@@ -181,7 +181,7 @@ def scrapePerson(data):
     inv_list = list()
     inv_div = soup.find('div', class_='investments')
     if (inv_div is not None):
-        inv_has_more = inv_div.find('a', {'title', 'All Investments'}) is not None
+        inv_has_more = inv_div.find('a', attrs={'title', 'All Investments'}) is not None
         logging.info("Has more investments: " + str(inv_has_more))
 
         if(inv_has_more):

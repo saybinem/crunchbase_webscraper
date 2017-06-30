@@ -113,7 +113,7 @@ if __name__ == "__main__":
     #console handler
     console_handler = logging.StreamHandler()
     console_handler.setFormatter(fmt)
-    console_handler.setLevel(logging.INFO)
+    #console_handler.setLevel(logging.INFO)
     logging.getLogger().addHandler(console_handler)
 
     #add file log

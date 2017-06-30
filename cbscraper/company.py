@@ -5,11 +5,13 @@ import cbscraper.common
 import logging
 
 # Scrape organization advisors
-def scrapeOrgAdvisors(soup_overview, company_cb_id, html_file_advisors):
+def scrapeOrgAdvisors(soup_overview, html_file_advisors):
 
-    link_more = soup_overview.find('a', {'title', 'All Board Members and Advisors'})
+    link_more = soup_overview.find('a', attrs={'title' : 'All Board Members and Advisors'})
 
     if(link_more is not None):
+        logging.debug("link_more.string=" + link_more.string)
+
         # Get the page
         advisor_url = 'https://www.crunchbase.com' + link_more.get('href')
         logging.info("Company has more advisors. Getting '" + advisor_url + "'")
@@ -40,14 +42,16 @@ def scrapeOrgAdvisors(soup_overview, company_cb_id, html_file_advisors):
 
 
 # Scrape organization current people
-def scrapeOrgCurrentPeople(soup_overview, company_cb_id, html_file_people):
+def scrapeOrgCurrentPeople(soup_overview, html_file_people):
 
-    link_more = soup_overview.find('a', {'title', 'All Current Team'})
+    link_more = soup_overview.find('a', attrs={'title' : 'All Current Team'})
 
     if(link_more is not None):
+        #logging.debug("link_more = " + str(link_more))
+
         # Get the page
         people_url = 'https://www.crunchbase.com' + link_more.get('href')
-        logging.info("ompany has more current_people. Getting: '" + people_url + "'")
+        logging.info("Company has more current_people. Getting: '" + people_url + "'")
         soup_people = cbscraper.common.getPageSoup(people_url, html_file_people, 'class_name', 'people')
         if (soup_people is False):
             logging.error("Error in making people soup")
@@ -74,11 +78,13 @@ def scrapeOrgCurrentPeople(soup_overview, company_cb_id, html_file_people):
 
 
 # Scrape organization past people
-def scrapeOrgPastPeople(soup_overview, company_cb_id, html_file_people):
+def scrapeOrgPastPeople(soup_overview, html_file_people):
 
-    link_more = soup_overview.find('a', {'title', 'All Past Team'})
+    link_more = soup_overview.find('a', attrs={'title' : 'All Past Team'})
 
     if(link_more is not None):
+        logging.debug("link_more.string=" + link_more.string)
+
         # Get the page
         past_people_url = 'https://www.crunchbase.com' + link_more.get('href')
         logging.info("Company has more past_people. Getting: '" + past_people_url + "'")
@@ -225,13 +231,13 @@ def scrapeOrganization(org_data):
             company_details['description'] = tag.text
 
     # Scrape page "people"
-    people = scrapeOrgCurrentPeople(soup, company_cb_id, html_file_people)
+    people = scrapeOrgCurrentPeople(soup, html_file_people)
 
     # Scrape page "advisors"
-    advisors = scrapeOrgAdvisors(soup, company_cb_id, html_file_advisors)
+    advisors = scrapeOrgAdvisors(soup, html_file_advisors)
 
     # Scrape page "past people"
-    past_people = scrapeOrgPastPeople(soup, company_cb_id, html_file_past_people)
+    past_people = scrapeOrgPastPeople(soup, html_file_past_people)
 
     # Return data
     company_data = {
