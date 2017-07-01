@@ -3,6 +3,7 @@ import logging
 import os
 
 import cbscraper.common
+import cbscraper.CompanyScraper
 
 # Scrape organization advisors
 def scrapeOrgAdvisors(soup_advisors):

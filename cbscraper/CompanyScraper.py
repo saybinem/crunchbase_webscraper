@@ -4,6 +4,8 @@ import random
 import time
 from enum import Enum
 
+import cbscraper.common
+
 import bs4 as bs
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
@@ -25,6 +27,7 @@ class CompanyScraper():
     load_timeout = 30
     wait_timeout = 60
 
+    #Name of the class to wait for when we load a page
     class_wait = {
         CBEndpoint.ORG_ENTITY: 'entity',
         CBEndpoint.ORG_PAST_PEOPLE: 'past_people',
@@ -32,6 +35,7 @@ class CompanyScraper():
         CBEndpoint.ORG_ADVISORS: 'advisors',
     }
 
+    #Suffixes of HTML files
     htmlfile_suffix = {
         CBEndpoint.ORG_ENTITY: '_overview',
         CBEndpoint.ORG_PEOPLE: '_people',
@@ -39,12 +43,19 @@ class CompanyScraper():
         CBEndpoint.ORG_PAST_PEOPLE: '_past_people',
     }
 
+    #Title attribute of the link tags in the organization 'entity' page
+    link_map = {
+        CBEndpoint.ORG_PEOPLE : 'All Current Team',
+        CBEndpoint.ORG_ADVISORS : 'All Past Team',
+        CBEndpoint.ORG_PAST_PEOPLE : 'All Board Members and Advisors'
+    }
+
     html_entity = False
     html_currteam = False
     html_pastteam = False
     html_adv = False
 
-    # last / is included
+    # last '/' is included
     cb_organization_url = "https://www.crunchbase.com/organization/"
 
     def __init__(self, company_id, html_basepath):
@@ -58,8 +69,8 @@ class CompanyScraper():
         logging.info("Sleeping for " + str(sec) + " seconds ...")
         time.sleep(sec)
 
+    #Open an url in web browser
     def openUrl(self, url):
-        # Get page
         try:
             self.getBrowser().set_page_load_timeout(self.load_timeout)
             self.getBrowser().get(url)
@@ -71,10 +82,20 @@ class CompanyScraper():
         else:
             logging.debug("browser.get() returned without exceptions")
 
+    def genHTMLFilePath(self, endpoint):
+        return os.path.join(self.html_basepath, self.company_id + self.htmlfile_suffix[endpoint] + ".html")
+
+    def writeHTMLFile(self, html, endpoint):
+        htmlfile = self.genHTMLFilePath(endpoint)
+        logging.info("Writing "+str(endpoint) + " in " + htmlfile)
+        with open(htmlfile, 'w', encoding='utf-8') as fileh:
+            fileh.write(html)
+
+    #Get saved HTML code
     def getHtmlFile(self, endpoint):
         if endpoint not in self.htmlfile_suffix:
             raise RuntimeError("The endpoint you passed is not mapped anywhere")
-        htmlfile = os.path.join(self.html_basepath, self.company_id + self.htmlfile_suffix[endpoint] + ".html")
+        htmlfile = self.genHTMLFilePath(endpoint)
         # Check if HTML file already exist
         if os.path.isfile(htmlfile):
             # Check if we can read from the file
@@ -88,7 +109,7 @@ class CompanyScraper():
                     return False
             # Check if the page served was the one for robots
             if filecont != '':
-                if (wasRobotDetected(filecont)):
+                if (cbscraper.common.wasRobotDetected(filecont)):
                     logging.warning("Pre-saved file contains robot. Removing it...")
                     os.unlink(htmlfile)
                     return False
@@ -99,6 +120,7 @@ class CompanyScraper():
             logging.debug("HTML file " + htmlfile + " not found")
             return False
 
+    #Wait for hte presence of an element in a web page and then wait for some more time
     def waitForPresence(self, by, value):
         try:
             logging.info("Waiting for presence of (" + str(by) + "," + value + ")")
@@ -112,8 +134,8 @@ class CompanyScraper():
             raise
         else:
             logging.critical("Page element found")
-        self.postLoad()
-        
+        self.randSleep(self.postload_sleep_min, self.postload_sleep_max)
+
     # Have the browser go to the page relative to endpoint 'entity' (overview page)
     def goToEntityPage(self):
         if self.entity_page:
@@ -132,21 +154,18 @@ class CompanyScraper():
         return bs.BeautifulSoup(html, 'lxml')
 
     def makeAllSoup(self):
-
         # Current team
         html = self.getCurrTeamHTML()
         if html is False:
             self.setCurrTeamSoup(self.getEntitySoup())
         else:
             self.setCurrTeamSoup(self.makeSoupFromHTML(html))
-
         # Past team
         html = self.getPastTeamHTML()
         if html is False:
             self.setPastTeamSoup(self.getEntitySoup())
         else:
             self.setPastTeamSoup(self.makeSoupFromHTML(html))
-
         # Advisors
         html = self.getAdvisorsHTML()
         if html is False:
@@ -154,37 +173,25 @@ class CompanyScraper():
         else:
             self.setAdvisorsSoup(self.makeSoupFromHTML(html))
 
-    # Get links from browser
-    def getLinkCurrentTeam(self):
-        return self.getBrowser().find_element_by_xpath('//a[@title="All Current Team"]')
+    # Get link located in the organization 'entity' page
+    def getBrowserLink(self, endpoint):
+        return self.getBrowser().find_element_by_xpath('//a[@title="'+self.link_map[endpoint]+'"]')
 
-    def getLinkPastTeam(self):
-        return self.getBrowser().find_element_by_xpath('//a[@title="All Past Team"]')
+    # Return if we have a specific page for that endpoint (only if there are a lot of information)
+    def isMore(self, endpoint):
+        return self.getEntitySoup().find('a', attrs={'title' : self.link_map[endpoint]})
 
-    def getLinkAdvisors(self):
-        return self.getBrowser().find_element_by_xpath('//a[@title="All Board Members and Advisors"]')
-
-    # Get if we have additional sections
-    def isCurrentTeam(self):
-        return self.getEntitySoup().find('a', attrs={'title': 'All Current Team'})
-
-    def isPastTeam(self):
-        return self.getEntitySoup().find('a', attrs={'title': 'All Past Team'})
-
-    def isAdvisors(self):
-        return self.getEntitySoup().find('a', attrs={'title': 'All Board Members and Advisors'})
-
+    #Browser functions
     def getBrowser(self):
         if self.browser is None:
-            self.browser = getWebDriver()
+            self.browser = cbscraper.common.getWebDriver()
         return self.browser
 
-    def getBrowserPageSource(self):
-        return self.getBrowser().page_source
-
-    # called when we finish loading a page
-    def postLoad(self):
-        self.randSleep(self.postload_sleep_min, self.postload_sleep_max)
+    def getBrowserPageSource(self, curr_endpoint = None):
+        html = self.getBrowser().page_source
+        if curr_endpoint is not None:
+            self.writeHTMLFile(html, curr_endpoint)
+        return html
 
     # Scrape an organization
     def scrape(self):
@@ -195,60 +202,61 @@ class CompanyScraper():
         self.prev_page_is_entity = False
 
         # Get endpoint 'entity'
-        html_entity = self.getHtmlFile(CBEndpoint.ORG_ENTITY)
+        endpoint = CBEndpoint.ORG_ENTITY
+        html_entity = self.getHtmlFile(endpoint)
         if html_entity is False:
             self.goToEntityPage()
-            html_entity = self.getBrowserPageSource()
+            html_entity = self.getBrowserPageSource(endpoint)
 
         self.setEntityHTML(html_entity)
         self.setEntitySoup(self.makeSoupFromHTML(self.getEntityHTML()))
 
         # Get current team
-        if self.isCurrentTeam():
-            endpoint = CBEndpoint.ORG_PEOPLE
+        endpoint = CBEndpoint.ORG_PEOPLE
+        if self.isMore(endpoint):
             logging.info("More " + str(endpoint) + " found")
             html = self.getHtmlFile(endpoint)
             if not html:
                 self.goToEntityPage()
-                link = self.getLinkCurrentTeam()
+                link = self.getBrowserLink(endpoint)
                 logging.info("Clicking on current team link")
                 link.click()
                 self.waitForPresence(By.CLASS_NAME, self.class_wait[endpoint])
                 self.entity_page = False
                 self.prev_page_is_entity = True
-                html = self.getBrowserPageSource()
+                html = self.getBrowserPageSource(endpoint)
             self.setCurrTeamHTML(html)
 
         # Get past team
-        if self.isPastTeam():
-            endpoint = CBEndpoint.ORG_PAST_PEOPLE
+        endpoint = CBEndpoint.ORG_PAST_PEOPLE
+        if self.isMore(endpoint):
             logging.info("More " + str(endpoint) + " found")
             html = self.getHtmlFile(endpoint)
             if not html:
                 self.goToEntityPage()
-                link = self.getLinkPastTeam()
+                link = self.getBrowserLink(endpoint)
                 logging.info("Clicking on past team link")
                 link.click()
                 self.waitForPresence(By.CLASS_NAME, self.class_wait[endpoint])
                 self.entity_page = False
                 self.prev_page_is_entity = True
-                html = self.getBrowserPageSource()
+                html = self.getBrowserPageSource(endpoint)
             self.setPastTeamHTML(html)
 
         # Get advisors
-        if self.isAdvisors():
-            endpoint = CBEndpoint.ORG_ADVISORS
+        endpoint = CBEndpoint.ORG_ADVISORS
+        if self.isMore(endpoint):
             logging.info("More " + str(endpoint) + " found")
             html = self.getHtmlFile(endpoint)
             if not html:
                 self.goToEntityPage()
-                link = self.getLinkAdvisors()
+                link = self.getBrowserLink(endpoint)
                 logging.info("Clicking on advisors link")
                 link.click()
                 self.waitForPresence(By.CLASS_NAME, self.class_wait[endpoint])
                 self.entity_page = False
                 self.prev_page_is_entity = True
-                html = self.getBrowserPageSource()
+                html = self.getBrowserPageSource(endpoint)
             self.setAdvisorsHTML(html)
 
         # Make the soup of downloaded HTML pages
