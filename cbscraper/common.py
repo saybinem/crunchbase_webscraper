@@ -23,17 +23,16 @@ browser_quit = False  # if True, quit the browser after retrieving the page. Thi
 pre_load_sleep_min = 0  # minimum number of seconds to wait before casking the webpage. Avoid robot detection
 pre_load_sleep_max = 0
 
-post_load_sleep_min = 1
-post_load_sleep_max = 10
+post_load_sleep_min = 5
+post_load_sleep_max = 15
 
 page_load_timeout = 30  # seconds before declaring that a page timed out
-detected_wait_min = 240  # seconds to wait if we are detected as robots
-detected_wait_max = 360
+
+detected_wait_min = 10*60 # seconds to wait if we are detected as robots
+detected_wait_max = 15*60
+max_robot_errors = 4
 
 condition_wait_timeout = 60  # seconds to wait for a condition to be true
-
-max_robot_errors = 3
-
 
 def saveDictToJsonFile(dict_data, json_file):
     with open(json_file, 'w', encoding="utf-8") as fileh:
@@ -50,22 +49,16 @@ def jsonPretty(dict_data):
 
 # check robots
 def wasRobotDetected(content):
-    logger = logging.getLogger("wasRobotDetected")
-
     if (content.find('"ROBOTS"') >= 0 and content.find('"NOINDEX, NOFOLLOW"') >= 0):
-        logger.error("Robot detected by test 1")
+        logging.error("Robot detected by test 1")
         return True
-
     if (content.find('"robots"') >= 0 and content.find('"noindex, nofollow"') >= 0):
-        logger.error("Robot detected by test 2")
+        logging.error("Robot detected by test 2")
         return True
-
     if (content.find('Pardon Our Interruption...') >= 0):
-        logger.error("Robot detected by test 3")
+        logging.error("Robot detected by test 3")
         return True
-
     return False
-
 
 def getWebDriver():
     global _browser
@@ -84,14 +77,30 @@ def getWebDriver():
 
         # Firefox (user profile)
         profile_path = r"C:\Users\raffa\AppData\Roaming\Mozilla\Firefox\Profiles\4ai6x5sv.default"
-        profile = webdriver.FirefoxProfile(profile_path)
-        _browser = webdriver.Firefox(firefox_profile=profile)
+        firefox_profile = webdriver.FirefoxProfile(profile_path)
+        firefox_profile.set_preference("browser.privatebrowsing.autostart", True)
+        _browser = webdriver.Firefox(firefox_profile=firefox_profile)
 
         # Firefox new profile
         # browser = webdriver.Firefox()
         # browser.maximize_window()
     return _browser
 
+
+def isRobotSafe(cont):
+    global robot_errors
+    if wasRobotDetected(cont):
+        robot_errors += 1
+        if robot_errors > max_robot_errors:
+            logging.critical("Too may robots errors")
+            exit()
+        else:
+            sec = random.randint(detected_wait_min, detected_wait_max)
+            logging.error("ROBOT detected. Waiting for " + str(sec) + " and then retrying")
+            time.sleep(sec)
+            return False
+    else:
+        return True
 
 # Requesting page with random delay and custom headers
 def getPageSourceCode(url, by_condition, by_value):
@@ -123,6 +132,10 @@ def getPageSourceCode(url, by_condition, by_value):
     sec = random.randint(post_load_sleep_min, post_load_sleep_max)
     logging.info("Post-loading sleep of " + str(sec) + " seconds...")
     time.sleep(sec)
+
+    #BOT CHECK
+    if not isRobotSafe(browser.page_source):
+        return getPageSourceCode(url, by_condition, by_value)
 
     # Wait until condition occur
     if by_condition is not None:
@@ -158,12 +171,8 @@ def getPageSourceCode(url, by_condition, by_value):
         browser = None
     return cont
 
-
 # Get a webpage and save to file (avoid another request). Return the page soup
 def getPageSoup(url, filepath, by_condition, by_value):
-    global robot_errors
-
-    logger = logging.getLogger("getPageSoup")
 
     # Check if HTML file already exist
     if os.path.isfile(filepath):
@@ -173,7 +182,7 @@ def getPageSoup(url, filepath, by_condition, by_value):
             try:
                 filecont = fileh.read()
             except UnicodeDecodeError:
-                logger.error("UnicodeDecodeError on " + filepath + ". Re-downloading it...")
+                logging.error("UnicodeDecodeError on " + filepath + ". Re-downloading it...")
                 fileh.close()
                 os.unlink(filepath)
                 filecont = ''
@@ -181,15 +190,15 @@ def getPageSoup(url, filepath, by_condition, by_value):
         # Check if the page served was the one for robots
         if filecont != '':
             if (wasRobotDetected(filecont)):
-                logger.warning("Pre-saved file contains robot. Removing it...")
+                logging.warning("Pre-saved file contains robot. Removing it...")
                 os.unlink(filepath)
             else:
-                logger.debug("Returning content from pre-saved file " + filepath)
+                logging.debug("Returning content from pre-saved file " + filepath)
                 soup = bs.BeautifulSoup(filecont, 'lxml')
                 return soup
 
     # Get actual source code
-    logger.debug("Calling getPageSourceCode( " + url + ")")
+    logging.debug("Calling getPageSourceCode( " + url + ")")
     cont = getPageSourceCode(url, by_condition, by_value)
 
     # Get the soup
@@ -199,21 +208,5 @@ def getPageSoup(url, filepath, by_condition, by_value):
     with open(filepath, 'w', encoding='utf-8') as fileh:
         fileh.write(cont)
 
-    # Check for robot detection
-    if wasRobotDetected(cont):
-        robot_errors += 1
-        sec = random.randint(detected_wait_min, detected_wait_max)
-        os.remove(filepath)
-        if robot_errors > max_robot_errors:
-            logger.critical("Too may robots errors")
-            exit()
-        else:
-            logger.error(
-                "ROBOT: I have downloaded a file that contains robot detection: " + filepath + ". Waiting for " + str(
-                    sec) + " and then retrying")
-            time.sleep(sec)
-            return getPageSoup(url, filepath, by_condition, by_value)
-    else:
-        robot_errors = 0
-        logger.debug("File downloaded successfully")
-        return soup
+    # Return soup
+    return soup

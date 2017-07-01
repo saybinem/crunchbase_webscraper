@@ -144,10 +144,8 @@ class CompanyScraper():
 
     # Check if there is 404 errore, Wait for the presence of an element in a web page and then wait for some more time
     def waitForPresence(self, by, value):
-
         if self.is404():
             return False
-
         try:
             logging.info("Waiting for presence of (" + str(by) + "," + value + "). URL="+self.getBrowser().current_url)
             condition = EC.presence_of_element_located((by, value))
@@ -216,9 +214,13 @@ class CompanyScraper():
 
     def getBrowserPageSource(self, curr_endpoint = None):
         html = self.getBrowser().page_source
-        if curr_endpoint is not None:
-            self.writeHTMLFile(html, curr_endpoint)
-        return html
+        if(cbscraper.common.wasRobotDetected(html)):
+            logging.critical("Robot detected in browser page")
+            return False
+        else:
+            if curr_endpoint is not None:
+                self.writeHTMLFile(html, curr_endpoint)
+            return html
 
     # Scrape an organization
     def scrape(self):
@@ -248,7 +250,7 @@ class CompanyScraper():
                 self.goToEntityPage()
                 link = self.getBrowserLink(endpoint)
                 logging.info("Clicking on current team link")
-                link.click()
+                self.clickLink(link)
                 self.waitForPresence(By.CLASS_NAME, self.class_wait[endpoint])
                 self.entity_page = False
                 self.prev_page_is_entity = True
@@ -264,7 +266,7 @@ class CompanyScraper():
                 self.goToEntityPage()
                 link = self.getBrowserLink(endpoint)
                 logging.info("Clicking on past team link")
-                link.click()
+                self.clickLink(link)
                 self.waitForPresence(By.CLASS_NAME, self.class_wait[endpoint])
                 self.entity_page = False
                 self.prev_page_is_entity = True
@@ -280,7 +282,7 @@ class CompanyScraper():
                 self.goToEntityPage()
                 link = self.getBrowserLink(endpoint)
                 logging.info("Clicking on advisors link")
-                link.click()
+                self.clickLink(link)
                 self.waitForPresence(By.CLASS_NAME, self.class_wait[endpoint])
                 self.entity_page = False
                 self.prev_page_is_entity = True
@@ -289,6 +291,16 @@ class CompanyScraper():
 
         # Make the soup of downloaded HTML pages
         self.makeAllSoup()
+
+    #click on a link and handle exception
+    def clickLink(self, link):
+        try:
+            link.click()
+        except TimeoutException:
+            logging.error("Timeout exception after a click. Continuing")
+        except:
+            logging.critical("unhandled exception after a click. Dying")
+            raise
 
     # Getters / Setters for HTML
     def getEntityHTML(self):

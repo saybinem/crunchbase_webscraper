@@ -134,7 +134,9 @@ def scrapePerson(data):
     for advisory_role in soup.find_all('div', class_='advisory_roles'):
         advisory_role_ul = advisory_role.ul
         if advisory_role_ul is not None:
+            logging.debug("Advisory role ul: " + advisory_role_ul.text)
             for li in advisory_role_ul.find_all('li'):
+                logging.debug("Advisory role li: " + li.text)
                 info_block = li.div
                 role = info_block.h5.text
                 company = info_block.h4.a.text
