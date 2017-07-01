@@ -1,27 +1,11 @@
-import codecs
 import json
-import os
-import cbscraper.common
 import logging
+import os
+
+import cbscraper.common
 
 # Scrape organization advisors
-def scrapeOrgAdvisors(soup_overview, html_file_advisors):
-
-    link_more = soup_overview.find('a', attrs={'title' : 'All Board Members and Advisors'})
-
-    if(link_more is not None):
-        logging.debug("link_more.string=" + link_more.string)
-
-        # Get the page
-        advisor_url = 'https://www.crunchbase.com' + link_more.get('href')
-        logging.info("Company has more advisors. Getting '" + advisor_url + "'")
-        soup_advisors = cbscraper.common.getPageSoup(advisor_url, html_file_advisors, 'class_name', 'advisors')
-        if (soup_advisors is False):
-            logging.error("Cannot extract advisory soup")
-            return False
-    else:
-        soup_advisors = soup_overview
-
+def scrapeOrgAdvisors(soup_advisors):
     # Scrape page "advisors" (get both main advisors and additional ones with the same code)
     advisors = list()
     for div_advisors in soup_advisors.find_all('div', class_='advisors'):
@@ -42,24 +26,7 @@ def scrapeOrgAdvisors(soup_overview, html_file_advisors):
 
 
 # Scrape organization current people
-def scrapeOrgCurrentPeople(soup_overview, html_file_people):
-
-    link_more = soup_overview.find('a', attrs={'title' : 'All Current Team'})
-
-    if(link_more is not None):
-        #logging.debug("link_more = " + str(link_more))
-
-        # Get the page
-        people_url = 'https://www.crunchbase.com' + link_more.get('href')
-        logging.info("Company has more current_people. Getting: '" + people_url + "'")
-        soup_people = cbscraper.common.getPageSoup(people_url, html_file_people, 'class_name', 'people')
-        if (soup_people is False):
-            logging.error("Error in making people soup")
-            return False
-    else:
-        soup_people = soup_overview
-
-    # Scrape
+def scrapeOrgCurrentPeople(soup_people):
     people = list()
     for div_people in soup_people.find_all('div', class_='people'):
         for info_block in div_people.find_all('div', class_='info-block'):
@@ -78,43 +45,25 @@ def scrapeOrgCurrentPeople(soup_overview, html_file_people):
 
 
 # Scrape organization past people
-def scrapeOrgPastPeople(soup_overview, html_file_people):
-
-    link_more = soup_overview.find('a', attrs={'title' : 'All Past Team'})
-
-    if(link_more is not None):
-        logging.debug("link_more.string=" + link_more.string)
-
-        # Get the page
-        past_people_url = 'https://www.crunchbase.com' + link_more.get('href')
-        logging.info("Company has more past_people. Getting: '" + past_people_url + "'")
-        soup = cbscraper.common.getPageSoup(past_people_url, html_file_people, 'class_name', 'past_people')
-        if (soup is False):
-            logging.error("Error in making past_people soup")
-            return False
-    else:
-        soup = soup_overview
-
-    # Scrape
+def scrapeOrgPastPeople(soup_past_people):
     people = list()
-    for div_people in soup.find_all('div', class_='past_people'):
+    for div_people in soup_past_people.find_all('div', class_='past_people'):
         for info_block in div_people.find_all('div', class_='info-block'):
+            #Get name and link
             h4 = info_block.find('h4')
             a = h4.a
             name = a.get('data-name')
-            logging.info("Found " + name)
+            #logging.info("Found " + name)
             link = a.get('href')
-
+            #Get role
             role = ''
             h5_tag = info_block.find('h5')
             if h5_tag is not None:
                 role = h5_tag.text
-
+            #Normalize and append
             name = cbscraper.common.myTextStrip(name)
             role = cbscraper.common.myTextStrip(role)
-
             people.append([name, link, role])
-
     return people
 
 
@@ -123,10 +72,6 @@ def scrapeOrganization(org_data):
     # Get variables
     json_file = org_data['json']
     rescrape = org_data['rescrape']
-    html_file_overview = org_data['overview_html']
-    html_file_people = org_data['people_html']
-    html_file_past_people = org_data['past_people_html']
-    html_file_advisors = org_data['advisors_html']
     company_vico_id = org_data['vico_id']
     company_cb_id = org_data['cb_id']
 
@@ -139,13 +84,10 @@ def scrapeOrganization(org_data):
             org_data = json.load(fileh)
         return org_data
 
-    # Get the page "overview"
-    overview_url = 'https://www.crunchbase.com/organization/' + company_cb_id
-    logging.info("Getting company overview (" + overview_url + ")")
-    soup = cbscraper.common.getPageSoup(overview_url, html_file_overview, 'class_name', 'info-card')
-    if (soup is False):
-        logging.error("Error in making overview soup")
-        return False
+    # Scrape organization
+    org = cbscraper.CompanyScraper.CompanyScraper(company_cb_id, './data/company/html')
+    org.scrape()
+    soup = org.getEntitySoup()
 
     # Scrape page "overview"
 
@@ -231,13 +173,13 @@ def scrapeOrganization(org_data):
             company_details['description'] = tag.text
 
     # Scrape page "people"
-    people = scrapeOrgCurrentPeople(soup, html_file_people)
+    people = scrapeOrgCurrentPeople(org.getCurrTeamSoup())
 
     # Scrape page "advisors"
-    advisors = scrapeOrgAdvisors(soup, html_file_advisors)
+    advisors = scrapeOrgAdvisors(org.getAdvisorsSoup())
 
     # Scrape page "past people"
-    past_people = scrapeOrgPastPeople(soup, html_file_past_people)
+    past_people = scrapeOrgPastPeople(org.getPastTeamSoup())
 
     # Return data
     company_data = {
@@ -251,7 +193,6 @@ def scrapeOrganization(org_data):
     }
 
     # Write to file
-    with codecs.open(json_file, 'w', 'utf-8') as fileh:
-        fileh.write(cbscraper.common.jsonPretty(company_data))
+    cbscraper.common.saveDictToJsonFile(company_data, json_file)
 
     return company_data

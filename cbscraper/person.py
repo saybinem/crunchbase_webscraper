@@ -1,4 +1,3 @@
-import codecs
 import logging
 import os
 import re
@@ -179,26 +178,37 @@ def scrapePerson(data):
 
     # Investments
     inv_list = list()
-    inv_div = soup.find('div', class_='investments')
-    if (inv_div is not None):
-        inv_has_more = inv_div.find('a', attrs={'title', 'All Investments'}) is not None
-        logging.info("Has more investments: " + str(inv_has_more))
 
-        if(inv_has_more):
-            inv_soup = cbscraper.common.getPageSoup('https://www.crunchbase.com' + person_link + "/investments", investment_html, 'class_name', 'investments')
-            inv_div = inv_soup.find('div', class_='investments')
+    inv_has_more = soup.find('a', attrs={'title' : 'All Investments'}) is not None #look for button "See more investments"
+    if(inv_has_more):
+        logging.info("Has 'more investments' button")
+        inv_soup = cbscraper.common.getPageSoup('https://www.crunchbase.com' + person_link + "/investments", investment_html, 'class_name', 'investments')
+    else:
+        inv_soup = soup
 
+    inv_div = inv_soup.find('div', class_='investments')
+    if inv_div is not None:
         for tr in inv_div.table.tbody.find_all('tr'):
-            td = tr.find('td')
-            date = td.text
-            td2 = td.find_next('td')
-            invested_in = td2.text
+            #Date
+            td1 = tr.find('td')
+            date = td1.text
+            #Invested in
+            td2 = td1.find_next('td')
+            invested_in_link = td2.a.get('href')
+            invested_in_text = td2.text
+            #Round
             td3 = td2.find_next('td')
-            round = td3.text
+            round_text = td3.text
+            round_link = td3.a.get('href')
+            #Details
             td4 = td3.find_next('td')
-            details = td4.text
-            inv_list.append([date, invested_in, round, details])
-            logging.info("Found investment: "+date + " "+invested_in + " " + round + " " + details)
+            details_text = td4.text
+            details_link = ''
+            if(td4.a is not None):
+                details_link = td4.a.get('href')
+            #append
+            inv_list.append([date, invested_in_link, invested_in_text, round_link, round_text, details_link, details_text])
+            #logging.info("Found investment: "+date + " "+invested_in_text + " " + round_text + " " + details_text)
 
     # Build complete data set
     person_data = {
@@ -217,8 +227,7 @@ def scrapePerson(data):
     }
 
     # Save to JSON file
-    with codecs.open(json_file, 'w', "utf-8") as fileh:
-        fileh.write(cbscraper.common.jsonPretty(person_data))
+    cbscraper.common.saveDictToJsonFile(person_data, json_file)
 
     # Return
     return person_data

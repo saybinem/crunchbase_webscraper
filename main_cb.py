@@ -78,10 +78,6 @@ def main():
         org_data = {
             "cb_id": company_cb_id,
             "vico_id": company_vico_id,
-            "overview_html": "./data/company/html/" + company_cb_id + "_overview.html",
-            "advisors_html": "./data/company/html/" + company_cb_id + "_board.html",
-            "people_html": "./data/company/html/" + company_cb_id + "_people.html",
-            "past_people_html": "./data/company/html/" + company_cb_id + "_past_people.html",
             "json": "./data/company/json/" + company_cb_id + ".json",
             "rescrape": rescrape,
         }
