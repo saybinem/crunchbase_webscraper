@@ -24,6 +24,9 @@ class CompanyScraper():
     postload_sleep_min = 5
     postload_sleep_max = 15
 
+    back_sleep_min = 2
+    back_sleep_max = 6
+
     load_timeout = 30
     wait_timeout = 60
 
@@ -46,8 +49,8 @@ class CompanyScraper():
     #Title attribute of the link tags in the organization 'entity' page
     link_map = {
         CBEndpoint.ORG_PEOPLE : 'All Current Team',
-        CBEndpoint.ORG_ADVISORS : 'All Past Team',
-        CBEndpoint.ORG_PAST_PEOPLE : 'All Board Members and Advisors'
+        CBEndpoint.ORG_ADVISORS: 'All Board Members and Advisors',
+        CBEndpoint.ORG_PAST_PEOPLE : 'All Past Team'
     }
 
     html_entity = False
@@ -123,12 +126,12 @@ class CompanyScraper():
     #Wait for hte presence of an element in a web page and then wait for some more time
     def waitForPresence(self, by, value):
         try:
-            logging.info("Waiting for presence of (" + str(by) + "," + value + ")")
+            logging.info("Waiting for presence of (" + str(by) + "," + value + "). URL="+self.getBrowser().current_url)
             condition = EC.presence_of_element_located((by, value))
             WebDriverWait(self.getBrowser(), self.wait_timeout).until(condition)
         except TimeoutException:
-            logging.error("Timed out waiting for page element.")
-            pass
+            logging.critical("Timed out waiting for page element. Fatal")
+            raise
         except:
             logging.error("Unexpected exception waiting for page element. Exiting")
             raise
@@ -144,6 +147,7 @@ class CompanyScraper():
         elif self.prev_page_is_entity:
             logging.info("Going back to entity page")
             self.getBrowser().back()
+            self.randSleep(self.back_sleep_min, self.back_sleep_max)
         else:
             logging.info("Opening entity page")
             self.openUrl(self.cb_organization_url + self.company_id)
@@ -206,6 +210,7 @@ class CompanyScraper():
         html_entity = self.getHtmlFile(endpoint)
         if html_entity is False:
             self.goToEntityPage()
+            self.waitForPresence(By.CLASS_NAME, self.class_wait[endpoint])
             html_entity = self.getBrowserPageSource(endpoint)
 
         self.setEntityHTML(html_entity)
