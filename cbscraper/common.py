@@ -6,7 +6,7 @@ import time
 
 import bs4 as bs
 from selenium import webdriver
-from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import TimeoutException, WebDriverException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -23,10 +23,10 @@ browser_quit = False  # if True, quit the browser after retrieving the page. Thi
 pre_load_sleep_min = 0  # minimum number of seconds to wait before casking the webpage. Avoid robot detection
 pre_load_sleep_max = 0
 
-post_load_sleep_min = 5
-post_load_sleep_max = 15
+post_load_sleep_min = 1
+post_load_sleep_max = 10
 
-page_load_timeout = 25  # seconds before declaring that a page timed out
+page_load_timeout = 30  # seconds before declaring that a page timed out
 detected_wait_min = 240  # seconds to wait if we are detected as robots
 detected_wait_max = 360
 
@@ -108,6 +108,9 @@ def getPageSourceCode(url, by_condition, by_value):
         browser.get(url)
     except TimeoutException:
         logging.warning("Timeout exception during page load. Try to continue.")
+    except WebDriverException as e:
+        logging.warning("WebDriverException msg='"+e.msg+"'. Retrying...")
+        return getPageSourceCode(url, by_condition, by_value)
     except:
         logging.error("Unexpected exception during page load. Exiting.")
         raise

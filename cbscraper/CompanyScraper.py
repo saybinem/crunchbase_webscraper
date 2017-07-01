@@ -7,7 +7,7 @@ from enum import Enum
 import cbscraper.common
 
 import bs4 as bs
-from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -21,8 +21,9 @@ class CBEndpoint(Enum):
 
 
 class CompanyScraper():
-    postload_sleep_min = 5
-    postload_sleep_max = 15
+
+    postload_sleep_min = 2
+    postload_sleep_max = 10
 
     back_sleep_min = 2
     back_sleep_max = 6
@@ -72,6 +73,22 @@ class CompanyScraper():
         logging.info("Sleeping for " + str(sec) + " seconds ...")
         time.sleep(sec)
 
+    #return false if we btained a missing link
+    def is404(self, html=None):
+        if html is None:
+            try:
+                self.getBrowser().find_element_by_id('error-404')
+            except NoSuchElementException:
+                return False
+            except:
+                logging.critical("unexpected exception in is404()")
+                raise
+            else:
+                return True
+        else:
+            soup=self.makeSoupFromHTML(html)
+            return soup.find('div',id='error-404') is not None
+
     #Open an url in web browser
     def openUrl(self, url):
         try:
@@ -95,7 +112,7 @@ class CompanyScraper():
             fileh.write(html)
 
     #Get saved HTML code
-    def getHtmlFile(self, endpoint):
+    def getHTMLFile(self, endpoint):
         if endpoint not in self.htmlfile_suffix:
             raise RuntimeError("The endpoint you passed is not mapped anywhere")
         htmlfile = self.genHTMLFilePath(endpoint)
@@ -116,6 +133,8 @@ class CompanyScraper():
                     logging.warning("Pre-saved file contains robot. Removing it...")
                     os.unlink(htmlfile)
                     return False
+                elif self.is404(filecont):
+                    return False
                 else:
                     logging.debug("Returning content from pre-saved file " + htmlfile)
                     return filecont
@@ -123,8 +142,12 @@ class CompanyScraper():
             logging.debug("HTML file " + htmlfile + " not found")
             return False
 
-    #Wait for hte presence of an element in a web page and then wait for some more time
+    # Check if there is 404 errore, Wait for the presence of an element in a web page and then wait for some more time
     def waitForPresence(self, by, value):
+
+        if self.is404():
+            return False
+
         try:
             logging.info("Waiting for presence of (" + str(by) + "," + value + "). URL="+self.getBrowser().current_url)
             condition = EC.presence_of_element_located((by, value))
@@ -136,7 +159,7 @@ class CompanyScraper():
             logging.error("Unexpected exception waiting for page element. Exiting")
             raise
         else:
-            logging.critical("Page element found")
+            logging.debug("Page element correctly found")
         self.randSleep(self.postload_sleep_min, self.postload_sleep_max)
 
     # Have the browser go to the page relative to endpoint 'entity' (overview page)
@@ -207,7 +230,7 @@ class CompanyScraper():
 
         # Get endpoint 'entity'
         endpoint = CBEndpoint.ORG_ENTITY
-        html_entity = self.getHtmlFile(endpoint)
+        html_entity = self.getHTMLFile(endpoint)
         if html_entity is False:
             self.goToEntityPage()
             self.waitForPresence(By.CLASS_NAME, self.class_wait[endpoint])
@@ -220,7 +243,7 @@ class CompanyScraper():
         endpoint = CBEndpoint.ORG_PEOPLE
         if self.isMore(endpoint):
             logging.info("More " + str(endpoint) + " found")
-            html = self.getHtmlFile(endpoint)
+            html = self.getHTMLFile(endpoint)
             if not html:
                 self.goToEntityPage()
                 link = self.getBrowserLink(endpoint)
@@ -236,7 +259,7 @@ class CompanyScraper():
         endpoint = CBEndpoint.ORG_PAST_PEOPLE
         if self.isMore(endpoint):
             logging.info("More " + str(endpoint) + " found")
-            html = self.getHtmlFile(endpoint)
+            html = self.getHTMLFile(endpoint)
             if not html:
                 self.goToEntityPage()
                 link = self.getBrowserLink(endpoint)
@@ -252,7 +275,7 @@ class CompanyScraper():
         endpoint = CBEndpoint.ORG_ADVISORS
         if self.isMore(endpoint):
             logging.info("More " + str(endpoint) + " found")
-            html = self.getHtmlFile(endpoint)
+            html = self.getHTMLFile(endpoint)
             if not html:
                 self.goToEntityPage()
                 link = self.getBrowserLink(endpoint)

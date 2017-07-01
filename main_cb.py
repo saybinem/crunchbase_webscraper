@@ -6,7 +6,7 @@ import cbscraper.company
 import cbscraper.person
 
 #GLOBALS
-rescrape = True
+rescrape = False
 excel_file = r"C:\data\tesi\VICO\ID Crunchbase_ID VICO.xlsx"
 excel_sheet = 'Firm'
 excel_col_cb = 'CB'
