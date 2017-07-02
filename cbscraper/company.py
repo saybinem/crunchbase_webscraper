@@ -88,7 +88,7 @@ def scrapeOrganization(org_data):
     # Scrape organization
     org = cbscraper.CompanyScraper.CompanyScraper(company_cb_id, './data/company/html')
     org.scrape()
-    soup = org.getEntitySoup()
+    soup = org.getEndpointSoup(cbscraper.CompanyScraper.OrgEndPoint.ENTITY)
 
     # Scrape page "overview"
 
@@ -174,13 +174,13 @@ def scrapeOrganization(org_data):
             company_details['description'] = tag.text
 
     # Scrape page "people"
-    people = scrapeOrgCurrentPeople(org.getCurrTeamSoup())
+    people = scrapeOrgCurrentPeople(org.getEndpointSoup(cbscraper.CompanyScraper.OrgEndPoint.PEOPLE))
 
     # Scrape page "advisors"
-    advisors = scrapeOrgAdvisors(org.getAdvisorsSoup())
+    advisors = scrapeOrgAdvisors(org.getEndpointSoup(cbscraper.CompanyScraper.OrgEndPoint.ADVISORS))
 
     # Scrape page "past people"
-    past_people = scrapeOrgPastPeople(org.getPastTeamSoup())
+    past_people = scrapeOrgPastPeople(org.getEndpointSoup(cbscraper.CompanyScraper.OrgEndPoint.PAST_PEOPLE))
 
     # Return data
     company_data = {

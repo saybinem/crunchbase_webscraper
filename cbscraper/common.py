@@ -76,14 +76,16 @@ def getWebDriver():
         # browser = webdriver.Chrome(executable_path=chrome_driver, chrome_options=options)
 
         # Firefox (user profile)
-        profile_path = r"C:\Users\raffa\AppData\Roaming\Mozilla\Firefox\Profiles\4ai6x5sv.default"
-        firefox_profile = webdriver.FirefoxProfile(profile_path)
-        firefox_profile.set_preference("browser.privatebrowsing.autostart", True)
-        _browser = webdriver.Firefox(firefox_profile=firefox_profile)
+        if False:
+            profile_path = r"C:\Users\raffa\AppData\Roaming\Mozilla\Firefox\Profiles\4ai6x5sv.default"
+            firefox_profile = webdriver.FirefoxProfile(profile_path)
+            #firefox_profile.set_preference("browser.privatebrowsing.autostart", True)
+            _browser = webdriver.Firefox(firefox_profile=firefox_profile)
 
         # Firefox new profile
-        # browser = webdriver.Firefox()
-        # browser.maximize_window()
+        _browser = webdriver.Firefox()
+        #browser.maximize_window()
+
     return _browser
 
 

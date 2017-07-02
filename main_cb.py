@@ -47,8 +47,18 @@ def scrapePersons(company_data, key):
 
 # MAIN
 def main():
-    logger = logging.getLogger("main")
     buildDirs()
+
+    #DEBUG
+    if False:
+        org_data = {
+            "cb_id": "facebook",
+            "vico_id": "NONEXIST",
+            "json": "./data/company/json/facebook.json",
+            "rescrape": True,
+        }
+        company_data = cbscraper.company.scrapeOrganization(org_data)
+        exit()
 
     # Scrape company
 
@@ -72,7 +82,7 @@ def main():
         company_cb_id = row[excel_col_cb].replace("/organization/","")
 
         percent = round((counter / ids_len) * 100, 2)
-        logger.info("Company: " + company_cb_id + " (" + str(counter) + "/" + str(ids_len) + " - " + str(percent) + "%)")
+        logging.info("Company: " + company_cb_id + " (" + str(counter) + "/" + str(ids_len) + " - " + str(percent) + "%)")
         counter += 1
 
         org_data = {
@@ -87,18 +97,18 @@ def main():
         # Scrape persons of the company
 
         if (company_data is not False):
-            logger.info("Scraping persons")
+            logging.info("Scraping persons")
             scrapePersons(company_data, 'people')
 
-            logger.info("Scraping advisors")
+            logging.info("Scraping advisors")
             scrapePersons(company_data, 'advisors')
 
-            logger.info("Scraping past_people")
+            logging.info("Scraping past_people")
             scrapePersons(company_data, 'past_people')
         else:
-            logger.error("No company_data")
+            logging.error("No company_data")
 
-    logger.info("ENDED!")
+    logging.info("ENDED!")
 
 
 if __name__ == "__main__":
