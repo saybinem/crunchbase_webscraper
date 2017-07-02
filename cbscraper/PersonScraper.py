@@ -1,18 +1,15 @@
 import logging
 from enum import Enum
 
-from selenium.webdriver.common.by import By
-from selenium.common.exceptions import TimeoutException, NoSuchElementException
 import cbscraper.GenericScraper
 
 
 class PersonEndPoint(Enum):
-    ENTITY =  1
+    ENTITY = 1
     INVESTMENTS = 2
 
 
 class PersonScraper(cbscraper.GenericScraper.GenericScraper):
-
     html_basepath = './data/person/html'
 
     # Name of the class to wait for when we load a page
@@ -23,13 +20,13 @@ class PersonScraper(cbscraper.GenericScraper.GenericScraper):
 
     # Suffixes of HTML files
     htmlfile_suffix = {
-        PersonEndPoint.ENTITY : '',
-        PersonEndPoint.INVESTMENTS : '_investments'
+        PersonEndPoint.ENTITY: '',
+        PersonEndPoint.INVESTMENTS: '_investments'
     }
 
     # Title attribute of the link tags in the organization 'entity' page
     link_map = {
-        PersonEndPoint.INVESTMENTS : 'All Investments'
+        PersonEndPoint.INVESTMENTS: 'All Investments'
     }
 
     cb_url = "https://www.crunchbase.com/person/"
@@ -42,9 +39,11 @@ class PersonScraper(cbscraper.GenericScraper.GenericScraper):
         elif self.prev_page_is_entity:
             logging.info("Going back to entity page")
             self.goBack()
+            self.waitForClass(PersonEndPoint.ENTITY)
         else:
             logging.info("Opening entity page")
             self.openUrl(self.cb_url + self.id)
+            self.waitForClass(PersonEndPoint.ENTITY)
         self.entity_page = True
         self.prev_page_is_entity = False
 
@@ -59,7 +58,7 @@ class PersonScraper(cbscraper.GenericScraper.GenericScraper):
         entity_html = self.getHTMLFile(endpoint)
         if entity_html is False:
             self.goToEntityPage()
-            self.waitForPresence(By.CLASS_NAME, self.class_wait[endpoint])
+            self.waitForClass(endpoint)
             entity_html = self.getBrowserPageSource(endpoint)
         self.setEndpointHTML(PersonEndPoint.ENTITY, entity_html)
         entity_soup = self.makeSoupFromHTML(entity_html)
@@ -67,7 +66,7 @@ class PersonScraper(cbscraper.GenericScraper.GenericScraper):
 
         # Process endpoints other than the entity one
         for endpoint in self.link_map.keys():
-            if self.isMore(PersonEndPoint.ENTITY,endpoint):
+            if self.isMore(PersonEndPoint.ENTITY, endpoint):
                 logging.info("More of " + str(endpoint) + " found")
                 html = self.getHTMLFile(endpoint)
                 if not html:
@@ -75,7 +74,7 @@ class PersonScraper(cbscraper.GenericScraper.GenericScraper):
                     link = self.getBrowserLink(endpoint)
                     logging.info("Clicking on '" + link.get_attribute('title') + "' link")
                     self.clickLink(link)
-                    self.waitForPresence(By.CLASS_NAME, self.class_wait[endpoint])
+                    self.waitForClass(endpoint)
                     self.entity_page = False
                     self.prev_page_is_entity = True
                     html = self.getBrowserPageSource(endpoint)

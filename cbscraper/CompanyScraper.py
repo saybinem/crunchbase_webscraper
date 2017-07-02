@@ -1,8 +1,6 @@
 import logging
 from enum import Enum
 
-from selenium.webdriver.common.by import By
-from selenium.common.exceptions import TimeoutException, NoSuchElementException
 import cbscraper.GenericScraper
 
 
@@ -51,9 +49,11 @@ class CompanyScraper(cbscraper.GenericScraper.GenericScraper):
         elif self.prev_page_is_entity:
             logging.info("Going back to entity page")
             self.goBack()
+            self.waitForClass(OrgEndPoint.ENTITY)
         else:
             logging.info("Opening entity page")
             self.openUrl(self.cb_url + self.id)
+            self.waitForClass(OrgEndPoint.ENTITY)
         self.entity_page = True
         self.prev_page_is_entity = False
 
@@ -68,7 +68,7 @@ class CompanyScraper(cbscraper.GenericScraper.GenericScraper):
         entity_html = self.getHTMLFile(endpoint)
         if entity_html is False:
             self.goToEntityPage()
-            self.waitForPresence(By.CLASS_NAME, self.class_wait[endpoint])
+            self.waitForClass(endpoint)
             entity_html = self.getBrowserPageSource(endpoint)
         self.setEndpointHTML(OrgEndPoint.ENTITY, entity_html)
         entity_soup = self.makeSoupFromHTML(entity_html)
@@ -84,7 +84,7 @@ class CompanyScraper(cbscraper.GenericScraper.GenericScraper):
                     link = self.getBrowserLink(endpoint)
                     logging.info("Clicking on '" + link.get_attribute('title') + "' link")
                     self.clickLink(link)
-                    self.waitForPresence(By.CLASS_NAME, self.class_wait[endpoint])
+                    self.waitForClass(endpoint)
                     self.entity_page = False
                     self.prev_page_is_entity = True
                     html = self.getBrowserPageSource(endpoint)

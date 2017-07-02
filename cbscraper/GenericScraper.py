@@ -1,26 +1,27 @@
-import time
-import os
 import logging
+import os
 import random
-
-import bs4 as bs
-from selenium.common.exceptions import TimeoutException, NoSuchElementException
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium import webdriver
-import cbscraper.common
-
+import time
 from abc import ABCMeta, abstractmethod
 
-class GenericScraper(metaclass=ABCMeta):
+import bs4 as bs
+from selenium import webdriver
+from selenium.common.exceptions import TimeoutException, NoSuchElementException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
+import cbscraper.common
+
+
+class GenericScraper(metaclass=ABCMeta):
     postload_sleep_min = 3
     postload_sleep_max = 7
 
-    #how much time to sleep after going back
+    # how much time to sleep after going back
     postback_sleep_min = 2
     postback_sleep_max = 8
-    back_timeout = 10 #seconds before declaring timeout after going back
+    back_timeout = 10  # seconds before declaring timeout after going back
 
     load_timeout = 20  # for set_page_load_timeout
     wait_timeout = 60  # for WebDriverWait(self.getBrowser(), self.wait_timeout).until(condition)
@@ -92,7 +93,7 @@ class GenericScraper(metaclass=ABCMeta):
             logging.error("Unexpected exception during page load. Exiting.")
             raise
         else:
-            logging.debug("browser.get() returned without exceptions")
+            logging.debug("browser.get(" + url + ") returned without exceptions")
 
     def writeHTMLFile(self, html, endpoint):
         htmlfile = self.genHTMLFilePath(endpoint)
@@ -142,13 +143,14 @@ class GenericScraper(metaclass=ABCMeta):
                     return filecont
 
     # Check if there is 404 errore, wait for the presence of an element in a web page and then wait for some more time
-    def waitForPresence(self, by, value):
+    def waitForPresenceCondition(self, by, value):
         if self.is404():
             return False
 
         if True:
             try:
-                logging.info("Waiting for presence of (" + str(by) + "," + value + "). URL=" + self.getBrowser().current_url)
+                logging.info(
+                    "Waiting for presence of (" + str(by) + "," + value + "). URL=" + self.getBrowser().current_url)
                 condition = EC.presence_of_element_located((by, value))
                 WebDriverWait(self.getBrowser(), self.wait_timeout).until(condition)
             except TimeoutException:
@@ -162,6 +164,9 @@ class GenericScraper(metaclass=ABCMeta):
 
         # Post-loading sleep
         self.randSleep(self.postload_sleep_min, self.postload_sleep_max)
+
+    def waitForClass(self, endpoint):
+        self.waitForPresenceCondition(By.CLASS_NAME, self.class_wait[endpoint])
 
     def makeSoupFromHTML(self, html):
         return bs.BeautifulSoup(html, 'lxml')
@@ -179,6 +184,8 @@ class GenericScraper(metaclass=ABCMeta):
             ## Firefox new profile
             cbscraper.common._browser = webdriver.Firefox()
             # browser.maximize_window()
+            # sleep after browser opening
+            self.randSleep(2, 2)
         return cbscraper.common._browser
 
     # Get HTML source code of a webpage and handle robot detection
@@ -231,7 +238,7 @@ class GenericScraper(metaclass=ABCMeta):
     def setEndpointSoup(self, endpoint, soup):
         self.endpoint_soup[endpoint] = soup
 
-    #ROBOT detection
+    # ROBOT detection
     def wasRobotDetected(self, content):
         if (content.find('"ROBOTS"') >= 0 and content.find('"NOINDEX, NOFOLLOW"') >= 0):
             logging.error("Robot detected by test 1")
