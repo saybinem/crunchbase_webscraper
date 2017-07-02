@@ -64,14 +64,6 @@ class CompanyScraper(cbscraper.GenericScraper.GenericScraper):
         self.entity_page = True
         self.prev_page_is_entity = False
 
-    # Get link located in the organization 'entity' page
-    def getBrowserLink(self, endpoint):
-        return self.getBrowser().find_element_by_xpath('//a[@title="' + self.link_map[endpoint] + '"]')
-
-    # If the organization entity page has a link for more of the information in 'endpoint', return that link
-    def isMore(self, endpoint):
-        return self.getEndpointSoup(OrgEndPoint.ENTITY).find('a', attrs={'title': self.link_map[endpoint]})
-
     # Scrape an organization
     def scrape(self):
         logging.info("Start scraping " + self.id)

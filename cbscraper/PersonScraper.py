@@ -100,3 +100,15 @@ class PersonScraper(cbscraper.GenericScraper.GenericScraper):
                 else:
                     soup = self.makeSoupFromHTML(html)
                 self.setEndpointSoup(endpoint, soup)
+
+    @property
+    def soup_entity(self):
+        return self.getEndpointSoup(PersonEndPoint.ENTITY)
+
+    @property
+    def soup_inv(self):
+        return self.getEndpointSoup(PersonEndPoint.INVESTMENTS)
+
+    @soup_entity.setter
+    def soup_entity(self, value):
+        self.setEndpointSoup(PersonEndPoint.ENTITY, value)

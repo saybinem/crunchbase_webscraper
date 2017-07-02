@@ -33,8 +33,8 @@ def scrapePerson(data):
     # Get the soup
     person = cbscraper.PersonScraper.PersonScraper(person_id)
     person.scrape()
-    soup = person.getEndpointSoup(cbscraper.PersonScraper.PersonEndPoint.ENTITY)
-    inv_soup = person.getEndpointSoup(cbscraper.PersonScraper.PersonEndPoint.INVESTMENTS)
+    soup = person.soup_entity
+    inv_soup = person.soup_inv
 
     # Get name
     name = soup.find(id='profile_header_heading').text
