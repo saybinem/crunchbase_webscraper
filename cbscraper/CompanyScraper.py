@@ -68,7 +68,6 @@ class CompanyScraper(cbscraper.GenericScraper.GenericScraper):
         entity_html = self.getHTMLFile(endpoint)
         if entity_html is False:
             self.goToEntityPage()
-            self.waitForClass(endpoint)
             entity_html = self.getBrowserPageSource(endpoint)
         self.setEndpointHTML(OrgEndPoint.ENTITY, entity_html)
         entity_soup = self.makeSoupFromHTML(entity_html)

@@ -15,15 +15,14 @@ import cbscraper.common
 
 
 class GenericScraper(metaclass=ABCMeta):
+    #Time to wait after the successful location of an element
+    #Uses in waitForPresenceCondition()
     postload_sleep_min = 3
     postload_sleep_max = 7
 
     # how much time to sleep after going back
-    postback_sleep_min = 2
-    postback_sleep_max = 8
     back_timeout = 10  # seconds before declaring timeout after going back
-
-    load_timeout = 20  # for set_page_load_timeout
+    load_timeout = 10  # for set_page_load_timeout in openUrl()
     wait_timeout = 60  # for WebDriverWait(self.getBrowser(), self.wait_timeout).until(condition)
 
     wait_robot_min = 10 * 60
@@ -146,22 +145,19 @@ class GenericScraper(metaclass=ABCMeta):
     def waitForPresenceCondition(self, by, value):
         if self.is404():
             return False
-
-        if True:
-            try:
-                logging.info(
-                    "Waiting for presence of (" + str(by) + "," + value + "). URL=" + self.getBrowser().current_url)
-                condition = EC.presence_of_element_located((by, value))
-                WebDriverWait(self.getBrowser(), self.wait_timeout).until(condition)
-            except TimeoutException:
-                logging.critical("Timed out waiting for page element. Fatal")
-                raise
-            except:
-                logging.error("Unexpected exception waiting for page element. Exiting")
-                raise
-            else:
-                logging.debug("Page element correctly found")
-
+        #wait for the presence in the DOM of a tag with a given class
+        try:
+            logging.info("Waiting for presence of (" + str(by) + "," + value + "). URL=" + self.getBrowser().current_url)
+            condition = EC.presence_of_element_located((by, value))
+            WebDriverWait(self.getBrowser(), self.wait_timeout).until(condition)
+        except TimeoutException:
+            logging.critical("Timed out waiting for page element. Fatal")
+            raise
+        except:
+            logging.error("Unexpected exception waiting for page element. Exiting")
+            raise
+        else:
+            logging.debug("Page element correctly found")
         # Post-loading sleep
         self.randSleep(self.postload_sleep_min, self.postload_sleep_max)
 
@@ -260,4 +256,3 @@ class GenericScraper(metaclass=ABCMeta):
         except:
             logging.critical("Unhandled exception during back. Exitin.")
             exit()
-        self.randSleep(self.postback_sleep_min, self.postback_sleep_max)

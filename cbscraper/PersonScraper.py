@@ -14,19 +14,19 @@ class PersonScraper(cbscraper.GenericScraper.GenericScraper):
 
     # Name of the class to wait for when we load a page
     class_wait = {
-        PersonEndPoint.ENTITY: 'entity',
-        PersonEndPoint.INVESTMENTS: 'investments'
+        PersonEndPoint.ENTITY : 'entity',
+        PersonEndPoint.INVESTMENTS : 'investments'
     }
 
     # Suffixes of HTML files
     htmlfile_suffix = {
         PersonEndPoint.ENTITY: '',
-        PersonEndPoint.INVESTMENTS: '_investments'
+        PersonEndPoint.INVESTMENTS : '_investments'
     }
 
     # Title attribute of the link tags in the organization 'entity' page
     link_map = {
-        PersonEndPoint.INVESTMENTS: 'All Investments'
+        PersonEndPoint.INVESTMENTS : 'All Investments'
     }
 
     cb_url = "https://www.crunchbase.com/person/"
@@ -58,7 +58,6 @@ class PersonScraper(cbscraper.GenericScraper.GenericScraper):
         entity_html = self.getHTMLFile(endpoint)
         if entity_html is False:
             self.goToEntityPage()
-            self.waitForClass(endpoint)
             entity_html = self.getBrowserPageSource(endpoint)
         self.setEndpointHTML(PersonEndPoint.ENTITY, entity_html)
         entity_soup = self.makeSoupFromHTML(entity_html)
