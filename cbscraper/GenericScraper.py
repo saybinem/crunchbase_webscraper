@@ -7,33 +7,56 @@ import bs4 as bs
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-
-import cbscraper.GenericScraper
+from selenium import webdriver
 import cbscraper.common
 
+from abc import ABCMeta, abstractmethod
 
-class GenericScraper(object):
-    postload_sleep_min = 10
-    postload_sleep_max = 20
+class GenericScraper(metaclass=ABCMeta):
 
-    back_sleep_min = 2
-    back_sleep_max = 6
+    postload_sleep_min = 5
+    postload_sleep_max = 10
 
-    load_timeout = 60  # for set_page_load_timeout
+    back_sleep_min = 3
+    back_sleep_max = 7
+
+    load_timeout = 40  # for set_page_load_timeout
     wait_timeout = 60  # for WebDriverWait(self.getBrowser(), self.wait_timeout).until(condition)
 
     wait_robot_min = 10 * 60
     wait_robot_max = 15 * 60
 
     # internal variables
-    endpoint_html = dict()
-    endpoint_soup = dict()
+    @property
+    @abstractmethod
+    def htmlfile_suffix(self):
+        pass
 
-    # last '/' is included
-    cb_organization_url = "https://www.crunchbase.com/organization/"
+    @property
+    @abstractmethod
+    def cb_url(self):
+        pass
 
-    def __init__(self):
-        self.browser = None
+    @property
+    @abstractmethod
+    def link_map(self):
+        pass
+
+    @property
+    @abstractmethod
+    def class_wait(self):
+        pass
+
+    @property
+    @abstractmethod
+    def html_basepath(self):
+        pass
+
+    def __init__(self, id):
+        self.endpoint_html = dict()
+        self.endpoint_soup = dict()
+        self.id = id
+        self.getBrowser().set_page_load_timeout(self.load_timeout)
 
     def randSleep(self, min, max):
         # Sleep to avoid robots
@@ -60,7 +83,6 @@ class GenericScraper(object):
     # Open an url in web browser
     def openUrl(self, url):
         try:
-            self.getBrowser().set_page_load_timeout(self.load_timeout)
             self.getBrowser().get(url)
         except TimeoutException:
             logging.warning("Timeout exception during page load. Try to continue.")
@@ -70,24 +92,27 @@ class GenericScraper(object):
         else:
             logging.debug("browser.get() returned without exceptions")
 
-    def genHTMLFilePath(self, endpoint):
-        return os.path.join(self.html_basepath, self.company_id + self.htmlfile_suffix[endpoint] + ".html")
-
     def writeHTMLFile(self, html, endpoint):
         htmlfile = self.genHTMLFilePath(endpoint)
         logging.info("Writing " + str(endpoint) + " in " + htmlfile)
         with open(htmlfile, 'w', encoding='utf-8') as fileh:
             fileh.write(html)
 
-    # Get saved HTML code
-    def getHTMLFile(self, endpoint):
+    def genHTMLFilePath(self, endpoint):
         if endpoint not in self.htmlfile_suffix:
             raise RuntimeError("The endpoint you passed is not mapped anywhere")
+        return os.path.join(self.html_basepath, self.id + self.htmlfile_suffix[endpoint] + ".html")
+
+    # Get saved HTML code
+    def getHTMLFile(self, endpoint):
+
         htmlfile = self.genHTMLFilePath(endpoint)
+
         # Check if HTML file already exist
         if not os.path.isfile(htmlfile):
             logging.debug("HTML file " + htmlfile + " not found")
             return False
+
         # Check if we can read from the file
         with open(htmlfile, 'r', encoding='utf-8') as fileh:
             try:
@@ -102,7 +127,7 @@ class GenericScraper(object):
                 raise
             else:
                 # Check if the page served was the one for robots
-                if (cbscraper.common.wasRobotDetected(filecont)):
+                if (self.wasRobotDetected(filecont)):
                     logging.warning("Pre-saved file contains robot. Removing it")
                     fileh.close()
                     os.unlink(htmlfile)
@@ -121,8 +146,7 @@ class GenericScraper(object):
 
         if True:
             try:
-                logging.info(
-                    "Waiting for presence of (" + str(by) + "," + value + "). URL=" + self.getBrowser().current_url)
+                logging.info("Waiting for presence of (" + str(by) + "," + value + "). URL=" + self.getBrowser().current_url)
                 condition = EC.presence_of_element_located((by, value))
                 WebDriverWait(self.getBrowser(), self.wait_timeout).until(condition)
             except TimeoutException:
@@ -142,14 +166,23 @@ class GenericScraper(object):
 
     # Browser functions
     def getBrowser(self):
-        if self.browser is None:
-            self.browser = cbscraper.common.getWebDriver()
-        return self.browser
+        if cbscraper.common._browser is None:
+            # Use selenium
+            logging.debug("Creating webdriver")
+            if False:
+                profile_path = r"C:\Users\raffa\AppData\Roaming\Mozilla\Firefox\Profiles\4ai6x5sv.default"
+                firefox_profile = webdriver.FirefoxProfile(profile_path)
+                # firefox_profile.set_preference("browser.privatebrowsing.autostart", True)
+                cbscraper.common._browser = webdriver.Firefox(firefox_profile=firefox_profile)
+            ## Firefox new profile
+            cbscraper.common._browser = webdriver.Firefox()
+            # browser.maximize_window()
+        return cbscraper.common._browser
 
     # Get HTML source code of a webpage and handle robot detection
     def getBrowserPageSource(self, curr_endpoint=None):
         html = self.getBrowser().page_source
-        if (cbscraper.common.wasRobotDetected(html)):
+        if (self.wasRobotDetected(html)):
             logging.critical("Robot detected in browser page")
             self.randSleep(self.wait_robot_min, self.wait_robot_max)
             return self.getBrowserPageSource(curr_endpoint)
@@ -167,6 +200,14 @@ class GenericScraper(object):
         except:
             logging.critical("Unhandled exception after a click. Dying")
             raise
+
+    # Get link located in the organization 'entity' page
+    def getBrowserLink(self, endpoint):
+        return self.getBrowser().find_element_by_xpath('//a[@title="' + self.link_map[endpoint] + '"]')
+
+    # If the organization entity page has a link for more of the information in 'endpoint', return that link
+    def isMore(self, start_point, link_point):
+        return self.getEndpointSoup(start_point).find('a', attrs={'title': self.link_map[link_point]})
 
     # Getters / Setters for HTML
     def getEndpointHTML(self, endpoint):
@@ -187,3 +228,16 @@ class GenericScraper(object):
 
     def setEndpointSoup(self, endpoint, soup):
         self.endpoint_soup[endpoint] = soup
+
+    #ROBOT detection
+    def wasRobotDetected(self, content):
+        if (content.find('"ROBOTS"') >= 0 and content.find('"NOINDEX, NOFOLLOW"') >= 0):
+            logging.error("Robot detected by test 1")
+            return True
+        if (content.find('"robots"') >= 0 and content.find('"noindex, nofollow"') >= 0):
+            logging.error("Robot detected by test 2")
+            return True
+        if (content.find('Pardon Our Interruption...') >= 0):
+            logging.error("Robot detected by test 3")
+            return True
+        return False

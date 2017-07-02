@@ -86,7 +86,7 @@ def scrapeOrganization(org_data):
         return org_data
 
     # Scrape organization
-    org = cbscraper.CompanyScraper.CompanyScraper(company_cb_id, './data/company/html')
+    org = cbscraper.CompanyScraper.CompanyScraper(company_cb_id)
     org.scrape()
     soup = org.getEndpointSoup(cbscraper.CompanyScraper.OrgEndPoint.ENTITY)
 

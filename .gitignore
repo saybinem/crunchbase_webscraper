@@ -7,4 +7,5 @@
 *.html
 *.json
 __pycache__
+.idea
 *.zip

@@ -4,7 +4,7 @@ import re
 
 import cbscraper.DateInterval
 import cbscraper.common
-
+import cbscraper.PersonScraper
 
 def getPersonIdFromLink(link):
     return link.split("/")[2]
@@ -13,12 +13,9 @@ def getPersonIdFromLink(link):
 # Scrape a single person
 # e.g. person_link="/person/gavin-ray"
 def scrapePerson(data):
-    logger = logging.getLogger("scrapePerson")
 
     # Get input vars
     person_id = data['id']
-    overview_html = data['overview']
-    investment_html = data['investment_html']
     json_file = data['json']
     rescrape = data['rescrape']
     type = data['type']
@@ -27,18 +24,17 @@ def scrapePerson(data):
     company_vico_id = data['company_id_vico']
 
     if (os.path.isfile(json_file) and not rescrape):
-        logger.info("Person \"" + person_id + "\" already scraped")
+        logging.info("Person \"" + person_id + "\" already scraped")
         return True
 
-    logger.info("Scraping person: \"" + person_id + "\"")
+    logging.info("Scraping person: \"" + person_id + "\"")
     person_link = "/person/" + person_id
 
     # Get the soup
-    soup = cbscraper.common.getPageSoup('https://www.crunchbase.com' + person_link, overview_html, 'id',
-                                        'profile_header_heading')
-    if (soup is False):
-        logger.error("Error during person soup")
-        return False
+    person = cbscraper.PersonScraper.PersonScraper(person_id)
+    person.scrape()
+    soup = person.getEndpointSoup(cbscraper.PersonScraper.PersonEndPoint.ENTITY)
+    inv_soup = person.getEndpointSoup(cbscraper.PersonScraper.PersonEndPoint.INVESTMENTS)
 
     # Get name
     name = soup.find(id='profile_header_heading').text
@@ -127,7 +123,7 @@ def scrapePerson(data):
             title = info_row.find('div', class_='title').text
             company = info_row.find('div', class_='company').text
             past_jobs.append([company, title, date_start, date_end])
-            # logger.info("Found past job: "+str(past_job_dict))
+            # logging.info("Found past job: "+str(past_job_dict))
 
     # Advisory roles
     adv_roles = list()
@@ -180,14 +176,6 @@ def scrapePerson(data):
 
     # Investments
     inv_list = list()
-
-    inv_has_more = soup.find('a', attrs={'title' : 'All Investments'}) is not None #look for button "See more investments"
-    if(inv_has_more):
-        logging.info("Has 'more investments' button")
-        inv_soup = cbscraper.common.getPageSoup('https://www.crunchbase.com' + person_link + "/investments", investment_html, 'class_name', 'investments')
-    else:
-        inv_soup = soup
-
     inv_div = inv_soup.find('div', class_='investments')
     if inv_div is not None:
         for tr in inv_div.table.tbody.find_all('tr'):

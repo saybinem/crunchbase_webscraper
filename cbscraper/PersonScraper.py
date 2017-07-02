@@ -6,43 +6,34 @@ from selenium.common.exceptions import TimeoutException, NoSuchElementException
 import cbscraper.GenericScraper
 
 
-class OrgEndPoint(Enum):
-    ENTITY = 1
-    PEOPLE = 2
-    ADVISORS = 3
-    PAST_PEOPLE = 4
+class PersonEndPoint(Enum):
+    ENTITY =  1
+    INVESTMENTS = 2
 
 
-class CompanyScraper(cbscraper.GenericScraper.GenericScraper):
+class PersonScraper(cbscraper.GenericScraper.GenericScraper):
 
-    html_basepath = './data/company/html'
+    html_basepath = './data/person/html'
 
     # Name of the class to wait for when we load a page
     class_wait = {
-        OrgEndPoint.ENTITY: 'entity',
-        OrgEndPoint.PAST_PEOPLE: 'past_people',
-        OrgEndPoint.PEOPLE: 'people',
-        OrgEndPoint.ADVISORS: 'advisors',
+        PersonEndPoint.ENTITY: 'entity',
+        PersonEndPoint.INVESTMENTS: 'investments'
     }
 
     # Suffixes of HTML files
     htmlfile_suffix = {
-        OrgEndPoint.ENTITY: '_overview',
-        OrgEndPoint.PEOPLE: '_people',
-        OrgEndPoint.ADVISORS: '_board',
-        OrgEndPoint.PAST_PEOPLE: '_past_people',
+        PersonEndPoint.ENTITY : '',
+        PersonEndPoint.INVESTMENTS : '_investments'
     }
 
     # Title attribute of the link tags in the organization 'entity' page
     link_map = {
-        OrgEndPoint.PEOPLE: 'All Current Team',
-        OrgEndPoint.ADVISORS: 'All Board Members and Advisors',
-        OrgEndPoint.PAST_PEOPLE: 'All Past Team'
+        PersonEndPoint.INVESTMENTS : 'All Investments'
     }
 
-    #CB starting URL
-    cb_url = "https://www.crunchbase.com/organization/"
-    
+    cb_url = "https://www.crunchbase.com/person/"
+
     # Have the browser go to the page of the 'entity' ednpoint (overview page)
     def goToEntityPage(self):
         if self.entity_page:
@@ -64,14 +55,6 @@ class CompanyScraper(cbscraper.GenericScraper.GenericScraper):
         self.entity_page = True
         self.prev_page_is_entity = False
 
-    # Get link located in the organization 'entity' page
-    def getBrowserLink(self, endpoint):
-        return self.getBrowser().find_element_by_xpath('//a[@title="' + self.link_map[endpoint] + '"]')
-
-    # If the organization entity page has a link for more of the information in 'endpoint', return that link
-    def isMore(self, endpoint):
-        return self.getEndpointSoup(OrgEndPoint.ENTITY).find('a', attrs={'title': self.link_map[endpoint]})
-
     # Scrape an organization
     def scrape(self):
         logging.info("Start scraping " + self.id)
@@ -79,19 +62,19 @@ class CompanyScraper(cbscraper.GenericScraper.GenericScraper):
         self.prev_page_is_entity = False
 
         # Get endpoint 'entity'
-        endpoint = OrgEndPoint.ENTITY
+        endpoint = PersonEndPoint.ENTITY
         entity_html = self.getHTMLFile(endpoint)
         if entity_html is False:
             self.goToEntityPage()
             self.waitForPresence(By.CLASS_NAME, self.class_wait[endpoint])
             entity_html = self.getBrowserPageSource(endpoint)
-        self.setEndpointHTML(OrgEndPoint.ENTITY, entity_html)
+        self.setEndpointHTML(PersonEndPoint.ENTITY, entity_html)
         entity_soup = self.makeSoupFromHTML(entity_html)
-        self.setEndpointSoup(OrgEndPoint.ENTITY, entity_soup)
+        self.setEndpointSoup(PersonEndPoint.ENTITY, entity_soup)
 
         # Process endpoints other than the entity one
         for endpoint in self.link_map.keys():
-            if self.isMore(OrgEndPoint.ENTITY, endpoint):
+            if self.isMore(PersonEndPoint.ENTITY,endpoint):
                 logging.info("More of " + str(endpoint) + " found")
                 html = self.getHTMLFile(endpoint)
                 if not html:
@@ -108,12 +91,12 @@ class CompanyScraper(cbscraper.GenericScraper.GenericScraper):
         self.makeAllSoup()
 
     def makeAllSoup(self):
-        for endpoint in OrgEndPoint:
+        for endpoint in PersonEndPoint:
             soup = self.getEndpointSoup(endpoint)
             if soup is False:
                 html = self.getEndpointHTML(endpoint)
                 if html is False:
-                    soup = self.getEndpointSoup(OrgEndPoint.ENTITY)
+                    soup = self.getEndpointSoup(PersonEndPoint.ENTITY)
                 else:
                     soup = self.makeSoupFromHTML(html)
                 self.setEndpointSoup(endpoint, soup)
