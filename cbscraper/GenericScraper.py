@@ -14,13 +14,15 @@ from abc import ABCMeta, abstractmethod
 
 class GenericScraper(metaclass=ABCMeta):
 
-    postload_sleep_min = 5
-    postload_sleep_max = 10
+    postload_sleep_min = 3
+    postload_sleep_max = 7
 
-    back_sleep_min = 3
-    back_sleep_max = 7
+    #how much time to sleep after going back
+    postback_sleep_min = 2
+    postback_sleep_max = 8
+    back_timeout = 10 #seconds before declaring timeout after going back
 
-    load_timeout = 40  # for set_page_load_timeout
+    load_timeout = 20  # for set_page_load_timeout
     wait_timeout = 60  # for WebDriverWait(self.getBrowser(), self.wait_timeout).until(condition)
 
     wait_robot_min = 10 * 60
@@ -56,7 +58,6 @@ class GenericScraper(metaclass=ABCMeta):
         self.endpoint_html = dict()
         self.endpoint_soup = dict()
         self.id = id
-        self.getBrowser().set_page_load_timeout(self.load_timeout)
 
     def randSleep(self, min, max):
         # Sleep to avoid robots
@@ -82,6 +83,7 @@ class GenericScraper(metaclass=ABCMeta):
 
     # Open an url in web browser
     def openUrl(self, url):
+        self.getBrowser().set_page_load_timeout(self.load_timeout)
         try:
             self.getBrowser().get(url)
         except TimeoutException:
@@ -241,3 +243,14 @@ class GenericScraper(metaclass=ABCMeta):
             logging.error("Robot detected by test 3")
             return True
         return False
+
+    def goBack(self):
+        try:
+            self.getBrowser().set_page_load_timeout(self.back_timeout)
+            self.getBrowser().back()
+        except TimeoutException:
+            logging.warning("Timeout exception during back(). Try to continue.")
+        except:
+            logging.critical("Unhandled exception during back. Exitin.")
+            exit()
+        self.randSleep(self.postback_sleep_min, self.postback_sleep_max)

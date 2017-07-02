@@ -41,14 +41,7 @@ class PersonScraper(cbscraper.GenericScraper.GenericScraper):
             pass
         elif self.prev_page_is_entity:
             logging.info("Going back to entity page")
-            try:
-                self.getBrowser().back()
-            except TimeoutException:
-                logging.warning("Timeout exception during back(). Try to continue.")
-            except:
-                logging.critical("Unhandled exception during back. Exitin.")
-                exit()
-            self.randSleep(self.back_sleep_min, self.back_sleep_max)
+            self.goBack()
         else:
             logging.info("Opening entity page")
             self.openUrl(self.cb_url + self.id)
