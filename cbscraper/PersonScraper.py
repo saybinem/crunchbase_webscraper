@@ -42,7 +42,7 @@ class PersonScraper(cbscraper.GenericScraper.GenericScraper):
             self.waitForClass(PersonEndPoint.ENTITY)
         else:
             logging.info("Opening entity page")
-            self.openUrl(self.cb_url + self.id)
+            self.openURL(self.cb_url + self.id)
             self.waitForClass(PersonEndPoint.ENTITY)
         self.entity_page = True
         self.prev_page_is_entity = False

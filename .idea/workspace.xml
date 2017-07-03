@@ -9,8 +9,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cbscraper/CompanyScraper.py" afterPath="$PROJECT_DIR$/cbscraper/CompanyScraper.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cbscraper/GenericScraper.py" afterPath="$PROJECT_DIR$/cbscraper/GenericScraper.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cbscraper/PersonScraper.py" afterPath="$PROJECT_DIR$/cbscraper/PersonScraper.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cbscraper/person.py" afterPath="$PROJECT_DIR$/cbscraper/person.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main_cb.py" afterPath="$PROJECT_DIR$/main_cb.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cbscraper/common.py" afterPath="$PROJECT_DIR$/cbscraper/common.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,7 +19,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/crunchbase_scraper$main_cb.coverage" NAME="main_cb Coverage Results" MODIFIED="1499017024869" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/crunchbase_scraper$main_cb.coverage" NAME="main_cb Coverage Results" MODIFIED="1499068770973" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
@@ -35,14 +34,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PersonScraper.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cbscraper/PersonScraper.py">
+      <file leaf-file-name="common.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cbscraper/common.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="34" column="18" lean-forward="false" selection-start-line="34" selection-start-column="8" selection-end-line="34" selection-end-column="18" />
-              <folding>
-                <element signature="e#0#14#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="84">
+              <caret line="4" column="10" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="10" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -51,17 +48,17 @@
         <entry file="file://$PROJECT_DIR$/main_cb.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="189">
-              <caret line="121" column="4" lean-forward="true" selection-start-line="121" selection-start-column="4" selection-end-line="121" selection-end-column="4" />
+              <caret line="121" column="4" lean-forward="false" selection-start-line="121" selection-start-column="4" selection-end-line="121" selection-end-column="4" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GenericScraper.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cbscraper/GenericScraper.py">
+      <file leaf-file-name="PersonScraper.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cbscraper/PersonScraper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="386">
-              <caret line="161" column="36" lean-forward="false" selection-start-line="161" selection-start-column="28" selection-end-line="161" selection-end-column="36" />
+            <state relative-caret-position="155">
+              <caret line="44" column="24" lean-forward="false" selection-start-line="44" selection-start-column="24" selection-end-line="44" selection-end-column="24" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -69,11 +66,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CompanyScraper.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GenericScraper.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/cbscraper/GenericScraper.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="399">
+              <caret line="25" column="21" lean-forward="false" selection-start-line="25" selection-start-column="21" selection-end-line="25" selection-end-column="21" />
+              <folding>
+                <element signature="e#0#14#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CompanyScraper.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cbscraper/CompanyScraper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="69" column="25" lean-forward="false" selection-start-line="69" selection-start-column="17" selection-end-line="69" selection-end-column="25" />
+            <state relative-caret-position="281">
+              <caret line="54" column="24" lean-forward="false" selection-start-line="54" selection-start-column="24" selection-end-line="54" selection-end-column="24" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -92,13 +101,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>compan</find>
-      <find>robot</find>
-      <find>getBr</find>
-      <find>wait_timeo</find>
-      <find>clickin</find>
-      <find>ORG_PAST_PEOPLE</find>
-      <find>makeAllSoup</find>
       <find>set_page_load</find>
       <find>logger</find>
       <find>self.brow</find>
@@ -115,13 +117,20 @@
       <find>load_time</find>
       <find>postload_sleep_min</find>
       <find>back()</find>
-      <find>waitForPrese</find>
       <find>waitFor</find>
       <find>load_timeout</find>
-      <find>postload</find>
       <find>Advisory</find>
       <find>goToEntity</find>
+      <find>postload</find>
       <find>goToEnti</find>
+      <find>waitForPrese</find>
+      <find>getBro</find>
+      <find>presence</find>
+      <find>goToEn</find>
+      <find>openURL</find>
+      <find>openUrl</find>
+      <find>goBack</find>
+      <find>company:</find>
     </findStrings>
     <replaceStrings>
       <replace>soup</replace>
@@ -132,6 +141,7 @@
       <replace>PAST_PEOPLE</replace>
       <replace>id</replace>
       <replace>cb_url</replace>
+      <replace>openURL</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -141,13 +151,13 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/cbscraper/DateInterval.py" />
-        <option value="$PROJECT_DIR$/cbscraper/common.py" />
         <option value="$PROJECT_DIR$/cbscraper/company.py" />
-        <option value="$PROJECT_DIR$/cbscraper/GenericScraper.py" />
         <option value="$PROJECT_DIR$/cbscraper/person.py" />
         <option value="$PROJECT_DIR$/main_cb.py" />
-        <option value="$PROJECT_DIR$/cbscraper/PersonScraper.py" />
         <option value="$PROJECT_DIR$/cbscraper/CompanyScraper.py" />
+        <option value="$PROJECT_DIR$/cbscraper/PersonScraper.py" />
+        <option value="$PROJECT_DIR$/cbscraper/common.py" />
+        <option value="$PROJECT_DIR$/cbscraper/GenericScraper.py" />
       </list>
     </option>
   </component>
@@ -542,7 +552,14 @@
       <option name="project" value="LOCAL" />
       <updated>1499016476580</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="bug fix in which he waited 2 times">
+      <created>1499017249916</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1499017249916</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TodoView">
@@ -562,7 +579,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3091733" sideWeight="0.5021482" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32842582" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3091733" sideWeight="0.49785176" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3091733" sideWeight="0.49785176" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21589689" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -615,7 +632,8 @@
     <MESSAGE value="classe PersonScraper" />
     <MESSAGE value="goBack() function" />
     <MESSAGE value="improvements" />
-    <option name="LAST_COMMIT_MESSAGE" value="improvements" />
+    <MESSAGE value="bug fix in which he waited 2 times" />
+    <option name="LAST_COMMIT_MESSAGE" value="bug fix in which he waited 2 times" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -984,14 +1002,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cbscraper/common.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cbscraper/company.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="182">
@@ -1008,16 +1018,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cbscraper/GenericScraper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="386">
-          <caret line="161" column="36" lean-forward="false" selection-start-line="161" selection-start-column="28" selection-end-line="161" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cbscraper/person.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
@@ -1029,15 +1029,15 @@
     <entry file="file://$PROJECT_DIR$/main_cb.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
-          <caret line="121" column="4" lean-forward="true" selection-start-line="121" selection-start-column="4" selection-end-line="121" selection-end-column="4" />
+          <caret line="121" column="4" lean-forward="false" selection-start-line="121" selection-start-column="4" selection-end-line="121" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cbscraper/PersonScraper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="34" column="18" lean-forward="false" selection-start-line="34" selection-start-column="8" selection-end-line="34" selection-end-column="18" />
+        <state relative-caret-position="155">
+          <caret line="44" column="24" lean-forward="false" selection-start-line="44" selection-start-column="24" selection-end-line="44" selection-end-column="24" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
@@ -1046,8 +1046,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/cbscraper/CompanyScraper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="69" column="25" lean-forward="false" selection-start-line="69" selection-start-column="17" selection-end-line="69" selection-end-column="25" />
+        <state relative-caret-position="281">
+          <caret line="54" column="24" lean-forward="false" selection-start-line="54" selection-start-column="24" selection-end-line="54" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cbscraper/common.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="4" column="10" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cbscraper/GenericScraper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="25" column="21" lean-forward="false" selection-start-line="25" selection-start-column="21" selection-end-line="25" selection-end-column="21" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>

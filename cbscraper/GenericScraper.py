@@ -17,16 +17,18 @@ import cbscraper.common
 class GenericScraper(metaclass=ABCMeta):
     #Time to wait after the successful location of an element
     #Uses in waitForPresenceCondition()
-    postload_sleep_min = 3
-    postload_sleep_max = 7
+    postload_sleep_min = 5
+    postload_sleep_max = 20
 
     # how much time to sleep after going back
-    back_timeout = 10  # seconds before declaring timeout after going back
-    load_timeout = 10  # for set_page_load_timeout in openUrl()
-    wait_timeout = 60  # for WebDriverWait(self.getBrowser(), self.wait_timeout).until(condition)
+    back_timeout = 20  # seconds before declaring timeout after going back
+    load_timeout = 30  # for set_page_load_timeout in openURL()
+    wait_timeout = 120  # for WebDriverWait(self.getBrowser(), self.wait_timeout).until(condition)
 
     wait_robot_min = 10 * 60
     wait_robot_max = 15 * 60
+
+    max_requests_per_browser_instance = 30
 
     # internal variables
     @property
@@ -81,8 +83,17 @@ class GenericScraper(metaclass=ABCMeta):
             soup = self.makeSoupFromHTML(html)
             return soup.find('div', id='error-404') is not None
 
+    #Add a browser request and eventually restart the browser
+    def addBrowserRequest(self):
+        cbscraper.common.n_requests += 1
+        if (cbscraper.common.n_requests >= self.max_requests_per_browser_instance):
+            logging.info("Reached max num of requests. Restarting the browser")
+            self.restartBrowser()
+            cbscraper.common.n_requests = 0
+
     # Open an url in web browser
-    def openUrl(self, url):
+    def openURL(self, url):
+        self.addBrowserRequest()
         self.getBrowser().set_page_load_timeout(self.load_timeout)
         try:
             self.getBrowser().get(url)
@@ -143,8 +154,15 @@ class GenericScraper(metaclass=ABCMeta):
 
     # Check if there is 404 errore, wait for the presence of an element in a web page and then wait for some more time
     def waitForPresenceCondition(self, by, value):
+        # Post-loading sleep
+        self.randSleep(self.postload_sleep_min, self.postload_sleep_max)
+        #Check for 404 error
         if self.is404():
+            logging.info("404 page retrieved")
             return False
+        #Check for robot detection
+        if self.wasRobotDetected():
+            self.detectedAsRobot()
         #wait for the presence in the DOM of a tag with a given class
         try:
             logging.info("Waiting for presence of (" + str(by) + "," + value + "). URL=" + self.getBrowser().current_url)
@@ -157,9 +175,7 @@ class GenericScraper(metaclass=ABCMeta):
             logging.error("Unexpected exception waiting for page element. Exiting")
             raise
         else:
-            logging.debug("Page element correctly found")
-        # Post-loading sleep
-        self.randSleep(self.postload_sleep_min, self.postload_sleep_max)
+            logging.info("Page element correctly found")
 
     def waitForClass(self, endpoint):
         self.waitForPresenceCondition(By.CLASS_NAME, self.class_wait[endpoint])
@@ -168,20 +184,26 @@ class GenericScraper(metaclass=ABCMeta):
         return bs.BeautifulSoup(html, 'lxml')
 
     # Browser functions
+    def setBrowser(self, brow):
+        cbscraper.common._browser = brow
+
     def getBrowser(self):
         if cbscraper.common._browser is None:
             # Use selenium
             logging.debug("Creating webdriver")
-            if False:
-                profile_path = r"C:\Users\raffa\AppData\Roaming\Mozilla\Firefox\Profiles\4ai6x5sv.default"
-                firefox_profile = webdriver.FirefoxProfile(profile_path)
-                # firefox_profile.set_preference("browser.privatebrowsing.autostart", True)
-                cbscraper.common._browser = webdriver.Firefox(firefox_profile=firefox_profile)
+
+            #    profile_path = r"C:\Users\raffa\AppData\Roaming\Mozilla\Firefox\Profiles\4ai6x5sv.default"
+            #    firefox_profile = webdriver.FirefoxProfile(profile_path)
+            #    firefox_profile.set_preference("browser.privatebrowsing.autostart", True)
+            #    cbscraper.common._browser = webdriver.Firefox(firefox_profile=firefox_profile)
+
             ## Firefox new profile
             cbscraper.common._browser = webdriver.Firefox()
+
             # browser.maximize_window()
             # sleep after browser opening
             self.randSleep(2, 2)
+
         return cbscraper.common._browser
 
     # Get HTML source code of a webpage and handle robot detection
@@ -235,7 +257,9 @@ class GenericScraper(metaclass=ABCMeta):
         self.endpoint_soup[endpoint] = soup
 
     # ROBOT detection
-    def wasRobotDetected(self, content):
+    def wasRobotDetected(self, content=None):
+        if(content is None):
+            content = self.getBrowser().page_source
         if (content.find('"ROBOTS"') >= 0 and content.find('"NOINDEX, NOFOLLOW"') >= 0):
             logging.error("Robot detected by test 1")
             return True
@@ -246,6 +270,30 @@ class GenericScraper(metaclass=ABCMeta):
             logging.error("Robot detected by test 3")
             return True
         return False
+
+    def detectedAsRobot(self):
+        logging.info("We were detected as robots")
+        try:
+            logging.info("Refreshing the page")
+            self.getBrowser().refresh()
+        except:
+            pass
+        self.randSleep(5,10)
+        detected = self.wasRobotDetected()
+        if not detected:
+            logging.info("Detection escaped")
+            return True
+        else:
+            logging.info("We are still being detected. Restarting the browser")
+            self.restartBrowser()
+            self.randSleep(self.wait_robot_min, self.wait_robot_max)
+            return self.detectedAsRobot()
+
+    def restartBrowser(self):
+        logging.info("Restarting the browser")
+        self.getBrowser().quit()
+        self.setBrowser(None)
+        self.getBrowser()
 
     def goBack(self):
         try:
