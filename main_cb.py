@@ -35,8 +35,6 @@ def scrapePersons(company_data, key):
         person_id = cbscraper.person.getPersonIdFromLink(p[1])
         person_data = {
             "id": person_id,
-            "overview": "./data/person/html/" + person_id + ".html",
-            "investment_html": "./data/person/html/" + person_id + "_investments.html",
             "json": "./data/person/json/" + person_id + ".json",
             "rescrape": rescrape,
             'company_id_cb': company_cb_id,

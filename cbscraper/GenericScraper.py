@@ -272,9 +272,8 @@ class GenericScraper(metaclass=ABCMeta):
         return False
 
     def detectedAsRobot(self):
-        logging.info("We were detected as robots")
+        logging.info("We were detected as robots. Refreshing the page")
         try:
-            logging.info("Refreshing the page")
             self.getBrowser().refresh()
         except:
             pass
@@ -283,11 +282,17 @@ class GenericScraper(metaclass=ABCMeta):
         if not detected:
             logging.info("Detection escaped")
             return True
-        else:
-            logging.info("We are still being detected. Restarting the browser")
-            self.restartBrowser()
-            self.randSleep(self.wait_robot_min, self.wait_robot_max)
-            return self.detectedAsRobot()
+
+        logging.info("We are still being detected. Restarting the browser")
+        url = self.getBrowser().current_url
+        self.restartBrowser()
+        self.randSleep(self.wait_robot_min, self.wait_robot_max)
+        self.getBrowser().get(url)
+        detected = self.wasRobotDetected()
+        if not detected:
+            logging.info("Detection escaped")
+            return True
+        return self.detectedAsRobot()
 
     def restartBrowser(self):
         logging.info("Restarting the browser")
