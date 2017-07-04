@@ -95,6 +95,7 @@ class GenericScraper(metaclass=ABCMeta):
         self.addBrowserRequest()
         self.getBrowser().set_page_load_timeout(self.load_timeout)
         try:
+            logging.info("Calling browser.get('"+url+"')")
             self.getBrowser().get(url)
         except TimeoutException:
             logging.warning("Timeout exception during page load. Moving on.")
@@ -155,9 +156,12 @@ class GenericScraper(metaclass=ABCMeta):
                     return html_code
 
     # Post-load sleep, Check if there are 404 errors, Wait for the presence of an element in a web page
-    def waitForPresenceCondition(self, by, value):
+    def waitForPresenceCondition(self, by, value, sleep=True):
         # Post-loading sleep
-        self.randSleep(self.postload_sleep_min, self.postload_sleep_max)
+        if(sleep):
+            self.randSleep(self.postload_sleep_min, self.postload_sleep_max)
+        else:
+            logging.info("NOT sleeping")
         # Check for 404 error
         html_code = self.getBrowserPageSource()
         if self.is404(html_code):

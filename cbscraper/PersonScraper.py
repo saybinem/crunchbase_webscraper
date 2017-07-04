@@ -40,7 +40,7 @@ class PersonScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
 
     def entityWait(self):
         self.waitForClass(PersonEndPoint.ENTITY)
-        self.waitForPresenceCondition(By.ID, 'profile_header_heading')
+        self.waitForPresenceCondition(By.ID, 'profile_header_heading', sleep=False)
 
     # Have the browser go to the page of the 'entity' ednpoint (overview page)
     def goToEntityPage(self):
