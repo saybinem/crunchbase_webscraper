@@ -76,10 +76,14 @@ class PersonScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
 
         # Get endpoint 'entity'
         endpoint = PersonEndPoint.ENTITY
-        entity_html = self.getHTMLFile(endpoint)
+        try:
+            entity_html = self.getHTMLFile(endpoint)
+        except cbscraper.GenericScraper.Error404:
+            logging.info("File contained 404 error. Moving on")
+            return False
+
         if entity_html is False:
-            res = self.goToEntityPage()
-            if not res:
+            if not self.goToEntityPage():
                 logging.error("goToEntityPage() returned false (404?). Continuing")
                 return False
             entity_html = self.getBrowserPageSource(endpoint)

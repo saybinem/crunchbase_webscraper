@@ -149,7 +149,7 @@ class GenericScraper(metaclass=ABCMeta):
                     return False
                 elif self.is404(html_code):
                     logging.warning("Pre-saved file contains 404 error")
-                    return False
+                    raise Error404("Error 404 in "+htmlfile)
                 else:
                     logging.debug("Returning content from pre-saved file " + htmlfile)
                     return html_code

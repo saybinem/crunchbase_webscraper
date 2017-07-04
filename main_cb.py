@@ -68,9 +68,6 @@ def main():
     frame = frame[[excel_col_cb, excel_col_vico]]  # get only interesting columns
     frame = frame.loc[frame[excel_col_cb] == frame[excel_col_cb]]  # remove NaNs
 
-    # DEBUG
-    # frame = pandas.DataFrame({'CB_ID':['actility'],'CompanyID':['VICO_CIAO']})
-
     counter = 1  # keep count of the current firm
     ids_len = frame.shape[0] #get row number
 
@@ -80,7 +77,9 @@ def main():
         company_cb_id = row[excel_col_cb].replace("/organization/","")
 
         percent = round((counter / ids_len) * 100, 2)
-        logging.info("Company: " + company_cb_id + " (" + str(counter) + "/" + str(ids_len) + " - " + str(percent) + "%)")
+        msg = "Company: " + company_cb_id + " (" + str(counter) + "/" + str(ids_len) + " - " + str(percent) + "%)"
+        logging.info(msg)
+
         counter += 1
 
         org_data = {
@@ -121,9 +120,10 @@ if __name__ == "__main__":
     logging.getLogger().addHandler(console_handler)
 
     #add file log
-    handler = logging.handlers.RotatingFileHandler('cbscraper.log', maxBytes=1024000, backupCount=5)
-    handler.setFormatter(fmt)
-    logging.getLogger().addHandler(handler)
+    if False:
+        handler = logging.handlers.RotatingFileHandler('cbscraper.log', maxBytes=1024000, backupCount=5)
+        handler.setFormatter(fmt)
+        logging.getLogger().addHandler(handler)
 
     logging.getLogger().setLevel(logging.DEBUG)
     logging.info("Starting at: "+time.strftime("%Y-%m-%d"))
