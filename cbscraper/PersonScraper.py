@@ -1,15 +1,15 @@
 import logging
 from enum import Enum
 
-import cbscraper.GenericScraper
-
+import cbscraper.CrunchbaseScraper
+from selenium.webdriver.common.by import By
 
 class PersonEndPoint(Enum):
     ENTITY = 1
     INVESTMENTS = 2
 
 
-class PersonScraper(cbscraper.GenericScraper.GenericScraper):
+class PersonScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
     html_basepath = './data/person/html'
 
     # Name of the class to wait for when we load a page
@@ -40,10 +40,12 @@ class PersonScraper(cbscraper.GenericScraper.GenericScraper):
             logging.info("Going back to entity page")
             self.goBack()
             self.waitForClass(PersonEndPoint.ENTITY)
+            self.waitForPresenceCondition(By.ID, 'profile_header_heading')
         else:
             logging.info("Opening entity page")
             self.openURL(self.cb_url + self.id)
             self.waitForClass(PersonEndPoint.ENTITY)
+            self.waitForPresenceCondition(By.ID, 'profile_header_heading')
         self.entity_page = True
         self.prev_page_is_entity = False
 

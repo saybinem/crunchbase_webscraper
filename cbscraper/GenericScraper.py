@@ -1,25 +1,27 @@
+import json
 import logging
 import os
 import random
+import smtplib
 import time
 from abc import ABCMeta, abstractmethod
+from email.mime.text import MIMEText
 
 import bs4 as bs
+import cbscraper.common
 from selenium import webdriver
-from selenium.common.exceptions import TimeoutException, NoSuchElementException
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-import cbscraper.common
-
-from email.mime.text import MIMEText
-import json
-import smtplib
+# Non modifiable globals
+_browser = None
+n_requests=0
 
 class GenericScraper(metaclass=ABCMeta):
-    #Time to wait after the successful location of an element
-    #Uses in waitForPresenceCondition()
+    # Time to wait after the successful location of an element
+    # Uses in waitForPresenceCondition()
     postload_sleep_min = 10
     postload_sleep_max = 20
 
@@ -31,32 +33,34 @@ class GenericScraper(metaclass=ABCMeta):
     wait_robot_min = 10 * 60
     wait_robot_max = 15 * 60
 
-    max_requests_per_browser_instance = 10
+    max_requests_per_browser_instance = 50
 
     # internal variables
+
+    # map a remote endpoint to HTML file suffix
     @property
     @abstractmethod
     def htmlfile_suffix(self):
         pass
 
-    @property
-    @abstractmethod
-    def cb_url(self):
-        pass
-
-    @property
-    @abstractmethod
-    def link_map(self):
-        pass
-
+    #map an endpoint to a class to wait for
     @property
     @abstractmethod
     def class_wait(self):
         pass
 
+    # a strin containing the directory of HTML files
     @property
     @abstractmethod
     def html_basepath(self):
+        pass
+
+    @abstractmethod
+    def wasRobotDetected(self, filecont):
+        pass
+
+    @abstractmethod
+    def is404(self, filecont):
         pass
 
     def __init__(self, id):
@@ -70,26 +74,11 @@ class GenericScraper(metaclass=ABCMeta):
         logging.info("Sleeping for " + str(sec) + " seconds ...")
         time.sleep(sec)
 
-    # return false if we btained a missing link
-    def is404(self, html=None):
-        if html is None:
-            try:
-                self.getBrowser().find_element_by_id('error-404')
-            except NoSuchElementException:
-                return False
-            except:
-                logging.critical("Unexpected exception in is404()")
-                raise
-            else:
-                return True
-        else:
-            soup = self.makeSoupFromHTML(html)
-            return soup.find('div', id='error-404') is not None
-
-    #Add a browser request and eventually restart the browser
+    # Add a browser request and eventually restart the browser
     def addBrowserRequest(self):
-        cbscraper.common.n_requests += 1
-        if (cbscraper.common.n_requests >= self.max_requests_per_browser_instance):
+        global n_requests
+        n_requests += 1
+        if (n_requests >= self.max_requests_per_browser_instance):
             logging.info("Reached max num of requests. Restarting the browser")
             self.restartBrowser()
             cbscraper.common.n_requests = 0
@@ -101,21 +90,22 @@ class GenericScraper(metaclass=ABCMeta):
         try:
             self.getBrowser().get(url)
         except TimeoutException:
-            logging.warning("Timeout exception during page load. Try to continue.")
+            logging.warning("Timeout exception during page load. Moving on.")
         except:
-            logging.error("Unexpected exception during page load. Exiting.")
-            raise
+            logging.error("Unexpected exception during page load. Retrying")
+            self.randSleep(60, 60)
+            return self.openURL(url)
         else:
             logging.debug("browser.get(" + url + ") returned without exceptions")
 
-    #Write HTML to file
+    # Write HTML to file
     def writeHTMLFile(self, html, endpoint):
         htmlfile = self.genHTMLFilePath(endpoint)
         logging.info("Writing " + str(endpoint) + " in " + htmlfile)
         with open(htmlfile, 'w', encoding='utf-8') as fileh:
             fileh.write(html)
 
-    #Get the file path of local HTML file from remote endpoin
+    # Get the file path of local HTML file from remote endpoin
     def genHTMLFilePath(self, endpoint):
         if endpoint not in self.htmlfile_suffix:
             raise RuntimeError("The endpoint you passed is not mapped anywhere")
@@ -157,21 +147,22 @@ class GenericScraper(metaclass=ABCMeta):
                     logging.debug("Returning content from pre-saved file " + htmlfile)
                     return filecont
 
-    # Check if there is 404 errore, wait for the presence of an element in a web page and then wait for some more time
+    # Post-load sleep, Check if there are 404 errors, Wait for the presence of an element in a web page
     def waitForPresenceCondition(self, by, value):
         # Post-loading sleep
         self.randSleep(self.postload_sleep_min, self.postload_sleep_max)
-        #Check for 404 error
+        # Check for 404 error
         if self.is404():
             logging.info("404 page retrieved")
             return False
-        #Check for robot detection
+        # Check for robot detection
         if self.wasRobotDetected():
             self.detectedAsRobot()
-        #wait for the presence in the DOM of a tag with a given class
+        # wait for the presence in the DOM of a tag with a given class
         try:
-            logging.info("Waiting for presence of (" + str(by) + "," + value + "). URL=" + self.getBrowser().current_url)
-            condition = EC.presence_of_element_located((by, value))
+            logging.info("Waiting for visibility of (" + str(
+                by) + "," + value + "). URL='" + self.getBrowser().current_url + "'")
+            condition = EC.visibility_of_element_located((by, value))
             WebDriverWait(self.getBrowser(), self.wait_timeout).until(condition)
         except TimeoutException:
             logging.critical("Timed out waiting for page element. Fatal")
@@ -193,27 +184,28 @@ class GenericScraper(metaclass=ABCMeta):
         cbscraper.common._browser = brow
 
     def getBrowser(self):
-        if cbscraper.common._browser is None:
+        global _browser
+        if _browser is None:
             # Use selenium
             logging.debug("Creating webdriver")
 
             ## FIrefox user profile
             profile_path = r"C:\Users\raffa\AppData\Roaming\Mozilla\Firefox\Profiles\4ai6x5sv.default"
             firefox_profile = webdriver.FirefoxProfile(profile_path)
-            #firefox_profile.set_preference("browser.privatebrowsing.autostart", True)
+            # firefox_profile.set_preference("browser.privatebrowsing.autostart", True)
             cbscraper.common._browser = webdriver.Firefox(firefox_profile=firefox_profile)
 
             ## Firefox new profile
-            #cbscraper.common._browser = webdriver.Firefox()
+            # cbscraper.common._browser = webdriver.Firefox()
 
-            #Modify windows
+            # Modify windows
             cbscraper.common._browser.set_window_position(0, 0)
             # browser.maximize_window()
 
             # sleep after browser opening
             self.randSleep(2, 3)
 
-        return cbscraper.common._browser
+        return _browser
 
     # Get HTML source code of a webpage and handle robot detection
     def getBrowserPageSource(self, curr_endpoint=None):
@@ -237,14 +229,6 @@ class GenericScraper(metaclass=ABCMeta):
             logging.critical("Unhandled exception after a click. Dying")
             raise
 
-    # Get link located in the organization 'entity' page
-    def getBrowserLink(self, endpoint):
-        return self.getBrowser().find_element_by_xpath('//a[@title="' + self.link_map[endpoint] + '"]')
-
-    # If the organization entity page has a link for more of the information in 'endpoint', return that link
-    def isMore(self, start_point, link_point):
-        return self.getEndpointSoup(start_point).find('a', attrs={'title': self.link_map[link_point]})
-
     # Getters / Setters for HTML
     def getEndpointHTML(self, endpoint):
         if endpoint in self.endpoint_html:
@@ -265,45 +249,6 @@ class GenericScraper(metaclass=ABCMeta):
     def setEndpointSoup(self, endpoint, soup):
         self.endpoint_soup[endpoint] = soup
 
-    # ROBOT detection
-    def wasRobotDetected(self, content=None):
-        if(content is None):
-            content = self.getBrowser().page_source
-        if (content.find('"ROBOTS"') >= 0 and content.find('"NOINDEX, NOFOLLOW"') >= 0):
-            logging.error("Robot detected by test 1")
-            return True
-        if (content.find('"robots"') >= 0 and content.find('"noindex, nofollow"') >= 0):
-            logging.error("Robot detected by test 2")
-            return True
-        if (content.find('Pardon Our Interruption...') >= 0):
-            logging.error("Robot detected by test 3")
-            return True
-        return False
-
-    def detectedAsRobot(self):
-        logging.info("We were detected as robots. Refreshing the page")
-        try:
-            self.getBrowser().refresh()
-        except:
-            pass
-        self.randSleep(10, 15)
-        detected = self.wasRobotDetected()
-        if not detected:
-            logging.info("Detection escaped")
-            return True
-
-        logging.info("We are still being detected. Restarting the browser")
-        self.sendRobotEmail()
-        url = self.getBrowser().current_url
-        self.restartBrowser()
-        self.randSleep(self.wait_robot_min, self.wait_robot_max)
-        self.getBrowser().get(url)
-        detected = self.wasRobotDetected()
-        if not detected:
-            logging.info("Detection escaped")
-            return True
-        return self.detectedAsRobot()
-
     def restartBrowser(self):
         logging.info("Restarting the browser")
         self.getBrowser().quit()
@@ -317,8 +262,11 @@ class GenericScraper(metaclass=ABCMeta):
         except TimeoutException:
             logging.warning("Timeout exception during back(). Try to continue.")
         except:
-            logging.critical("Unhandled exception during back. Exitin.")
+            logging.critical("Unhandled exception during back. Exiting.")
             exit()
+
+    def getTitle(self):
+        return self.getBrowser().title
 
     def sendRobotEmail(self):
         with open("credentials.json", "r") as fileh:
@@ -333,7 +281,7 @@ class GenericScraper(metaclass=ABCMeta):
         msg['To'] = toaddr
         msg['Subject'] = "Stalled by robot"
 
-        #SMTP connection
+        # SMTP connection
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
         server.login(credentials['username'], credentials['password'])

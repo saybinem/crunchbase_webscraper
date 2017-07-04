@@ -1,8 +1,7 @@
 import logging
 from enum import Enum
 
-import cbscraper.GenericScraper
-
+import cbscraper.CrunchbaseScraper
 
 class OrgEndPoint(Enum):
     ENTITY = 1
@@ -11,7 +10,7 @@ class OrgEndPoint(Enum):
     PAST_PEOPLE = 4
 
 
-class CompanyScraper(cbscraper.GenericScraper.GenericScraper):
+class CompanyScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
 
     html_basepath = './data/company/html'
 
@@ -41,7 +40,7 @@ class CompanyScraper(cbscraper.GenericScraper.GenericScraper):
     #CB starting URL
     cb_url = "https://www.crunchbase.com/organization/"
     
-    # Have the browser go to the page of the 'entity' ednpoint (overview page)
+    # Have the browser go to the page of the 'entity' endpoint (overview page)
     def goToEntityPage(self):
         if self.entity_page:
             logging.info("Already on entity page")
