@@ -13,11 +13,14 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 import cbscraper.common
 
+from email.mime.text import MIMEText
+import json
+import smtplib
 
 class GenericScraper(metaclass=ABCMeta):
     #Time to wait after the successful location of an element
     #Uses in waitForPresenceCondition()
-    postload_sleep_min = 5
+    postload_sleep_min = 10
     postload_sleep_max = 20
 
     # how much time to sleep after going back
@@ -28,7 +31,7 @@ class GenericScraper(metaclass=ABCMeta):
     wait_robot_min = 10 * 60
     wait_robot_max = 15 * 60
 
-    max_requests_per_browser_instance = 30
+    max_requests_per_browser_instance = 10
 
     # internal variables
     @property
@@ -105,12 +108,14 @@ class GenericScraper(metaclass=ABCMeta):
         else:
             logging.debug("browser.get(" + url + ") returned without exceptions")
 
+    #Write HTML to file
     def writeHTMLFile(self, html, endpoint):
         htmlfile = self.genHTMLFilePath(endpoint)
         logging.info("Writing " + str(endpoint) + " in " + htmlfile)
         with open(htmlfile, 'w', encoding='utf-8') as fileh:
             fileh.write(html)
 
+    #Get the file path of local HTML file from remote endpoin
     def genHTMLFilePath(self, endpoint):
         if endpoint not in self.htmlfile_suffix:
             raise RuntimeError("The endpoint you passed is not mapped anywhere")
@@ -192,17 +197,21 @@ class GenericScraper(metaclass=ABCMeta):
             # Use selenium
             logging.debug("Creating webdriver")
 
-            #    profile_path = r"C:\Users\raffa\AppData\Roaming\Mozilla\Firefox\Profiles\4ai6x5sv.default"
-            #    firefox_profile = webdriver.FirefoxProfile(profile_path)
-            #    firefox_profile.set_preference("browser.privatebrowsing.autostart", True)
-            #    cbscraper.common._browser = webdriver.Firefox(firefox_profile=firefox_profile)
+            ## FIrefox user profile
+            profile_path = r"C:\Users\raffa\AppData\Roaming\Mozilla\Firefox\Profiles\4ai6x5sv.default"
+            firefox_profile = webdriver.FirefoxProfile(profile_path)
+            #firefox_profile.set_preference("browser.privatebrowsing.autostart", True)
+            cbscraper.common._browser = webdriver.Firefox(firefox_profile=firefox_profile)
 
             ## Firefox new profile
-            cbscraper.common._browser = webdriver.Firefox()
+            #cbscraper.common._browser = webdriver.Firefox()
 
+            #Modify windows
+            cbscraper.common._browser.set_window_position(0, 0)
             # browser.maximize_window()
+
             # sleep after browser opening
-            self.randSleep(2, 2)
+            self.randSleep(2, 3)
 
         return cbscraper.common._browser
 
@@ -277,13 +286,14 @@ class GenericScraper(metaclass=ABCMeta):
             self.getBrowser().refresh()
         except:
             pass
-        self.randSleep(5,10)
+        self.randSleep(10, 15)
         detected = self.wasRobotDetected()
         if not detected:
             logging.info("Detection escaped")
             return True
 
         logging.info("We are still being detected. Restarting the browser")
+        self.sendRobotEmail()
         url = self.getBrowser().current_url
         self.restartBrowser()
         self.randSleep(self.wait_robot_min, self.wait_robot_max)
@@ -309,3 +319,23 @@ class GenericScraper(metaclass=ABCMeta):
         except:
             logging.critical("Unhandled exception during back. Exitin.")
             exit()
+
+    def sendRobotEmail(self):
+        with open("credentials.json", "r") as fileh:
+            credentials = json.load(fileh)
+
+        fromaddr = credentials['email']
+        toaddr = credentials['email']
+        body = "Scraping is stalled by robot detection"
+
+        msg = MIMEText(body)
+        msg['From'] = fromaddr
+        msg['To'] = toaddr
+        msg['Subject'] = "Stalled by robot"
+
+        #SMTP connection
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login(credentials['username'], credentials['password'])
+        server.send_message(msg)
+        server.quit()
