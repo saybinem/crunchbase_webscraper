@@ -170,7 +170,7 @@ class GenericScraper(metaclass=ABCMeta):
         try:
             msg = "Waiting for visibility of "
             msg += "(" + str(by) + "," + value + ")"
-            msg += " in ddURL='" + self.getBrowser().current_url + "'"
+            msg += " in URL='" + self.getBrowser().current_url + "'"
             logging.info(msg)
             condition = EC.visibility_of_element_located((by, value))
             WebDriverWait(self.getBrowser(), self.wait_timeout).until(condition)

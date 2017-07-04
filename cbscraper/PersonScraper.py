@@ -33,6 +33,11 @@ class PersonScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
 
     cb_url = "https://www.crunchbase.com/person/"
 
+    def __init__(self, id):
+        self.entity_page = False
+        self.prev_page_is_entity = False
+        super().__init__(id)
+
     def entityWait(self):
         self.waitForClass(PersonEndPoint.ENTITY)
         self.waitForPresenceCondition(By.ID, 'profile_header_heading')
@@ -41,23 +46,26 @@ class PersonScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
     def goToEntityPage(self):
         if self.entity_page:
             logging.info("Already on entity page")
-            pass
+            return True
         elif self.prev_page_is_entity:
             logging.info("Going back to entity page")
+            self.goBack()
             try:
-                self.goBack()
                 self.entityWait()
             except cbscraper.GenericScraper.Error404:
-                logging.info("Error 404")
+                logging.error("Error 404")
                 return False
             except:
                 logging.critical("Unhandled exception")
                 raise
+            else:
+                self.entity_page = True
+                self.prev_page_is_entity = False
+                return True
         else:
             logging.info("Opening entity page")
             self.openURL(self.cb_url + self.id)
             try:
-                self.goBack()
                 self.entityWait()
             except cbscraper.GenericScraper.Error404:
                 logging.info("Error 404")
@@ -65,14 +73,14 @@ class PersonScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
             except:
                 logging.critical("Unhandled exception")
                 raise
-        self.entity_page = True
-        self.prev_page_is_entity = False
+            else:
+                self.entity_page = True
+                self.prev_page_is_entity = False
+                return True
 
     # Scrape an organization
     def scrape(self):
         logging.info("Start scraping " + self.id)
-        self.entity_page = False
-        self.prev_page_is_entity = False
 
         # Get endpoint 'entity'
         endpoint = PersonEndPoint.ENTITY
