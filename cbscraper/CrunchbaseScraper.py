@@ -37,16 +37,14 @@ class CrunchbaseScraper(cbscraper.GenericScraper.GenericScraper):
             return soup.find('div', id='error-404') is not None
 
     # ROBOT detection
-    def wasRobotDetected(self, content=None):
-        if (content is None):
-            content = self.getBrowser().page_source
-        if (content.find('"ROBOTS"') >= 0 and content.find('"NOINDEX, NOFOLLOW"') >= 0):
+    def wasRobotDetected(self, hmtl_code=None):
+        if (hmtl_code.find('"ROBOTS"') >= 0 and hmtl_code.find('"NOINDEX, NOFOLLOW"') >= 0):
             logging.error("Robot detected by test 1")
             return True
-        if (content.find('"robots"') >= 0 and content.find('"noindex, nofollow"') >= 0):
+        if (hmtl_code.find('"robots"') >= 0 and hmtl_code.find('"noindex, nofollow"') >= 0):
             logging.error("Robot detected by test 2")
             return True
-        if (content.find('Pardon Our Interruption...') >= 0):
+        if (hmtl_code.find('Pardon Our Interruption...') >= 0):
             logging.error("Robot detected by test 3")
             return True
         return False

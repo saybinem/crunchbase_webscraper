@@ -60,7 +60,11 @@ class GenericScraper(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def is404(self, filecont):
+    def is404(self, html):
+        pass
+
+    @abstractmethod
+    def detectedAsRobot(self, filecont):
         pass
 
     def __init__(self, id):
@@ -124,7 +128,7 @@ class GenericScraper(metaclass=ABCMeta):
         # Check if we can read from the file
         with open(htmlfile, 'r', encoding='utf-8') as fileh:
             try:
-                filecont = fileh.read()
+                html_code = fileh.read()
             except UnicodeDecodeError:
                 logging.error("UnicodeDecodeError on " + htmlfile + ". Re-downloading it...")
                 fileh.close()
@@ -135,33 +139,36 @@ class GenericScraper(metaclass=ABCMeta):
                 raise
             else:
                 # Check if the page served was the one for robots
-                if (self.wasRobotDetected(filecont)):
+                if (self.wasRobotDetected(html_code)):
                     logging.warning("Pre-saved file contains robot. Removing it")
                     fileh.close()
                     os.unlink(htmlfile)
                     return False
-                elif self.is404(filecont):
+                elif self.is404(html_code):
                     logging.warning("Pre-saved file contains 404 error")
                     return False
                 else:
                     logging.debug("Returning content from pre-saved file " + htmlfile)
-                    return filecont
+                    return html_code
 
     # Post-load sleep, Check if there are 404 errors, Wait for the presence of an element in a web page
     def waitForPresenceCondition(self, by, value):
         # Post-loading sleep
         self.randSleep(self.postload_sleep_min, self.postload_sleep_max)
         # Check for 404 error
-        if self.is404():
+        html_code = self.getBrowserPageSource()
+        if self.is404(html_code):
             logging.info("404 page retrieved")
             return False
         # Check for robot detection
-        if self.wasRobotDetected():
+        if self.wasRobotDetected(html_code):
             self.detectedAsRobot()
         # wait for the presence in the DOM of a tag with a given class
         try:
-            logging.info("Waiting for visibility of (" + str(
-                by) + "," + value + "). URL='" + self.getBrowser().current_url + "'")
+            msg = "Waiting for visibility of ("
+            msg += "(" + str(by) + "," + value + ")"
+            msg += " URL='" + self.getBrowser().current_url + "'"
+            logging.info(msg)
             condition = EC.visibility_of_element_located((by, value))
             WebDriverWait(self.getBrowser(), self.wait_timeout).until(condition)
         except TimeoutException:
@@ -193,13 +200,13 @@ class GenericScraper(metaclass=ABCMeta):
             profile_path = r"C:\Users\raffa\AppData\Roaming\Mozilla\Firefox\Profiles\4ai6x5sv.default"
             firefox_profile = webdriver.FirefoxProfile(profile_path)
             # firefox_profile.set_preference("browser.privatebrowsing.autostart", True)
-            cbscraper.common._browser = webdriver.Firefox(firefox_profile=firefox_profile)
+            _browser = webdriver.Firefox(firefox_profile=firefox_profile)
 
             ## Firefox new profile
             # cbscraper.common._browser = webdriver.Firefox()
 
             # Modify windows
-            cbscraper.common._browser.set_window_position(0, 0)
+            _browser.set_window_position(0, 0)
             # browser.maximize_window()
 
             # sleep after browser opening
@@ -207,17 +214,12 @@ class GenericScraper(metaclass=ABCMeta):
 
         return _browser
 
-    # Get HTML source code of a webpage and handle robot detection
+    # Get HTML source code of a webpage. If curr_endpoint is not None, write the HTML code to a file
     def getBrowserPageSource(self, curr_endpoint=None):
         html = self.getBrowser().page_source
-        if (self.wasRobotDetected(html)):
-            logging.critical("Robot detected in browser page")
-            self.randSleep(self.wait_robot_min, self.wait_robot_max)
-            return self.getBrowserPageSource(curr_endpoint)
-        else:
-            if curr_endpoint is not None:
-                self.writeHTMLFile(html, curr_endpoint)
-            return html
+        if curr_endpoint is not None:
+            self.writeHTMLFile(html, curr_endpoint)
+        return html
 
     # Click on a link and handle exception
     def clickLink(self, link):
@@ -269,7 +271,7 @@ class GenericScraper(metaclass=ABCMeta):
         return self.getBrowser().title
 
     def sendRobotEmail(self):
-        with open("credentials.json", "r") as fileh:
+        with open("email_credentials.json", "r") as fileh:
             credentials = json.load(fileh)
 
         fromaddr = credentials['email']

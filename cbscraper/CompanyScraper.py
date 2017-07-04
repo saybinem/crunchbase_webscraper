@@ -14,7 +14,6 @@ class CompanyScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
 
     html_basepath = './data/company/html'
 
-    # Name of the class to wait for when we load a page
     class_wait = {
         OrgEndPoint.ENTITY: 'entity',
         OrgEndPoint.PAST_PEOPLE: 'past_people',
@@ -22,7 +21,6 @@ class CompanyScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
         OrgEndPoint.ADVISORS: 'advisors',
     }
 
-    # Suffixes of HTML files
     htmlfile_suffix = {
         OrgEndPoint.ENTITY: '_overview',
         OrgEndPoint.PEOPLE: '_people',
@@ -30,7 +28,6 @@ class CompanyScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
         OrgEndPoint.PAST_PEOPLE: '_past_people',
     }
 
-    # Title attribute of the link tags in the organization 'entity' page
     link_map = {
         OrgEndPoint.PEOPLE: 'All Current Team',
         OrgEndPoint.ADVISORS: 'All Board Members and Advisors',
