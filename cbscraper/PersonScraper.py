@@ -2,6 +2,8 @@ import logging
 from enum import Enum
 
 import cbscraper.CrunchbaseScraper
+import cbscraper.GenericScraper
+
 from selenium.webdriver.common.by import By
 
 class PersonEndPoint(Enum):
@@ -31,6 +33,10 @@ class PersonScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
 
     cb_url = "https://www.crunchbase.com/person/"
 
+    def entityWait(self):
+        self.waitForClass(PersonEndPoint.ENTITY)
+        self.waitForPresenceCondition(By.ID, 'profile_header_heading')
+
     # Have the browser go to the page of the 'entity' ednpoint (overview page)
     def goToEntityPage(self):
         if self.entity_page:
@@ -38,14 +44,27 @@ class PersonScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
             pass
         elif self.prev_page_is_entity:
             logging.info("Going back to entity page")
-            self.goBack()
-            self.waitForClass(PersonEndPoint.ENTITY)
-            self.waitForPresenceCondition(By.ID, 'profile_header_heading')
+            try:
+                self.goBack()
+                self.entityWait()
+            except cbscraper.GenericScraper.Error404:
+                logging.info("Error 404")
+                return False
+            except:
+                logging.critical("Unhandled exception")
+                raise
         else:
             logging.info("Opening entity page")
             self.openURL(self.cb_url + self.id)
-            self.waitForClass(PersonEndPoint.ENTITY)
-            self.waitForPresenceCondition(By.ID, 'profile_header_heading')
+            try:
+                self.goBack()
+                self.entityWait()
+            except cbscraper.GenericScraper.Error404:
+                logging.info("Error 404")
+                return False
+            except:
+                logging.critical("Unhandled exception")
+                raise
         self.entity_page = True
         self.prev_page_is_entity = False
 
@@ -59,7 +78,10 @@ class PersonScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
         endpoint = PersonEndPoint.ENTITY
         entity_html = self.getHTMLFile(endpoint)
         if entity_html is False:
-            self.goToEntityPage()
+            res = self.goToEntityPage()
+            if not res:
+                logging.error("goToEntityPage() returned false (404?). Continuing")
+                return False
             entity_html = self.getBrowserPageSource(endpoint)
         self.setEndpointHTML(PersonEndPoint.ENTITY, entity_html)
         entity_soup = self.makeSoupFromHTML(entity_html)
@@ -82,6 +104,7 @@ class PersonScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
                 self.setEndpointHTML(endpoint, html)
         # Make the soup of downloaded HTML pages
         self.makeAllSoup()
+        return True
 
     def makeAllSoup(self):
         for endpoint in PersonEndPoint:

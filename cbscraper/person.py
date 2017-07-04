@@ -194,7 +194,11 @@ def scrapePerson(data):
 
     # Get the soup
     person = cbscraper.PersonScraper.PersonScraper(person_id)
-    person.scrape()
+
+    if not person.scrape():
+        logging.error("scrape() retuned false. Skipping this person")
+        return False
+
     soup = person.soup_entity
     inv_soup = person.soup_inv
 

@@ -41,7 +41,7 @@ def scrapePersons(company_data, key):
             'company_id_vico': company_vico_id,
             'type': key  # allow to distinguish among "team", "advisors" and "past_people"
         }
-        person_res = cbscraper.person.scrapePerson(person_data)
+        cbscraper.person.scrapePerson(person_data)
 
 # MAIN
 def main():

@@ -19,6 +19,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 _browser = None
 n_requests=0
 
+class Error404(Exception):
+    pass
+
 class GenericScraper(metaclass=ABCMeta):
     # Time to wait after the successful location of an element
     # Uses in waitForPresenceCondition()
@@ -28,7 +31,7 @@ class GenericScraper(metaclass=ABCMeta):
     # how much time to sleep after going back
     back_timeout = 20  # seconds before declaring timeout after going back
     load_timeout = 40  # for set_page_load_timeout in openURL()
-    wait_timeout = 120  # for WebDriverWait(self.getBrowser(), self.wait_timeout).until(condition)
+    wait_timeout = 3*60  # for WebDriverWait(self.getBrowser(), self.wait_timeout).until(condition)
 
     wait_robot_min = 10 * 60
     wait_robot_max = 15 * 60
@@ -159,7 +162,7 @@ class GenericScraper(metaclass=ABCMeta):
         html_code = self.getBrowserPageSource()
         if self.is404(html_code):
             logging.info("404 page retrieved")
-            return False
+            raise Error404("404 error on page "+self.getBrowserURL())
         # Check for robot detection
         if self.wasRobotDetected(html_code):
             self.detectedAsRobot()
@@ -181,7 +184,7 @@ class GenericScraper(metaclass=ABCMeta):
             logging.info("Page element correctly found")
 
     def waitForClass(self, endpoint):
-        self.waitForPresenceCondition(By.CLASS_NAME, self.class_wait[endpoint])
+        return self.waitForPresenceCondition(By.CLASS_NAME, self.class_wait[endpoint])
 
     def makeSoupFromHTML(self, html):
         return bs.BeautifulSoup(html, 'lxml')
@@ -267,8 +270,11 @@ class GenericScraper(metaclass=ABCMeta):
             logging.critical("Unhandled exception during back. Exiting.")
             exit()
 
-    def getTitle(self):
+    def getBrowserTitle(self):
         return self.getBrowser().title
+
+    def getBrowserURL(self):
+        return self.getBrowser().current_url
 
     def sendRobotEmail(self):
         logging.info("Sending email telling we are stalled by robot detection")
