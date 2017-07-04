@@ -37,7 +37,7 @@ class CrunchbaseScraper(cbscraper.GenericScraper.GenericScraper):
             return soup.find('div', id='error-404') is not None
 
     # ROBOT detection
-    def wasRobotDetected(self, hmtl_code=None):
+    def wasRobotDetected(self, hmtl_code):
         if (hmtl_code.find('"ROBOTS"') >= 0 and hmtl_code.find('"NOINDEX, NOFOLLOW"') >= 0):
             logging.error("Robot detected by test 1")
             return True
@@ -56,7 +56,7 @@ class CrunchbaseScraper(cbscraper.GenericScraper.GenericScraper):
         except:
             pass
         self.randSleep(10, 15)
-        detected = self.wasRobotDetected()
+        detected = self.wasRobotDetected(self.getBrowserPageSource())
         if not detected:
             logging.info("Detection escaped")
             return True
@@ -67,7 +67,7 @@ class CrunchbaseScraper(cbscraper.GenericScraper.GenericScraper):
         self.restartBrowser()
         self.randSleep(self.wait_robot_min, self.wait_robot_max)
         self.getBrowser().get(url)
-        detected = self.wasRobotDetected()
+        detected = self.wasRobotDetected(self.getBrowserPageSource())
         if not detected:
             logging.info("Detection escaped")
             return True

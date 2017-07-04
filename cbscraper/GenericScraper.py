@@ -27,13 +27,13 @@ class GenericScraper(metaclass=ABCMeta):
 
     # how much time to sleep after going back
     back_timeout = 20  # seconds before declaring timeout after going back
-    load_timeout = 30  # for set_page_load_timeout in openURL()
+    load_timeout = 40  # for set_page_load_timeout in openURL()
     wait_timeout = 120  # for WebDriverWait(self.getBrowser(), self.wait_timeout).until(condition)
 
     wait_robot_min = 10 * 60
     wait_robot_max = 15 * 60
 
-    max_requests_per_browser_instance = 50
+    max_requests_per_browser_instance = 5000
 
     # internal variables
 
@@ -165,9 +165,9 @@ class GenericScraper(metaclass=ABCMeta):
             self.detectedAsRobot()
         # wait for the presence in the DOM of a tag with a given class
         try:
-            msg = "Waiting for visibility of ("
+            msg = "Waiting for visibility of "
             msg += "(" + str(by) + "," + value + ")"
-            msg += " URL='" + self.getBrowser().current_url + "'"
+            msg += " in ddURL='" + self.getBrowser().current_url + "'"
             logging.info(msg)
             condition = EC.visibility_of_element_located((by, value))
             WebDriverWait(self.getBrowser(), self.wait_timeout).until(condition)
@@ -271,6 +271,7 @@ class GenericScraper(metaclass=ABCMeta):
         return self.getBrowser().title
 
     def sendRobotEmail(self):
+        logging.info("Sending email telling we are stalled by robot detection")
         with open("email_credentials.json", "r") as fileh:
             credentials = json.load(fileh)
 

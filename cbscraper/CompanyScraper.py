@@ -22,16 +22,16 @@ class CompanyScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
     }
 
     htmlfile_suffix = {
-        OrgEndPoint.ENTITY: '_overview',
-        OrgEndPoint.PEOPLE: '_people',
-        OrgEndPoint.ADVISORS: '_board',
-        OrgEndPoint.PAST_PEOPLE: '_past_people',
+        OrgEndPoint.ENTITY : '_overview',
+        OrgEndPoint.PEOPLE : '_people',
+        OrgEndPoint.ADVISORS : '_board',
+        OrgEndPoint.PAST_PEOPLE : '_past_people',
     }
 
     link_map = {
-        OrgEndPoint.PEOPLE: 'All Current Team',
-        OrgEndPoint.ADVISORS: 'All Board Members and Advisors',
-        OrgEndPoint.PAST_PEOPLE: 'All Past Team'
+        OrgEndPoint.PEOPLE : 'All Current Team',
+        OrgEndPoint.ADVISORS : 'All Board Members and Advisors',
+        OrgEndPoint.PAST_PEOPLE : 'All Past Team'
     }
 
     #CB starting URL
