@@ -168,7 +168,7 @@ class GenericScraper(metaclass=ABCMeta):
         # Check for 404 error
         html_code = self.getBrowserPageSource()
         if self.is404(html_code):
-            logging.info("404 page retrieved")
+            logging.info("404 page retrieved. Raising a Error404 exception")
             raise Error404("404 error on page "+self.getBrowserURL())
         # Check for robot detection
         if self.wasRobotDetected(html_code):
@@ -177,7 +177,7 @@ class GenericScraper(metaclass=ABCMeta):
         try:
             msg = "Waiting for visibility of "
             msg += "(" + str(by) + "," + value + ")"
-            msg += " in URL='" + self.getBrowser().current_url + "'"
+            msg += " in URL='" + self.getBrowserURL() + "'"
             logging.info(msg)
             condition = EC.visibility_of_element_located((by, value))
             WebDriverWait(self.getBrowser(), self.wait_timeout).until(condition)
@@ -190,15 +190,16 @@ class GenericScraper(metaclass=ABCMeta):
         else:
             logging.info("Page element correctly found")
 
-    def waitForClass(self, endpoint):
-        return self.waitForPresenceCondition(By.CLASS_NAME, self.class_wait[endpoint])
+    def waitForClass(self, endpoint, sleep=True):
+        return self.waitForPresenceCondition(By.CLASS_NAME, self.class_wait[endpoint], sleep)
 
     def makeSoupFromHTML(self, html):
         return bs.BeautifulSoup(html, 'lxml')
 
     # Browser functions
     def setBrowser(self, brow):
-        cbscraper.common._browser = brow
+        global _browser
+        _browser = brow
 
     def getBrowser(self):
         global _browser
@@ -224,7 +225,7 @@ class GenericScraper(metaclass=ABCMeta):
 
         return _browser
 
-    # Get HTML source code of a webpage. If curr_endpoint is not None, write the HTML code to a file
+    # Get the HTML source code of a web page. If curr_endpoint is not None, write the HTML code to a file
     def getBrowserPageSource(self, curr_endpoint=None):
         html = self.getBrowser().page_source
         if curr_endpoint is not None:
@@ -307,5 +308,6 @@ class GenericScraper(metaclass=ABCMeta):
     def browserRefresh(self):
         try:
             self.getBrowser().refresh()
-        except:
+        except Exception as e:
+            logging.error("Exception during page refresh. Continuining. "+str(e))
             pass

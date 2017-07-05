@@ -63,16 +63,21 @@ class CompanyScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
         # Get endpoint 'entity'
         endpoint = OrgEndPoint.ENTITY
         entity_html = self.getHTMLFile(endpoint)
+        is404 = False
         if entity_html is False:
             try:
                 self.goToEntityPage()
             except cbscraper.GenericScraper.Error404:
-                logging.error("Caught error 404")
-                return False
+                logging.error("Caught error 404. Setting is404=True")
+                is404 = True
+            #Get HTML code and write it to a file
             entity_html = self.getBrowserPageSource(endpoint)
         self.setEndpointHTML(OrgEndPoint.ENTITY, entity_html)
         entity_soup = self.makeSoupFromHTML(entity_html)
         self.setEndpointSoup(OrgEndPoint.ENTITY, entity_soup)
+        if is404:
+            logging.info("Returning false due to 404 error")
+            return False
 
         # Process endpoints other than the entity one
         for endpoint in self.link_map.keys():
