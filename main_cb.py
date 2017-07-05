@@ -104,7 +104,7 @@ def main():
             logging.info("Scraping past_people")
             scrapePersons(company_data, 'past_people', company_percent)
         else:
-            logging.error("No company_data")
+            logging.error("scrapeOrganization() returned False. This means there is no company_data")
 
     logging.info("ENDED!")
 

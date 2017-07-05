@@ -120,9 +120,12 @@ class GenericScraper(metaclass=ABCMeta):
     def genHTMLFilePath(self, endpoint):
         if endpoint not in self.htmlfile_suffix:
             raise RuntimeError("The endpoint you passed is not mapped anywhere")
-        return os.path.join(self.html_basepath, self.id + self.htmlfile_suffix[endpoint] + ".html")
+        path = os.path.join(self.html_basepath, self.id + self.htmlfile_suffix[endpoint] + ".html")
+        path = os.path.normpath(path) #normalize path which has mixed slashes (e.g. C:\data/ciao -> c:/data/cia0). Only a visual perk for the logs
+        return path
 
     # Get saved HTML code
+    # Raises a Error404 exception if the file contains an error 404 page
     def getHTMLFile(self, endpoint):
 
         htmlfile = self.genHTMLFilePath(endpoint)
@@ -221,7 +224,7 @@ class GenericScraper(metaclass=ABCMeta):
             # browser.maximize_window()
 
             # sleep after browser opening
-            self.randSleep(2, 3)
+            self.randSleep(4, 6)
 
         return _browser
 

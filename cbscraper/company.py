@@ -76,19 +76,19 @@ def scrapeOrganization(org_data):
     company_vico_id = org_data['vico_id']
     company_cb_id = org_data['cb_id']
 
-    logging.debug("Scraping company " + company_cb_id)
-
     # Check if we have a JSON file and if rescrape is False. In this case use the JSON file we already have
     if (os.path.isfile(json_file) and not rescrape):
         logging.warning("Organization already scraped. Returning JSON file")
         with open(json_file, 'r') as fileh:
             org_data = json.load(fileh)
         return org_data
+    else:
+        logging.debug("Scraping company " + company_cb_id)
 
     # Scrape organization
     org = cbscraper.CompanyScraper.CompanyScraper(company_cb_id)
     if not org.scrape():
-        logging.info("scrape() returned false. Skipping")
+        logging.info("scrape() returned false. Returning false")
         return False
     soup = org.getEndpointSoup(cbscraper.CompanyScraper.OrgEndPoint.ENTITY)
 

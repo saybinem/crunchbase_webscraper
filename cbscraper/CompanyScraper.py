@@ -3,6 +3,7 @@ from enum import Enum
 
 import cbscraper.CrunchbaseScraper
 import cbscraper.GenericScraper
+from cbscraper.GenericScraper import Error404
 
 class OrgEndPoint(Enum):
     ENTITY = 1
@@ -62,21 +63,35 @@ class CompanyScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
 
         # Get endpoint 'entity'
         endpoint = OrgEndPoint.ENTITY
-        entity_html = self.getHTMLFile(endpoint)
         is404 = False
-        if entity_html is False:
-            try:
-                self.goToEntityPage()
-            except cbscraper.GenericScraper.Error404:
-                logging.error("Caught error 404. Setting is404=True")
-                is404 = True
-            #Get HTML code and write it to a file
-            entity_html = self.getBrowserPageSource(endpoint)
-        self.setEndpointHTML(OrgEndPoint.ENTITY, entity_html)
-        entity_soup = self.makeSoupFromHTML(entity_html)
-        self.setEndpointSoup(OrgEndPoint.ENTITY, entity_soup)
+        entity_html = False
+
+        try:
+            entity_html = self.getHTMLFile(endpoint)
+        except Error404 as e:
+            logging.info("Detected 404. Setting is404=True")
+            is404 = True
+        else:
+            if not entity_html:
+                try:
+                    self.goToEntityPage()
+                except cbscraper.GenericScraper.Error404:
+                    logging.error("Caught error 404. Setting is404=True")
+                    is404 = True
+                #Get HTML code and write it to a file
+                entity_html = self.getBrowserPageSource(endpoint)
+
+        if entity_html:
+            self.setEndpointHTML(OrgEndPoint.ENTITY, entity_html)
+            entity_soup = self.makeSoupFromHTML(entity_html)
+            self.setEndpointSoup(OrgEndPoint.ENTITY, entity_soup)
+
         if is404:
             logging.info("Returning false due to 404 error")
+            return False
+
+        if not entity_html:
+            logging.info("Returning false due to entity_html being False")
             return False
 
         # Process endpoints other than the entity one
@@ -96,6 +111,8 @@ class CompanyScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
                 self.setEndpointHTML(endpoint, html)
         # Make the soup of downloaded HTML pages
         self.makeAllSoup()
+        logging.info("Returning True")
+        return True
 
     def makeAllSoup(self):
         for endpoint in OrgEndPoint:
