@@ -2,6 +2,7 @@ import logging
 from enum import Enum
 
 import cbscraper.CrunchbaseScraper
+import cbscraper.GenericScraper
 
 class OrgEndPoint(Enum):
     ENTITY = 1
@@ -63,7 +64,11 @@ class CompanyScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
         endpoint = OrgEndPoint.ENTITY
         entity_html = self.getHTMLFile(endpoint)
         if entity_html is False:
-            self.goToEntityPage()
+            try:
+                self.goToEntityPage()
+            except cbscraper.GenericScraper.Error404:
+                logging.error("Caught error 404")
+                return False
             entity_html = self.getBrowserPageSource(endpoint)
         self.setEndpointHTML(OrgEndPoint.ENTITY, entity_html)
         entity_soup = self.makeSoupFromHTML(entity_html)

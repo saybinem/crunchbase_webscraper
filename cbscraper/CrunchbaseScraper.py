@@ -51,10 +51,7 @@ class CrunchbaseScraper(cbscraper.GenericScraper.GenericScraper):
 
     def detectedAsRobot(self):
         logging.info("We were detected as robots. Refreshing the page")
-        try:
-            self.getBrowser().refresh()
-        except:
-            pass
+        self.browserRefresh()
         self.randSleep(10, 15)
         detected = self.wasRobotDetected(self.getBrowserPageSource())
         if not detected:
@@ -63,10 +60,10 @@ class CrunchbaseScraper(cbscraper.GenericScraper.GenericScraper):
 
         logging.info("We are still being detected. Restarting the browser")
         self.sendRobotEmail()
-        url = self.getBrowser().current_url
+        url = self.getBrowserURL()
         self.restartBrowser()
         self.randSleep(self.wait_robot_min, self.wait_robot_max)
-        self.getBrowser().get(url)
+        self.openURL(url)
         detected = self.wasRobotDetected(self.getBrowserPageSource())
         if not detected:
             logging.info("Detection escaped")

@@ -23,7 +23,7 @@ def buildDirs():
 # Give a company, scrape current people, past people and advisors
 # company_data = a dict returned by cbscraper.company.scrapeOrganization()
 # key = the dictionary key that contains the list of lists of company persons
-def scrapePersons(company_data, key):
+def scrapePersons(company_data, key, company_percent):
     company_cb_id = company_data['company_id_cb']
     company_vico_id = company_data['company_id_vico']
     p_list = company_data[key]
@@ -34,6 +34,7 @@ def scrapePersons(company_data, key):
     for p in p_list:
         person_id = cbscraper.person.getPersonIdFromLink(p[1])
         person_data = {
+            "company_percent" : company_percent,
             "id": person_id,
             "json": "./data/person/json/" + person_id + ".json",
             "rescrape": rescrape,
@@ -76,8 +77,8 @@ def main():
         company_vico_id = row[excel_col_vico]
         company_cb_id = row[excel_col_cb].replace("/organization/","")
 
-        percent = round((counter / ids_len) * 100, 2)
-        msg = "Company: " + company_cb_id + " (" + str(counter) + "/" + str(ids_len) + " - " + str(percent) + "%)"
+        company_percent = round((counter / ids_len) * 100, 2)
+        msg = "Company: " + company_cb_id + " (" + str(counter) + "/" + str(ids_len) + " - " + str(company_percent) + "%)"
         logging.info(msg)
 
         counter += 1
@@ -95,13 +96,13 @@ def main():
 
         if (company_data is not False):
             logging.info("Scraping persons")
-            scrapePersons(company_data, 'people')
+            scrapePersons(company_data, 'people', company_percent)
 
             logging.info("Scraping advisors")
-            scrapePersons(company_data, 'advisors')
+            scrapePersons(company_data, 'advisors', company_percent)
 
             logging.info("Scraping past_people")
-            scrapePersons(company_data, 'past_people')
+            scrapePersons(company_data, 'past_people', company_percent)
         else:
             logging.error("No company_data")
 
@@ -110,8 +111,8 @@ def main():
 
 if __name__ == "__main__":
 
-    FORMAT = "%(asctime)s - %(levelname)-7s - [%(module)s:%(lineno)d:%(funcName)s] %(message)s"
-    fmt = logging.Formatter(FORMAT, datefmt='%H:%M:%S')
+    format_str = "%(asctime)s - %(levelname)-7s - [%(filename)s : %(lineno)d : %(funcName)s] %(message)s"
+    fmt = logging.Formatter(format_str, datefmt='%H:%M:%S')
 
     #console handler
     console_handler = logging.StreamHandler()

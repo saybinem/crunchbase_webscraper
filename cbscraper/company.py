@@ -87,7 +87,9 @@ def scrapeOrganization(org_data):
 
     # Scrape organization
     org = cbscraper.CompanyScraper.CompanyScraper(company_cb_id)
-    org.scrape()
+    if not org.scrape():
+        logging.info("scrape() returned false. Skipping")
+        return False
     soup = org.getEndpointSoup(cbscraper.CompanyScraper.OrgEndPoint.ENTITY)
 
     # Scrape page "overview"

@@ -36,6 +36,9 @@ class GenericScraper(metaclass=ABCMeta):
     wait_robot_min = 10 * 60
     wait_robot_max = 15 * 60
 
+    get_error_sleep_min = 2*60
+    get_error_slee_max = 5*60
+
     max_requests_per_browser_instance = 5000
 
     # internal variables
@@ -101,7 +104,7 @@ class GenericScraper(metaclass=ABCMeta):
             logging.warning("Timeout exception during page load. Moving on.")
         except:
             logging.error("Unexpected exception during page load. Retrying")
-            self.randSleep(60, 60)
+            self.randSleep(self.get_error_sleep_min, self.get_error_sleep_max)
             return self.openURL(url)
         else:
             logging.debug("browser.get(" + url + ") returned without exceptions")
@@ -300,3 +303,9 @@ class GenericScraper(metaclass=ABCMeta):
         server.login(credentials['username'], credentials['password'])
         server.send_message(msg)
         server.quit()
+
+    def browserRefresh(self):
+        try:
+            self.getBrowser().refresh()
+        except:
+            pass
