@@ -67,35 +67,46 @@ def scrapeOrgPastPeople(soup_past_people):
             people.append([name, link, role])
     return people
 
+#Scrape organization details
+def scrapeOrgDetails(soup):
+    # Scrape section overview->company details
+    company_details = {}
+    company_details_tag = soup.find('div', class_="base info-tab description")
 
-# Scrape a company
-def scrapeOrganization(org_data):
-    # Get variables
-    json_file = org_data['json']
-    rescrape = org_data['rescrape']
-    company_vico_id = org_data['vico_id']
-    company_cb_id = org_data['cb_id']
+    if company_details_tag is not None:
 
-    # Check if we have a JSON file and if rescrape is False. In this case use the JSON file we already have
-    if (os.path.isfile(json_file) and not rescrape):
-        logging.warning("Organization already scraped. Returning JSON file")
-        with open(json_file, 'r') as fileh:
-            org_data = json.load(fileh)
-        return org_data
-    else:
-        logging.debug("Scraping company " + company_cb_id)
+        # Founded year
+        tag = company_details_tag.find('dt', string='Founded:')
+        if tag is not None:
+            company_details['founded'] = tag.find_next('dd').text
 
-    # Scrape organization
-    org = cbscraper.CompanyScraper.CompanyScraper(company_cb_id)
-    if not org.scrape():
-        logging.info("scrape() returned false. Returning false")
-        return False
-    soup = org.getEndpointSoup(cbscraper.CompanyScraper.OrgEndPoint.ENTITY)
+        # Email
+        tag = company_details_tag.find('span', class_='email')
+        if tag is not None:
+            company_details['email'] = tag.text
 
-    # Scrape page "overview"
+        # Phone number
+        tag = company_details_tag.find('span', class_='phone_number')
+        if tag is not None:
+            company_details['phone_number'] = tag.text
 
-    # Legend: page->section
+        # Employees
+        tag = company_details_tag.find('dt', string='Employees:')
+        if tag is not None:
+            emp_str = tag.find_next('dd').text
+            emp_arr = emp_str.split("|")
+            company_details['employees_num'] = emp_arr[0].strip()
+            if len(emp_arr) > 1:
+                company_details['employees_found'] = emp_arr[1].strip()
 
+        # Phone number
+        tag = company_details_tag.find('span', class_='description')
+        if tag is not None:
+            company_details['description'] = tag.text
+
+    return company_details
+
+def scrapeOrgOverview(soup):
     # Scrape section overview->overview
     overview = {}
 
@@ -140,49 +151,43 @@ def scrapeOrganization(org_data):
         if linkedin is not None:
             overview['social']['linkedin'] = linkedin.get('href')
 
-    # Scrape section overview->company details
-    company_details = {}
-    company_details_tag = soup.find('div', class_="base info-tab description")
+    return overview
 
-    if company_details_tag is not None:
+# Scrape a company
+def scrapeOrganization(org_data):
+    # Get variables
+    json_file = org_data['json']
+    rescrape = org_data['rescrape']
+    company_vico_id = org_data['vico_id']
+    company_cb_id = org_data['cb_id']
 
-        # Founded year
-        tag = company_details_tag.find('dt', string='Founded:')
-        if tag is not None:
-            company_details['founded'] = tag.find_next('dd').text
+    # Check if we have a JSON file and if rescrape is False. In this case use the JSON file we already have
+    if (os.path.isfile(json_file) and not rescrape):
+        logging.warning("Organization already scraped. Returning JSON file")
+        with open(json_file, 'r') as fileh:
+            org_data = json.load(fileh)
+        return org_data
+    else:
+        logging.debug("Scraping company " + company_cb_id)
 
-        # Email
-        tag = company_details_tag.find('span', class_='email')
-        if tag is not None:
-            company_details['email'] = tag.text
+    # Scrape organization
+    org = cbscraper.CompanyScraper.CompanyScraper(company_cb_id)
+    if not org.scrape():
+        logging.info("scrape() returned false. Returning false")
+        return False
 
-        # Phone number
-        tag = company_details_tag.find('span', class_='phone_number')
-        if tag is not None:
-            company_details['phone_number'] = tag.text
+    # Get soup of various sections
+    soup_entity = org.getEndpointSoup(cbscraper.CompanyScraper.OrgEndPoint.ENTITY)
+    soup_people = org.getEndpointSoup(cbscraper.CompanyScraper.OrgEndPoint.PEOPLE)
+    soup_adv = org.getEndpointSoup(cbscraper.CompanyScraper.OrgEndPoint.ADVISORS)
+    soup_past_people = org.getEndpointSoup(cbscraper.CompanyScraper.OrgEndPoint.PAST_PEOPLE)
 
-        # Employees
-        tag = company_details_tag.find('dt', string='Employees:')
-        if tag is not None:
-            emp_str = tag.find_next('dd').text
-            emp_arr = emp_str.split("|")
-            company_details['employees_num'] = emp_arr[0].strip()
-            if len(emp_arr) > 1:
-                company_details['employees_found'] = emp_arr[1].strip()
-
-        # Phone number
-        tag = company_details_tag.find('span', class_='description')
-        if tag is not None:
-            company_details['description'] = tag.text
-
-    # Scrape page "people"
-    people = scrapeOrgCurrentPeople(org.getEndpointSoup(cbscraper.CompanyScraper.OrgEndPoint.PEOPLE))
-
-    # Scrape page "advisors"
-    advisors = scrapeOrgAdvisors(org.getEndpointSoup(cbscraper.CompanyScraper.OrgEndPoint.ADVISORS))
-
-    # Scrape page "past people"
-    past_people = scrapeOrgPastPeople(org.getEndpointSoup(cbscraper.CompanyScraper.OrgEndPoint.PAST_PEOPLE))
+    # Data scraping
+    company_details = scrapeOrgDetails(soup_entity)
+    overview = scrapeOrgOverview(soup_entity)
+    people = scrapeOrgCurrentPeople(soup_people)
+    advisors = scrapeOrgAdvisors(soup_adv)
+    past_people = scrapeOrgPastPeople(soup_past_people)
 
     # Return data
     company_data = {

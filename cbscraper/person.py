@@ -211,6 +211,8 @@ def scrapePerson(data):
     div_description = soup.find('div', {"id": "description"})
     if div_description is not None:
         person_details = div_description.text
+        if person_details.find("Click/Touch UPDATE above to add Details for") > 0:
+            person_details = ""
 
     # Scrape
     overview = scrapePersonOverview(soup)
