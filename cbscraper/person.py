@@ -9,8 +9,8 @@ import cbscraper.common
 def getPersonIdFromLink(link):
     return link.split("/")[2]
 
+# *** Investments ***
 def scrapePersonInvestments(inv_soup):
-    # Investments
     inv_list = list()
     inv_div = inv_soup.find('div', class_='investments')
     if inv_div is not None:
@@ -26,6 +26,11 @@ def scrapePersonInvestments(inv_soup):
             td3 = td2.find_next('td')
             round_text = td3.text
             round_link = td3.a.get('href')
+            
+            round_arr = round_text.split("/")
+            round_amount = round_arr[0].strip()
+            round_series = round_arr[1].strip()
+            
             # Details
             td4 = td3.find_next('td')
             details_text = td4.text
@@ -34,12 +39,12 @@ def scrapePersonInvestments(inv_soup):
                 details_link = td4.a.get('href')
             # append
             inv_list.append(
-                [date, invested_in_link, invested_in_text, round_link, round_text, details_link, details_text])
+                [date, invested_in_link, invested_in_text, round_link, round_amount, round_series, details_link, details_text])
             # logging.info("Found investment: "+date + " "+invested_in_text + " " + round_text + " " + details_text)
     return inv_list
 
+# *** Education ***
 def scrapePersonEducation(soup):
-    # Education
     education_list = list()
     for edu in soup.find_all('div', class_='education'):
         for info_block in edu.find_all('div', class_='info-block'):
@@ -68,8 +73,8 @@ def scrapePersonEducation(soup):
             education_list.append(edu_items)
     return education_list
 
+# *** Advisory roles ***
 def scrapePersonAdvisoryRoles(soup):
-    # Advisory roles
     adv_roles = list()
     for advisory_role in soup.find_all('div', class_='advisory_roles'):
         advisory_role_ul = advisory_role.ul
@@ -90,6 +95,7 @@ def scrapePersonAdvisoryRoles(soup):
                 adv_roles.append([role, company, date_start, date_end])
     return adv_roles
 
+# *** Past jobs ***
 def scrapePersonPastJobs(soup):
     # Past jobs (experiences -> card-content -> past_job)
     past_jobs = list()
@@ -109,6 +115,7 @@ def scrapePersonPastJobs(soup):
             # logging.info("Found past job: "+str(past_job_dict))
     return past_jobs
 
+# *** Current jobs ***
 def scrapePersonCurrentJobs(soup):
     # Current jobs  (experiences -> card-content -> current_job)
     current_jobs = list()
@@ -127,6 +134,7 @@ def scrapePersonCurrentJobs(soup):
         current_jobs.append([role, company, date_start, date_end])
     return current_jobs
 
+# *** Overview ***
 def scrapePersonOverview(soup):
     overview = dict()
     overview_content = soup.find(id='info-card-overview-content')
@@ -176,6 +184,16 @@ def scrapePersonOverview(soup):
 
     return overview
 
+# *** Details ***
+def scrapePersonDetails(soup):
+    # Get personal details (in the HTML code they are called 'description')
+    person_details = ''
+    div_description = soup.find('div', {"id": "description"})
+    if div_description is not None:
+        person_details = div_description.text
+        if person_details.find("Click/Touch UPDATE above to add Details for") > 0:
+            person_details = ""
+
 # Scrape a single person (e.g. person_link="/person/gavin-ray")
 def scrapePerson(data):
     # Get input vars
@@ -191,7 +209,7 @@ def scrapePerson(data):
         logging.info("Person \"" + person_id + "\" already scraped")
         return True
 
-    logging.info("Scraping person: \"" + person_id + "\" ("+str(company_percent)+"% completed)")
+    logging.info("Scraping person: '" + person_id + "' of company '"+company_cb_id+"' ("+str(company_percent)+"% completed)")
 
     # Get the soup
     person = cbscraper.PersonScraper.PersonScraper(person_id)
@@ -206,15 +224,8 @@ def scrapePerson(data):
     # Get name
     name = soup.find(id='profile_header_heading').text
 
-    # Get personal details (in HTML code they are called 'description')
-    person_details = ''
-    div_description = soup.find('div', {"id": "description"})
-    if div_description is not None:
-        person_details = div_description.text
-        if person_details.find("Click/Touch UPDATE above to add Details for") > 0:
-            person_details = ""
-
     # Scrape
+    person_details = scrapePersonDetails(soup)
     overview = scrapePersonOverview(soup)
     current_jobs = scrapePersonCurrentJobs(soup)
     past_jobs = scrapePersonPastJobs(soup)

@@ -4,6 +4,7 @@ import os
 
 import cbscraper.common
 import cbscraper.CompanyScraper
+from cbscraper.CompanyScraper import OrgEndPoint
 
 # Scrape organization advisors
 def scrapeOrgAdvisors(soup_advisors):
@@ -168,7 +169,8 @@ def scrapeOrganization(org_data):
             org_data = json.load(fileh)
         return org_data
     else:
-        logging.debug("Scraping company " + company_cb_id)
+        #logging.debug("Scraping company " + company_cb_id)
+        pass
 
     # Scrape organization
     org = cbscraper.CompanyScraper.CompanyScraper(company_cb_id)
@@ -177,10 +179,10 @@ def scrapeOrganization(org_data):
         return False
 
     # Get soup of various sections
-    soup_entity = org.getEndpointSoup(cbscraper.CompanyScraper.OrgEndPoint.ENTITY)
-    soup_people = org.getEndpointSoup(cbscraper.CompanyScraper.OrgEndPoint.PEOPLE)
-    soup_adv = org.getEndpointSoup(cbscraper.CompanyScraper.OrgEndPoint.ADVISORS)
-    soup_past_people = org.getEndpointSoup(cbscraper.CompanyScraper.OrgEndPoint.PAST_PEOPLE)
+    soup_entity = org.getEndpointSoup(OrgEndPoint.ENTITY)
+    soup_people = org.getEndpointSoup(OrgEndPoint.PEOPLE)
+    soup_adv = org.getEndpointSoup(OrgEndPoint.ADVISORS)
+    soup_past_people = org.getEndpointSoup(OrgEndPoint.PAST_PEOPLE)
 
     # Data scraping
     company_details = scrapeOrgDetails(soup_entity)

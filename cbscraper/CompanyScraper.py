@@ -42,14 +42,14 @@ class CompanyScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
     # Have the browser go to the page of the 'entity' endpoint (overview page)
     def goToEntityPage(self):
         if self.entity_page:
-            logging.info("Already on entity page")
+            logging.debug("Already on entity page")
             pass
         elif self.prev_page_is_entity:
-            logging.info("Going back to entity page")
+            logging.debug("Going back to entity page")
             self.goBack()
             self.waitForClass(OrgEndPoint.ENTITY)
         else:
-            logging.info("Opening entity page")
+            logging.debug("Opening entity page")
             self.openURL(self.cb_url + self.id)
             self.waitForClass(OrgEndPoint.ENTITY)
         self.entity_page = True
@@ -111,7 +111,7 @@ class CompanyScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
                 self.setEndpointHTML(endpoint, html)
         # Make the soup of downloaded HTML pages
         self.makeAllSoup()
-        logging.info("Returning True")
+        logging.debug("Returning True")
         return True
 
     def makeAllSoup(self):

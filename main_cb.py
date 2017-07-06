@@ -95,14 +95,16 @@ def main():
         # Scrape persons of the company
 
         if (company_data is not False):
-            logging.info("Scraping persons")
+        
+            logging.debug("Scraping persons")
             scrapePersons(company_data, 'people', company_percent)
 
-            logging.info("Scraping advisors")
+            logging.debug("Scraping advisors")
             scrapePersons(company_data, 'advisors', company_percent)
 
-            logging.info("Scraping past_people")
+            logging.debug("Scraping past_people")
             scrapePersons(company_data, 'past_people', company_percent)
+            
         else:
             logging.error("scrapeOrganization() returned False. This means there is no company_data")
 
@@ -111,7 +113,7 @@ def main():
 
 if __name__ == "__main__":
 
-    format_str = "%(asctime)s - %(levelname)-7s - [%(filename)s : %(lineno)d : %(funcName)s] %(message)s"
+    format_str = "[%(asctime)s:%(levelname)s:%(filename)s:%(lineno)d:%(funcName)s] %(message)s"
     fmt = logging.Formatter(format_str, datefmt='%H:%M:%S')
 
     #console handler
@@ -120,12 +122,12 @@ if __name__ == "__main__":
     console_handler.setLevel(logging.INFO)
     logging.getLogger().addHandler(console_handler)
 
-    #add file log
-    if False:
-        handler = logging.handlers.RotatingFileHandler('cbscraper.log', maxBytes=1024000, backupCount=5)
-        handler.setFormatter(fmt)
-        logging.getLogger().addHandler(handler)
+    #log file handler
+    #handler = logging.handlers.RotatingFileHandler('cbscraper.log', maxBytes=1024000, backupCount=5)
+    #handler.setFormatter(fmt)
+    #logging.getLogger().addHandler(handler)
 
+    #root logger
     logging.getLogger().setLevel(logging.DEBUG)
     logging.info("Starting at: "+time.strftime("%Y-%m-%d"))
     main()

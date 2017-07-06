@@ -45,10 +45,10 @@ class PersonScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
     # Have the browser go to the page of the 'entity' ednpoint (overview page)
     def goToEntityPage(self):
         if self.entity_page:
-            logging.info("Already on entity page")
+            logging.debug("Already on entity page")
             return True
         elif self.prev_page_is_entity:
-            logging.info("Going back to entity page")
+            logging.debug("Going back to entity page")
             self.goBack()
             try:
                 self.entityWait()
@@ -63,12 +63,12 @@ class PersonScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
                 self.prev_page_is_entity = False
                 return True
         else:
-            logging.info("Opening entity page")
+            logging.debug("Opening entity page")
             self.openURL(self.cb_url + self.id)
             try:
                 self.entityWait()
             except cbscraper.GenericScraper.Error404:
-                logging.info("Error 404")
+                logging.error("Error 404")
                 return False
             except:
                 logging.critical("Unhandled exception")
@@ -80,21 +80,26 @@ class PersonScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
 
     # Scrape an organization
     def scrape(self):
-        logging.info("Start scraping " + self.id)
+        #logging.info("Start scraping " + self.id)
 
         # Get endpoint 'entity'
         endpoint = PersonEndPoint.ENTITY
+        entity_html = False
+        #try to get it from file
         try:
             entity_html = self.getHTMLFile(endpoint)
         except cbscraper.GenericScraper.Error404 as e:
             logging.info(str(e)+" Returning false")
             return False
-
+        #try to get it from the web
         if entity_html is False:
-            if not self.goToEntityPage():
-                logging.error("goToEntityPage() returned false (404?). Continuing")
-                return False
+            res = self.goToEntityPage()
+            # SAVE HTML TO FILE (EVEN IF WE HAVE A 404 ERROR)
             entity_html = self.getBrowserPageSource(endpoint)
+            if not res:
+                logging.error("goToEntityPage() returned false (404?). Continuing")
+                return False            
+            
         self.setEndpointHTML(PersonEndPoint.ENTITY, entity_html)
         entity_soup = self.makeSoupFromHTML(entity_html)
         self.setEndpointSoup(PersonEndPoint.ENTITY, entity_soup)
