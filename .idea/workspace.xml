@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8ffd353f-9675-4efa-a6a6-3ad054850fe0" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/crunchbase_scraper.iml" afterPath="$PROJECT_DIR$/.idea/crunchbase_scraper.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cbscraper/GenericScraper.py" afterPath="$PROJECT_DIR$/cbscraper/GenericScraper.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cbscraper/common.py" afterPath="$PROJECT_DIR$/cbscraper/common.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/src/cb2linkedin.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/cb2linkedin.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,11 +32,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="LinkedinScraper.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="LinkedinScraper.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1680">
-              <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+            <state relative-caret-position="294">
+              <caret line="37" column="37" lean-forward="false" selection-start-line="37" selection-start-column="37" selection-end-line="37" selection-end-column="37" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -48,11 +44,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="person_scraper.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="person_scraper.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="840">
-              <caret line="72" column="43" lean-forward="false" selection-start-line="72" selection-start-column="43" selection-end-line="72" selection-end-column="43" />
+            <state relative-caret-position="-2517">
+              <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -156,10 +152,10 @@
         <option value="$PROJECT_DIR$/main_cb.py" />
         <option value="$PROJECT_DIR$/../linkedin_scraper/src/main_in.py" />
         <option value="$PROJECT_DIR$/cbscraper/common.py" />
-        <option value="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py" />
         <option value="$PROJECT_DIR$/../linkedin_scraper/src/cb2linkedin.py" />
         <option value="$PROJECT_DIR$/cbscraper/GenericScraper.py" />
         <option value="$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py" />
+        <option value="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py" />
       </list>
     </option>
   </component>
@@ -742,7 +738,14 @@
       <option name="project" value="LOCAL" />
       <updated>1499409956404</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="improvements">
+      <created>1499411598659</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1499411598659</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1237,14 +1240,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/main_in.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1131">
-          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cbscraper/GenericScraper.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5236">
@@ -1255,21 +1250,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py">
+    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/main_in.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1680">
-          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-1131">
+          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="72" column="43" lean-forward="false" selection-start-line="72" selection-start-column="43" selection-end-line="72" selection-end-column="43" />
+        <state relative-caret-position="-2517">
+          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="37" column="37" lean-forward="false" selection-start-line="37" selection-start-column="37" selection-end-line="37" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
