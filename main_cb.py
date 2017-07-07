@@ -113,8 +113,8 @@ def main():
 
 if __name__ == "__main__":
 
-    format_str = "[%(asctime)s:%(levelname)s:%(filename)s:%(lineno)d:%(funcName)s] %(message)s"
-    fmt = logging.Formatter(format_str, datefmt='%H:%M:%S')
+    log_format_str = "[%(asctime)s:%(levelname)s:%(filename)s:%(lineno)d:%(funcName)s] %(message)s"
+    fmt = logging.Formatter(log_format_str, datefmt='%H:%M:%S')
 
     #console handler
     console_handler = logging.StreamHandler()

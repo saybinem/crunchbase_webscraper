@@ -5,7 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8ffd353f-9675-4efa-a6a6-3ad054850fe0" name="Default" comment="">
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../linkedin_scraper/LinkedinScraper.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../linkedin_scraper/cb2linkedin.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/cb2linkedin.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../linkedin_scraper/main_in.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/main_in.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../linkedin_scraper/person_scraper.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/crunchbase_scraper.iml" afterPath="$PROJECT_DIR$/.idea/crunchbase_scraper.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cbscraper/GenericScraper.py" afterPath="$PROJECT_DIR$/cbscraper/GenericScraper.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main_cb.py" afterPath="$PROJECT_DIR$/main_cb.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/.idea/linkedin_scraper.iml" afterPath="$PROJECT_DIR$/../linkedin_scraper/.idea/linkedin_scraper.iml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,7 +23,8 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/crunchbase_scraper$main_cb.coverage" NAME="main_cb Coverage Results" MODIFIED="1499263358783" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/crunchbase_scraper$main_cb.coverage" NAME="main_cb Coverage Results" MODIFIED="1499407818191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/crunchbase_scraper$linkedin_scraper.coverage" NAME="linkedin_scraper Coverage Results" MODIFIED="1499409762366" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../linkedin_scraper" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -29,53 +38,47 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="company.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cbscraper/company.py">
+      <file leaf-file-name="main_in.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/main_in.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-103">
-              <caret line="178" column="34" lean-forward="false" selection-start-line="178" selection-start-column="34" selection-end-line="178" selection-end-column="34" />
+            <state relative-caret-position="-1572">
+              <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="person.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/cbscraper/person.py">
+      <file leaf-file-name="person_scraper.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="224">
+              <caret line="153" column="16" lean-forward="true" selection-start-line="153" selection-start-column="16" selection-end-line="153" selection-end-column="16" />
               <folding>
-                <element signature="e#157#182#0" expanded="false" />
-                <element signature="e#227#1278#0" expanded="false" />
-                <element signature="e#356#1258#0" expanded="false" />
-                <element signature="e#414#1258#0" expanded="false" />
-                <element signature="e#1317#2327#0" expanded="false" />
-                <element signature="e#1422#2301#0" expanded="false" />
-                <element signature="e#1495#2301#0" expanded="false" />
-                <element signature="e#1877#2176#0" expanded="false" />
-                <element signature="e#1976#2162#0" expanded="false" />
-                <element signature="e#2370#3336#0" expanded="false" />
-                <element signature="e#2490#3315#0" expanded="false" />
-                <element signature="e#2579#3315#0" expanded="false" />
-                <element signature="e#2638#3315#0" expanded="false" />
-                <element signature="e#2976#3243#0" expanded="false" />
-                <element signature="e#3056#3243#0" expanded="false" />
-                <element signature="e#3374#4351#0" expanded="false" />
-                <element signature="e#3524#4330#0" expanded="false" />
-                <element signature="e#3682#4330#0" expanded="false" />
-                <element signature="e#3818#3876#0" expanded="false" />
-                <element signature="e#4392#5167#0" expanded="false" />
-                <element signature="e#4554#5143#0" expanded="false" />
-                <element signature="e#4879#5076#0" expanded="false" />
-                <element signature="e#5205#6911#0" expanded="false" />
-                <element signature="e#5336#6890#0" expanded="false" />
-                <element signature="e#5456#5682#0" expanded="false" />
-                <element signature="e#6340#6890#0" expanded="false" />
-                <element signature="e#7005#9077#0" expanded="false" />
-                <element signature="e#7330#7410#0" expanded="false" />
-                <element signature="e#7628#7710#0" expanded="false" />
-                <element signature="e#8047#8205#0" expanded="false" />
-                <element signature="e#8538#8951#0" expanded="false" />
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LinkedinScraper.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="966">
+              <caret line="130" column="49" lean-forward="true" selection-start-line="130" selection-start-column="49" selection-end-line="130" selection-end-column="49" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GenericScraper.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/cbscraper/GenericScraper.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="221" column="17" lean-forward="false" selection-start-line="221" selection-start-column="17" selection-end-line="221" selection-end-column="17" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -92,7 +95,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>waitForPrese</find>
       <find>presence</find>
       <find>goToEn</find>
       <find>openUrl</find>
@@ -122,6 +124,7 @@
       <find>setEndpoint</find>
       <find>writeHTML</find>
       <find>DateInterval</find>
+      <find>getBrowser(</find>
     </findStrings>
     <replaceStrings>
       <replace>soup</replace>
@@ -149,14 +152,18 @@
         <option value="$PROJECT_DIR$/cbscraper/PersonScraper.py" />
         <option value="$PROJECT_DIR$/cbscraper/CrunchbaseScraper.py" />
         <option value="$PROJECT_DIR$/cbscraper/CompanyScraper.py" />
-        <option value="$PROJECT_DIR$/main_cb.py" />
-        <option value="$PROJECT_DIR$/cbscraper/GenericScraper.py" />
         <option value="$PROJECT_DIR$/../linkedin_scraper/cb2linkedin.py" />
         <option value="$PROJECT_DIR$/../linkedin_scraper/person_scraper.py" />
-        <option value="$PROJECT_DIR$/../linkedin_scraper/main_in.py" />
         <option value="$PROJECT_DIR$/../linkedin_scraper/LinkedinScraper.py" />
         <option value="$PROJECT_DIR$/cbscraper/company.py" />
         <option value="$PROJECT_DIR$/cbscraper/person.py" />
+        <option value="$PROJECT_DIR$/../linkedin_scraper/main_in.py" />
+        <option value="$PROJECT_DIR$/../linkedin_scraper/src/cb2linkedin.py" />
+        <option value="$PROJECT_DIR$/main_cb.py" />
+        <option value="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py" />
+        <option value="$PROJECT_DIR$/../linkedin_scraper/src/main_in.py" />
+        <option value="$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py" />
+        <option value="$PROJECT_DIR$/cbscraper/GenericScraper.py" />
       </list>
     </option>
   </component>
@@ -190,9 +197,68 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="linkedin_scraper">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="C:\data\tesi\software\linkedin_scraper">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="crunchbase_scraper" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="linkedin_scraper" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="crunchbase_scraper" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="linkedin_scraper" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="crunchbase_scraper" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="linkedin_scraper" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="linkedin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="crunchbase_scraper" />
@@ -226,7 +292,12 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="run.code.analysis.last.selected.profile" value="aDefault" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/cbscraper" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../linkedin_scraper/main_in.py" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\data\tesi\software\linkedin_scraper\src" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -240,13 +311,13 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.main_cb">
-    <configuration default="false" name="main_cb" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.linkedin_scraper">
+    <configuration default="false" name="crunchbase_scraper" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
         <env name="PATH" value="C:\data\bin" />
+        <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -426,12 +497,32 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method />
     </configuration>
-    <list size="1">
-      <item index="0" class="java.lang.String" itemvalue="Python.main_cb" />
+    <configuration default="false" name="linkedin_scraper" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\IntelPython35\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../linkedin_scraper" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="linkedin_scraper" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../linkedin_scraper/src/main_in.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <list size="2">
+      <item index="0" class="java.lang.String" itemvalue="Python.linkedin_scraper" />
+      <item index="1" class="java.lang.String" itemvalue="Python.crunchbase_scraper" />
     </list>
     <recent_temporary>
       <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="Python.main_cb" />
+        <item index="0" class="java.lang.String" itemvalue="Python.crunchbase_scraper" />
       </list>
     </recent_temporary>
   </component>
@@ -704,18 +795,18 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1932" height="1048" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3091733" sideWeight="0.5021482" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32842582" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3091733" sideWeight="0.49785176" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3091733" sideWeight="0.49785176" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23545259" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27316812" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297414" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23868534" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2419181" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3997735" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297414" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -724,6 +815,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -784,36 +876,8 @@
           <caret line="3" column="14" lean-forward="false" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
           <folding>
             <element signature="e#157#182#0" expanded="false" />
-            <element signature="e#227#1278#0" expanded="false" />
-            <element signature="e#356#1258#0" expanded="false" />
-            <element signature="e#414#1258#0" expanded="false" />
-            <element signature="e#1317#2327#0" expanded="false" />
-            <element signature="e#1422#2301#0" expanded="false" />
-            <element signature="e#1495#2301#0" expanded="false" />
-            <element signature="e#1877#2176#0" expanded="false" />
-            <element signature="e#1976#2162#0" expanded="false" />
-            <element signature="e#2370#3336#0" expanded="false" />
-            <element signature="e#2490#3315#0" expanded="false" />
-            <element signature="e#2579#3315#0" expanded="false" />
-            <element signature="e#2638#3315#0" expanded="false" />
-            <element signature="e#2976#3243#0" expanded="false" />
-            <element signature="e#3056#3243#0" expanded="false" />
-            <element signature="e#3374#4351#0" expanded="false" />
-            <element signature="e#3524#4330#0" expanded="false" />
-            <element signature="e#3682#4330#0" expanded="false" />
-            <element signature="e#3818#3876#0" expanded="false" />
-            <element signature="e#4392#5167#0" expanded="false" />
-            <element signature="e#4554#5143#0" expanded="false" />
-            <element signature="e#4879#5076#0" expanded="false" />
-            <element signature="e#5205#6911#0" expanded="false" />
-            <element signature="e#5336#6890#0" expanded="false" />
-            <element signature="e#5456#5682#0" expanded="false" />
-            <element signature="e#6340#6890#0" expanded="false" />
-            <element signature="e#7005#9077#0" expanded="false" />
-            <element signature="e#7330#7410#0" expanded="false" />
-            <element signature="e#7628#7710#0" expanded="false" />
-            <element signature="e#8047#8205#0" expanded="false" />
-            <element signature="e#8538#8951#0" expanded="false" />
+            <element signature="e#7672#9464#0" expanded="false" />
+            <element signature="e#8925#9338#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -847,36 +911,8 @@
           <caret line="3" column="14" lean-forward="false" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
           <folding>
             <element signature="e#157#182#0" expanded="false" />
-            <element signature="e#227#1278#0" expanded="false" />
-            <element signature="e#356#1258#0" expanded="false" />
-            <element signature="e#414#1258#0" expanded="false" />
-            <element signature="e#1317#2327#0" expanded="false" />
-            <element signature="e#1422#2301#0" expanded="false" />
-            <element signature="e#1495#2301#0" expanded="false" />
-            <element signature="e#1877#2176#0" expanded="false" />
-            <element signature="e#1976#2162#0" expanded="false" />
-            <element signature="e#2370#3336#0" expanded="false" />
-            <element signature="e#2490#3315#0" expanded="false" />
-            <element signature="e#2579#3315#0" expanded="false" />
-            <element signature="e#2638#3315#0" expanded="false" />
-            <element signature="e#2976#3243#0" expanded="false" />
-            <element signature="e#3056#3243#0" expanded="false" />
-            <element signature="e#3374#4351#0" expanded="false" />
-            <element signature="e#3524#4330#0" expanded="false" />
-            <element signature="e#3682#4330#0" expanded="false" />
-            <element signature="e#3818#3876#0" expanded="false" />
-            <element signature="e#4392#5167#0" expanded="false" />
-            <element signature="e#4554#5143#0" expanded="false" />
-            <element signature="e#4879#5076#0" expanded="false" />
-            <element signature="e#5205#6911#0" expanded="false" />
-            <element signature="e#5336#6890#0" expanded="false" />
-            <element signature="e#5456#5682#0" expanded="false" />
-            <element signature="e#6340#6890#0" expanded="false" />
-            <element signature="e#7005#9077#0" expanded="false" />
-            <element signature="e#7330#7410#0" expanded="false" />
-            <element signature="e#7628#7710#0" expanded="false" />
-            <element signature="e#8047#8205#0" expanded="false" />
-            <element signature="e#8538#8951#0" expanded="false" />
+            <element signature="e#7672#9464#0" expanded="false" />
+            <element signature="e#8925#9338#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -910,36 +946,8 @@
           <caret line="3" column="14" lean-forward="false" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
           <folding>
             <element signature="e#157#182#0" expanded="false" />
-            <element signature="e#227#1278#0" expanded="false" />
-            <element signature="e#356#1258#0" expanded="false" />
-            <element signature="e#414#1258#0" expanded="false" />
-            <element signature="e#1317#2327#0" expanded="false" />
-            <element signature="e#1422#2301#0" expanded="false" />
-            <element signature="e#1495#2301#0" expanded="false" />
-            <element signature="e#1877#2176#0" expanded="false" />
-            <element signature="e#1976#2162#0" expanded="false" />
-            <element signature="e#2370#3336#0" expanded="false" />
-            <element signature="e#2490#3315#0" expanded="false" />
-            <element signature="e#2579#3315#0" expanded="false" />
-            <element signature="e#2638#3315#0" expanded="false" />
-            <element signature="e#2976#3243#0" expanded="false" />
-            <element signature="e#3056#3243#0" expanded="false" />
-            <element signature="e#3374#4351#0" expanded="false" />
-            <element signature="e#3524#4330#0" expanded="false" />
-            <element signature="e#3682#4330#0" expanded="false" />
-            <element signature="e#3818#3876#0" expanded="false" />
-            <element signature="e#4392#5167#0" expanded="false" />
-            <element signature="e#4554#5143#0" expanded="false" />
-            <element signature="e#4879#5076#0" expanded="false" />
-            <element signature="e#5205#6911#0" expanded="false" />
-            <element signature="e#5336#6890#0" expanded="false" />
-            <element signature="e#5456#5682#0" expanded="false" />
-            <element signature="e#6340#6890#0" expanded="false" />
-            <element signature="e#7005#9077#0" expanded="false" />
-            <element signature="e#7330#7410#0" expanded="false" />
-            <element signature="e#7628#7710#0" expanded="false" />
-            <element signature="e#8047#8205#0" expanded="false" />
-            <element signature="e#8538#8951#0" expanded="false" />
+            <element signature="e#7672#9464#0" expanded="false" />
+            <element signature="e#8925#9338#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -973,36 +981,8 @@
           <caret line="3" column="14" lean-forward="false" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
           <folding>
             <element signature="e#157#182#0" expanded="false" />
-            <element signature="e#227#1278#0" expanded="false" />
-            <element signature="e#356#1258#0" expanded="false" />
-            <element signature="e#414#1258#0" expanded="false" />
-            <element signature="e#1317#2327#0" expanded="false" />
-            <element signature="e#1422#2301#0" expanded="false" />
-            <element signature="e#1495#2301#0" expanded="false" />
-            <element signature="e#1877#2176#0" expanded="false" />
-            <element signature="e#1976#2162#0" expanded="false" />
-            <element signature="e#2370#3336#0" expanded="false" />
-            <element signature="e#2490#3315#0" expanded="false" />
-            <element signature="e#2579#3315#0" expanded="false" />
-            <element signature="e#2638#3315#0" expanded="false" />
-            <element signature="e#2976#3243#0" expanded="false" />
-            <element signature="e#3056#3243#0" expanded="false" />
-            <element signature="e#3374#4351#0" expanded="false" />
-            <element signature="e#3524#4330#0" expanded="false" />
-            <element signature="e#3682#4330#0" expanded="false" />
-            <element signature="e#3818#3876#0" expanded="false" />
-            <element signature="e#4392#5167#0" expanded="false" />
-            <element signature="e#4554#5143#0" expanded="false" />
-            <element signature="e#4879#5076#0" expanded="false" />
-            <element signature="e#5205#6911#0" expanded="false" />
-            <element signature="e#5336#6890#0" expanded="false" />
-            <element signature="e#5456#5682#0" expanded="false" />
-            <element signature="e#6340#6890#0" expanded="false" />
-            <element signature="e#7005#9077#0" expanded="false" />
-            <element signature="e#7330#7410#0" expanded="false" />
-            <element signature="e#7628#7710#0" expanded="false" />
-            <element signature="e#8047#8205#0" expanded="false" />
-            <element signature="e#8538#8951#0" expanded="false" />
+            <element signature="e#7672#9464#0" expanded="false" />
+            <element signature="e#8925#9338#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1036,36 +1016,8 @@
           <caret line="3" column="14" lean-forward="false" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
           <folding>
             <element signature="e#157#182#0" expanded="false" />
-            <element signature="e#227#1278#0" expanded="false" />
-            <element signature="e#356#1258#0" expanded="false" />
-            <element signature="e#414#1258#0" expanded="false" />
-            <element signature="e#1317#2327#0" expanded="false" />
-            <element signature="e#1422#2301#0" expanded="false" />
-            <element signature="e#1495#2301#0" expanded="false" />
-            <element signature="e#1877#2176#0" expanded="false" />
-            <element signature="e#1976#2162#0" expanded="false" />
-            <element signature="e#2370#3336#0" expanded="false" />
-            <element signature="e#2490#3315#0" expanded="false" />
-            <element signature="e#2579#3315#0" expanded="false" />
-            <element signature="e#2638#3315#0" expanded="false" />
-            <element signature="e#2976#3243#0" expanded="false" />
-            <element signature="e#3056#3243#0" expanded="false" />
-            <element signature="e#3374#4351#0" expanded="false" />
-            <element signature="e#3524#4330#0" expanded="false" />
-            <element signature="e#3682#4330#0" expanded="false" />
-            <element signature="e#3818#3876#0" expanded="false" />
-            <element signature="e#4392#5167#0" expanded="false" />
-            <element signature="e#4554#5143#0" expanded="false" />
-            <element signature="e#4879#5076#0" expanded="false" />
-            <element signature="e#5205#6911#0" expanded="false" />
-            <element signature="e#5336#6890#0" expanded="false" />
-            <element signature="e#5456#5682#0" expanded="false" />
-            <element signature="e#6340#6890#0" expanded="false" />
-            <element signature="e#7005#9077#0" expanded="false" />
-            <element signature="e#7330#7410#0" expanded="false" />
-            <element signature="e#7628#7710#0" expanded="false" />
-            <element signature="e#8047#8205#0" expanded="false" />
-            <element signature="e#8538#8951#0" expanded="false" />
+            <element signature="e#7672#9464#0" expanded="false" />
+            <element signature="e#8925#9338#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1091,36 +1043,8 @@
           <caret line="3" column="14" lean-forward="false" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
           <folding>
             <element signature="e#157#182#0" expanded="false" />
-            <element signature="e#227#1278#0" expanded="false" />
-            <element signature="e#356#1258#0" expanded="false" />
-            <element signature="e#414#1258#0" expanded="false" />
-            <element signature="e#1317#2327#0" expanded="false" />
-            <element signature="e#1422#2301#0" expanded="false" />
-            <element signature="e#1495#2301#0" expanded="false" />
-            <element signature="e#1877#2176#0" expanded="false" />
-            <element signature="e#1976#2162#0" expanded="false" />
-            <element signature="e#2370#3336#0" expanded="false" />
-            <element signature="e#2490#3315#0" expanded="false" />
-            <element signature="e#2579#3315#0" expanded="false" />
-            <element signature="e#2638#3315#0" expanded="false" />
-            <element signature="e#2976#3243#0" expanded="false" />
-            <element signature="e#3056#3243#0" expanded="false" />
-            <element signature="e#3374#4351#0" expanded="false" />
-            <element signature="e#3524#4330#0" expanded="false" />
-            <element signature="e#3682#4330#0" expanded="false" />
-            <element signature="e#3818#3876#0" expanded="false" />
-            <element signature="e#4392#5167#0" expanded="false" />
-            <element signature="e#4554#5143#0" expanded="false" />
-            <element signature="e#4879#5076#0" expanded="false" />
-            <element signature="e#5205#6911#0" expanded="false" />
-            <element signature="e#5336#6890#0" expanded="false" />
-            <element signature="e#5456#5682#0" expanded="false" />
-            <element signature="e#6340#6890#0" expanded="false" />
-            <element signature="e#7005#9077#0" expanded="false" />
-            <element signature="e#7330#7410#0" expanded="false" />
-            <element signature="e#7628#7710#0" expanded="false" />
-            <element signature="e#8047#8205#0" expanded="false" />
-            <element signature="e#8538#8951#0" expanded="false" />
+            <element signature="e#7672#9464#0" expanded="false" />
+            <element signature="e#8925#9338#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1155,36 +1079,8 @@
           <caret line="3" column="14" lean-forward="false" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
           <folding>
             <element signature="e#157#182#0" expanded="false" />
-            <element signature="e#227#1278#0" expanded="false" />
-            <element signature="e#356#1258#0" expanded="false" />
-            <element signature="e#414#1258#0" expanded="false" />
-            <element signature="e#1317#2327#0" expanded="false" />
-            <element signature="e#1422#2301#0" expanded="false" />
-            <element signature="e#1495#2301#0" expanded="false" />
-            <element signature="e#1877#2176#0" expanded="false" />
-            <element signature="e#1976#2162#0" expanded="false" />
-            <element signature="e#2370#3336#0" expanded="false" />
-            <element signature="e#2490#3315#0" expanded="false" />
-            <element signature="e#2579#3315#0" expanded="false" />
-            <element signature="e#2638#3315#0" expanded="false" />
-            <element signature="e#2976#3243#0" expanded="false" />
-            <element signature="e#3056#3243#0" expanded="false" />
-            <element signature="e#3374#4351#0" expanded="false" />
-            <element signature="e#3524#4330#0" expanded="false" />
-            <element signature="e#3682#4330#0" expanded="false" />
-            <element signature="e#3818#3876#0" expanded="false" />
-            <element signature="e#4392#5167#0" expanded="false" />
-            <element signature="e#4554#5143#0" expanded="false" />
-            <element signature="e#4879#5076#0" expanded="false" />
-            <element signature="e#5205#6911#0" expanded="false" />
-            <element signature="e#5336#6890#0" expanded="false" />
-            <element signature="e#5456#5682#0" expanded="false" />
-            <element signature="e#6340#6890#0" expanded="false" />
-            <element signature="e#7005#9077#0" expanded="false" />
-            <element signature="e#7330#7410#0" expanded="false" />
-            <element signature="e#7628#7710#0" expanded="false" />
-            <element signature="e#8047#8205#0" expanded="false" />
-            <element signature="e#8538#8951#0" expanded="false" />
+            <element signature="e#7672#9464#0" expanded="false" />
+            <element signature="e#8925#9338#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1225,36 +1121,8 @@
           <caret line="30" column="128" lean-forward="false" selection-start-line="30" selection-start-column="128" selection-end-line="30" selection-end-column="128" />
           <folding>
             <element signature="e#157#182#0" expanded="false" />
-            <element signature="e#227#1278#0" expanded="false" />
-            <element signature="e#356#1258#0" expanded="false" />
-            <element signature="e#414#1258#0" expanded="false" />
-            <element signature="e#1317#2327#0" expanded="false" />
-            <element signature="e#1422#2301#0" expanded="false" />
-            <element signature="e#1495#2301#0" expanded="false" />
-            <element signature="e#1877#2176#0" expanded="false" />
-            <element signature="e#1976#2162#0" expanded="false" />
-            <element signature="e#2370#3336#0" expanded="false" />
-            <element signature="e#2490#3315#0" expanded="false" />
-            <element signature="e#2579#3315#0" expanded="false" />
-            <element signature="e#2638#3315#0" expanded="false" />
-            <element signature="e#2976#3243#0" expanded="false" />
-            <element signature="e#3056#3243#0" expanded="false" />
-            <element signature="e#3374#4351#0" expanded="false" />
-            <element signature="e#3524#4330#0" expanded="false" />
-            <element signature="e#3682#4330#0" expanded="false" />
-            <element signature="e#3818#3876#0" expanded="false" />
-            <element signature="e#4392#5167#0" expanded="false" />
-            <element signature="e#4554#5143#0" expanded="false" />
-            <element signature="e#4879#5076#0" expanded="false" />
-            <element signature="e#5205#6911#0" expanded="false" />
-            <element signature="e#5336#6890#0" expanded="false" />
-            <element signature="e#5456#5682#0" expanded="false" />
-            <element signature="e#6340#6890#0" expanded="false" />
-            <element signature="e#7005#9077#0" expanded="false" />
-            <element signature="e#7330#7410#0" expanded="false" />
-            <element signature="e#7628#7710#0" expanded="false" />
-            <element signature="e#8047#8205#0" expanded="false" />
-            <element signature="e#8538#8951#0" expanded="false" />
+            <element signature="e#7672#9464#0" expanded="false" />
+            <element signature="e#8925#9338#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1281,36 +1149,8 @@
           <caret line="30" column="128" lean-forward="false" selection-start-line="30" selection-start-column="128" selection-end-line="30" selection-end-column="128" />
           <folding>
             <element signature="e#157#182#0" expanded="false" />
-            <element signature="e#227#1278#0" expanded="false" />
-            <element signature="e#356#1258#0" expanded="false" />
-            <element signature="e#414#1258#0" expanded="false" />
-            <element signature="e#1317#2327#0" expanded="false" />
-            <element signature="e#1422#2301#0" expanded="false" />
-            <element signature="e#1495#2301#0" expanded="false" />
-            <element signature="e#1877#2176#0" expanded="false" />
-            <element signature="e#1976#2162#0" expanded="false" />
-            <element signature="e#2370#3336#0" expanded="false" />
-            <element signature="e#2490#3315#0" expanded="false" />
-            <element signature="e#2579#3315#0" expanded="false" />
-            <element signature="e#2638#3315#0" expanded="false" />
-            <element signature="e#2976#3243#0" expanded="false" />
-            <element signature="e#3056#3243#0" expanded="false" />
-            <element signature="e#3374#4351#0" expanded="false" />
-            <element signature="e#3524#4330#0" expanded="false" />
-            <element signature="e#3682#4330#0" expanded="false" />
-            <element signature="e#3818#3876#0" expanded="false" />
-            <element signature="e#4392#5167#0" expanded="false" />
-            <element signature="e#4554#5143#0" expanded="false" />
-            <element signature="e#4879#5076#0" expanded="false" />
-            <element signature="e#5205#6911#0" expanded="false" />
-            <element signature="e#5336#6890#0" expanded="false" />
-            <element signature="e#5456#5682#0" expanded="false" />
-            <element signature="e#6340#6890#0" expanded="false" />
-            <element signature="e#7005#9077#0" expanded="false" />
-            <element signature="e#7330#7410#0" expanded="false" />
-            <element signature="e#7628#7710#0" expanded="false" />
-            <element signature="e#8047#8205#0" expanded="false" />
-            <element signature="e#8538#8951#0" expanded="false" />
+            <element signature="e#7672#9464#0" expanded="false" />
+            <element signature="e#8925#9338#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1337,17 +1177,17 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="1" column="29" lean-forward="true" selection-start-line="1" selection-start-column="29" selection-end-line="1" selection-end-column="29" />
+        </state>
+      </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="273">
             <caret line="13" column="57" lean-forward="false" selection-start-line="13" selection-start-column="57" selection-end-line="13" selection-end-column="57" />
           </first_editor>
           <second_editor />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="1" column="29" lean-forward="true" selection-start-line="1" selection-start-column="29" selection-end-line="1" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -1374,64 +1214,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main_cb.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="106" column="85" lean-forward="false" selection-start-line="106" selection-start-column="85" selection-end-line="106" selection-end-column="85" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cbscraper/CompanyScraper.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1848">
           <caret line="94" column="24" lean-forward="false" selection-start-line="94" selection-start-column="24" selection-end-line="94" selection-end-column="24" />
           <folding>
             <element signature="e#0#14#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/cb2linkedin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="34" lean-forward="false" selection-start-line="0" selection-start-column="34" selection-end-line="0" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/person_scraper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#14#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/main_in.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1239">
-          <caret line="65" column="52" lean-forward="false" selection-start-line="65" selection-start-column="52" selection-end-line="65" selection-end-column="52" />
-          <folding>
-            <element signature="e#23#36#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/LinkedinScraper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="588">
-          <caret line="34" column="29" lean-forward="false" selection-start-line="34" selection-start-column="29" selection-end-line="34" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cbscraper/GenericScraper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4431">
-          <caret line="226" column="31" lean-forward="false" selection-start-line="226" selection-start-column="31" selection-end-line="226" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#11#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1444,17 +1232,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cbscraper/common.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cbscraper/company.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-103">
+        <state relative-caret-position="3633">
           <caret line="178" column="34" lean-forward="false" selection-start-line="178" selection-start-column="34" selection-end-line="178" selection-end-column="34" />
           <folding />
         </state>
@@ -1466,36 +1246,70 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#157#182#0" expanded="false" />
-            <element signature="e#227#1278#0" expanded="false" />
-            <element signature="e#356#1258#0" expanded="false" />
-            <element signature="e#414#1258#0" expanded="false" />
-            <element signature="e#1317#2327#0" expanded="false" />
-            <element signature="e#1422#2301#0" expanded="false" />
-            <element signature="e#1495#2301#0" expanded="false" />
-            <element signature="e#1877#2176#0" expanded="false" />
-            <element signature="e#1976#2162#0" expanded="false" />
-            <element signature="e#2370#3336#0" expanded="false" />
-            <element signature="e#2490#3315#0" expanded="false" />
-            <element signature="e#2579#3315#0" expanded="false" />
-            <element signature="e#2638#3315#0" expanded="false" />
-            <element signature="e#2976#3243#0" expanded="false" />
-            <element signature="e#3056#3243#0" expanded="false" />
-            <element signature="e#3374#4351#0" expanded="false" />
-            <element signature="e#3524#4330#0" expanded="false" />
-            <element signature="e#3682#4330#0" expanded="false" />
-            <element signature="e#3818#3876#0" expanded="false" />
-            <element signature="e#4392#5167#0" expanded="false" />
-            <element signature="e#4554#5143#0" expanded="false" />
-            <element signature="e#4879#5076#0" expanded="false" />
-            <element signature="e#5205#6911#0" expanded="false" />
-            <element signature="e#5336#6890#0" expanded="false" />
-            <element signature="e#5456#5682#0" expanded="false" />
-            <element signature="e#6340#6890#0" expanded="false" />
-            <element signature="e#7005#9077#0" expanded="false" />
-            <element signature="e#7330#7410#0" expanded="false" />
-            <element signature="e#7628#7710#0" expanded="false" />
-            <element signature="e#8047#8205#0" expanded="false" />
-            <element signature="e#8538#8951#0" expanded="false" />
+            <element signature="e#7672#9464#0" expanded="false" />
+            <element signature="e#8925#9338#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cbscraper/common.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/cb2linkedin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="76" column="37" lean-forward="false" selection-start-line="76" selection-start-column="37" selection-end-line="76" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main_cb.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="132" column="10" lean-forward="true" selection-start-line="115" selection-start-column="0" selection-end-line="132" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/main_in.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1572">
+          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="153" column="16" lean-forward="true" selection-start-line="153" selection-start-column="16" selection-end-line="153" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="966">
+          <caret line="130" column="49" lean-forward="true" selection-start-line="130" selection-start-column="49" selection-end-line="130" selection-end-column="49" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cbscraper/GenericScraper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="221" column="17" lean-forward="false" selection-start-line="221" selection-start-column="17" selection-end-line="221" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>

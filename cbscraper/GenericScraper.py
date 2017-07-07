@@ -14,32 +14,32 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 # Non modifiable globals
 _browser = None
-n_requests=0
+n_requests = 0
+
 
 class Error404(Exception):
     pass
 
-class GenericScraper(metaclass=ABCMeta):
 
+class GenericScraper(metaclass=ABCMeta):
     # SLEEP
-    
+
     wait_robot_min = 10 * 60
     wait_robot_max = 15 * 60
 
-    get_error_sleep_min = 2*60
-    get_error_slee_max = 5*60    
-    
-    postload_sleep_min = 5 # Time to wait after the successful location of an element. Used in waitForPresenceCondition()
+    get_error_sleep_min = 2 * 60
+    get_error_slee_max = 5 * 60
+
+    postload_sleep_min = 5  # Time to wait after the successful location of an element. Used in waitForPresenceCondition()
     postload_sleep_max = 10
 
     # LOAD TIMEOUTS
     back_timeout = 20  # seconds before declaring loading timeout after going back
     load_timeout = 40  # for set_page_load_timeout in openURL()
-    wait_timeout = 3*60  # for WebDriverWait in waitForPresenceCondition()
+    wait_timeout = 3 * 60  # for WebDriverWait in waitForPresenceCondition()
 
     # MAX LIMITS
     max_requests_per_browser_instance = 10000
@@ -52,7 +52,7 @@ class GenericScraper(metaclass=ABCMeta):
     def htmlfile_suffix(self):
         pass
 
-    #map an endpoint to a class to wait for
+    # map an endpoint to a class to wait for
     @property
     @abstractmethod
     def class_wait(self):
@@ -102,7 +102,7 @@ class GenericScraper(metaclass=ABCMeta):
         self.addBrowserRequest()
         self.getBrowser().set_page_load_timeout(self.load_timeout)
         try:
-            logging.debug("Calling browser.get('"+url+"')")
+            logging.debug("Calling browser.get('" + url + "')")
             self.getBrowser().get(url)
         except TimeoutException:
             logging.warning("Timeout exception during page load. Moving on.")
@@ -126,7 +126,8 @@ class GenericScraper(metaclass=ABCMeta):
             raise RuntimeError("The endpoint you passed is not mapped anywhere")
         path = os.path.join(self.html_basepath, self.id + self.htmlfile_suffix[endpoint] + ".html")
         path = os.path.abspath(path)
-        path = os.path.normpath(path) #normalize path which has mixed slashes (e.g. C:\data/ciao -> c:/data/cia0). Only a visual perk for the logs
+        path = os.path.normpath(
+            path)  # normalize path which has mixed slashes (e.g. C:\data/ciao -> c:/data/cia0). Only a visual perk for the logs
         return path
 
     # Get saved HTML code
@@ -159,7 +160,7 @@ class GenericScraper(metaclass=ABCMeta):
                     fileh.close()
                     os.unlink(htmlfile)
                     return False
-                #Check for 404 error
+                # Check for 404 error
                 elif self.is404(html_code):
                     logging.warning("Pre-saved file contains 404 error")
                     raise Error404("Error 404 in '" + htmlfile + "'")
@@ -170,7 +171,7 @@ class GenericScraper(metaclass=ABCMeta):
     # Post-load sleep, Check if there are 404 errors, Wait for the presence of an element in a web page
     def waitForPresenceCondition(self, by, value, sleep=True):
         # Post-loading sleep
-        if(sleep):
+        if (sleep):
             self.randSleep(self.postload_sleep_min, self.postload_sleep_max)
         else:
             logging.debug("NOT sleeping")
@@ -199,7 +200,7 @@ class GenericScraper(metaclass=ABCMeta):
             logging.error("Unexpected exception waiting for page element. Exiting")
             raise
         else:
-            logging.debug("Element "+condition_str+" found in URL='" + url + "'")
+            logging.debug("Element " + condition_str + " found in URL='" + url + "'")
 
     def waitForClass(self, endpoint, sleep=True):
         return self.waitForPresenceCondition(By.CLASS_NAME, self.class_wait[endpoint], sleep)
@@ -216,18 +217,18 @@ class GenericScraper(metaclass=ABCMeta):
         global _browser
         if _browser is None:
             # Use selenium
-            logging.debug("Creating webdriver")
+            logging.info("Creating Selenium webdriver")
 
-            ## FIrefox user profile
+            ## Firefox user profile
             profile_path = r"C:\Users\raffa\AppData\Roaming\Mozilla\Firefox\Profiles\4ai6x5sv.default"
             profile = webdriver.firefox.firefox_profile.FirefoxProfile(profile_path)
-            #https://github.com/SeleniumHQ/selenium-google-code-issue-archive/issues/5931
-            #profile.set_preference("webdriver.log.browser.ignore", "True")
-            #profile.set_preference("webdriver.log.driver.ignore", "True")
-            #profile.set_preference("webdriver.log.profiler.ignore", "True")
+            # https://github.com/SeleniumHQ/selenium-google-code-issue-archive/issues/5931
+            # profile.set_preference("webdriver.log.browser.ignore", "True")
+            # profile.set_preference("webdriver.log.driver.ignore", "True")
+            # profile.set_preference("webdriver.log.profiler.ignore", "True")
             from selenium.webdriver.remote.remote_connection import LOGGER
             LOGGER.setLevel(logging.WARNING)
-            _browser = webdriver.firefox.webdriver.WebDriver(firefox_profile = profile)
+            _browser = webdriver.firefox.webdriver.WebDriver(firefox_profile=profile)
 
             ## Firefox new profile
             # cbscraper.common._browser = webdriver.Firefox()
@@ -325,5 +326,5 @@ class GenericScraper(metaclass=ABCMeta):
         try:
             self.getBrowser().refresh()
         except Exception as e:
-            logging.error("Exception during page refresh. Continuining. "+str(e))
+            logging.error("Exception during page refresh. Continuining. " + str(e))
             pass
