@@ -56,7 +56,7 @@ class GenericScraper(metaclass=ABCMeta):
     # OTHER VARIABLES
     max_requests_per_browser_instance = 10000
     is_firefox_user_profile = True
-    profile_path = r"C:\Users\raffa\AppData\Roaming\Mozilla\Firefox\Profiles\4ai6x5sv.default"
+    firefox_profile_path = r"C:\Users\raffa\AppData\Roaming\Mozilla\Firefox\Profiles\4ai6x5sv.default"
 
     # internal variables
 
