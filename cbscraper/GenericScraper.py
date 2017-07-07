@@ -202,7 +202,7 @@ class GenericScraper(metaclass=ABCMeta):
                     return html_code
 
     # Post-load sleep, Check if there are 404 errors, Wait for the presence of an element in a web page
-    def waitForPresenceCondition(self, by, value, sleep=True):
+    def waitForPresenceCondition(self, by, value, sleep = True, check_for_404 = True):
         # Post-loading sleep
         if (sleep):
             self.randSleep(self.postload_sleep_min, self.postload_sleep_max)
@@ -210,9 +210,10 @@ class GenericScraper(metaclass=ABCMeta):
             logging.debug("NOT sleeping")
         # Check for 404 error
         html_code = self.getBrowserPageSource()
-        if self.is404(html_code):
-            logging.info("404 page retrieved. Raising a Error404 exception")
-            raise Error404("404 error on page '" + self.getBrowserURL() + "'")
+        if check_for_404 and self.is404(html_code):
+            msg = "404 error on page '" + self.getBrowserURL() + "'"
+            logging.info(msg)
+            raise Error404(msg)
         # Check for robot detection
         if self.wasRobotDetected(html_code):
             self.detectedAsRobot()
