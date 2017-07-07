@@ -225,7 +225,7 @@ class GenericScraper(metaclass=ABCMeta):
         msg += " in URL='" + url + "'"
         logging.info(msg)
         try:
-            condition = EC.visibility_of_element_located((by, value))
+            condition = EC.presence_of_element_located((by, value))
             WebDriverWait(self.getBrowser(), self.wait_timeout).until(condition)
         except TimeoutException:
             logging.critical("Timed out waiting for page element. Fatal. Exiting")
@@ -264,6 +264,7 @@ class GenericScraper(metaclass=ABCMeta):
             #PHANTOM JS
             elif self.browser_type == EBrowser.PHANTOMJS:
                 _browser = webdriver.PhantomJS(self.phantomjs_path)
+                _browser.set_window_size(1920, 1080)
 
             # Modify windows
             _browser.set_window_position(0, 0)
@@ -360,3 +361,6 @@ class GenericScraper(metaclass=ABCMeta):
         except Exception as e:
             logging.error("Exception during page refresh. Continuining. " + str(e))
             pass
+
+    def scrollDown(self, value):
+        self.getBrowser().execute_script("window.scrollBy(0,"+str(value)+")")
