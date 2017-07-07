@@ -159,6 +159,12 @@ class GenericScraper(metaclass=ABCMeta):
             path)  # normalize path which has mixed slashes (e.g. C:\data/ciao -> c:/data/cia0). Only a visual perk for the logs
         return path
 
+    def removeHTMLFile(self, endpoint):
+        htmlfile = self.genHTMLFilePath(endpoint)
+        if os.path.isfile(htmlfile):
+            logging.debug("Removing HTML file for endpoint "+str(endpoint))
+            os.remove(htmlfile)
+
     # Get saved HTML code
     # Raises a Error404 exception if the file contains an error 404 page
     # Return values:
