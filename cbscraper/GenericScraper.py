@@ -6,6 +6,7 @@ import smtplib
 import time
 from abc import ABCMeta, abstractmethod
 from email.mime.text import MIMEText
+from enum import Enum
 
 import bs4 as bs
 from selenium import webdriver
@@ -35,10 +36,15 @@ def jsonPretty(dict_data):
 class Error404(Exception):
     pass
 
+#ENUM BROWSER
+class EBrowser(Enum):
+    FIREFOX = 1
+    PHANTOMJS = 2
+
 #CLASS GENERIC SCRAPER
 class GenericScraper(metaclass=ABCMeta):
-    # SLEEP VARIABLES
 
+    # SLEEP VARIABLES
     wait_robot_min = 10 * 60
     wait_robot_max = 15 * 60
 
@@ -55,8 +61,10 @@ class GenericScraper(metaclass=ABCMeta):
 
     # OTHER VARIABLES
     max_requests_per_browser_instance = 10000
-    is_firefox_user_profile = True
+    browser_user_profile = True
     firefox_profile_path = r"C:\Users\raffa\AppData\Roaming\Mozilla\Firefox\Profiles\4ai6x5sv.default"
+    browser_type = EBrowser.PHANTOMJS
+    phantomjs_path = r"C:\data\programmi\phantomjs-2.1.1-windows\bin\phantomjs.exe"
 
     # internal variables
 
@@ -94,13 +102,20 @@ class GenericScraper(metaclass=ABCMeta):
         self.endpoint_html = dict()
         self.endpoint_soup = dict()
         self.id = id
+        LOGGER.setLevel(logging.WARNING)
         self.getBrowser()
 
-    def randSleep(self, min, max):
-        # Sleep to avoid robots
-        sec = random.randint(min, max)
+    def saveScreenshot(self, filename):
+        logging.info("Saving current page screenshot in '"+filename+"'")
+        self.getBrowser().save_screenshot(filename)
+
+    def sleep(self, sec):
         logging.info("Sleeping for " + str(sec) + " seconds ...")
         time.sleep(sec)
+
+    def randSleep(self, min, max):
+        sec = random.randint(min, max)
+        self.sleep(sec)
 
     # Add a browser request and eventually restart the browser
     def addBrowserRequest(self):
@@ -236,18 +251,18 @@ class GenericScraper(metaclass=ABCMeta):
         if _browser is None:
             # Use selenium
             logging.info("Creating Selenium webdriver")
-            LOGGER.setLevel(logging.WARNING)
 
-            ## Firefox user profile
-            if self.is_firefox_user_profile:
-                profile = webdriver.firefox.firefox_profile.FirefoxProfile(self.firefox_profile_path)
-            else:
-                profile = webdriver.firefox.firefox_profile.FirefoxProfile()
+            #Firefox
+            if self.browser_type == EBrowser.FIREFOX:
+                if self.browser_user_profile:
+                    profile = webdriver.firefox.firefox_profile.FirefoxProfile(self.firefox_profile_path)
+                else:
+                    profile = webdriver.firefox.firefox_profile.FirefoxProfile()
+                _browser = webdriver.firefox.webdriver.WebDriver(firefox_profile=profile)
 
-            _browser = webdriver.firefox.webdriver.WebDriver(firefox_profile=profile)
-
-            ## Firefox new profile
-            # cbscraper.common._browser = webdriver.Firefox()
+            #PHANTOM JS
+            elif self.browser_type == EBrowser.PHANTOMJS:
+                _browser = webdriver.PhantomJS(self.phantomjs_path)
 
             # Modify windows
             _browser.set_window_position(0, 0)
