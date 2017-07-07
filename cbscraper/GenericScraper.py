@@ -8,41 +8,55 @@ from abc import ABCMeta, abstractmethod
 from email.mime.text import MIMEText
 
 import bs4 as bs
-import cbscraper.common
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.remote.remote_connection import LOGGER
 
 # Non modifiable globals
 _browser = None
 n_requests = 0
 
+#FUNCTIONS
 
+def saveDictToJsonFile(dict_data, json_file):
+    with open(json_file, 'w', encoding="utf-8") as fileh:
+        fileh.write(jsonPretty(dict_data))
+
+def myTextStrip(str):
+    return str.replace('\n', '').strip()
+
+def jsonPretty(dict_data):
+    return json.dumps(dict_data, sort_keys=True, indent=4, separators=(',', ': '))
+
+#CLASS ERROR404
 class Error404(Exception):
     pass
 
-
+#CLASS GENERIC SCRAPER
 class GenericScraper(metaclass=ABCMeta):
-    # SLEEP
+    # SLEEP VARIABLES
 
     wait_robot_min = 10 * 60
     wait_robot_max = 15 * 60
 
     get_error_sleep_min = 2 * 60
-    get_error_slee_max = 5 * 60
+    get_error_sleep_max = 5 * 60
 
     postload_sleep_min = 5  # Time to wait after the successful location of an element. Used in waitForPresenceCondition()
     postload_sleep_max = 10
 
-    # LOAD TIMEOUTS
+    # LOAD TIMEOUTS VARIABLES
     back_timeout = 20  # seconds before declaring loading timeout after going back
     load_timeout = 40  # for set_page_load_timeout in openURL()
     wait_timeout = 3 * 60  # for WebDriverWait in waitForPresenceCondition()
 
-    # MAX LIMITS
+    # OTHER VARIABLES
     max_requests_per_browser_instance = 10000
+    is_firefox_user_profile = True
+    profile_path = r"C:\Users\raffa\AppData\Roaming\Mozilla\Firefox\Profiles\4ai6x5sv.default"
 
     # internal variables
 
@@ -95,7 +109,7 @@ class GenericScraper(metaclass=ABCMeta):
         if (n_requests >= self.max_requests_per_browser_instance):
             logging.info("Reached max num of requests. Restarting the browser")
             self.restartBrowser()
-            cbscraper.common.n_requests = 0
+            n_requests = 0
 
     # Open an url in web browser
     def openURL(self, url):
@@ -218,16 +232,14 @@ class GenericScraper(metaclass=ABCMeta):
         if _browser is None:
             # Use selenium
             logging.info("Creating Selenium webdriver")
+            LOGGER.setLevel(logging.WARNING)
 
             ## Firefox user profile
-            profile_path = r"C:\Users\raffa\AppData\Roaming\Mozilla\Firefox\Profiles\4ai6x5sv.default"
-            profile = webdriver.firefox.firefox_profile.FirefoxProfile(profile_path)
-            # https://github.com/SeleniumHQ/selenium-google-code-issue-archive/issues/5931
-            # profile.set_preference("webdriver.log.browser.ignore", "True")
-            # profile.set_preference("webdriver.log.driver.ignore", "True")
-            # profile.set_preference("webdriver.log.profiler.ignore", "True")
-            from selenium.webdriver.remote.remote_connection import LOGGER
-            LOGGER.setLevel(logging.WARNING)
+            if self.is_firefox_user_profile:
+                profile = webdriver.firefox.firefox_profile.FirefoxProfile(self.firefox_profile_path)
+            else:
+                profile = webdriver.firefox.firefox_profile.FirefoxProfile()
+
             _browser = webdriver.firefox.webdriver.WebDriver(firefox_profile=profile)
 
             ## Firefox new profile
@@ -238,7 +250,7 @@ class GenericScraper(metaclass=ABCMeta):
             # browser.maximize_window()
 
             # sleep after browser opening
-            self.randSleep(4, 6)
+            self.randSleep(2, 3)
 
         return _browser
 
