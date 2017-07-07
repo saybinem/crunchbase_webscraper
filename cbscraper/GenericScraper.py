@@ -146,6 +146,10 @@ class GenericScraper(metaclass=ABCMeta):
 
     # Get saved HTML code
     # Raises a Error404 exception if the file contains an error 404 page
+    # Return values:
+    # - False if HTML file not found (was never downloaded) or file not readable
+    # - The HTML source code if the file was found and is readable
+    # - Raises Error404 if the file contains a 404 error
     def getHTMLFile(self, endpoint):
 
         htmlfile = self.genHTMLFilePath(endpoint)
