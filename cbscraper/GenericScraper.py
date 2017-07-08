@@ -283,23 +283,22 @@ class GenericScraper(metaclass=ABCMeta):
 
             #Firefox
             if self.browser_type == EBrowser.FIREFOX:
+                #see http://selenium-python.readthedocs.io/faq.html#how-to-auto-save-files-using-custom-firefox-profile
                 if self.browser_user_profile:
-                    profile = webdriver.firefox.firefox_profile.FirefoxProfile(self.firefox_profile_path)
+                    profile = webdriver.FirefoxProfile(self.firefox_profile_path)
                 else:
-                    profile = webdriver.firefox.firefox_profile.FirefoxProfile()
-                _browser = webdriver.firefox.webdriver.WebDriver(firefox_profile=profile)
+                    profile = webdriver.FirefoxProfile()
+                _browser = webdriver.Firefox(firefox_profile=profile)
+                # sleep after browser opening
+                self.sleep(3)
+                _browser.set_window_position(0, 0)
 
             #PHANTOM JS
             elif self.browser_type == EBrowser.PHANTOMJS:
                 _browser = webdriver.PhantomJS(self.phantomjs_path)
+                self.sleep(3)
                 _browser.set_window_size(1920, 1080)
-
-            # Modify windows
-            _browser.set_window_position(0, 0)
-            # browser.maximize_window()
-
-            # sleep after browser opening
-            self.randSleep(2, 3)
+                self.sleep(3)
 
         return _browser
 
