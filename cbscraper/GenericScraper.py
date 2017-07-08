@@ -363,17 +363,22 @@ class GenericScraper(metaclass=ABCMeta):
 
     def sendRobotEmail(self):
         logging.info("Sending email telling we are stalled by robot detection")
+        body = "Scraping is stalled by robot detection"
+        subject = "Stalled by robot"
+        self.sendEmail(subject, body)
+
+    def sendEmail(self, subject, body):
+
         with open("email_credentials.json", "r") as fileh:
             credentials = json.load(fileh)
 
         fromaddr = credentials['email']
         toaddr = credentials['email']
-        body = "Scraping is stalled by robot detection"
 
         msg = MIMEText(body)
         msg['From'] = fromaddr
         msg['To'] = toaddr
-        msg['Subject'] = "Stalled by robot"
+        msg['Subject'] = subject
 
         # SMTP connection
         server = smtplib.SMTP('smtp.gmail.com', 587)
