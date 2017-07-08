@@ -248,7 +248,7 @@ class GenericScraper(metaclass=ABCMeta):
         # wait for the presence in the DOM of a tag with a given class
         condition_str = "(" + str(by) + "," + value + ")"
         url = self.getBrowserURL()
-        msg = "Waiting for visibility of "
+        msg = "Waiting for presence of "
         msg += condition_str
         msg += " in URL='" + url + "'"
         logging.info(msg)

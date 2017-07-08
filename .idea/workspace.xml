@@ -5,9 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8ffd353f-9675-4efa-a6a6-3ad054850fe0" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../linkedin_scraper/.project" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../linkedin_scraper/.pydevproject" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cbscraper/GenericScraper.py" afterPath="$PROJECT_DIR$/cbscraper/GenericScraper.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/run.bat" afterPath="$PROJECT_DIR$/../linkedin_scraper/run.bat" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/src/main_in.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/main_in.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,7 +23,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/crunchbase_scraper$main_cb.coverage" NAME="main_cb Coverage Results" MODIFIED="1499407818191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/crunchbase_scraper$linkedin_scraper.coverage" NAME="linkedin_scraper Coverage Results" MODIFIED="1499508400697" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../linkedin_scraper" />
+    <SUITE FILE_PATH="coverage/crunchbase_scraper$linkedin_scraper.coverage" NAME="linkedin_scraper Coverage Results" MODIFIED="1499524853641" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../linkedin_scraper" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -35,10 +40,39 @@
       <file leaf-file-name="GenericScraper.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cbscraper/GenericScraper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="401">
+            <state relative-caret-position="5964">
               <caret line="300" column="28" lean-forward="false" selection-start-line="300" selection-start-column="28" selection-end-line="300" selection-end-column="28" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
+                <marker date="1499511155642" expanded="true" signature="1090:14022" ph="..." />
+                <marker date="1499511155642" expanded="true" signature="8244:9678" ph="..." />
+                <marker date="1499511155642" expanded="true" signature="9177:9326" ph="..." />
+                <marker date="1499511155642" expanded="true" signature="9359:9460" ph="..." />
+                <marker date="1499511155642" expanded="true" signature="9476:9578" ph="..." />
+                <marker date="1499511155642" expanded="true" signature="9729:9823" ph="..." />
+                <marker date="1499511155642" expanded="true" signature="9862:9908" ph="..." />
+                <marker date="1499511155642" expanded="true" signature="9965:10013" ph="..." />
+                <marker date="1499511155642" expanded="true" signature="10040:11065" ph="..." />
+                <marker date="1499511155642" expanded="true" signature="10093:11040" ph="..." />
+                <marker date="1499511155642" expanded="true" signature="10252:10776" ph="..." />
+                <marker date="1499511155642" expanded="true" signature="10859:11040" ph="..." />
+                <marker date="1499511155642" expanded="true" signature="11228:11383" ph="..." />
+                <marker date="1499511155642" expanded="true" signature="11458:11709" ph="..." />
+                <marker date="1499511155642" expanded="true" signature="11618:11709" ph="..." />
+                <marker date="1499511155642" expanded="true" signature="11784:11914" ph="..." />
+                <marker date="1499511155642" expanded="true" signature="11962:12006" ph="..." />
+                <marker date="1499511155642" expanded="true" signature="12080:12210" ph="..." />
+                <marker date="1499511155642" expanded="true" signature="12258:12302" ph="..." />
+                <marker date="1499511155642" expanded="true" signature="12333:12469" ph="..." />
+                <marker date="1499511155642" expanded="true" signature="12492:12836" ph="..." />
+                <marker date="1499511155642" expanded="true" signature="12505:12613" ph="..." />
+                <marker date="1499511155642" expanded="true" signature="12743:12836" ph="..." />
+                <marker date="1499511155642" expanded="true" signature="12868:12907" ph="..." />
+                <marker date="1499511155642" expanded="true" signature="12937:12982" ph="..." />
+                <marker date="1499511155642" expanded="true" signature="13013:13694" ph="..." />
+                <marker date="1499511155642" expanded="true" signature="13725:13910" ph="..." />
+                <marker date="1499511155642" expanded="true" signature="13809:13910" ph="..." />
+                <marker date="1499511155642" expanded="true" signature="13944:14022" ph="..." />
               </folding>
             </state>
           </provider>
@@ -47,11 +81,21 @@
       <file leaf-file-name="LinkedinScraper.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="201" column="24" lean-forward="false" selection-start-line="201" selection-start-column="24" selection-end-line="201" selection-end-column="24" />
+            <state relative-caret-position="205">
+              <caret line="233" column="12" lean-forward="false" selection-start-line="233" selection-start-column="12" selection-end-line="233" selection-end-column="12" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="person_scraper.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="234">
+              <caret line="165" column="36" lean-forward="false" selection-start-line="165" selection-start-column="36" selection-end-line="165" selection-end-column="36" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -67,8 +111,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getPersonId</find>
-      <find>current_job</find>
       <find>company:</find>
       <find>getBro</find>
       <find>getB</find>
@@ -97,6 +139,8 @@
       <find>waitForPrese</find>
       <find>getHTMLFile</find>
       <find>def getBrowser(</find>
+      <find>Try to re-download the file</find>
+      <find>removeLink</find>
     </findStrings>
     <replaceStrings>
       <replace>soup</replace>
@@ -130,11 +174,11 @@
         <option value="$PROJECT_DIR$/cbscraper/common.py" />
         <option value="$PROJECT_DIR$/../linkedin_scraper/src/cb2linkedin.py" />
         <option value="$PROJECT_DIR$/../linkedin_scraper/src/main_in.py" />
-        <option value="$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py" />
         <option value="$PROJECT_DIR$/main_cb.py" />
         <option value="$PROJECT_DIR$/cbscraper/PersonScraper.py" />
         <option value="$PROJECT_DIR$/cbscraper/CompanyScraper.py" />
         <option value="$PROJECT_DIR$/cbscraper/GenericScraper.py" />
+        <option value="$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py" />
         <option value="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py" />
       </list>
     </option>
@@ -187,6 +231,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -215,7 +260,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -472,13 +516,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1498207171857</updated>
-    </task>
-    <task id="LOCAL-00001" summary="PyCharm reformat code">
-      <created>1498208326006</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1498208326006</updated>
     </task>
     <task id="LOCAL-00002" summary="improvements">
       <created>1498568728319</created>
@@ -816,7 +853,14 @@
       <option name="project" value="LOCAL" />
       <updated>1499507136249</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="improvements">
+      <created>1499508452284</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1499508452284</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TodoView">
@@ -838,7 +882,7 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32842582" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3091733" sideWeight="0.49785176" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25484914" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25862068" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297414" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2419181" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1220,17 +1264,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1932">
           <caret line="98" column="12" lean-forward="false" selection-start-line="98" selection-start-column="12" selection-end-line="98" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="155" column="36" lean-forward="false" selection-start-line="155" selection-start-column="36" selection-end-line="155" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#11#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1238,7 +1271,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-43">
           <caret line="21" column="43" lean-forward="false" selection-start-line="21" selection-start-column="43" selection-end-line="21" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1246,9 +1278,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="118">
           <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#14#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1256,26 +1285,60 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="301">
           <caret line="18" column="39" lean-forward="false" selection-start-line="18" selection-start-column="39" selection-end-line="18" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#14#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cbscraper/GenericScraper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="401">
+        <state relative-caret-position="5964">
           <caret line="300" column="28" lean-forward="false" selection-start-line="300" selection-start-column="28" selection-end-line="300" selection-end-column="28" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
+            <marker date="1499511155642" expanded="true" signature="1090:14022" ph="..." />
+            <marker date="1499511155642" expanded="true" signature="8244:9678" ph="..." />
+            <marker date="1499511155642" expanded="true" signature="9177:9326" ph="..." />
+            <marker date="1499511155642" expanded="true" signature="9359:9460" ph="..." />
+            <marker date="1499511155642" expanded="true" signature="9476:9578" ph="..." />
+            <marker date="1499511155642" expanded="true" signature="9729:9823" ph="..." />
+            <marker date="1499511155642" expanded="true" signature="9862:9908" ph="..." />
+            <marker date="1499511155642" expanded="true" signature="9965:10013" ph="..." />
+            <marker date="1499511155642" expanded="true" signature="10040:11065" ph="..." />
+            <marker date="1499511155642" expanded="true" signature="10093:11040" ph="..." />
+            <marker date="1499511155642" expanded="true" signature="10252:10776" ph="..." />
+            <marker date="1499511155642" expanded="true" signature="10859:11040" ph="..." />
+            <marker date="1499511155642" expanded="true" signature="11228:11383" ph="..." />
+            <marker date="1499511155642" expanded="true" signature="11458:11709" ph="..." />
+            <marker date="1499511155642" expanded="true" signature="11618:11709" ph="..." />
+            <marker date="1499511155642" expanded="true" signature="11784:11914" ph="..." />
+            <marker date="1499511155642" expanded="true" signature="11962:12006" ph="..." />
+            <marker date="1499511155642" expanded="true" signature="12080:12210" ph="..." />
+            <marker date="1499511155642" expanded="true" signature="12258:12302" ph="..." />
+            <marker date="1499511155642" expanded="true" signature="12333:12469" ph="..." />
+            <marker date="1499511155642" expanded="true" signature="12492:12836" ph="..." />
+            <marker date="1499511155642" expanded="true" signature="12505:12613" ph="..." />
+            <marker date="1499511155642" expanded="true" signature="12743:12836" ph="..." />
+            <marker date="1499511155642" expanded="true" signature="12868:12907" ph="..." />
+            <marker date="1499511155642" expanded="true" signature="12937:12982" ph="..." />
+            <marker date="1499511155642" expanded="true" signature="13013:13694" ph="..." />
+            <marker date="1499511155642" expanded="true" signature="13725:13910" ph="..." />
+            <marker date="1499511155642" expanded="true" signature="13809:13910" ph="..." />
+            <marker date="1499511155642" expanded="true" signature="13944:14022" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="165" column="36" lean-forward="false" selection-start-line="165" selection-start-column="36" selection-end-line="165" selection-end-column="36" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="201" column="24" lean-forward="false" selection-start-line="201" selection-start-column="24" selection-end-line="201" selection-end-column="24" />
+        <state relative-caret-position="205">
+          <caret line="233" column="12" lean-forward="false" selection-start-line="233" selection-start-column="12" selection-end-line="233" selection-end-column="12" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
