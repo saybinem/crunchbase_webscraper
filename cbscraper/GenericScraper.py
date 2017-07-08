@@ -208,21 +208,43 @@ class GenericScraper(metaclass=ABCMeta):
                     return html_code
 
     # Post-load sleep, Check if there are 404 errors, Wait for the presence of an element in a web page
-    def waitForPresenceCondition(self, by, value, sleep = True, check_for_404 = True):
+    def waitForInvisibility(self, by, value):
+        condition_str = "(" + str(by) + "," + value + ")"
+        url = self.getBrowserURL()
+        msg = "Waiting for in-visibility of "
+        msg += condition_str
+        msg += " in URL='" + url + "'"
+        logging.info(msg)
+        try:
+            condition = EC.invisibility_of_element_located((by, value))
+            WebDriverWait(self.getBrowser(), self.wait_timeout).until(condition)
+        except TimeoutException:
+            logging.critical("Timed out waiting for element invisibility. Exiting")
+            raise
+        except:
+            logging.error("Unexpected exception waiting for element invisibility. Exiting")
+            raise
+        else:
+            logging.debug("Element " + condition_str + " is now invisible in URL='" + url + "'")
+
+    # Post-load sleep, Check if there are 404 errors, Wait for the presence of an element in a web page
+    def waitForPresenceCondition(self, by, value, sleep = True, check_for_errors = True):
         # Post-loading sleep
-        if (sleep):
+        if sleep:
             self.randSleep(self.postload_sleep_min, self.postload_sleep_max)
         else:
             logging.debug("NOT sleeping")
-        # Check for 404 error
         html_code = self.getBrowserPageSource()
-        if check_for_404 and self.is404(html_code):
-            msg = "404 error on page '" + self.getBrowserURL() + "'"
-            logging.info(msg)
-            raise Error404(msg)
-        # Check for robot detection
-        if self.wasRobotDetected(html_code):
-            self.detectedAsRobot()
+        # Check for errors
+        if check_for_errors:
+            # Check for 404
+            if self.is404(html_code):
+                msg = "404 error on page '" + self.getBrowserURL() + "'"
+                logging.info(msg)
+                raise Error404(msg)
+            # Check for robot detection
+            if self.wasRobotDetected(html_code):
+                self.detectedAsRobot()
         # wait for the presence in the DOM of a tag with a given class
         condition_str = "(" + str(by) + "," + value + ")"
         url = self.getBrowserURL()

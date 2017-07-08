@@ -16,8 +16,10 @@ excel_col_vico = 'VICO'
 def buildDirs():
     os.makedirs("./data/person/html", exist_ok=True)
     os.makedirs("./data/person/json", exist_ok=True)
+    os.makedirs("./data/person/screenshots", exist_ok=True)
     os.makedirs("./data/company/html", exist_ok=True)
     os.makedirs("./data/company/json", exist_ok=True)
+    os.makedirs("./data/company/screenshots", exist_ok=True)
 
 
 # Give a company, scrape current people, past people and advisors

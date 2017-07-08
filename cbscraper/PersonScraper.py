@@ -3,7 +3,7 @@ from enum import Enum
 
 import cbscraper.CrunchbaseScraper
 import cbscraper.GenericScraper
-
+import os
 from selenium.webdriver.common.by import By
 
 class PersonEndPoint(Enum):
@@ -13,6 +13,7 @@ class PersonEndPoint(Enum):
 
 class PersonScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
     html_basepath = './data/person/html'
+    screenshot_folder = './data/person/screenshots'
 
     # Name of the class to wait for when we load a page
     class_wait = {
@@ -89,16 +90,19 @@ class PersonScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
         try:
             entity_html = self.getHTMLFile(endpoint)
         except cbscraper.GenericScraper.Error404 as e:
-            logging.info(str(e)+" Returning false")
+            logging.info("HTML file contain 404 error. Returning false")
             return False
+
         #try to get it from the web
         if entity_html is False:
-            res = self.goToEntityPage()
-            # SAVE HTML TO FILE (EVEN IF WE HAVE A 404 ERROR)
-            entity_html = self.getBrowserPageSource(endpoint)
-            if not res:
-                logging.error("goToEntityPage() returned false (404?). Continuing")
-                return False            
+            try:
+                self.goToEntityPage()
+            except cbscraper.GenericScraper.Error404 as e:
+                logging.info("Page contain 404 error. Returning")
+            finally:
+                # SAVE HTML TO FILE (EVEN IF WE HAVE A 404 ERROR)
+                entity_html = self.getBrowserPageSource(endpoint)
+                self.saveScreenshot(os.path.join(self.screenshot_folder, self.id + ".png"))
             
         self.setEndpointHTML(PersonEndPoint.ENTITY, entity_html)
         entity_soup = self.makeSoupFromHTML(entity_html)

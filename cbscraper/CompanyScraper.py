@@ -1,5 +1,6 @@
 import logging
 from enum import Enum
+import os
 
 import cbscraper.CrunchbaseScraper
 import cbscraper.GenericScraper
@@ -15,6 +16,7 @@ class OrgEndPoint(Enum):
 class CompanyScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
 
     html_basepath = './data/company/html'
+    screenshot_folder = './data/company/screenshots'
 
     class_wait = {
         OrgEndPoint.ENTITY: 'entity',
@@ -63,36 +65,31 @@ class CompanyScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
 
         # Get endpoint 'entity'
         endpoint = OrgEndPoint.ENTITY
-        is404 = False
         entity_html = False
 
         try:
             entity_html = self.getHTMLFile(endpoint)
         except Error404 as e:
-            logging.info("Detected 404. Setting is404=True")
-            is404 = True
+            logging.info("Detected 404 in HTML file. Returning False")
+            return False
         else:
             if not entity_html:
                 try:
                     self.goToEntityPage()
                 except cbscraper.GenericScraper.Error404:
-                    logging.error("Caught error 404. Setting is404=True")
-                    is404 = True
-                #Get HTML code and write it to a file
-                entity_html = self.getBrowserPageSource(endpoint)
+                    logging.error("Caught error 404. Returning False")
+                    return False
+                finally:
+                    # Write HTML to file and get screenshot even if we get a 404 error
+                    entity_html = self.getBrowserPageSource(endpoint)
+                    self.saveScreenshot(os.path.join(self.screenshot_folder, self.id + ".png"))
+            else:
+                logging.info("Content retrieved from HTML file")
 
-        if entity_html:
-            self.setEndpointHTML(OrgEndPoint.ENTITY, entity_html)
-            entity_soup = self.makeSoupFromHTML(entity_html)
-            self.setEndpointSoup(OrgEndPoint.ENTITY, entity_soup)
-
-        if is404:
-            logging.info("Returning false due to 404 error")
-            return False
-
-        if not entity_html:
-            logging.info("Returning false due to entity_html being False")
-            return False
+        # Make the soup
+        self.setEndpointHTML(OrgEndPoint.ENTITY, entity_html)
+        entity_soup = self.makeSoupFromHTML(entity_html)
+        self.setEndpointSoup(OrgEndPoint.ENTITY, entity_soup)
 
         # Process endpoints other than the entity one
         for endpoint in self.link_map.keys():
