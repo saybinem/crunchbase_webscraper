@@ -193,6 +193,8 @@ def scrapePersonDetails(soup):
         person_details = div_description.text
         if person_details.find("Click/Touch UPDATE above to add Details for") > 0:
             person_details = ""
+            
+    return person_details
 
 # Scrape a single person (e.g. person_link="/person/gavin-ray")
 def scrapePerson(data):
