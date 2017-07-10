@@ -249,12 +249,10 @@ class GenericScraper(metaclass=ABCMeta):
             # Check for robot detection
             if self.wasRobotDetected(html_code):
                 self.detectedAsRobot()
-        # wait for the presence in the DOM of a tag with a given class
+        # Wait for the presence in the DOM of a tag with a given class
         condition_str = "(" + str(by) + "," + value + ")"
         url = self.getBrowserURL()
-        msg = "Waiting for presence of "
-        msg += condition_str
-        msg += " in URL='" + url + "'"
+        msg = "Waiting for presence of " + condition_str + " in URL='" + url + "'"
         logging.info(msg)
         try:
             condition = EC.presence_of_element_located((by, value))
@@ -376,7 +374,6 @@ class GenericScraper(metaclass=ABCMeta):
         self.sendEmail(subject, body)
 
     def sendEmail(self, subject, body):
-
         with open("email_credentials.json", "r") as fileh:
             credentials = json.load(fileh)
 
