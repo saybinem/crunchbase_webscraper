@@ -6,9 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="8ffd353f-9675-4efa-a6a6-3ad054850fe0" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cbscraper/GenericScraper.py" afterPath="$PROJECT_DIR$/cbscraper/GenericScraper.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/src/main_in.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/main_in.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,7 +19,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/crunchbase_scraper$main_cb.coverage" NAME="main_cb Coverage Results" MODIFIED="1499407818191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/crunchbase_scraper$linkedin_scraper.coverage" NAME="linkedin_scraper Coverage Results" MODIFIED="1499611164865" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../linkedin_scraper" />
+    <SUITE FILE_PATH="coverage/crunchbase_scraper$linkedin_scraper.coverage" NAME="linkedin_scraper Coverage Results" MODIFIED="1499625085693" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../linkedin_scraper" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -33,21 +33,29 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="main_in.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main_in.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/main_in.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="84">
               <caret line="12" column="12" lean-forward="false" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
-              <folding />
+              <folding>
+                <marker date="1499667661153" expanded="true" signature="1961:2136" ph="..." />
+                <marker date="1499667661153" expanded="true" signature="2469:2571" ph="..." />
+                <marker date="1499667661153" expanded="true" signature="3701:3851" ph="..." />
+                <marker date="1499667661153" expanded="true" signature="3928:4183" ph="..." />
+                <marker date="1499667661153" expanded="true" signature="4201:4305" ph="..." />
+                <marker date="1499667661153" expanded="true" signature="4410:4482" ph="..." />
+                <marker date="1499667661153" expanded="true" signature="4631:4891" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LinkedinScraper.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="LinkedinScraper.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-113">
-              <caret line="317" column="33" lean-forward="false" selection-start-line="317" selection-start-column="33" selection-end-line="317" selection-end-column="33" />
+            <state relative-caret-position="624">
+              <caret line="228" column="24" lean-forward="false" selection-start-line="228" selection-start-column="24" selection-end-line="228" selection-end-column="24" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -58,7 +66,7 @@
       <file leaf-file-name="person_scraper.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
+            <state relative-caret-position="693">
               <caret line="154" column="0" lean-forward="false" selection-start-line="154" selection-start-column="0" selection-end-line="154" selection-end-column="0" />
               <folding>
                 <element signature="e#229#265#0" expanded="false" />
@@ -82,9 +90,27 @@
       <file leaf-file-name="GenericScraper.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cbscraper/GenericScraper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-378">
-              <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="15" selection-end-column="55" />
-              <folding />
+            <state relative-caret-position="7980">
+              <caret line="404" column="0" lean-forward="false" selection-start-line="404" selection-start-column="0" selection-end-line="405" selection-end-column="77" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+                <marker date="1499629678394" expanded="true" signature="11360:11499" ph="..." />
+                <marker date="1499629678394" expanded="true" signature="11662:11817" ph="..." />
+                <marker date="1499629678394" expanded="true" signature="11892:12143" ph="..." />
+                <marker date="1499629678394" expanded="true" signature="12052:12143" ph="..." />
+                <marker date="1499629678394" expanded="true" signature="12218:12348" ph="..." />
+                <marker date="1499629678394" expanded="true" signature="12396:12440" ph="..." />
+                <marker date="1499629678394" expanded="true" signature="12514:12644" ph="..." />
+                <marker date="1499629678394" expanded="true" signature="12692:12736" ph="..." />
+                <marker date="1499629678394" expanded="true" signature="12767:12903" ph="..." />
+                <marker date="1499629678394" expanded="true" signature="12926:13270" ph="..." />
+                <marker date="1499629678394" expanded="true" signature="12939:13047" ph="..." />
+                <marker date="1499629678394" expanded="true" signature="13177:13270" ph="..." />
+                <marker date="1499629678394" expanded="true" signature="13302:13341" ph="..." />
+                <marker date="1499629678394" expanded="true" signature="13371:13416" ph="..." />
+                <marker date="1499629678394" expanded="true" signature="13447:13658" ph="..." />
+                <marker date="1499629678394" expanded="true" signature="13699:14234" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -100,9 +126,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>cb_url</find>
-      <find>credential</find>
-      <find>Company</find>
       <find>waitForPresenceCondition</find>
       <find>Company:</find>
       <find>is404</find>
@@ -124,12 +147,15 @@
       <find>removeLinkedinURLLanguage</find>
       <find>processURL</find>
       <find>recursive</find>
-      <find>scrollDown</find>
       <find>scroll</find>
       <find>scrape</find>
       <find>seeMoreIn</find>
       <find>getBrowserURL</find>
       <find>waitForInvisibility</find>
+      <find>getBro</find>
+      <find>source</find>
+      <find>scrollDown</find>
+      <find>scr</find>
     </findStrings>
     <replaceStrings>
       <replace>soup</replace>
@@ -167,9 +193,9 @@
         <option value="$PROJECT_DIR$/cbscraper/CompanyScraper.py" />
         <option value="$PROJECT_DIR$/cbscraper/GenericScraper.py" />
         <option value="$PROJECT_DIR$/cbscraper/person.py" />
-        <option value="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py" />
         <option value="$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py" />
         <option value="$PROJECT_DIR$/../linkedin_scraper/src/main_in.py" />
+        <option value="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py" />
       </list>
     </option>
   </component>
@@ -203,6 +229,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="Scope">
         <subPane subId="Project Files">
           <PATH>
@@ -249,7 +276,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -506,13 +532,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1498207171857</updated>
-    </task>
-    <task id="LOCAL-00010" summary="improvements">
-      <created>1498921511292</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1498921511292</updated>
     </task>
     <task id="LOCAL-00011" summary="improvements">
       <created>1498995440240</created>
@@ -850,7 +869,14 @@
       <option name="project" value="LOCAL" />
       <updated>1499595176098</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="improvements">
+      <created>1499611659110</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1499611659110</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TodoView">
@@ -870,9 +896,9 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3091733" sideWeight="0.5021482" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32842582" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3091733" sideWeight="0.49785176" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3091733" sideWeight="0.49785176" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2604726" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.264232" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297414" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2419181" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1165,17 +1191,17 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="1" column="29" lean-forward="true" selection-start-line="1" selection-start-column="29" selection-end-line="1" selection-end-column="29" />
-        </state>
-      </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="273">
             <caret line="13" column="57" lean-forward="false" selection-start-line="13" selection-start-column="57" selection-end-line="13" selection-end-column="57" />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="1" column="29" lean-forward="true" selection-start-line="1" selection-start-column="29" selection-end-line="1" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -1226,7 +1252,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1575">
           <caret line="75" column="0" lean-forward="false" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1255,7 +1280,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="351">
           <caret line="195" column="0" lean-forward="false" selection-start-line="195" selection-start-column="0" selection-end-line="195" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1267,27 +1291,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cbscraper/GenericScraper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-378">
-          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="15" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-113">
-          <caret line="317" column="33" lean-forward="false" selection-start-line="317" selection-start-column="33" selection-end-line="317" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
+        <state relative-caret-position="693">
           <caret line="154" column="0" lean-forward="false" selection-start-line="154" selection-start-column="0" selection-end-line="154" selection-end-column="0" />
           <folding>
             <element signature="e#229#265#0" expanded="false" />
@@ -1311,7 +1317,51 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
           <caret line="12" column="12" lean-forward="false" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
-          <folding />
+          <folding>
+            <marker date="1499667661153" expanded="true" signature="1961:2136" ph="..." />
+            <marker date="1499667661153" expanded="true" signature="2469:2571" ph="..." />
+            <marker date="1499667661153" expanded="true" signature="3701:3851" ph="..." />
+            <marker date="1499667661153" expanded="true" signature="3928:4183" ph="..." />
+            <marker date="1499667661153" expanded="true" signature="4201:4305" ph="..." />
+            <marker date="1499667661153" expanded="true" signature="4410:4482" ph="..." />
+            <marker date="1499667661153" expanded="true" signature="4631:4891" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cbscraper/GenericScraper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7980">
+          <caret line="404" column="0" lean-forward="false" selection-start-line="404" selection-start-column="0" selection-end-line="405" selection-end-column="77" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <marker date="1499629678394" expanded="true" signature="11360:11499" ph="..." />
+            <marker date="1499629678394" expanded="true" signature="11662:11817" ph="..." />
+            <marker date="1499629678394" expanded="true" signature="11892:12143" ph="..." />
+            <marker date="1499629678394" expanded="true" signature="12052:12143" ph="..." />
+            <marker date="1499629678394" expanded="true" signature="12218:12348" ph="..." />
+            <marker date="1499629678394" expanded="true" signature="12396:12440" ph="..." />
+            <marker date="1499629678394" expanded="true" signature="12514:12644" ph="..." />
+            <marker date="1499629678394" expanded="true" signature="12692:12736" ph="..." />
+            <marker date="1499629678394" expanded="true" signature="12767:12903" ph="..." />
+            <marker date="1499629678394" expanded="true" signature="12926:13270" ph="..." />
+            <marker date="1499629678394" expanded="true" signature="12939:13047" ph="..." />
+            <marker date="1499629678394" expanded="true" signature="13177:13270" ph="..." />
+            <marker date="1499629678394" expanded="true" signature="13302:13341" ph="..." />
+            <marker date="1499629678394" expanded="true" signature="13371:13416" ph="..." />
+            <marker date="1499629678394" expanded="true" signature="13447:13658" ph="..." />
+            <marker date="1499629678394" expanded="true" signature="13699:14234" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="624">
+          <caret line="228" column="24" lean-forward="false" selection-start-line="228" selection-start-column="24" selection-end-line="228" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

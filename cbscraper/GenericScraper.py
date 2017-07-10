@@ -15,6 +15,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.remote.remote_connection import LOGGER
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+
+from fake_useragent import UserAgent
+ua = UserAgent()
 
 # Non modifiable globals
 _browser = None
@@ -140,7 +144,7 @@ class GenericScraper(metaclass=ABCMeta):
             self.randSleep(self.get_error_sleep_min, self.get_error_sleep_max)
             return self.openURL(url)
         else:
-            logging.debug("browser.get(" + url + ") returned without exceptions")
+            logging.debug("browser.get('" + url + "') returned without exceptions")
 
     # Write HTML to file
     def writeHTMLFile(self, html, endpoint):
@@ -279,7 +283,7 @@ class GenericScraper(metaclass=ABCMeta):
         global _browser
         if _browser is None:
             # Use selenium
-            logging.info("Creating Selenium webdriver")
+            logging.info("Creating Selenium webdriver using "+str(self.browser_type))
 
             #Firefox
             if self.browser_type == EBrowser.FIREFOX:
@@ -295,7 +299,11 @@ class GenericScraper(metaclass=ABCMeta):
 
             #PHANTOM JS
             elif self.browser_type == EBrowser.PHANTOMJS:
-                _browser = webdriver.PhantomJS(self.phantomjs_path)
+                dcap = dict(DesiredCapabilities.PHANTOMJS)
+                useragent = ua.random
+                dcap["phantomjs.page.settings.userAgent"] = useragent
+                logging.info("Useragent='"+useragent+"'")
+                _browser = webdriver.PhantomJS(executable_path=self.phantomjs_path, desired_capabilities=dcap)
                 self.sleep(3)
                 _browser.set_window_size(1920, 1080)
                 self.sleep(3)
