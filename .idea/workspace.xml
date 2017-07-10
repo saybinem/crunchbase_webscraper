@@ -4,11 +4,11 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8ffd353f-9675-4efa-a6a6-3ad054850fe0" name="Default" comment="">
+    <list default="true" id="8ffd353f-9675-4efa-a6a6-3ad054850fe0" name="Default" comment="improvements">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cbscraper/GenericScraper.py" afterPath="$PROJECT_DIR$/cbscraper/GenericScraper.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/.gitignore" afterPath="$PROJECT_DIR$/../linkedin_scraper/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/src/main_in.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/main_in.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -51,11 +51,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LinkedinScraper.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="LinkedinScraper.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="624">
-              <caret line="228" column="24" lean-forward="false" selection-start-line="228" selection-start-column="24" selection-end-line="228" selection-end-column="24" />
+            <state relative-caret-position="635">
+              <caret line="364" column="19" lean-forward="false" selection-start-line="364" selection-start-column="19" selection-end-line="364" selection-end-column="19" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -87,30 +87,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GenericScraper.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GenericScraper.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/cbscraper/GenericScraper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7980">
-              <caret line="404" column="0" lean-forward="false" selection-start-line="404" selection-start-column="0" selection-end-line="405" selection-end-column="77" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-                <marker date="1499629678394" expanded="true" signature="11360:11499" ph="..." />
-                <marker date="1499629678394" expanded="true" signature="11662:11817" ph="..." />
-                <marker date="1499629678394" expanded="true" signature="11892:12143" ph="..." />
-                <marker date="1499629678394" expanded="true" signature="12052:12143" ph="..." />
-                <marker date="1499629678394" expanded="true" signature="12218:12348" ph="..." />
-                <marker date="1499629678394" expanded="true" signature="12396:12440" ph="..." />
-                <marker date="1499629678394" expanded="true" signature="12514:12644" ph="..." />
-                <marker date="1499629678394" expanded="true" signature="12692:12736" ph="..." />
-                <marker date="1499629678394" expanded="true" signature="12767:12903" ph="..." />
-                <marker date="1499629678394" expanded="true" signature="12926:13270" ph="..." />
-                <marker date="1499629678394" expanded="true" signature="12939:13047" ph="..." />
-                <marker date="1499629678394" expanded="true" signature="13177:13270" ph="..." />
-                <marker date="1499629678394" expanded="true" signature="13302:13341" ph="..." />
-                <marker date="1499629678394" expanded="true" signature="13371:13416" ph="..." />
-                <marker date="1499629678394" expanded="true" signature="13447:13658" ph="..." />
-                <marker date="1499629678394" expanded="true" signature="13699:14234" ph="..." />
-              </folding>
+            <state relative-caret-position="462">
+              <caret line="405" column="77" lean-forward="false" selection-start-line="405" selection-start-column="77" selection-end-line="405" selection-end-column="77" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -126,7 +108,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>waitForPresenceCondition</find>
       <find>Company:</find>
       <find>is404</find>
       <find>visibility</find>
@@ -156,6 +137,7 @@
       <find>source</find>
       <find>scrollDown</find>
       <find>scr</find>
+      <find>stalled</find>
     </findStrings>
     <replaceStrings>
       <replace>soup</replace>
@@ -172,7 +154,7 @@
     </replaceStrings>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../linkedin_scraper" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -191,11 +173,11 @@
         <option value="$PROJECT_DIR$/main_cb.py" />
         <option value="$PROJECT_DIR$/cbscraper/PersonScraper.py" />
         <option value="$PROJECT_DIR$/cbscraper/CompanyScraper.py" />
-        <option value="$PROJECT_DIR$/cbscraper/GenericScraper.py" />
         <option value="$PROJECT_DIR$/cbscraper/person.py" />
         <option value="$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py" />
         <option value="$PROJECT_DIR$/../linkedin_scraper/src/main_in.py" />
         <option value="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py" />
+        <option value="$PROJECT_DIR$/cbscraper/GenericScraper.py" />
       </list>
     </option>
   </component>
@@ -533,13 +515,6 @@
       <option name="presentableId" value="Default" />
       <updated>1498207171857</updated>
     </task>
-    <task id="LOCAL-00011" summary="improvements">
-      <created>1498995440240</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1498995440240</updated>
-    </task>
     <task id="LOCAL-00012" summary="improvements">
       <created>1498997565925</created>
       <option name="number" value="00012" />
@@ -876,7 +851,14 @@
       <option name="project" value="LOCAL" />
       <updated>1499611659110</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="improvements">
+      <created>1499669365293</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1499669365293</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1329,39 +1311,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cbscraper/GenericScraper.py">
+    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7980">
-          <caret line="404" column="0" lean-forward="false" selection-start-line="404" selection-start-column="0" selection-end-line="405" selection-end-column="77" />
+        <state relative-caret-position="635">
+          <caret line="364" column="19" lean-forward="false" selection-start-line="364" selection-start-column="19" selection-end-line="364" selection-end-column="19" />
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
-            <marker date="1499629678394" expanded="true" signature="11360:11499" ph="..." />
-            <marker date="1499629678394" expanded="true" signature="11662:11817" ph="..." />
-            <marker date="1499629678394" expanded="true" signature="11892:12143" ph="..." />
-            <marker date="1499629678394" expanded="true" signature="12052:12143" ph="..." />
-            <marker date="1499629678394" expanded="true" signature="12218:12348" ph="..." />
-            <marker date="1499629678394" expanded="true" signature="12396:12440" ph="..." />
-            <marker date="1499629678394" expanded="true" signature="12514:12644" ph="..." />
-            <marker date="1499629678394" expanded="true" signature="12692:12736" ph="..." />
-            <marker date="1499629678394" expanded="true" signature="12767:12903" ph="..." />
-            <marker date="1499629678394" expanded="true" signature="12926:13270" ph="..." />
-            <marker date="1499629678394" expanded="true" signature="12939:13047" ph="..." />
-            <marker date="1499629678394" expanded="true" signature="13177:13270" ph="..." />
-            <marker date="1499629678394" expanded="true" signature="13302:13341" ph="..." />
-            <marker date="1499629678394" expanded="true" signature="13371:13416" ph="..." />
-            <marker date="1499629678394" expanded="true" signature="13447:13658" ph="..." />
-            <marker date="1499629678394" expanded="true" signature="13699:14234" ph="..." />
+            <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py">
+    <entry file="file://$PROJECT_DIR$/cbscraper/GenericScraper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="624">
-          <caret line="228" column="24" lean-forward="false" selection-start-line="228" selection-start-column="24" selection-end-line="228" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="462">
+          <caret line="405" column="77" lean-forward="false" selection-start-line="405" selection-start-column="77" selection-end-line="405" selection-end-column="77" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -403,4 +403,19 @@ class GenericScraper(metaclass=ABCMeta):
             pass
 
     def scrollDown(self, value):
-        self.getBrowser().execute_script("window.scrollBy(0,"+str(value)+")")
+        self.getBrowser().execute_script("window.scrollBy(0," + str(value) + ")")
+
+    # Scroll down the page
+    def scrollDownAllTheWay(self):
+        old_page = self.getBrowserPageSource()
+        while True:
+            logging.debug("Scrolling loop")
+            for i in range(2):
+                self.scrollDown(500)
+                self.sleep(2)
+            new_page = self.getBrowserPageSource()
+            if new_page != old_page:
+                old_page = new_page
+            else:
+                break
+        return True
