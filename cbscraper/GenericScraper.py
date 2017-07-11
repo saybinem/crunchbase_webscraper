@@ -139,8 +139,8 @@ class GenericScraper(metaclass=ABCMeta):
             self.getBrowser().get(url)
         except TimeoutException:
             logging.warning("Timeout exception during page load. Moving on.")
-        except:
-            logging.error("Unexpected exception during page load. Retrying")
+        except Exception as e:
+            logging.error("Unexpected exception during page load. "+str(e))
             self.randSleep(self.get_error_sleep_min, self.get_error_sleep_max)
             return self.openURL(url)
         else:
