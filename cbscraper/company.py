@@ -177,18 +177,22 @@ def scrapeOrgOverview(soup):
         # Status
         dt_status = soup.find('dt', string='Status')
         if dt_status is not None:
-            overview['stats']['status'] = {}
             dd_status = dt_status.find_next_sibling('dd')
-            #DEBUG
-            #logging.info("dd_status='"+str(dd_status)+"'")
-            a1 = dd_status.a
-            if a1 is not None:
-                overview['stats']['status']['fate'] = a1.string
-                a2 = a1.find_next_sibling('a')
-                overview['stats']['status']['by'] = a2.string
-                overview['stats']['status']['date'] = dd_status.find('span', string='on').next_sibling.string
-            else:
-                overview['stats']['status']['fate'] = dd_status.string
+            overview['stats']['status'] = dd_status.string
+
+            # overview['stats']['status'] = {}
+            
+            # DEBUG
+            # logging.info("dd_status='"+str(dd_status)+"'")
+            # a1 = dd_status.a
+
+            # if a1 is not None:
+            #     overview['stats']['status']['fate'] = a1.string
+            #     a2 = a1.find_next_sibling('a')
+            #     overview['stats']['status']['by'] = a2.string
+            #     overview['stats']['status']['date'] = dd_status.find('span', string='on').next_sibling.string
+            # else:
+            #     overview['stats']['status']['fate'] = dd_status.string
 
         # Total Equity Funding
         overview['stats']['tef'] = {}

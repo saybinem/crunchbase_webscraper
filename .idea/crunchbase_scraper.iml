@@ -9,6 +9,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="linkedin_scraper" />
     <orderEntry type="module" module-name="linkedin2excel" />
+    <orderEntry type="module" module-name="company_table" />
   </component>
   <component name="TestRunnerService">
     <option name="projectConfiguration" value="Nosetests" />

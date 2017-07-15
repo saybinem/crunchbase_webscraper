@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../company_table/.idea/company_table.iml" filepath="$PROJECT_DIR$/../company_table/.idea/company_table.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/crunchbase_scraper.iml" filepath="$PROJECT_DIR$/.idea/crunchbase_scraper.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../linkedin2excel/.idea/linkedin2excel.iml" filepath="$PROJECT_DIR$/../linkedin2excel/.idea/linkedin2excel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../person_table/.idea/linkedin2excel.iml" filepath="$PROJECT_DIR$/../person_table/.idea/linkedin2excel.iml" />
       <module fileurl="file://$PROJECT_DIR$/../linkedin_scraper/.idea/linkedin_scraper.iml" filepath="$PROJECT_DIR$/../linkedin_scraper/.idea/linkedin_scraper.iml" />
     </modules>
   </component>

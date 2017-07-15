@@ -55,7 +55,7 @@ class CrunchbaseScraper(cbscraper.GenericScraper.GenericScraper):
             return True
         return False
 
-    def detectedAsRobot(self):
+    def detectedAsRobot(self, filecont):
         logging.info("We were detected as robots. Refreshing the page")
         self.browserRefresh()
         self.randSleep(10, 15)
@@ -74,4 +74,4 @@ class CrunchbaseScraper(cbscraper.GenericScraper.GenericScraper):
         if not detected:
             logging.info("Detection escaped")
             return True
-        return self.detectedAsRobot()
+        return self.detectedAsRobot(filecont)
