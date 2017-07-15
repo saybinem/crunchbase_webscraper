@@ -67,7 +67,7 @@ class GenericScraper(metaclass=ABCMeta):
     max_requests_per_browser_instance = 10000
     browser_user_profile = True
     firefox_profile_path = r"C:\Users\raffa\AppData\Roaming\Mozilla\Firefox\Profiles\4ai6x5sv.default"
-    browser_type = EBrowser.PHANTOMJS
+    browser_type = EBrowser.FIREFOX
     phantomjs_path = r"C:\data\programmi\phantomjs-2.1.1-windows\bin\phantomjs.exe"
 
     # internal variables

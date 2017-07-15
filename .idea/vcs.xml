@@ -2,6 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../linkedin2excel" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../gen_person_table" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../linkedin_scraper" vcs="Git" />
   </component>
 </project>

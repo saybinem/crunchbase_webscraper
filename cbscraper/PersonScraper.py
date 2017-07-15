@@ -111,7 +111,7 @@ class PersonScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
         # Process endpoints other than the entity one
         for endpoint in self.link_map.keys():
             if self.isMore(PersonEndPoint.ENTITY, endpoint):
-                logging.info("More of " + str(endpoint) + " found")
+                logging.debug("More of " + str(endpoint) + " found")
                 html = self.getHTMLFile(endpoint)
                 if not html:
                     self.goToEntityPage()

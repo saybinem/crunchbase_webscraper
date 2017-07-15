@@ -8,7 +8,6 @@ from selenium.common.exceptions import NoSuchElementException
 
 class CrunchbaseScraper(cbscraper.GenericScraper.GenericScraper):
 
-    browser_type = EBrowser.PHANTOMJS
     is_firefox_user_profile = True
     screenshot_folder = ''    
     

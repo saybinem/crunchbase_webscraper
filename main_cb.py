@@ -3,6 +3,8 @@ import logging, logging.handlers
 import time
 import cbscraper.company
 import cbscraper.person
+from multiprocessing import Pool
+import pandas
 
 #GLOBALS
 rescrape = True
@@ -22,48 +24,11 @@ def buildDirs():
     os.makedirs("./data/company/screenshots", exist_ok=True)
 
 
-# Give a company, scrape current people, past people and advisors
-# company_data = a dict returned by cbscraper.company.scrapeOrganization()
-# key = the dictionary key that contains the list of lists of company persons
-def scrapePersons(company_data, key, company_percent):
-    company_cb_id = company_data['company_id_cb']
-    company_vico_id = company_data['company_id_vico']
-    p_list = company_data[key]
-
-    if not p_list:
-        logging.warning("List "+key+" is empty for "+company_cb_id)
-
-    for p in p_list:
-        person_id = cbscraper.person.getPersonIdFromLink(p[1])
-        person_data = {
-            "company_percent" : company_percent,
-            "id": person_id,
-            "json": "./data/person/json/" + person_id + ".json",
-            "rescrape": rescrape,
-            'company_id_cb': company_cb_id,
-            'company_id_vico': company_vico_id,
-            'type': key  # allow to distinguish among "team", "advisors" and "past_people"
-        }
-        cbscraper.person.scrapePerson(person_data)
-
 # MAIN
 def main():
     buildDirs()
 
-    #DEBUG
-    if False:
-        org_data = {
-            "cb_id": "facebook",
-            "vico_id": "NONEXIST",
-            "json": "./data/company/json/facebook.json",
-            "rescrape": True,
-        }
-        company_data = cbscraper.company.scrapeOrganization(org_data)
-        exit()
-
     # Scrape company
-
-    import pandas
 
     frame = pandas.read_excel(excel_file, index_col=None, header=0, sheetname=excel_sheet)
 
@@ -74,14 +39,19 @@ def main():
     counter = 1  # keep count of the current firm
     ids_len = frame.shape[0] #get row number
 
+    #DEBUG
+    #frame=pandas.DataFrame({excel_col_cb:['feedvisor'],excel_col_vico:['NONE']})
+
+    jobs_list = list()
+
+    # Build job list
+    logging.info("Build job list")
     for index, row in frame.iterrows():
 
         company_vico_id = row[excel_col_vico]
         company_cb_id = row[excel_col_cb].replace("/organization/","")
 
-        company_percent = round((counter / ids_len) * 100, 2)
-        msg = "Company: " + company_cb_id + " (" + str(counter) + "/" + str(ids_len) + " - " + str(company_percent) + "%)"
-        logging.info(msg)
+        completion_perc = round((counter / ids_len) * 100, 2)
 
         counter += 1
 
@@ -90,26 +60,18 @@ def main():
             "vico_id": company_vico_id,
             "json": "./data/company/json/" + company_cb_id + ".json",
             "rescrape": rescrape,
-            "go_on" : go_on
+            "go_on" : go_on,
+            "completion_perc" : completion_perc
         }
 
-        company_data = cbscraper.company.scrapeOrganization(org_data)
+        jobs_list.append(org_data)
 
-        # Scrape persons of the company
-
-        if (company_data is not False):
-        
-            logging.debug("Scraping persons")
-            scrapePersons(company_data, 'people', company_percent)
-
-            logging.debug("Scraping advisors")
-            scrapePersons(company_data, 'advisors', company_percent)
-
-            logging.debug("Scraping past_people")
-            scrapePersons(company_data, 'past_people', company_percent)
-            
-        else:
-            logging.error("scrapeOrganization() returned False. This means there is no company_data")
+    # Run job list
+    logging.info("Running job list")
+    #with Pool(1) as p:
+    #    p.map(cbscraper.company.scrapeOrgAndPeople, jobs_list)
+    for job in jobs_list:
+        cbscraper.company.scrapeOrgAndPeople(job)
 
     logging.info("ENDED!")
 

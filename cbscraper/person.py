@@ -4,6 +4,7 @@ import re
 
 import cbscraper.DateInterval
 import cbscraper.PersonScraper
+import cbscraper.GenericScraper
 
 def getPersonIdFromLink(link):
     return link.split("/")[2]
@@ -204,13 +205,12 @@ def scrapePerson(data):
     type = data['type']
     company_cb_id = data['company_id_cb']
     company_vico_id = data['company_id_vico']
-    company_percent = data['company_percent']
 
     if (os.path.isfile(json_file) and not rescrape):
         logging.info("Person \"" + person_id + "\" already scraped")
         return True
 
-    logging.info("Scraping person: '" + person_id + "' of company '"+company_cb_id+"' ("+str(company_percent)+"% completed)")
+    logging.debug("Scraping person: '" + person_id + "' of company '"+company_cb_id+"'")
 
     # Get the soup
     person = cbscraper.PersonScraper.PersonScraper(person_id)

@@ -59,7 +59,7 @@ class CompanyScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
 
     # Scrape an organization
     def scrape(self):
-        logging.info("Start scraping " + self.id)
+        logging.debug("Start scraping " + self.id)
         self.entity_page = False
         self.prev_page_is_entity = False
 
@@ -84,7 +84,7 @@ class CompanyScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
                     entity_html = self.getBrowserPageSource(endpoint)
                     self.saveScreenshot(os.path.join(self.screenshot_folder, self.id + ".png"))
             else:
-                logging.info("Content retrieved from HTML file")
+                logging.debug("Content retrieved from HTML file")
 
         # Make the soup
         self.setEndpointHTML(OrgEndPoint.ENTITY, entity_html)
@@ -94,7 +94,7 @@ class CompanyScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
         # Process endpoints other than the entity one
         for endpoint in self.link_map.keys():
             if self.isMore(OrgEndPoint.ENTITY, endpoint):
-                logging.info("More of " + str(endpoint) + " found")
+                logging.debug("More of " + str(endpoint) + " found")
                 html = self.getHTMLFile(endpoint)
                 if not html:
                     self.goToEntityPage()
