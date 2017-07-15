@@ -8,6 +8,7 @@
     <orderEntry type="jdk" jdkName="Python 3.5.2 (C:\IntelPython35\python.exe)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="linkedin_scraper" />
+    <orderEntry type="module" module-name="linkedin2excel" />
   </component>
   <component name="TestRunnerService">
     <option name="projectConfiguration" value="Nosetests" />

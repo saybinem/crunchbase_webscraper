@@ -416,3 +416,6 @@ class GenericScraper(metaclass=ABCMeta):
             else:
                 break
         return True
+        
+    def jsClick(self, element):
+        self.getBrowser().execute_script("arguments[0].click();", element)
