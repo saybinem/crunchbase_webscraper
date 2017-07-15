@@ -4,7 +4,6 @@ import re
 
 import cbscraper.DateInterval
 import cbscraper.PersonScraper
-import cbscraper.common
 
 def getPersonIdFromLink(link):
     return link.split("/")[2]
@@ -252,7 +251,7 @@ def scrapePerson(data):
     }
 
     # Save to JSON file
-    cbscraper.common.saveDictToJsonFile(person_data, json_file)
+    cbscraper.GenericScraper.saveDictToJsonFile(person_data, json_file)
 
     # Return
     return person_data

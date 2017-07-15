@@ -1,6 +1,7 @@
 import logging
 from abc import abstractmethod
 
+from cbscraper.GenericScraper import EBrowser
 import cbscraper.GenericScraper
 from selenium.common.exceptions import NoSuchElementException
 

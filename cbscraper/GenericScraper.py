@@ -107,7 +107,7 @@ class GenericScraper(metaclass=ABCMeta):
         self.endpoint_soup = dict()
         self.id = id
         LOGGER.setLevel(logging.WARNING)
-        self.getBrowser()
+        #self.getBrowser()
 
     def saveScreenshot(self, filename):
         logging.info("Saving current page screenshot in '"+filename+"'")

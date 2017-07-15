@@ -1,12 +1,12 @@
 import os
 import logging, logging.handlers
 import time
-import cbscraper.common
 import cbscraper.company
 import cbscraper.person
 
 #GLOBALS
-rescrape = False
+rescrape = True
+go_on = False #scrape unscraped companies
 excel_file = r"C:\data\tesi\VICO\ID Crunchbase_ID VICO.xlsx"
 excel_sheet = 'Firm'
 excel_col_cb = 'CB'
@@ -90,6 +90,7 @@ def main():
             "vico_id": company_vico_id,
             "json": "./data/company/json/" + company_cb_id + ".json",
             "rescrape": rescrape,
+            "go_on" : go_on
         }
 
         company_data = cbscraper.company.scrapeOrganization(org_data)

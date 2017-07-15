@@ -2,8 +2,8 @@ import json
 import logging
 import os
 
-import cbscraper.common
 import cbscraper.CompanyScraper
+import cbscraper.GenericScraper
 from cbscraper.CompanyScraper import OrgEndPoint
 
 # Scrape organization advisors
@@ -18,9 +18,9 @@ def scrapeOrgAdvisors(soup_advisors):
             primary_role = info_block.h5.text  # the primary role of this person (may not be related to the company at hand)
             role_in_bod = info_block.h6.text  # his role in our company's BoD
 
-            name = cbscraper.common.myTextStrip(name)
-            primary_role = cbscraper.common.myTextStrip(primary_role)
-            role_in_bod = cbscraper.common.myTextStrip(role_in_bod)
+            name = cbscraper.GenericScraper.myTextStrip(name)
+            primary_role = cbscraper.GenericScraper.myTextStrip(primary_role)
+            role_in_bod = cbscraper.GenericScraper.myTextStrip(role_in_bod)
 
             advisors.append([name, link, role_in_bod, primary_role])
 
@@ -38,8 +38,8 @@ def scrapeOrgCurrentPeople(soup_people):
             link = a.get('href')
             role = info_block.find('h5').text
 
-            name = cbscraper.common.myTextStrip(name)
-            role = cbscraper.common.myTextStrip(role)
+            name = cbscraper.GenericScraper.myTextStrip(name)
+            role = cbscraper.GenericScraper.myTextStrip(role)
 
             people.append([name, link, role])
 
@@ -63,8 +63,8 @@ def scrapeOrgPastPeople(soup_past_people):
             if h5_tag is not None:
                 role = h5_tag.text
             #Normalize and append
-            name = cbscraper.common.myTextStrip(name)
-            role = cbscraper.common.myTextStrip(role)
+            name = cbscraper.GenericScraper.myTextStrip(name)
+            role = cbscraper.GenericScraper.myTextStrip(role)
             people.append([name, link, role])
     return people
 
@@ -141,16 +141,87 @@ def scrapeOrgOverview(soup):
     # Social
     tag = soup.find('dd', class_="social-links")
     if tag is not None:
-
         overview['social'] = {}
-
         twitter = tag.find('a', class_="twitter")
         if twitter is not None:
             overview['social']['twitter'] = twitter.get('href')
-
         linkedin = tag.find('a', class_="linkedin")
         if linkedin is not None:
             overview['social']['linkedin'] = linkedin.get('href')
+
+    # Statistics
+    t_overview_stats = soup.find('div', class_="overview-stats")
+    if t_overview_stats is not None:
+
+        overview['stats'] = {}
+
+        #Acquisitions (https://www.crunchbase.com/organization/onxeo#/entity)
+        dt_acq = soup.find('dt', string='Acquisitions')
+        if dt_acq is not None:
+            overview['stats']['acquisitions'] = {}
+            dd_acq = dt_acq.find_next_sibling('dd')
+            overview['stats']['acquisitions']['num'] = dd_acq.string
+
+        #IPO (https://www.crunchbase.com/organization/onxeo#/entity)
+        dt_ipo = soup.find('dt', string='IPO / Stock')
+        if dt_ipo is not None:
+            overview['stats']['ipo'] = {}
+            dd_ipo = dt_ipo.find_next_sibling('dd')
+            a1 = dd_ipo.a
+            overview['stats']['ipo']['fate'] = a1.string
+            overview['stats']['ipo']['fate_link'] = a1.get('href')
+            overview['stats']['ipo']['date'] = str(a1.next_sibling)
+            a2 = a1.find_next_sibling('a')
+            overview['stats']['ipo']['ticker'] = a2.string
+
+        # Status
+        dt_status = soup.find('dt', string='Status')
+        if dt_status is not None:
+            overview['stats']['status'] = {}
+            dd_status = dt_status.find_next_sibling('dd')
+            #DEBUG
+            #logging.info("dd_status='"+str(dd_status)+"'")
+            a1 = dd_status.a
+            if a1 is not None:
+                overview['stats']['status']['fate'] = a1.string
+                a2 = a1.find_next_sibling('a')
+                overview['stats']['status']['by'] = a2.string
+                overview['stats']['status']['date'] = dd_status.find('span', string='on').next_sibling.string
+            else:
+                overview['stats']['status']['fate'] = dd_status.string
+
+        # Total Equity Funding
+        overview['stats']['tef'] = {}
+        dt_total_equity_funding = soup.find('dt',string='Total Equity Funding')
+        if dt_total_equity_funding is not None:
+            #DEBUG
+            #logging.info("Found: "+str(dt_total_equity_funding))
+            dd_total_equity_funding = dt_total_equity_funding.find_next_sibling('dd')
+
+            founding_amount = dd_total_equity_funding.find('span', class_="funding_amount")
+            if founding_amount is not None:
+                overview['stats']['tef']['funding_amount'] = founding_amount.text
+
+            founding_rounds = dd_total_equity_funding.find('span', class_="funding_rounds")
+            if founding_rounds is not None:
+                overview['stats']['tef']['funding_rounds'] = founding_rounds.text
+
+            overview['stats']['tef']['funding_investors'] = dd_total_equity_funding.a.text
+
+        # Most Recent Funding
+        dt_most_recent_funding = soup.find('dt', string='Most Recent Funding')
+        if dt_most_recent_funding is not None:
+            overview['stats']['mrf'] = {}
+
+            dd_most_recent_funding = dt_most_recent_funding.find_next_sibling('dd')
+
+            funding_type = dd_most_recent_funding.find('span', class_='funding-type')
+            if funding_type is not None:
+                overview['stats']['mrf']['funding_type_text'] = funding_type.a.text
+                overview['stats']['mrf']['funding_type_link'] = funding_type.a.get('href')
+
+            # The right hand side is a NavigableString
+            overview['stats']['mrf']['date'] = str( dd_most_recent_funding.find('span', class_='connecting').next_sibling )
 
     return overview
 
@@ -159,21 +230,32 @@ def scrapeOrganization(org_data):
     # Get variables
     json_file = org_data['json']
     rescrape = org_data['rescrape']
+    go_on = org_data['go_on']
     company_vico_id = org_data['vico_id']
     company_cb_id = org_data['cb_id']
 
     # Check if we have a JSON file and if rescrape is False. In this case use the JSON file we already have
-    if (os.path.isfile(json_file) and not rescrape):
-        logging.warning("Organization already scraped. Returning JSON file")
-        with open(json_file, 'r') as fileh:
-            org_data = json.load(fileh)
-        return org_data
-    else:
-        #logging.debug("Scraping company " + company_cb_id)
-        pass
+    if os.path.isfile(json_file) :
+        if not rescrape:
+            logging.warning("Organization already scraped. Returning JSON file")
+            with open(json_file, 'r') as fileh:
+                org_data = json.load(fileh)
+            return org_data
+        else:
+            os.unlink(json_file)
 
     # Scrape organization
     org = cbscraper.CompanyScraper.CompanyScraper(company_cb_id)
+    htmlfile = org.genHTMLFilePath(OrgEndPoint.ENTITY)
+
+    # Check if HTML file already exist
+    if not os.path.isfile(htmlfile) and not go_on:
+        #HTML file does not exists and we are not scrapign new companies
+        if not go_on:
+            logging.info("NOT RESCRAPING NEW COMPANIES")
+            return False
+
+    #Scrape the company
     if not org.scrape():
         logging.info("scrape() returned false. Returning false")
         return False
@@ -203,6 +285,6 @@ def scrapeOrganization(org_data):
     }
 
     # Write to file
-    cbscraper.common.saveDictToJsonFile(company_data, json_file)
+    cbscraper.GenericScraper.saveDictToJsonFile(company_data, json_file)
 
     return company_data
