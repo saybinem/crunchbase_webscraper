@@ -15,7 +15,7 @@ month_dict = {
     "nov":11,
     "dic":12,
 
-    #ENG
+    #ENG (partial)
     "jan":1,
     "feb":2,
     "mar":3,
@@ -28,13 +28,26 @@ month_dict = {
     "oct":10,
     "nov":11,
     "dec":12,
+
+}
+
+month_sub = {
+    # ENG (full)
+    "january": "jan",
+    "february": "feb",
+    "march": "mar",
+    "april": "apr",
+    "may": "may",
+    "june": "jun",
+    "july": "jul",
+    "august": "aug",
+    "september": "sep",
+    "october": "oct",
+    "november": "nov",
+    "december": "dec",
 }
 
 def processDate(date):
-    # exp_0 andrew whiting -> Jul 26, 2015
-    # Nick Verkroost exp_2_start -> Sep, 2013
-    # AU45
-
     # print("ORIGINAL_DATE: "+date+" => ",end='')
 
     date = date.lower()
@@ -42,6 +55,11 @@ def processDate(date):
     # Get the first 3 letters
     first3 = date[0:3].lower()
 
+    # Replace month full name with short name (e.g. september -> sep)
+    for key, value in month_sub.items():
+        date = date.replace(key, value)
+
+    # Use first 3 letters
     if first3 in month_dict:
 
         if date[3] == " " and date[4].isnumeric() and "," not in date:
@@ -93,7 +111,7 @@ def processDate(date):
         # print("year="+str(year)+" month="+str(month)+" day="+str(day))
         return datetime.date(year, month, day)
 
-    return new_date
+
 
 # class DateInterval
 class DateInterval(object):
