@@ -68,10 +68,12 @@ def main():
 
     # Run job list
     logging.info("Running job list")
-    #with Pool(1) as p:
-    #    p.map(cbscraper.company.scrapeOrgAndPeople, jobs_list)
-    for job in jobs_list:
-        cbscraper.company.scrapeOrgAndPeople(job)
+
+    with Pool(10) as p:
+        p.map(cbscraper.company.scrapeOrgAndPeople, jobs_list)
+
+    #for job in jobs_list:
+    #    cbscraper.company.scrapeOrgAndPeople(job)
 
     logging.info("ENDED!")
 

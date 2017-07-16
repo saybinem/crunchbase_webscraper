@@ -84,6 +84,11 @@ def scrapeOrgDetails(soup):
         if tag is not None:
             company_details['founded'] = tag.find_next('dd').text
 
+        # Closed
+        tag = company_details_tag.find('dt', string='Closed:')
+        if tag is not None:
+            company_details['closed'] = tag.find_next('dd').text
+
         # Email
         tag = company_details_tag.find('span', class_='email')
         if tag is not None:
@@ -99,9 +104,12 @@ def scrapeOrgDetails(soup):
         if tag is not None:
             emp_str = tag.find_next('dd').text
             emp_arr = emp_str.split("|")
-            company_details['employees_num'] = emp_arr[0].strip()
             if len(emp_arr) > 1:
+                company_details['employees_num'] = emp_arr[0].strip()
                 company_details['employees_found'] = emp_arr[1].strip()
+            else:
+                company_details['employees_num'] = ''
+                company_details['employees_found'] = emp_arr[0].strip()
 
         # Phone number
         tag = company_details_tag.find('span', class_='description')
@@ -181,13 +189,13 @@ def scrapeOrgOverview(soup):
     if t_overview_stats is not None:
 
         #Acquisitions (https://www.crunchbase.com/organization/onxeo#/entity)
-        dt_acq = soup.find('dt', string='Acquisitions')
+        dt_acq = t_overview_stats.find('dt', string='Acquisitions')
         if dt_acq is not None:
             dd_acq = dt_acq.find_next_sibling('dd')
             overview['stats']['acquisitions']['num'] = dd_acq.string
 
         #IPO (https://www.crunchbase.com/organization/onxeo#/entity)
-        dt_ipo = soup.find('dt', string='IPO / Stock')
+        dt_ipo = t_overview_stats.find('dt', string='IPO / Stock')
         if dt_ipo is not None:
             dd_ipo = dt_ipo.find_next_sibling('dd')
             a1 = dd_ipo.a
@@ -198,10 +206,10 @@ def scrapeOrgOverview(soup):
             overview['stats']['ipo']['ticker'] = a2.string
 
         # Status
-        dt_status = soup.find('dt', string='Status')
+        dt_status = t_overview_stats.find('dt', string='Status')
         if dt_status is not None:
             dd_status = dt_status.find_next_sibling('dd')
-            overview['stats']['status'] = dd_status.string
+            overview['stats']['status'] = dd_status.get_text()
 
             # DEBUG
             # logging.info("dd_status='"+str(dd_status)+"'")
@@ -216,7 +224,7 @@ def scrapeOrgOverview(soup):
             #     overview['stats']['status']['fate'] = dd_status.string
 
         # Total Equity Funding (TEF)
-        dt_total_equity_funding = soup.find('dt',string='Total Equity Funding')
+        dt_total_equity_funding = t_overview_stats.find('dt',string='Total Equity Funding')
         if dt_total_equity_funding is not None:
             #DEBUG
             #logging.info("Found: "+str(dt_total_equity_funding))
@@ -233,12 +241,12 @@ def scrapeOrgOverview(soup):
             overview['stats']['tef']['funding_investors'] = dd_total_equity_funding.a.text
 
         # Most Recent Funding
-        dt_most_recent_funding = soup.find('dt', string='Most Recent Funding')
+        dt_most_recent_funding = t_overview_stats.find('dt', string='Most Recent Funding')
         if dt_most_recent_funding is not None:
 
             dd_most_recent_funding = dt_most_recent_funding.find_next_sibling('dd')
 
-            overview['stats']['mrf'] = dd_most_recent_funding.string
+            overview['stats']['mrf'] = dd_most_recent_funding.get_text()
 
             # overview['stats']['mrf'] = {}
             # funding_type = dd_most_recent_funding.find('span', class_='funding-type')
