@@ -51,6 +51,12 @@ def processDate(date):
     # print("ORIGINAL_DATE: "+date+" => ",end='')
 
     date = date.lower()
+    now = datetime.datetime.now()
+
+    #output variables
+    day = ''
+    month = ''
+    year = ''
 
     # Get the first 3 letters
     first3 = date[0:3].lower()
@@ -62,7 +68,13 @@ def processDate(date):
     # Use first 3 letters
     if first3 in month_dict:
 
-        if date[3] == " " and date[4].isnumeric() and "," not in date:
+        if len(date) == 3:
+            #we only have the month. We hp. current year
+            day = 1
+            month = int(month_dict[first3])
+            year = now.year
+
+        elif date[3] == " " and date[4].isnumeric() and "," not in date:
             # e.g. "dic 2014"
             day = 1
             month = int(month_dict[first3])
@@ -85,8 +97,7 @@ def processDate(date):
             print("ERRORE: FORMATO DATA NON RICONOSCIUTO: " + date)
             exit()
 
-    elif date == "presente" or date == "current":
-        now = datetime.datetime.now()
+    elif date == "presente" or date == "current" or date=="present":
         day = now.day
         month = now.month
         year = now.year
@@ -97,9 +108,7 @@ def processDate(date):
         year = int(date)
 
     elif date == '' or date == "unknown":
-        day = ''
-        month = ''
-        year = ''
+        pass
 
     else:
         print("ERRORE: FORMATO DATA NON TROVATO: '" + date + "'")
