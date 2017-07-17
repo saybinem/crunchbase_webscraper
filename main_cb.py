@@ -9,7 +9,7 @@ import pandas
 #GLOBALS
 rescrape = True
 go_on = False #scrape unscraped companies
-excel_file = r"C:\data\tesi\VICO\ID Crunchbase_ID VICO.xlsx"
+excel_file = r"C:\data\tesi\VICO\ID Crunchbase_ID VICO_firm_purged.xlsx"
 excel_sheet = 'Firm'
 excel_col_cb = 'CB'
 excel_col_vico = 'VICO'
@@ -69,11 +69,11 @@ def main():
     # Run job list
     logging.info("Running job list")
 
-    with Pool(10) as p:
-        p.map(cbscraper.company.scrapeOrgAndPeople, jobs_list)
+    #with Pool(10) as p:
+    #    p.map(cbscraper.company.scrapeOrgAndPeople, jobs_list)
 
-    #for job in jobs_list:
-    #    cbscraper.company.scrapeOrgAndPeople(job)
+    for job in jobs_list:
+        cbscraper.company.scrapeOrgAndPeople(job)
 
     logging.info("ENDED!")
 

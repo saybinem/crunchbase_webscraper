@@ -207,7 +207,7 @@ def scrapePerson(data):
     company_vico_id = data['company_id_vico']
 
     if (os.path.isfile(json_file) and not rescrape):
-        logging.info("Person \"" + person_id + "\" already scraped")
+        logging.info("Person \"" + person_id + "\" already scraped and we are not re-scraping")
         return True
 
     logging.debug("Scraping person: '" + person_id + "' of company '"+company_cb_id+"'")

@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/../gen_company_table/.idea/gen_company_table.iml" filepath="$PROJECT_DIR$/../gen_company_table/.idea/gen_company_table.iml" />
       <module fileurl="file://$PROJECT_DIR$/../gen_person_table/.idea/gen_person_table.iml" filepath="$PROJECT_DIR$/../gen_person_table/.idea/gen_person_table.iml" />
       <module fileurl="file://$PROJECT_DIR$/../linkedin_scraper/.idea/linkedin_scraper.iml" filepath="$PROJECT_DIR$/../linkedin_scraper/.idea/linkedin_scraper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../process_person_table/.idea/process_person_table.iml" filepath="$PROJECT_DIR$/../process_person_table/.idea/process_person_table.iml" />
     </modules>
   </component>
 </project>
