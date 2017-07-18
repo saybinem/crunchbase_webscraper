@@ -83,7 +83,9 @@ def scrapePersonAdvisoryRoles(soup):
                 # logging.debug("Advisory role li: " + li.text)
                 info_block = li.div
                 role = info_block.h5.text
-                company = info_block.h4.a.text
+                company_tag = info_block.h4.a
+                company_name = company_tag.text
+                company_link = company_tag['data-permalink']
                 date = info_block.find('h5', class_='date')
                 date_start, date_end = '', ''
                 if (date is not None):
@@ -92,7 +94,7 @@ def scrapePersonAdvisoryRoles(soup):
                         date_int = cbscraper.DateInterval.DateInterval()
                         date_int.fromText(date_text)
                         date_start, date_end = date_int.getStart(), date_int.getEnd()
-                adv_roles.append([role, company, date_start, date_end])
+                adv_roles.append([role, company_name, date_start, date_end, company_link])
     return adv_roles
 
 # *** Past jobs ***
@@ -110,8 +112,10 @@ def scrapePersonPastJobs(soup):
             date_start = date_start_child.text
             date_end = date_start_child.find_next('div', class_='date').text
             title = info_row.find('div', class_='title').text
-            company = info_row.find('div', class_='company').text
-            past_jobs.append([company, title, date_start, date_end])
+            company_tag = info_row.find('div', class_='company')
+            company_name = company_tag.text
+            company_link = company_tag['data-permalink']
+            past_jobs.append([company_name, title, date_start, date_end, company_link])
             # logging.info("Found past job: "+str(past_job_dict))
     return past_jobs
 
@@ -123,7 +127,8 @@ def scrapePersonCurrentJobs(soup):
         info_block = current_job.find('div', class_='info-block')
         role = info_block.h4.text
         follow_card = info_block.find('a', class_='follow_card')
-        company = follow_card.text
+        company_name = follow_card.text
+        company_link = follow_card['data-permalink']
         date = info_block.find('h5', class_='date')
         date_start, date_end = '', ''
         if (date is not None):
@@ -131,7 +136,7 @@ def scrapePersonCurrentJobs(soup):
             date_int = cbscraper.DateInterval.DateInterval()
             date_int.fromText(date_text)
             date_start, date_end = date_int.getStart(), date_int.getEnd()
-        current_jobs.append([role, company, date_start, date_end])
+        current_jobs.append([role, company_name, date_start, date_end, company_link])
     return current_jobs
 
 # *** Overview ***
