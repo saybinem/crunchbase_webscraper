@@ -196,7 +196,7 @@ def scrapePersonDetails(soup):
 
     return person_details
 
-# Scrape a single person (e.g. person_link="/person/gavin-ray")
+# *** Scrape a single person (e.g. "/person/gavin-ray") ***
 def scrapePerson(data):
     # Get input vars
     person_id = data['id']
