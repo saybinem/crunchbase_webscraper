@@ -37,7 +37,14 @@ def jsonPretty(dict_data):
     return json.dumps(dict_data, sort_keys=True, indent=4, separators=(',', ': '))
 
 #CLASS ERROR404
+
+class ErrorNoLink(Exception):
+    pass
+
 class Error404(Exception):
+    pass
+
+class ErrorInvalidLink(Exception):
     pass
 
 #ENUM BROWSER
@@ -204,7 +211,7 @@ class GenericScraper(metaclass=ABCMeta):
                     return False
                 # Check for 404 error
                 elif self.is404(html_code):
-                    logging.warning("Pre-saved file contains 404 error")
+                    logging.debug("Pre-saved file contains 404 error")
                     raise Error404("Error 404 in '" + htmlfile + "'")
                 else:
                     logging.debug("Returning content from pre-saved file '" + htmlfile + "'")
@@ -398,7 +405,7 @@ class GenericScraper(metaclass=ABCMeta):
             logging.error("Exception during page refresh. Continuining. " + str(e))
             pass
 
-    def scrollDown(self, value):
+    def jsScrollDown(self, value):
         self.getBrowser().execute_script("window.scrollBy(0," + str(value) + ")")
 
     # Scroll down the page
@@ -407,14 +414,22 @@ class GenericScraper(metaclass=ABCMeta):
         while True:
             logging.debug("Scrolling loop")
             for i in range(2):
-                self.scrollDown(500)
-                self.sleep(2)
+                self.jsScrollDown(500)
+                #self.jsScrollToBottom()
+                self.randSleep(2,3)
             new_page = self.getBrowserPageSource()
             if new_page != old_page:
                 old_page = new_page
             else:
                 break
         return True
-        
+
     def jsClick(self, element):
         self.getBrowser().execute_script("arguments[0].click();", element)
+
+    def jsScrollToTop(self):
+        self.getBrowser().execute_script("window.scrollTo(0, 0);")
+
+    def jsScrollToBottom(self):
+        script = 'window.scrollTo(0, document.body.scrollHeight);'
+        self.getBrowser().execute_script(script)

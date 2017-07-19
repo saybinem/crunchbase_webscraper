@@ -119,7 +119,6 @@ def scrapeOrgDetails(soup):
     return company_details
 
 def scrapeOrgOverviewStats(soup):
-    stats = dict()
     stats = {}
     stats['acquisitions'] = {}
     stats['ipo'] = {
@@ -318,6 +317,19 @@ def scrapeOrg(org_data):
     advisors = scrapeOrgAdvisors(soup_adv)
     past_people = scrapeOrgPastPeople(soup_past_people)
 
+    founders_list = overview['founders']
+
+    #error code
+    error = ''
+    if len(people) == 0:
+        error+='NoPeople_'
+    if len(past_people) == 0:
+        error+='NoPastPeople_'
+    if len(advisors) == 0:
+        error+='NoAdvisors_'
+    if len(founders_list) == 0:
+        error+='NoFounders_'
+
     # Return data
     company_data = {
         'company_id_vico': company_vico_id,
@@ -326,42 +338,14 @@ def scrapeOrg(org_data):
         'company_details': company_details,
         'people': people,
         'advisors': advisors,
-        'past_people': past_people
+        'past_people': past_people,
+        'error':error
     }
 
     # Write to file
     cbscraper.GenericScraper.saveDictToJsonFile(company_data, json_file)
 
     return company_data
-
-# Give a company, scrape current people, past people and advisors
-# company_data = a dict returned by cbscraper.company.scrapeOrganization()
-# key = the dictionary key that contains the list of lists of company persons
-def scrapePersons(company_data, key, company_id_cb = None, company_id_vico = None):
-    rescrape = main_cb.rescrape
-
-    if company_id_cb is None:
-        company_id_cb = company_data['company_id_cb']
-
-    if company_id_vico is None:
-        company_id_vico = company_data['company_id_vico']
-
-    p_list = company_data[key]
-
-    if not p_list:
-        logging.debug("List "+key+" is empty for "+company_id_cb)
-
-    for p in p_list:
-        person_id = cbscraper.person.getPersonIdFromLink(p[1])
-        person_data = {
-            "id": person_id,
-            "json": "./data/person/json/" + person_id + ".json",
-            "rescrape": rescrape,
-            'company_id_cb': company_id_cb,
-            'company_id_vico': company_id_vico,
-            'type': key  # allow to distinguish among "team", "advisors" and "past_people"
-        }
-        cbscraper.person.scrapePerson(person_data)
 
 # Scrape an organization and all its people
 def scrapeOrgAndPeople(org_data):
@@ -372,18 +356,18 @@ def scrapeOrgAndPeople(org_data):
 
     if (company_data is not False):
 
-        logging.debug("Scraping founders")
+        logging.debug("Scraping 'founders'")
         #def scrapePersons(company_data, key, company_id_cb = None, company_id_vico = None):
-        scrapePersons(company_data['overview'], 'founders', company_data['company_id_cb'], company_data['company_id_vico'])
+        cbscraper.person.scrapePersons(company_data['overview'], 'founders', company_data['company_id_cb'], company_data['company_id_vico'])
 
-        logging.debug("Scraping persons")
-        scrapePersons(company_data, 'people')
+        logging.debug("Scraping 'people'")
+        cbscraper.person.scrapePersons(company_data, 'people')
 
-        logging.debug("Scraping advisors")
-        scrapePersons(company_data, 'advisors')
+        logging.debug("Scraping 'advisors'")
+        cbscraper.person.scrapePersons(company_data, 'advisors')
 
-        logging.debug("Scraping past_people")
-        scrapePersons(company_data, 'past_people')
+        logging.debug("Scraping 'past_people'")
+        cbscraper.person.scrapePersons(company_data, 'past_people')
 
     else:
         logging.error("scrapeOrganization() returned False. This means there is no company_data")

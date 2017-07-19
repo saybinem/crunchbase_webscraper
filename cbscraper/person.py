@@ -5,6 +5,7 @@ import re
 import cbscraper.DateInterval
 import cbscraper.PersonScraper
 import cbscraper.GenericScraper
+import main_cb
 
 def getPersonIdFromLink(link):
     return link.split("/")[2]
@@ -85,7 +86,7 @@ def scrapePersonAdvisoryRoles(soup):
                 role = info_block.h5.text
                 company_tag = info_block.h4.a
                 company_name = company_tag.text
-                company_link = company_tag['data-permalink']
+                company_id = company_tag['data-permalink']
                 date = info_block.find('h5', class_='date')
                 date_start, date_end = '', ''
                 if (date is not None):
@@ -94,7 +95,7 @@ def scrapePersonAdvisoryRoles(soup):
                         date_int = cbscraper.DateInterval.DateInterval()
                         date_int.fromText(date_text)
                         date_start, date_end = date_int.getStart(), date_int.getEnd()
-                adv_roles.append([role, company_name, date_start, date_end, company_link])
+                adv_roles.append([role, company_name, date_start, date_end, company_id])
     return adv_roles
 
 # *** Past jobs ***
@@ -114,8 +115,8 @@ def scrapePersonPastJobs(soup):
             title = info_row.find('div', class_='title').text
             company_tag = info_row.find('div', class_='company')
             company_name = company_tag.text
-            company_link = company_tag['data-permalink']
-            past_jobs.append([company_name, title, date_start, date_end, company_link])
+            company_id = company_tag['data-permalink']
+            past_jobs.append([company_name, title, date_start, date_end, company_id])
             # logging.info("Found past job: "+str(past_job_dict))
     return past_jobs
 
@@ -128,7 +129,7 @@ def scrapePersonCurrentJobs(soup):
         role = info_block.h4.text
         follow_card = info_block.find('a', class_='follow_card')
         company_name = follow_card.text
-        company_link = follow_card['data-permalink']
+        company_id = follow_card['data-permalink']
         date = info_block.find('h5', class_='date')
         date_start, date_end = '', ''
         if (date is not None):
@@ -136,7 +137,7 @@ def scrapePersonCurrentJobs(soup):
             date_int = cbscraper.DateInterval.DateInterval()
             date_int.fromText(date_text)
             date_start, date_end = date_int.getStart(), date_int.getEnd()
-        current_jobs.append([role, company_name, date_start, date_end, company_link])
+        current_jobs.append([role, company_name, date_start, date_end, company_id])
     return current_jobs
 
 # *** Overview ***
@@ -239,6 +240,19 @@ def scrapePerson(data):
     education = scrapePersonEducation(soup)
     inv_list = scrapePersonInvestments(inv_soup)
 
+    # Build error code
+    error_code = ''
+    if len(current_jobs) == 0:
+        error_code += 'NoCurJobs_'
+    if len(past_jobs) == 0:
+        error_code += 'NoPasJobs_'
+    if len(adv_roles) == 0:
+        error_code += 'NoAdvRoles_'
+    if len(education) == 0:
+        error_code += 'NoEdu_'
+    if len(inv_list) == 0:
+        error_code += 'NoInv_'
+
     # Build complete data set
     person_data = {
         'name': name,
@@ -252,7 +266,8 @@ def scrapePerson(data):
         'past_jobs': past_jobs,
         'advisory_roles': adv_roles,
         'education': education,
-        'investments': inv_list
+        'investments': inv_list,
+        'error' : error_code
     }
 
     # Save to JSON file
@@ -260,3 +275,32 @@ def scrapePerson(data):
 
     # Return
     return person_data
+
+# Give a company, scrape current people, past people and advisors
+# company_data = a dict returned by cbscraper.company.scrapeOrganization()
+# key = the dictionary key that contains the list of lists of company persons
+def scrapePersons(company_data, key, company_id_cb = None, company_id_vico = None):
+    rescrape = main_cb.rescrape
+
+    if company_id_cb is None:
+        company_id_cb = company_data['company_id_cb']
+
+    if company_id_vico is None:
+        company_id_vico = company_data['company_id_vico']
+
+    p_list = company_data[key]
+
+    if not p_list:
+        logging.debug("List "+key+" is empty for "+company_id_cb)
+
+    for p in p_list:
+        person_id = getPersonIdFromLink(p[1])
+        person_data = {
+            "id": person_id,
+            "json": "./data/person/json/" + person_id + ".json",
+            "rescrape": rescrape,
+            'company_id_cb': company_id_cb,
+            'company_id_vico': company_id_vico,
+            'type': key  # allow to distinguish among "team", "advisors", "past_people" and "founders"
+        }
+        scrapePerson(person_data)
