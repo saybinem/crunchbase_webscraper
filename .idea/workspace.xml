@@ -4,19 +4,8 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8ffd353f-9675-4efa-a6a6-3ad054850fe0" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gen_person_table/write_cb.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gen_person_table/write_li.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/crunchbase_scraper.iml" afterPath="$PROJECT_DIR$/.idea/crunchbase_scraper.iml" />
+    <list default="true" id="8ffd353f-9675-4efa-a6a6-3ad054850fe0" name="Default" comment="BUG FIX">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cbscraper/GenericScraper.py" afterPath="$PROJECT_DIR$/cbscraper/GenericScraper.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cbscraper/company.py" afterPath="$PROJECT_DIR$/cbscraper/company.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cbscraper/person.py" afterPath="$PROJECT_DIR$/cbscraper/person.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gen_company_table/main.py" afterPath="$PROJECT_DIR$/../gen_company_table/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gen_person_table/main.py" afterPath="$PROJECT_DIR$/../gen_person_table/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/src/main_in.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/main_in.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -58,7 +47,7 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../gen_person_table/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
+            <state relative-caret-position="347">
               <caret line="83" column="65" lean-forward="false" selection-start-line="83" selection-start-column="65" selection-end-line="83" selection-end-column="65" />
               <folding />
             </state>
@@ -544,13 +533,6 @@
       <option name="presentableId" value="Default" />
       <updated>1498207171857</updated>
     </task>
-    <task id="LOCAL-00027" summary="better handle 404 errors">
-      <created>1499184079321</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1499184079321</updated>
-    </task>
     <task id="LOCAL-00028" summary="better handle 404 errors">
       <created>1499188437415</created>
       <option name="number" value="00028" />
@@ -887,7 +869,14 @@
       <option name="project" value="LOCAL" />
       <updated>1500397234183</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary="BUG FIX">
+      <created>1500469521008</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1500469521009</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1307,7 +1296,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../gen_person_table/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
+        <state relative-caret-position="347">
           <caret line="83" column="65" lean-forward="false" selection-start-line="83" selection-start-column="65" selection-end-line="83" selection-end-column="65" />
           <folding />
         </state>
