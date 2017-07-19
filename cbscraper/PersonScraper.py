@@ -3,6 +3,7 @@ from enum import Enum
 
 import cbscraper.CrunchbaseScraper
 import cbscraper.GenericScraper
+from cbscraper.GenericScraper import Error404
 import os
 from selenium.webdriver.common.by import By
 
@@ -53,9 +54,9 @@ class PersonScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
             self.goBack()
             try:
                 self.entityWait()
-            except cbscraper.GenericScraper.Error404:
-                logging.error("Error 404")
-                return False
+            except Error404:
+                logging.debug("Error 404")
+                raise
             except:
                 logging.critical("Unhandled exception")
                 raise
@@ -68,9 +69,9 @@ class PersonScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
             self.openURL(self.cb_url + self.id)
             try:
                 self.entityWait()
-            except cbscraper.GenericScraper.Error404:
-                logging.error("Error 404")
-                return False
+            except Error404:
+                logging.debug("Error 404")
+                raise
             except:
                 logging.critical("Unhandled exception")
                 raise
@@ -89,16 +90,17 @@ class PersonScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
         #try to get it from file
         try:
             entity_html = self.getHTMLFile(endpoint)
-        except cbscraper.GenericScraper.Error404 as e:
-            logging.info("HTML file contain 404 error. Returning false")
-            return False
+        except Error404 as e:
+            logging.debug("HTML file contain 404 error")
+            raise
 
         #try to get it from the web
         if entity_html is False:
             try:
                 self.goToEntityPage()
-            except cbscraper.GenericScraper.Error404 as e:
-                logging.info("Page contain 404 error. Returning")
+            except Error404 as e:
+                logging.debug("Page contain 404 error")
+                raise
             finally:
                 # SAVE HTML TO FILE (EVEN IF WE HAVE A 404 ERROR)
                 entity_html = self.getBrowserPageSource(endpoint)

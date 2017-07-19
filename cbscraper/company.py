@@ -4,6 +4,7 @@ import os
 
 import cbscraper.CompanyScraper
 import cbscraper.GenericScraper
+from cbscraper.GenericScraper import Error404
 from cbscraper.CompanyScraper import OrgEndPoint
 import cbscraper.person
 
@@ -300,47 +301,52 @@ def scrapeOrg(org_data):
         return False
 
     # Scrape the company
-    if not org.scrape():
-        logging.info("scrape() returned false. Returning false")
-        return False
-
-    # Get soup of various sections
-    soup_entity = org.getEndpointSoup(OrgEndPoint.ENTITY)
-    soup_people = org.getEndpointSoup(OrgEndPoint.PEOPLE)
-    soup_adv = org.getEndpointSoup(OrgEndPoint.ADVISORS)
-    soup_past_people = org.getEndpointSoup(OrgEndPoint.PAST_PEOPLE)
-
-    # Data mining
-    company_details = scrapeOrgDetails(soup_entity)
-    overview = scrapeOrgOverview(soup_entity)
-    people = scrapeOrgCurrentPeople(soup_people)
-    advisors = scrapeOrgAdvisors(soup_adv)
-    past_people = scrapeOrgPastPeople(soup_past_people)
-
-    founders_list = overview['founders']
-
-    #error code
-    error = ''
-    if len(people) == 0:
-        error+='NoPeople_'
-    if len(past_people) == 0:
-        error+='NoPastPeople_'
-    if len(advisors) == 0:
-        error+='NoAdvisors_'
-    if len(founders_list) == 0:
-        error+='NoFounders_'
-
-    # Return data
     company_data = {
         'company_id_vico': company_vico_id,
-        'company_id_cb': company_cb_id,
-        'overview': overview,
-        'company_details': company_details,
-        'people': people,
-        'advisors': advisors,
-        'past_people': past_people,
-        'error':error
+        'company_id_cb': company_cb_id
     }
+    error_code = ''
+    try:
+        org.scrape()
+    except Error404:
+        error_code = '404'
+        logging.info("Error404 intercepted")
+
+    if error_code == '':
+        # Get soup of various sections
+        soup_entity = org.getEndpointSoup(OrgEndPoint.ENTITY)
+        soup_people = org.getEndpointSoup(OrgEndPoint.PEOPLE)
+        soup_adv = org.getEndpointSoup(OrgEndPoint.ADVISORS)
+        soup_past_people = org.getEndpointSoup(OrgEndPoint.PAST_PEOPLE)
+
+        # Data mining
+        company_details = scrapeOrgDetails(soup_entity)
+        overview = scrapeOrgOverview(soup_entity)
+        people = scrapeOrgCurrentPeople(soup_people)
+        advisors = scrapeOrgAdvisors(soup_adv)
+        past_people = scrapeOrgPastPeople(soup_past_people)
+
+        founders_list = overview['founders']
+
+        #error code
+        if len(people) == 0:
+            error_code += 'NoPeople_'
+        if len(past_people) == 0:
+            error_code += 'NoPastPeople_'
+        if len(advisors) == 0:
+            error_code += 'NoAdvisors_'
+        if len(founders_list) == 0:
+            error_code += 'NoFounders_'
+
+        # Add informations
+        company_data['overview'] = overview
+        company_data['company_details'] = company_details
+        company_data['people'] = people
+        company_data['advisors'] = advisors
+        company_data['past_people'] = past_people
+
+    # Save error code
+    company_data['error'] = error_code
 
     # Write to file
     cbscraper.GenericScraper.saveDictToJsonFile(company_data, json_file)

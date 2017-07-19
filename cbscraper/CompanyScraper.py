@@ -70,8 +70,8 @@ class CompanyScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
         try:
             entity_html = self.getHTMLFile(endpoint)
         except Error404 as e:
-            logging.info("Detected 404 in HTML file. Returning False")
-            return False
+            logging.debug("Detected 404 in HTML file")
+            raise
         else:
             if not entity_html:
                 try:

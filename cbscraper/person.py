@@ -5,6 +5,7 @@ import re
 import cbscraper.DateInterval
 import cbscraper.PersonScraper
 import cbscraper.GenericScraper
+from cbscraper.GenericScraper import Error404
 import main_cb
 
 def getPersonIdFromLink(link):
@@ -113,7 +114,8 @@ def scrapePersonPastJobs(soup):
             date_start = date_start_child.text
             date_end = date_start_child.find_next('div', class_='date').text
             title = info_row.find('div', class_='title').text
-            company_tag = info_row.find('div', class_='company')
+            company_cell = info_row.find('div', class_='company')
+            company_tag = company_cell.a
             company_name = company_tag.text
             company_id = company_tag['data-permalink']
             past_jobs.append([company_name, title, date_start, date_end, company_id])
@@ -218,57 +220,64 @@ def scrapePerson(data):
 
     logging.debug("Scraping person: '" + person_id + "' of company '"+company_cb_id+"'")
 
-    # Get the soup
-    person = cbscraper.PersonScraper.PersonScraper(person_id)
-
-    if not person.scrape():
-        logging.error("scrape() retuned false. Skipping this person")
-        return False
-
-    soup = person.soup_entity
-    inv_soup = person.soup_inv
-
-    # Get name
-    name = soup.find(id='profile_header_heading').text
-
-    # Scrape
-    person_details = scrapePersonDetails(soup)
-    overview = scrapePersonOverview(soup)
-    current_jobs = scrapePersonCurrentJobs(soup)
-    past_jobs = scrapePersonPastJobs(soup)
-    adv_roles = scrapePersonAdvisoryRoles(soup)
-    education = scrapePersonEducation(soup)
-    inv_list = scrapePersonInvestments(inv_soup)
-
-    # Build error code
-    error_code = ''
-    if len(current_jobs) == 0:
-        error_code += 'NoCurJobs_'
-    if len(past_jobs) == 0:
-        error_code += 'NoPasJobs_'
-    if len(adv_roles) == 0:
-        error_code += 'NoAdvRoles_'
-    if len(education) == 0:
-        error_code += 'NoEdu_'
-    if len(inv_list) == 0:
-        error_code += 'NoInv_'
-
-    # Build complete data set
+    # Initial build of information
     person_data = {
-        'name': name,
         'type': type,
         'person_id_cb': person_id,
         'company_id_cb': company_cb_id,
-        'company_id_vico': company_vico_id,
-        'overview': overview,
-        'person_details': person_details,
-        'current_jobs': current_jobs,
-        'past_jobs': past_jobs,
-        'advisory_roles': adv_roles,
-        'education': education,
-        'investments': inv_list,
-        'error' : error_code
+        'company_id_vico': company_vico_id
     }
+
+    # Scrape
+    error_code = ''
+    person = cbscraper.PersonScraper.PersonScraper(person_id)
+    try:
+        person.scrape()
+    except Error404:
+        error_code = '404'
+        logging.error("scrape() retuned a 404 error")
+    else:
+        # The try ... except statement has an optional else clause, which, when present, must follow all except clauses.
+        # It is useful for code that must be executed if the try clause does not raise an exception
+        soup = person.soup_entity
+        inv_soup = person.soup_inv
+
+        # Get name
+        name = soup.find(id='profile_header_heading').text
+
+        # Scrape
+        person_details = scrapePersonDetails(soup)
+        overview = scrapePersonOverview(soup)
+        current_jobs = scrapePersonCurrentJobs(soup)
+        past_jobs = scrapePersonPastJobs(soup)
+        adv_roles = scrapePersonAdvisoryRoles(soup)
+        education = scrapePersonEducation(soup)
+        inv_list = scrapePersonInvestments(inv_soup)
+
+        # Build error code
+        if len(current_jobs) == 0:
+            error_code += 'NoCurJobs_'
+        if len(past_jobs) == 0:
+            error_code += 'NoPasJobs_'
+        if len(adv_roles) == 0:
+            error_code += 'NoAdvRoles_'
+        if len(education) == 0:
+            error_code += 'NoEdu_'
+        if len(inv_list) == 0:
+            error_code += 'NoInv_'
+
+        # Add informations
+        person_data['name'] = name
+        person_data['overview'] = overview,
+        person_data['person_details'] = person_details,
+        person_data['current_jobs'] = current_jobs,
+        person_data['past_jobs'] = past_jobs,
+        person_data['advisory_roles'] = adv_roles,
+        person_data['education'] = education,
+        person_data['investments'] = inv_list,
+
+    # Rembemr to save the error code, no matter what has happened
+    person_data['error'] = error_code
 
     # Save to JSON file
     cbscraper.GenericScraper.saveDictToJsonFile(person_data, json_file)
