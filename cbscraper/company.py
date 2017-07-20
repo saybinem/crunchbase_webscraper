@@ -9,6 +9,7 @@ from cbscraper.CompanyScraper import OrgEndPoint
 import cbscraper.person
 
 import main_cb
+import global_vars
 
 # Scrape organization advisors
 def scrapeOrgAdvisors(soup_advisors):
@@ -273,8 +274,6 @@ def scrapeOrg(org_data):
 
     # Get variables
     json_file = org_data['json']
-    rescrape = org_data['rescrape']
-    go_on = org_data['go_on']
     company_vico_id = org_data['vico_id']
     company_cb_id = org_data['cb_id']
     completion_perc = org_data['completion_perc']
@@ -283,7 +282,7 @@ def scrapeOrg(org_data):
 
     # If we have a JSON file and rescrape is False, use the JSON file we already have
     if os.path.isfile(json_file) :
-        if not rescrape:
+        if not global_vars.rescrape:
             logging.warning("Organization already scraped. Returning JSON file")
             with open(json_file, 'r') as fileh:
                 org_data = json.load(fileh)
@@ -296,7 +295,7 @@ def scrapeOrg(org_data):
 
     # If the HTML file doesn't exist and go_on is False, skip the organization
     htmlfile = org.genHTMLFilePath(OrgEndPoint.ENTITY)
-    if not os.path.isfile(htmlfile) and not go_on:
+    if not os.path.isfile(htmlfile) and not global_vars.go_on:
         logging.info("NOT WEB-SCRAPING NEW COMPANIES")
         return False
 
@@ -305,6 +304,7 @@ def scrapeOrg(org_data):
         'company_id_vico': company_vico_id,
         'company_id_cb': company_cb_id
     }
+
     error_code = ''
     try:
         org.scrape()
@@ -359,8 +359,7 @@ def scrapeOrgAndPeople(org_data):
     company_data = scrapeOrg(org_data)
 
     # Scrape persons of the company
-
-    if (company_data is not False):
+    if (company_data is not False and company_data['error'] != '404'):
 
         logging.debug("Scraping 'founders'")
         #def scrapePersons(company_data, key, company_id_cb = None, company_id_vico = None):

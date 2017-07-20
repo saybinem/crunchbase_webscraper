@@ -7,6 +7,7 @@ import cbscraper.PersonScraper
 import cbscraper.GenericScraper
 from cbscraper.GenericScraper import Error404
 import main_cb
+import global_vars
 
 def getPersonIdFromLink(link):
     return link.split("/")[2]
@@ -206,16 +207,16 @@ def scrapePersonDetails(soup):
 
 # *** Scrape a single person (e.g. "/person/gavin-ray") ***
 def scrapePerson(data):
+
     # Get input vars
     person_id = data['id']
     json_file = data['json']
-    rescrape = data['rescrape']
     type = data['type']
     company_cb_id = data['company_id_cb']
     company_vico_id = data['company_id_vico']
 
-    if (os.path.isfile(json_file) and not rescrape):
-        logging.info("Person \"" + person_id + "\" already scraped and we are not re-scraping")
+    if (os.path.isfile(json_file) and not global_vars.rescrape):
+        logging.info("Person \"" + person_id + "\" already scraped and not re-scraping because global vars say so")
         return True
 
     logging.debug("Scraping person: '" + person_id + "' of company '"+company_cb_id+"'")
@@ -235,7 +236,7 @@ def scrapePerson(data):
         person.scrape()
     except Error404:
         error_code = '404'
-        logging.error("scrape() retuned a 404 error")
+        logging.error("scrape() raised a 404 error")
     else:
         # The try ... except statement has an optional else clause, which, when present, must follow all except clauses.
         # It is useful for code that must be executed if the try clause does not raise an exception
@@ -289,7 +290,7 @@ def scrapePerson(data):
 # company_data = a dict returned by cbscraper.company.scrapeOrganization()
 # key = the dictionary key that contains the list of lists of company persons
 def scrapePersons(company_data, key, company_id_cb = None, company_id_vico = None):
-    rescrape = main_cb.rescrape
+    global rescrape
 
     if company_id_cb is None:
         company_id_cb = company_data['company_id_cb']
@@ -307,7 +308,6 @@ def scrapePersons(company_data, key, company_id_cb = None, company_id_vico = Non
         person_data = {
             "id": person_id,
             "json": "./data/person/json/" + person_id + ".json",
-            "rescrape": rescrape,
             'company_id_cb': company_id_cb,
             'company_id_vico': company_id_vico,
             'type': key  # allow to distinguish among "team", "advisors", "past_people" and "founders"
