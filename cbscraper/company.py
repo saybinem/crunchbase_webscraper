@@ -329,13 +329,13 @@ def scrapeOrg(org_data):
 
         #error code
         if len(people) == 0:
-            error_code += 'NoPeople_'
+            error_code += 'NoCP_'
         if len(past_people) == 0:
-            error_code += 'NoPastPeople_'
+            error_code += 'NoPP_'
         if len(advisors) == 0:
-            error_code += 'NoAdvisors_'
+            error_code += 'NoA_'
         if len(founders_list) == 0:
-            error_code += 'NoFounders_'
+            error_code += 'NoF_'
 
         # Add informations
         company_data['overview'] = overview

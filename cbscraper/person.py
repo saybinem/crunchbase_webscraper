@@ -269,13 +269,13 @@ def scrapePerson(data):
 
         # Add informations
         person_data['name'] = name
-        person_data['overview'] = overview,
-        person_data['person_details'] = person_details,
-        person_data['current_jobs'] = current_jobs,
-        person_data['past_jobs'] = past_jobs,
-        person_data['advisory_roles'] = adv_roles,
-        person_data['education'] = education,
-        person_data['investments'] = inv_list,
+        person_data['overview'] = overview
+        person_data['person_details'] = person_details
+        person_data['current_jobs'] = current_jobs
+        person_data['past_jobs'] = past_jobs
+        person_data['advisory_roles'] = adv_roles
+        person_data['education'] = education
+        person_data['investments'] = inv_list
 
     # Rembemr to save the error code, no matter what has happened
     person_data['error'] = error_code

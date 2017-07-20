@@ -6,9 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="8ffd353f-9675-4efa-a6a6-3ad054850fe0" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cbscraper/GenericScraper.py" afterPath="$PROJECT_DIR$/cbscraper/GenericScraper.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cbscraper/company.py" afterPath="$PROJECT_DIR$/cbscraper/company.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cbscraper/global_vars.py" afterPath="$PROJECT_DIR$/cbscraper/global_vars.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cbscraper/person.py" afterPath="$PROJECT_DIR$/cbscraper/person.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gen_company_table/gen_stats.do" afterPath="$PROJECT_DIR$/../gen_company_table/gen_stats.do" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gen_company_table/main.py" afterPath="$PROJECT_DIR$/../gen_company_table/main.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/src/global_vars.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/global_vars.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/src/main_in.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/main_in.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,8 +26,8 @@
     <SUITE FILE_PATH="coverage/crunchbase_scraper$gen_person_table.coverage" NAME="gen_person_table Coverage Results" MODIFIED="1500359307968" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../gen_person_table" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$main_cb.coverage" NAME="main_cb Coverage Results" MODIFIED="1499407818191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$process_person_table.coverage" NAME="process_person_table Coverage Results" MODIFIED="1500374449070" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
-    <SUITE FILE_PATH="coverage/crunchbase_scraper$gen_company_table.coverage" NAME="gen_company_table Coverage Results" MODIFIED="1500544485643" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../gen_company_table" />
-    <SUITE FILE_PATH="coverage/crunchbase_scraper$linkedin_scraper.coverage" NAME="linkedin_scraper Coverage Results" MODIFIED="1500535576565" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../linkedin_scraper" />
+    <SUITE FILE_PATH="coverage/crunchbase_scraper$gen_company_table.coverage" NAME="gen_company_table Coverage Results" MODIFIED="1500549675377" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../gen_company_table" />
+    <SUITE FILE_PATH="coverage/crunchbase_scraper$linkedin_scraper.coverage" NAME="linkedin_scraper Coverage Results" MODIFIED="1500551500233" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../linkedin_scraper" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$crunchbase_scraper.coverage" NAME="crunchbase_scraper Coverage Results" MODIFIED="1500544379489" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
@@ -37,14 +42,12 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="company.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/cbscraper/company.py">
+      <file leaf-file-name="main_cb.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main_cb.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="329">
-              <caret line="297" column="54" lean-forward="true" selection-start-line="297" selection-start-column="54" selection-end-line="297" selection-end-column="54" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="315">
+              <caret line="23" column="53" lean-forward="true" selection-start-line="23" selection-start-column="53" selection-end-line="23" selection-end-column="53" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -132,19 +135,19 @@
         <option value="$PROJECT_DIR$/cbscraper/DateInterval.py" />
         <option value="$PROJECT_DIR$/../process_person_table/main.py" />
         <option value="$PROJECT_DIR$/../gen_person_table/write_li.py" />
-        <option value="$PROJECT_DIR$/../gen_company_table/main.py" />
         <option value="$PROJECT_DIR$/../gen_person_table/main.py" />
         <option value="$PROJECT_DIR$/../gen_person_table/write_cb.py" />
         <option value="$PROJECT_DIR$/cbscraper/PersonScraper.py" />
-        <option value="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py" />
-        <option value="$PROJECT_DIR$/../linkedin_scraper/src/main_in.py" />
-        <option value="$PROJECT_DIR$/../linkedin_scraper/src/global_vars.py" />
-        <option value="$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py" />
         <option value="$PROJECT_DIR$/main_cb.py" />
-        <option value="$PROJECT_DIR$/cbscraper/person.py" />
         <option value="$PROJECT_DIR$/cbscraper/global_vars.py" />
         <option value="$PROJECT_DIR$/cbscraper/GenericScraper.py" />
+        <option value="$PROJECT_DIR$/../gen_company_table/main.py" />
         <option value="$PROJECT_DIR$/cbscraper/company.py" />
+        <option value="$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py" />
+        <option value="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py" />
+        <option value="$PROJECT_DIR$/../linkedin_scraper/src/global_vars.py" />
+        <option value="$PROJECT_DIR$/../linkedin_scraper/src/main_in.py" />
+        <option value="$PROJECT_DIR$/cbscraper/person.py" />
       </list>
     </option>
   </component>
@@ -251,7 +254,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.gen_company_table">
+  <component name="RunManager" selected="Python.crunchbase_scraper">
     <configuration default="false" name="crunchbase_scraper" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -544,13 +547,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1498207171857</updated>
-    </task>
-    <task id="LOCAL-00033" summary="improvements">
-      <created>1499262840043</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1499262840043</updated>
     </task>
     <task id="LOCAL-00034" summary="improvements">
       <created>1499283631948</created>
@@ -888,7 +884,14 @@
       <option name="project" value="LOCAL" />
       <updated>1500542074890</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="Improvements">
+      <created>1500544497726</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1500544497726</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TodoView">
@@ -902,10 +905,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3091733" sideWeight="0.5021482" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3091733" sideWeight="0.49785176" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3091733" sideWeight="0.49785176" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32842582" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -931,19 +935,19 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3091733" sideWeight="0.5021482" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3091733" sideWeight="0.49785176" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32842582" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3127148" sideWeight="0.49785176" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2667026" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28625134" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297414" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24543501" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24436091" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3997735" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297414" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
@@ -1197,13 +1201,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../gen_company_table/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="81" column="29" lean-forward="false" selection-start-line="81" selection-start-column="29" selection-end-line="81" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../gen_person_table/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1617">
@@ -1236,43 +1233,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="195" column="19" lean-forward="false" selection-start-line="195" selection-start-column="19" selection-end-line="195" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/main_in.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="82" column="18" lean-forward="false" selection-start-line="82" selection-start-column="18" selection-end-line="82" selection-end-column="18" />
-          <folding>
-            <element signature="e#23#38#0" expanded="true" />
-            <marker date="1500516752299" expanded="true" signature="4733:5014" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/global_vars.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="13" lean-forward="false" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="214" column="58" lean-forward="false" selection-start-line="214" selection-start-column="58" selection-end-line="214" selection-end-column="58" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cbscraper/global_vars.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
@@ -1281,20 +1241,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main_cb.py">
+    <entry file="file://$PROJECT_DIR$/../gen_company_table/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+        <state relative-caret-position="147">
+          <caret line="170" column="33" lean-forward="true" selection-start-line="170" selection-start-column="33" selection-end-line="170" selection-end-column="33" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#21#32#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cbscraper/company.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="347" column="23" lean-forward="false" selection-start-line="347" selection-start-column="23" selection-end-line="347" selection-end-column="23" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cbscraper/GenericScraper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="28" column="16" lean-forward="false" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="16" />
+        <state relative-caret-position="192">
+          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
             <marker date="1500544379254" expanded="true" signature="3961:4303" ph="..." />
@@ -1302,23 +1270,56 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cbscraper/person.py">
+    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="218" column="113" lean-forward="false" selection-start-line="218" selection-start-column="113" selection-end-line="218" selection-end-column="113" />
+        <state relative-caret-position="191">
+          <caret line="343" column="36" lean-forward="false" selection-start-line="343" selection-start-column="36" selection-end-line="343" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="156" column="30" lean-forward="true" selection-start-line="156" selection-start-column="30" selection-end-line="156" selection-end-column="30" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cbscraper/company.py">
+    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/global_vars.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="297" column="54" lean-forward="true" selection-start-line="297" selection-start-column="54" selection-end-line="297" selection-end-column="54" />
+        <state relative-caret-position="0">
+          <caret line="0" column="12" lean-forward="false" selection-start-line="0" selection-start-column="12" selection-end-line="0" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/main_in.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="126" column="67" lean-forward="true" selection-start-line="126" selection-start-column="67" selection-end-line="126" selection-end-column="67" />
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#23#38#0" expanded="true" />
+            <marker date="1500551500127" expanded="true" signature="5152:5433" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cbscraper/person.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2384">
+          <caret line="147" column="21" lean-forward="true" selection-start-line="147" selection-start-column="21" selection-end-line="147" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main_cb.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="23" column="53" lean-forward="true" selection-start-line="23" selection-start-column="53" selection-end-line="23" selection-end-column="53" />
+          <folding />
         </state>
       </provider>
     </entry>
