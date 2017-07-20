@@ -34,7 +34,7 @@ def myTextStrip(str):
     return str.replace('\n', '').strip()
 
 def jsonPretty(dict_data):
-    return json.dumps(dict_data, sort_keys=True, indent=4, separators=(',', ': '))
+    return json.dumps(dict_data, sort_keys=True, indent=4, separators=(',', ': '), ensure_ascii=False)
 
 #CLASS ERROR404
 
@@ -51,6 +51,7 @@ class ErrorInvalidLink(Exception):
 class EBrowser(Enum):
     FIREFOX = 1
     PHANTOMJS = 2
+    CHROME = 3
 
 #CLASS GENERIC SCRAPER
 class GenericScraper(metaclass=ABCMeta):
@@ -263,12 +264,12 @@ class GenericScraper(metaclass=ABCMeta):
         try:
             condition = EC.presence_of_element_located((by, value))
             WebDriverWait(self.getBrowser(), self.wait_timeout).until(condition)
-        except TimeoutException:
+        except TimeoutException as e:
             logging.critical("Timed out waiting for page element. Fatal. Exiting")
-            raise
-        except:
-            logging.error("Unexpected exception waiting for page element. Exiting")
-            raise
+            raise e
+        except Exception as e:
+            logging.critical("Unexpected exception waiting for page element. Exiting")
+            raise e
         else:
             logging.debug("Element " + condition_str + " found in URL='" + url + "'")
 
@@ -297,8 +298,7 @@ class GenericScraper(metaclass=ABCMeta):
                 else:
                     profile = webdriver.FirefoxProfile()
                 _browser = webdriver.Firefox(firefox_profile=profile)
-                # sleep after browser opening
-                self.sleep(3)
+                self.sleep(1)
                 _browser.set_window_position(0, 0)
 
             #PHANTOM JS
@@ -308,9 +308,15 @@ class GenericScraper(metaclass=ABCMeta):
                 dcap["phantomjs.page.settings.userAgent"] = useragent
                 logging.info("Useragent='"+useragent+"'")
                 _browser = webdriver.PhantomJS(executable_path=self.phantomjs_path, desired_capabilities=dcap)
-                self.sleep(3)
+                self.sleep(1)
                 _browser.set_window_size(1920, 1080)
-                self.sleep(3)
+                self.sleep(1)
+
+            #CROME
+            elif self.browser_type == EBrowser.CHROME:
+                _browser = webdriver.Chrome()
+                self.sleep(1)
+                _browser.set_window_position(0, 0)
 
         return _browser
 
