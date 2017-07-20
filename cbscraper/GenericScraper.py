@@ -26,6 +26,11 @@ n_requests = 0
 
 #FUNCTIONS
 
+def readJSONFile(json_file):
+    with open(json_file, 'r', encoding='utf-8') as fileh:
+        data = json.load(fileh)
+    return data
+
 def saveDictToJsonFile(dict_data, json_file):
     with open(json_file, 'w', encoding="utf-8") as fileh:
         fileh.write(jsonPretty(dict_data))

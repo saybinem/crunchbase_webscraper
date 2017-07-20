@@ -284,8 +284,7 @@ def scrapeOrg(org_data):
     if os.path.isfile(json_file) :
         if not global_vars.rescrape:
             logging.warning("Organization already scraped. Returning JSON file")
-            with open(json_file, 'r') as fileh:
-                org_data = json.load(fileh)
+            org_data = cbscraper.GenericScraper.readJSONFile(json_file)
             return org_data
         else:
             os.unlink(json_file)
