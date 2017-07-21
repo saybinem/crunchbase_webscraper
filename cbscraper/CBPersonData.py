@@ -3,35 +3,15 @@ import logging
 import global_vars
 import FrozenClass
 
-class CBPersonDataOverviewSocial(FrozenClass.RFrozenClass):
-    def __init__(self, in_dict = None):
-        if not in_dict:
-            self.facebook = ''
-            self.linkedin = ''
-            self.twitter = ''
-        else:
-            assert (set(in_dict.keys()) == {'facebook', 'linkedin', 'twitter'})
-            self.__dict__ = in_dict
-        self._freeze()
+class CBPersonDataOverviewSocial(FrozenClass.StringHolder):
+    valid_keys = {'facebook', 'linkedin', 'twitter'}
 
-    def serialize(self):
-        return self.__dict__
-
-class CBPersonDataOverviewPrimaryRole(FrozenClass.RFrozenClass):
-    def __init__(self, in_dict = None):
-        if not in_dict:
-            self.role = ''
-            self.firm = ''
-        else:
-            assert(set(in_dict.keys()) == {'role','firm'})
-            self.__dict__ = in_dict
-        self._freeze()
-
-    def serialize(self):
-        return self.__dict__
+class CBPersonDataOverviewPrimaryRole(FrozenClass.StringHolder):
+    valid_keys = {'role', 'firm'}
 
 class CBPersonDataOverview(FrozenClass.RFrozenClass):
-    def __init__(self, in_dict):
+    valid_keys = {}
+    def __init__(self, in_dict = None):
         if not in_dict:
             self.primary_role = CBPersonDataOverviewPrimaryRole()
             self.social = CBPersonDataOverviewSocial()
@@ -39,15 +19,21 @@ class CBPersonDataOverview(FrozenClass.RFrozenClass):
             self.gender = ''
             self.location = ''
         else:
+            valid_keys = {'primary_role', 'social', 'born', 'gender', 'location'}
+            assert (set(in_dict.keys()) == valid_keys)
+            assert (type(in_dict['born'] == str))
+            assert (type(in_dict['gender'] == str))
+            assert (type(in_dict['location'] == str))
             self.__dict__ = in_dict
             self.primary_role = CBPersonDataOverviewPrimaryRole(in_dict['primary_role'])
             self.social = CBPersonDataOverviewSocial(in_dict['social'])
         self._freeze()
 
     def serialize(self):
-        self.primary_role = self.primary_role.serialize()
-        self.social = self.social.serialize()
-        return self.__dict__
+        out_dict = self.__dict__
+        out_dict['primary_role'] = self.primary_role.serialize()
+        out_dict['social'] = self.social.serialize()
+        return out_dict
 
 class CBPersonData(FrozenClass.RFrozenClass):
 
@@ -72,10 +58,9 @@ class CBPersonData(FrozenClass.RFrozenClass):
         self._freeze()
 
     def save(self, outfile):
-        overview_copy = self.overview
-        self.overview = self.overview.serialize()
-        GenericScraper.saveDictToJsonFile(self.__dict__, outfile)
-        self.overview = overview_copy #restore overview object
+        out_dict = self.__dict__
+        out_dict['overview'] = self.overview.serialize()
+        GenericScraper.saveDictToJsonFile(out_dict, outfile)
 
     def load(self, infile):
         in_dict = GenericScraper.readJSONFile(infile)
@@ -83,15 +68,7 @@ class CBPersonData(FrozenClass.RFrozenClass):
         self.__dict__ = in_dict
 
     def hasLILink(self):
-        if not 'social' in self.overview:
-            return False
-        if not 'linkedin' in self.overview['social']:
-            return False
-        return True
+        return self.overview.social.linkedin == ''
 
     def getLILink(self):
-        if not 'social' in self.overview:
-            return ''
-        if not 'linkedin' in self.overview['social']:
-            return ''
-        return self.overview['social']['linkedin']
+        return self.overview.social.linkedin

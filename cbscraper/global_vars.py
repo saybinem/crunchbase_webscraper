@@ -7,3 +7,5 @@ excel_file = r"C:\data\tesi\VICO\ID Crunchbase_ID VICO_firm_purged.xlsx"
 excel_sheet = 'Firm'
 excel_col_cb = 'CB'
 excel_col_vico = 'VICO'
+company_json_dir = "./data/company/json"
+person_json_dir = "./data/person/json"

@@ -22,16 +22,13 @@ def main():
 
     if global_vars.remove_existing_json:
 
-        company_json_dir = "./data/company/json"
-        person_json_dir = "./data/person/json"
+        if os.path.isdir(global_vars.company_json_dir):
+            logging.info("Remove company JSON directory '" + global_vars.company_json_dir + "'")
+            shutil.rmtree(global_vars.company_json_dir)
 
-        if os.path.isdir(company_json_dir):
-            logging.info("Remove company JSON directory '" + company_json_dir + "'")
-            shutil.rmtree(company_json_dir)
-
-        if os.path.isdir(person_json_dir):
-            logging.info("Remove person JSON directory '" + person_json_dir + "'")
-            shutil.rmtree(person_json_dir)
+        if os.path.isdir(global_vars.person_json_dir):
+            logging.info("Remove person JSON directory '" + global_vars.person_json_dir + "'")
+            shutil.rmtree(global_vars.person_json_dir)
 
     buildDirs()
 
@@ -57,7 +54,7 @@ def main():
         org_data = {
             "cb_id": company_cb_id,
             "vico_id": company_vico_id,
-            "json": "./data/company/json/" + company_cb_id + ".json",
+            "json": os.path.join(global_vars.company_json_dir, company_cb_id + ".json"),
             "completion_perc" : completion_perc
         }
 

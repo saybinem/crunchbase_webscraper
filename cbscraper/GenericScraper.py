@@ -18,6 +18,8 @@ from selenium.webdriver.remote.remote_connection import LOGGER
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 from fake_useragent import UserAgent
+import pickle
+
 ua = UserAgent()
 
 # Non modifiable globals
@@ -25,6 +27,15 @@ _browser = None
 n_requests = 0
 
 #FUNCTIONS
+
+def readPickle(file):
+    with open(file, 'wb') as f:
+        data = pickle.load(file)
+    return data
+
+def writePickle(data, file):
+    with open(file, 'wb') as f:
+        pickle.dump(data, file)
 
 def readJSONFile(json_file):
     with open(json_file, 'r', encoding='utf-8') as fileh:
