@@ -21,10 +21,17 @@ def buildDirs():
 def main():
 
     if global_vars.remove_existing_json:
-        logging.info("Remove company JSON directory")
-        shutil.rmtree("./data/company/json")
-        logging.info("Remove person JSON directory")
-        shutil.rmtree("./data/person/json")
+
+        company_json_dir = "./data/company/json"
+        person_json_dir = "./data/person/json"
+
+        if os.path.isdir(company_json_dir):
+            logging.info("Remove company JSON directory '" + company_json_dir + "'")
+            shutil.rmtree(company_json_dir)
+
+        if os.path.isdir(person_json_dir):
+            logging.info("Remove person JSON directory '" + person_json_dir + "'")
+            shutil.rmtree(person_json_dir)
 
     buildDirs()
 
