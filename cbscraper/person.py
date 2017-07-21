@@ -8,6 +8,7 @@ import cbscraper.GenericScraper
 from cbscraper.GenericScraper import Error404
 import main_cb
 import global_vars
+import CBPersonData
 
 def getPersonIdFromLink(link):
     return link.split("/")[2]
@@ -145,7 +146,8 @@ def scrapePersonCurrentJobs(soup):
 
 # *** Overview ***
 def scrapePersonOverview(soup):
-    overview = dict()
+    overview = CBPersonData.CBPersonDataOverview()
+
     overview_content = soup.find(id='info-card-overview-content')
 
     if overview_content is not None:
@@ -154,42 +156,42 @@ def scrapePersonOverview(soup):
         tag = overview_content.find('dt', string='Primary Role')
         if tag is not None:
             role_arr = tag.find_next('dd').text.split('@')
-            overview['primary_role'] = dict()
-            overview['primary_role']['role'] = role_arr[0].strip()
-            overview['primary_role']['firm'] = role_arr[1].strip()
+            overview.primary_role = dict()
+            overview.primary_role['role'] = role_arr[0].strip()
+            overview.primary_role['firm'] = role_arr[1].strip()
 
         # Born date
         tag = overview_content.find('dt', string='Born:')
         if tag is not None:
-            overview['born'] = tag.find_next('dd').text
+            overview.born = tag.find_next('dd').text
 
         # Gender
         tag = overview_content.find('dt', string='Gender:')
         if tag is not None:
-            overview['gender'] = tag.find_next('dd').text
+            overview.gender = tag.find_next('dd').text
 
         # Location
         tag = overview_content.find('dt', string='Location:')
         if tag is not None:
-            overview['location'] = tag.find_next('dd').text
+            overview.location = tag.find_next('dd').text
 
         # Social links
-        overview['social'] = dict()
+
         tag = overview_content.find('dt', text=re.compile('Social:.*'))
         if tag:
             social_links = tag.findNext('dd')
 
             a_tag = social_links.find('a', {'data-icons': 'facebook'})
             if a_tag is not None:
-                overview['social']['facebook'] = a_tag.get('href')
+                overview.social['facebook'] = a_tag.get('href')
 
             a_tag = social_links.find('a', {'data-icons': 'linkedin'})
             if a_tag is not None:
-                overview['social']['linkedin'] = a_tag.get('href')
+                overview.social['linkedin'] = a_tag.get('href')
 
             a_tag = social_links.find('a', {'data-icons': 'twitter'})
             if a_tag is not None:
-                overview['social']['twitter'] = a_tag.get('href')
+                overview.social['twitter'] = a_tag.get('href')
 
     return overview
 
@@ -211,7 +213,7 @@ def scrapePerson(data):
     # Get input vars
     person_id = data['id']
     json_file = data['json']
-    type = data['type']
+    person_type = data['type']
     company_cb_id = data['company_id_cb']
     company_vico_id = data['company_id_vico']
 
@@ -222,20 +224,18 @@ def scrapePerson(data):
     logging.debug("Scraping person: '" + person_id + "' of company '"+company_cb_id+"'")
 
     # Initial build of information
-    person_data = {
-        'type': type,
-        'person_id_cb': person_id,
-        'company_id_cb': company_cb_id,
-        'company_id_vico': company_vico_id
-    }
+    person_data = CBPersonData.CBPersonData()
+    person_data.type = person_type
+    person_data.person_id_cb = person_id
+    person_data.company_id_cb = company_cb_id
+    person_data.company_id_vico = company_vico_id
 
     # Scrape
-    error_code = ''
     person = cbscraper.PersonScraper.PersonScraper(person_id)
     try:
         person.scrape()
     except Error404:
-        error_code = '404'
+        person_data.error = '404'
         logging.error("scrape() raised a 404 error")
     else:
         # The try ... except statement has an optional else clause, which, when present, must follow all except clauses.
@@ -247,41 +247,28 @@ def scrapePerson(data):
         name = soup.find(id='profile_header_heading').text
 
         # Scrape
-        person_details = scrapePersonDetails(soup)
-        overview = scrapePersonOverview(soup)
-        current_jobs = scrapePersonCurrentJobs(soup)
-        past_jobs = scrapePersonPastJobs(soup)
-        adv_roles = scrapePersonAdvisoryRoles(soup)
-        education = scrapePersonEducation(soup)
-        inv_list = scrapePersonInvestments(inv_soup)
+        person_data.person_details = scrapePersonDetails(soup)
+        person_data.overview = scrapePersonOverview(soup)
+        person_data.current_jobs = scrapePersonCurrentJobs(soup)
+        person_data.past_jobs = scrapePersonPastJobs(soup)
+        person_data.advisory_roles = scrapePersonAdvisoryRoles(soup)
+        person_data.education = scrapePersonEducation(soup)
+        person_data.investments = scrapePersonInvestments(inv_soup)
 
         # Build error code
-        if len(current_jobs) == 0:
-            error_code += 'NoCurJobs_'
-        if len(past_jobs) == 0:
-            error_code += 'NoPasJobs_'
-        if len(adv_roles) == 0:
-            error_code += 'NoAdvRoles_'
-        if len(education) == 0:
-            error_code += 'NoEdu_'
-        if len(inv_list) == 0:
-            error_code += 'NoInv_'
-
-        # Add informations
-        person_data['name'] = name
-        person_data['overview'] = overview
-        person_data['person_details'] = person_details
-        person_data['current_jobs'] = current_jobs
-        person_data['past_jobs'] = past_jobs
-        person_data['advisory_roles'] = adv_roles
-        person_data['education'] = education
-        person_data['investments'] = inv_list
-
-    # Rembemr to save the error code, no matter what has happened
-    person_data['error'] = error_code
+        if len(person_data.current_jobs) == 0:
+            person_data.stat_code += 'NoCurJobs_'
+        if len(person_data.past_jobs) == 0:
+            person_data.stat_code += 'NoPasJobs_'
+        if len(person_data.advisory_roles) == 0:
+            person_data.stat_code += 'NoAdvRoles_'
+        if len(person_data.education) == 0:
+            person_data.stat_code += 'NoEdu_'
+        if len(person_data.investments) == 0:
+            person_data.stat_code += 'NoInv_'
 
     # Save to JSON file
-    cbscraper.GenericScraper.saveDictToJsonFile(person_data, json_file)
+    person_data.save(json_file)
 
     # Return
     return person_data
