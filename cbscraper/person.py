@@ -200,7 +200,7 @@ def scrapePersonDetails(soup):
     div_description = soup.find('div', {"id": "description"})
     if div_description is not None:
         person_details = div_description.text
-        if person_details.find("Click/Touch UPDATE above to add Details for") > 0:
+        if "Click/Touch UPDATE above to add Details" in person_details:
             person_details = ""
 
     return person_details
