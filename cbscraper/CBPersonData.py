@@ -10,7 +10,7 @@ class CBPersonDataOverviewSocial(FrozenClass.RFrozenClass):
             self.linkedin = ''
             self.twitter = ''
         else:
-            assert (set(in_dict.keys()) == {'facebook', 'linkedin', 'twitter''})
+            assert (set(in_dict.keys()) == {'facebook', 'linkedin', 'twitter'})
             self.__dict__ = in_dict
         self._freeze()
 
