@@ -7,6 +7,7 @@ from multiprocessing import Pool
 import pandas
 import shutil
 import global_vars
+import sys
 
 # make data dirs if they do not exists
 def buildDirs():
@@ -16,6 +17,12 @@ def buildDirs():
     os.makedirs("./data/company/html", exist_ok=True)
     os.makedirs("./data/company/json", exist_ok=True)
     os.makedirs("./data/company/screenshots", exist_ok=True)
+
+def writeListToFile(file, list):
+    fileh = open(file, "w", encoding="utf-8")
+    for company in list:
+        fileh.write(str(company) + "\n")
+    fileh.close()
 
 # MAIN
 def main():
@@ -32,22 +39,59 @@ def main():
 
     buildDirs()
 
+    #Vico db
+    vico_frame = pandas.read_hdf(global_vars.vico_file)
+    valid_vico_ids = list(vico_frame.index)
+
     # Get list of companies
-    frame = pandas.read_excel(global_vars.excel_file, index_col=None, header=0, sheetname=global_vars.excel_sheet)
-    frame = frame[[global_vars.excel_col_cb, global_vars.excel_col_vico]]  # get only interesting columns
-    frame = frame.loc[frame[global_vars.excel_col_cb] == frame[global_vars.excel_col_cb]]  # remove NaNs
+    vico_cb_map = pandas.read_excel(global_vars.excel_file, index_col=global_vars.excel_col_vico, header=0, sheetname=global_vars.excel_sheet)
 
-    counter = 1  # keep count of the current firm
-    ids_len = frame.shape[0] #get row number
+    #Count companies which are in the map but not in the vico db
+    vico_frame_indexes = set(vico_frame.index)
+    vico_cb_map_indexes = set(vico_cb_map.index)
 
-    jobs_list = list()
+    # Companies which are in the map but not in VICO
+    not_vicoed_ids = vico_cb_map_indexes - vico_frame_indexes
+    writeListToFile("not_vicoed_ids.txt", not_vicoed_ids)
+
+    #Companies which are in VICO but do not have in the map
+    writeListToFile("vico_frame_index.txt", vico_frame_indexes)
+    writeListToFile("vico_cbmap_index.txt", vico_cb_map_indexes)
+
+    not_mapped_ids = vico_frame_indexes - vico_cb_map_indexes
+    writeListToFile("not_mapped_ids.txt", not_mapped_ids)
+
+    if not_mapped_ids != set():
+        logging.critical("The following " + str(len(not_mapped_ids)) + " companies are in VICO db but not in the map")
+        logging.critical(str(not_mapped_ids))
+        #sys.exit(0)
 
     # Build job list
     logging.info("Build job list")
-    for index, row in frame.iterrows():
+    counter = 1  # keep count of the current firm
+    ids_len = vico_cb_map.shape[0] #get row number
+    jobs_list = list()
+    not_found = set() #count companies not found in VICO db
+    already_in_job = set()
+    duplicates = list()
 
-        company_vico_id = row[global_vars.excel_col_vico]
+    for index, row in vico_cb_map.iterrows():
+
+        company_vico_id = index
         company_cb_id = row[global_vars.excel_col_cb].replace("/organization/","")
+
+        if not company_vico_id in valid_vico_ids:
+            #logging.critical(company_vico_id + " (" + company_cb_id + ") is not in VICO db. Skipping")
+            not_found.add(company_vico_id)
+            continue
+            #sys.exit(0)
+
+        # Check if we are already processing this company
+        if company_vico_id in already_in_job:
+            duplicates.append(company_vico_id)
+            continue
+        already_in_job.add(company_vico_id)
+
         completion_perc = round((counter / ids_len) * 100, 2)
         counter += 1
 
@@ -59,6 +103,24 @@ def main():
         }
 
         jobs_list.append(org_data)
+
+    logging.info("Firms not found in VICO = " + str(not_found))
+    not_found_count = len(not_found)
+    not_found_set_count = len(set(not_found))
+    job_count = len(jobs_list)
+    mapped_firms_count = len(set(vico_cb_map.index))
+    diff = mapped_firms_count - job_count
+    logging.info("not_found_count=" + str(not_found_count)
+                 + ", not_found_set_count=" + str(not_found_set_count)
+                 + ", job_count=" + str(job_count)
+                 + ", mapped_firms_count=" + str(mapped_firms_count)
+                 + ", diff=" + str(diff))
+
+    logging.info("Duplicates: "+str(duplicates))
+    writeListToFile("duplicate_mapped.txt", duplicates)
+
+    # Assert that we have skipped all companies which do not have a correspondence on VICO
+    assert(set(not_found) == not_vicoed_ids)
 
     # Run job list
     logging.info("Running job list")

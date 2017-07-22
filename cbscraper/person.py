@@ -156,9 +156,8 @@ def scrapePersonOverview(soup):
         tag = overview_content.find('dt', string='Primary Role')
         if tag is not None:
             role_arr = tag.find_next('dd').text.split('@')
-            overview.primary_role = dict()
-            overview.primary_role['role'] = role_arr[0].strip()
-            overview.primary_role['firm'] = role_arr[1].strip()
+            overview.primary_role.role = role_arr[0].strip()
+            overview.primary_role.firm = role_arr[1].strip()
 
         # Born date
         tag = overview_content.find('dt', string='Born:')
@@ -183,15 +182,15 @@ def scrapePersonOverview(soup):
 
             a_tag = social_links.find('a', {'data-icons': 'facebook'})
             if a_tag is not None:
-                overview.social['facebook'] = a_tag.get('href')
+                overview.social.facebook = a_tag.get('href')
 
             a_tag = social_links.find('a', {'data-icons': 'linkedin'})
             if a_tag is not None:
-                overview.social['linkedin'] = a_tag.get('href')
+                overview.social.linkedin = a_tag.get('href')
 
             a_tag = social_links.find('a', {'data-icons': 'twitter'})
             if a_tag is not None:
-                overview.social['twitter'] = a_tag.get('href')
+                overview.social.twitter = a_tag.get('href')
 
     return overview
 

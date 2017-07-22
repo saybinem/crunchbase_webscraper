@@ -10,6 +10,7 @@ import cbscraper.person
 
 import main_cb
 import global_vars
+import sys
 
 # Scrape organization advisors
 def scrapeOrgAdvisors(soup_advisors):
@@ -296,6 +297,7 @@ def scrapeOrg(org_data):
     htmlfile = org.genHTMLFilePath(OrgEndPoint.ENTITY)
     if not os.path.isfile(htmlfile) and not global_vars.go_on:
         logging.info("NOT WEB-SCRAPING NEW COMPANIES")
+        sys.exit(0)
         return False
 
     # Scrape the company

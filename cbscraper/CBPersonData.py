@@ -10,8 +10,9 @@ class CBPersonDataOverviewPrimaryRole(FrozenClass.StringHolder):
     valid_keys = {'role', 'firm'}
 
 class CBPersonDataOverview(FrozenClass.RFrozenClass):
-    valid_keys = {}
+
     def __init__(self, in_dict = None):
+        super().__init__()
         if not in_dict:
             self.primary_role = CBPersonDataOverviewPrimaryRole()
             self.social = CBPersonDataOverviewSocial()
@@ -19,14 +20,17 @@ class CBPersonDataOverview(FrozenClass.RFrozenClass):
             self.gender = ''
             self.location = ''
         else:
+            del in_dict['_RFrozenClass__isfrozen']
             valid_keys = {'primary_role', 'social', 'born', 'gender', 'location'}
             assert (set(in_dict.keys()) == valid_keys)
             assert (type(in_dict['born'] == str))
             assert (type(in_dict['gender'] == str))
             assert (type(in_dict['location'] == str))
             self.__dict__ = in_dict
-            self.primary_role = CBPersonDataOverviewPrimaryRole(in_dict['primary_role'])
-            self.social = CBPersonDataOverviewSocial(in_dict['social'])
+            pr = CBPersonDataOverviewPrimaryRole(in_dict['primary_role'])
+            self.primary_role = pr
+            soc = CBPersonDataOverviewSocial(in_dict['social'])
+            self.social = soc
         self._freeze()
 
     def serialize(self):
@@ -38,6 +42,7 @@ class CBPersonDataOverview(FrozenClass.RFrozenClass):
 class CBPersonData(FrozenClass.RFrozenClass):
 
     def __init__(self, infile=None):
+        super().__init__()
         if infile is not None:
             self.load(infile)
         else:
@@ -64,7 +69,8 @@ class CBPersonData(FrozenClass.RFrozenClass):
 
     def load(self, infile):
         in_dict = GenericScraper.readJSONFile(infile)
-        in_dict['overview'] = CBPersonDataOverview(in_dict['overview'])
+        ov = CBPersonDataOverview(in_dict['overview'])
+        in_dict['overview'] = ov
         self.__dict__ = in_dict
 
     def hasLILink(self):
