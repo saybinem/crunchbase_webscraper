@@ -39,7 +39,7 @@ def main():
 
     buildDirs()
 
-    #Vico db
+    # VICO DB
     vico_frame = pandas.read_hdf(global_vars.vico_file)
     valid_vico_ids = list(vico_frame.index)
 
@@ -75,30 +75,38 @@ def main():
     already_in_job = set()
     duplicates = list()
 
+    #DataFrame.iterrows()[source]
+    #Iterate over DataFrame rows as (index, Series) pairs.
+
+    #vico_cb_map = pandas.DataFrame({'CB':pandas.Series(['/organization/crowdcube'],index=['VICO2058'])})
+    #vico_cb_map = vico_cb_map[vico_cb_map.CB == '/organization/crowdcube']
+
     for index, row in vico_cb_map.iterrows():
 
-        company_vico_id = index
-        company_cb_id = row[global_vars.excel_col_cb].replace("/organization/","")
+        company_id_vico = index
 
-        if not company_vico_id in valid_vico_ids:
+        company_id_cb = row[global_vars.excel_col_cb].replace("/organization/","")
+
+        # Check if the ID is in the VICO DB
+        if not company_id_vico in valid_vico_ids:
             #logging.critical(company_vico_id + " (" + company_cb_id + ") is not in VICO db. Skipping")
-            not_found.add(company_vico_id)
+            not_found.add(company_id_vico)
             continue
             #sys.exit(0)
 
-        # Check if we are already processing this company
-        if company_vico_id in already_in_job:
-            duplicates.append(company_vico_id)
+        # Check if we already processed this company
+        if company_id_vico in already_in_job:
+            duplicates.append(company_id_vico)
             continue
-        already_in_job.add(company_vico_id)
+        already_in_job.add(company_id_vico)
 
         completion_perc = round((counter / ids_len) * 100, 2)
         counter += 1
 
         org_data = {
-            "cb_id": company_cb_id,
-            "vico_id": company_vico_id,
-            "json": os.path.join(global_vars.company_json_dir, company_cb_id + ".json"),
+            "company_id_cb" : company_id_cb,
+            "company_id_vico" : company_id_vico,
+            "json" : os.path.join(global_vars.company_json_dir, company_id_cb + ".json"),
             "completion_perc" : completion_perc
         }
 
@@ -120,7 +128,7 @@ def main():
     writeListToFile("duplicate_mapped.txt", duplicates)
 
     # Assert that we have skipped all companies which do not have a correspondence on VICO
-    assert(set(not_found) == not_vicoed_ids)
+    #assert(set(not_found) == not_vicoed_ids)
 
     # Run job list
     logging.info("Running job list")

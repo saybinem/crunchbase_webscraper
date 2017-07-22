@@ -275,10 +275,10 @@ def scrapeOrg(org_data):
 
     # Get variables
     json_file = org_data['json']
-    company_vico_id = org_data['vico_id']
-    company_cb_id = org_data['cb_id']
+    company_id_vico = org_data['company_id_vico']
+    company_id_cb = org_data['company_id_cb']
     completion_perc = org_data['completion_perc']
-    msg = "Company: " + company_cb_id + " (" + str(completion_perc) + "%)"
+    msg = "Company: " + company_id_cb + " (" + str(completion_perc) + "%) (" + company_id_vico + ")"
     logging.warning(msg)
 
     # If we have a JSON file and rescrape is False, use the JSON file we already have
@@ -291,7 +291,7 @@ def scrapeOrg(org_data):
             os.unlink(json_file)
 
     # Scrape organization
-    org = cbscraper.CompanyScraper.CompanyScraper(company_cb_id)
+    org = cbscraper.CompanyScraper.CompanyScraper(company_id_cb)
 
     # If the HTML file doesn't exist and go_on is False, skip the organization
     htmlfile = org.genHTMLFilePath(OrgEndPoint.ENTITY)
@@ -302,8 +302,8 @@ def scrapeOrg(org_data):
 
     # Scrape the company
     company_data = {
-        'company_id_vico': company_vico_id,
-        'company_id_cb': company_cb_id
+        'company_id_vico': company_id_vico,
+        'company_id_cb': company_id_cb
     }
 
     error_code = ''
@@ -357,6 +357,7 @@ def scrapeOrg(org_data):
 # Scrape an organization and all its people
 def scrapeOrgAndPeople(org_data):
 
+    # Scrape the company
     company_data = scrapeOrg(org_data)
 
     # Scrape persons of the company
