@@ -98,9 +98,10 @@ def processDate(date):
             exit()
 
     elif date == "presente" or date == "current" or date=="present":
-        day = now.day
-        month = now.month
-        year = now.year
+        #day = now.day
+        #month = now.month
+        #year = now.year
+        return "current"
 
     elif date.isnumeric():
         day = 1
