@@ -3,12 +3,12 @@ import os
 import re
 
 import cbscraper.DateInterval
-import cbscraper.PersonScraper
-import cbscraper.GenericScraper
-from cbscraper.GenericScraper import Error404
+import cbscraper.CBPersonWebScraper
+import cbscraper.GenericWebScraper
+from cbscraper.GenericWebScraper import Error404
 import main_cb
 import global_vars
-import CBPersonData
+from CBPersonData import CBPersonData
 
 def getPersonIdFromLink(link):
     return link.split("/")[2]
@@ -207,30 +207,16 @@ def scrapePersonDetails(soup):
     return person_details
 
 # *** Scrape a single person (e.g. "/person/gavin-ray") ***
-def scrapePerson(data):
+def scrapePerson(person_data):
 
-    # Get input vars
-    person_id = data['id']
-    json_file = data['json']
-    person_type = data['type']
-    company_cb_id = data['company_id_cb']
-    company_vico_id = data['company_id_vico']
-
-    if (os.path.isfile(json_file) and not global_vars.rescrape):
-        logging.info("Person \"" + person_id + "\" already scraped and not re-scraping because global vars say so")
+    if (os.path.isfile(person_data.json_file) and not global_vars.rescrape):
+        logging.info("Person \"" + person_data.person_id_cb + "\" already scraped and not re-scraping because global vars say so")
         return True
 
-    logging.debug("Scraping person: '" + person_id + "' of company '"+company_cb_id+"'")
-
-    # Initial build of information
-    person_data = CBPersonData.CBPersonData()
-    person_data.type = person_type
-    person_data.person_id_cb = person_id
-    person_data.company_id_cb = company_cb_id
-    person_data.company_id_vico = company_vico_id
+    logging.debug("Scraping person: '" + person_data.person_id_cb + "' of company '" + person_data.company_id_cb + "'")
 
     # Scrape
-    person = cbscraper.PersonScraper.PersonScraper(person_id)
+    person = cbscraper.CBPersonWebScraper.CBPersonWebScraper(person_data.person_id_cb)
     try:
         person.scrape()
     except Error404:
@@ -241,9 +227,6 @@ def scrapePerson(data):
         # It is useful for code that must be executed if the try clause does not raise an exception
         soup = person.soup_entity
         inv_soup = person.soup_inv
-
-        # Get name
-        name = soup.find(id='profile_header_heading').text
 
         # Scrape
         person_data.person_details = scrapePersonDetails(soup)
@@ -267,7 +250,7 @@ def scrapePerson(data):
             person_data.stat_code += 'NoInv_'
 
     # Save to JSON file
-    person_data.save(json_file)
+    person_data.save()
 
     # Return
     return person_data
@@ -275,8 +258,7 @@ def scrapePerson(data):
 # Give a company, scrape current people, past people and advisors
 # company_data = a dict returned by cbscraper.company.scrapeOrganization()
 # key = the dictionary key that contains the list of lists of company persons
-def scrapePersons(company_data, key, company_id_cb = None, company_id_vico = None):
-    global rescrape
+def scrapePersonsList(company_data, key, company_id_cb = None, company_id_vico = None):
 
     if company_id_cb is None:
         company_id_cb = company_data['company_id_cb']
@@ -291,11 +273,19 @@ def scrapePersons(company_data, key, company_id_cb = None, company_id_vico = Non
 
     for p in p_list:
         person_id = getPersonIdFromLink(p[1])
-        person_data = {
-            "id": person_id,
-            "json": "./data/person/json/" + person_id + ".json",
-            'company_id_cb': company_id_cb,
-            'company_id_vico': company_id_vico,
-            'type': key  # allow to distinguish among "team", "advisors", "past_people" and "founders"
-        }
-        scrapePerson(person_data)
+        json_file = "./data/person/json/" + person_id + ".json"
+
+        if person_id in global_vars.already_scraped:
+            logging.warning("The person '" + person_id + "' has already been scraped. Just adding new type")
+            person_data = CBPersonData(json_file)
+            person_data.setType(key)
+            person_data.save()
+        else:
+            person_data = CBPersonData()
+            person_data.person_id_cb = person_id
+            person_data.company_id_cb = company_id_cb
+            person_data.company_id_vico = company_id_vico
+            person_data.json_file = json_file
+            person_data.setType(key)
+            scrapePerson(person_data)
+            global_vars.already_scraped.append(person_data.person_id_cb)

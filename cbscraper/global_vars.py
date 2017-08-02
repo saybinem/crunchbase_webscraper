@@ -11,3 +11,5 @@ excel_col_cb = 'CB'
 excel_col_vico = 'VICO'
 company_json_dir = "./data/company/json"
 person_json_dir = "./data/person/json"
+
+already_scraped = list() #person ids that have already been scraped

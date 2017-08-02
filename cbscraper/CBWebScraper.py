@@ -1,12 +1,12 @@
 import logging
 from abc import abstractmethod
 
-from cbscraper.GenericScraper import EBrowser
-import cbscraper.GenericScraper
+from cbscraper.GenericWebScraper import EBrowser
+import cbscraper.GenericWebScraper
 from selenium.common.exceptions import NoSuchElementException
 
 
-class CrunchbaseScraper(cbscraper.GenericScraper.GenericScraper):
+class CBWebScraper(cbscraper.GenericWebScraper.GenericScraper):
 
     is_firefox_user_profile = True
     screenshot_folder = ''    

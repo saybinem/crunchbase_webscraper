@@ -1,9 +1,8 @@
 import logging
 from enum import Enum
 
-import cbscraper.CrunchbaseScraper
-import cbscraper.GenericScraper
-from cbscraper.GenericScraper import Error404
+import cbscraper
+from cbscraper.GenericWebScraper import Error404
 import os
 from selenium.webdriver.common.by import By
 
@@ -12,7 +11,7 @@ class PersonEndPoint(Enum):
     INVESTMENTS = 2
 
 
-class PersonScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
+class CBPersonWebScraper(cbscraper.CBWebScraper.CBWebScraper):
     html_basepath = './data/person/html'
     screenshot_folder = './data/person/screenshots'
 

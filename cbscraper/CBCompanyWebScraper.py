@@ -2,9 +2,9 @@ import logging
 from enum import Enum
 import os
 
-import cbscraper.CrunchbaseScraper
-import cbscraper.GenericScraper
-from cbscraper.GenericScraper import Error404
+import cbscraper.CBWebScraper
+import cbscraper.GenericWebScraper
+from cbscraper.GenericWebScraper import Error404
 
 class OrgEndPoint(Enum):
     ENTITY = 1
@@ -13,7 +13,7 @@ class OrgEndPoint(Enum):
     PAST_PEOPLE = 4
 
 
-class CompanyScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
+class CBCompanyWebScraper(cbscraper.CBWebScraper.CBWebScraper):
 
     html_basepath = './data/company/html'
     screenshot_folder = './data/company/screenshots'
@@ -76,7 +76,7 @@ class CompanyScraper(cbscraper.CrunchbaseScraper.CrunchbaseScraper):
             if not entity_html:
                 try:
                     self.goToEntityPage()
-                except cbscraper.GenericScraper.Error404:
+                except cbscraper.GenericWebScraper.Error404:
                     logging.error("Caught error 404. Returning False")
                     return False
                 finally:

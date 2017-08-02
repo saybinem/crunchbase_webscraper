@@ -1,17 +1,25 @@
-import GenericScraper
-import logging
-import global_vars
 import FrozenClass
+import GenericWebScraper
+from enum import Enum, unique
+
+@unique
+class EPersonType(Enum):
+    PEOPLE = 'people'
+    ADVISORS = 'advisors'
+    PAST_PEOPLE = 'past_people'
+    FOUNDERS = 'founders'
+
 
 class CBPersonDataOverviewSocial(FrozenClass.StringHolder):
     valid_keys = {'facebook', 'linkedin', 'twitter'}
 
+
 class CBPersonDataOverviewPrimaryRole(FrozenClass.StringHolder):
     valid_keys = {'role', 'firm'}
 
-class CBPersonDataOverview(FrozenClass.RFrozenClass):
 
-    def __init__(self, in_dict = None):
+class CBPersonDataOverview(FrozenClass.RFrozenClass):
+    def __init__(self, in_dict=None):
         super().__init__()
         if not in_dict:
             self.primary_role = CBPersonDataOverviewPrimaryRole()
@@ -39,14 +47,15 @@ class CBPersonDataOverview(FrozenClass.RFrozenClass):
         out_dict['social'] = self.social.serialize()
         return out_dict
 
-class CBPersonData(FrozenClass.RFrozenClass):
 
+class CBPersonData(FrozenClass.RFrozenClass):
     def __init__(self, infile=None):
         super().__init__()
         if infile is not None:
-            self.load(infile)
+            self.json_file = infile
+            self.load()
         else:
-            self.type = str()
+            self.json_file = str()
             self.person_id_cb = str()
             self.company_id_cb = str()
             self.company_id_vico = str()
@@ -60,15 +69,34 @@ class CBPersonData(FrozenClass.RFrozenClass):
             self.advisory_roles = list()
             self.education = list()
             self.investments = list()
+
+            # type list
+            self.is_founder = False
+            self.is_current_people = False
+            self.is_past = False
+            self.is_adv = False
+
         self._freeze()
 
-    def save(self, outfile):
+    def setType(self, type):
+        assert(type in EPersonType)
+        if type==EPersonType.FOUNDERS:
+            self.is_founder = True
+        elif type==EPersonType.PAST_PEOPLE:
+            self.is_past = True
+        elif type==EPersonType.ADVISORS:
+            self.is_adv = True
+        elif type==EPersonType.PEOPLE:
+            self.is_current_people = True
+
+    def save(self):
         out_dict = self.__dict__
         out_dict['overview'] = self.overview.serialize()
-        GenericScraper.saveDictToJsonFile(out_dict, outfile)
+        del out_dict['json_file']
+        GenericWebScraper.saveJSON(out_dict, self.json_file)
 
-    def load(self, infile):
-        in_dict = GenericScraper.readJSONFile(infile)
+    def load(self):
+        in_dict = GenericWebScraper.readJSONFile(self.json_file)
         ov = CBPersonDataOverview(in_dict['overview'])
         in_dict['overview'] = ov
         self.__dict__ = in_dict

@@ -28,21 +28,13 @@ n_requests = 0
 
 #FUNCTIONS
 
-def readPickle(file):
-    with open(file, 'wb') as f:
-        data = pickle.load(file)
-    return data
-
-def writePickle(data, file):
-    with open(file, 'wb') as f:
-        pickle.dump(data, file)
-
 def readJSONFile(json_file):
+    assert(os.path.isfile(json_file))
     with open(json_file, 'r', encoding='utf-8') as fileh:
         data = json.load(fileh)
     return data
 
-def saveDictToJsonFile(dict_data, json_file):
+def saveJSON(dict_data, json_file):
     with open(json_file, 'w', encoding="utf-8") as fileh:
         fileh.write(jsonPretty(dict_data))
 
