@@ -1,9 +1,11 @@
 import FrozenClass
 import GenericWebScraper
 from enum import Enum, unique
+import os
+import logging
 
 @unique
-class EPersonType(Enum):
+class EPersonType(str, Enum):
     PEOPLE = 'people'
     ADVISORS = 'advisors'
     PAST_PEOPLE = 'past_people'
@@ -28,13 +30,12 @@ class CBPersonDataOverview(FrozenClass.RFrozenClass):
             self.gender = ''
             self.location = ''
         else:
-            del in_dict['_RFrozenClass__isfrozen']
             valid_keys = {'primary_role', 'social', 'born', 'gender', 'location'}
             assert (set(in_dict.keys()) == valid_keys)
             assert (type(in_dict['born'] == str))
             assert (type(in_dict['gender'] == str))
             assert (type(in_dict['location'] == str))
-            self.__dict__ = in_dict
+            self.setDict(in_dict)
             pr = CBPersonDataOverviewPrimaryRole(in_dict['primary_role'])
             self.primary_role = pr
             soc = CBPersonDataOverviewSocial(in_dict['social'])
@@ -42,7 +43,7 @@ class CBPersonDataOverview(FrozenClass.RFrozenClass):
         self._freeze()
 
     def serialize(self):
-        out_dict = self.__dict__
+        out_dict = self.getDict()
         out_dict['primary_role'] = self.primary_role.serialize()
         out_dict['social'] = self.social.serialize()
         return out_dict
@@ -52,8 +53,7 @@ class CBPersonData(FrozenClass.RFrozenClass):
     def __init__(self, infile=None):
         super().__init__()
         if infile is not None:
-            self.json_file = infile
-            self.load()
+            self.load(infile)
         else:
             self.json_file = str()
             self.person_id_cb = str()
@@ -69,17 +69,14 @@ class CBPersonData(FrozenClass.RFrozenClass):
             self.advisory_roles = list()
             self.education = list()
             self.investments = list()
-
-            # type list
+            # person type list
             self.is_founder = False
             self.is_current_people = False
             self.is_past = False
             self.is_adv = False
-
         self._freeze()
 
     def setType(self, type):
-        assert(type in EPersonType)
         if type==EPersonType.FOUNDERS:
             self.is_founder = True
         elif type==EPersonType.PAST_PEOPLE:
@@ -88,18 +85,26 @@ class CBPersonData(FrozenClass.RFrozenClass):
             self.is_adv = True
         elif type==EPersonType.PEOPLE:
             self.is_current_people = True
+        else:
+            logging.critical(str(type)+" not in EPersonType")
+            assert(False)
 
-    def save(self):
-        out_dict = self.__dict__
+    def save(self, overwrite=False):
+        assert(self.json_file != '')
+        if not overwrite:
+            assert(not os.path.isfile(self.json_file))
+        out_dict = self.getDict()
         out_dict['overview'] = self.overview.serialize()
         del out_dict['json_file']
+        #logging.info(GenericWebScraper.jsonPretty(self.getDict()))
         GenericWebScraper.saveJSON(out_dict, self.json_file)
 
-    def load(self):
-        in_dict = GenericWebScraper.readJSONFile(self.json_file)
+    def load(self, json_file):
+        in_dict = GenericWebScraper.readJSONFile(json_file)
         ov = CBPersonDataOverview(in_dict['overview'])
         in_dict['overview'] = ov
-        self.__dict__ = in_dict
+        self.setDict(in_dict)
+        self.json_file = json_file
 
     def hasLILink(self):
         return self.overview.social.linkedin == ''

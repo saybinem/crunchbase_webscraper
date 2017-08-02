@@ -1,4 +1,4 @@
-import logging
+from abc import ABCMeta, abstractmethod
 
 class FrozenClass():
 
@@ -15,6 +15,17 @@ class FrozenClass():
         if self.__isfrozen and not hasattr(self, key):
             raise TypeError(self._genTypeErrorMsg(key, value)+ "no new attributes allowed")
         object.__setattr__(self, key, value)
+
+    def getDict(self):
+        d = self.__dict__.copy()
+        del d['_FrozenClass__isfrozen']
+        return d
+
+    def setDict(self, d):
+        frstr = '_FrozenClass__isfrozen'
+        if frstr in d:
+            del d[frstr]
+        self.__dict__ = d
 
 
 class RFrozenClass():
@@ -40,7 +51,24 @@ class RFrozenClass():
                 raise TypeError(self._genTypeErrorMsg(key, value)+ "can't change attribute type")
         object.__setattr__(self, key, value)
 
-class StringHolder(RFrozenClass):
+    def getDict(self):
+        d = self.__dict__.copy()
+        del d['_RFrozenClass__isfrozen']
+        return d
+
+    def setDict(self, d):
+        frstr = '_RFrozenClass__isfrozen'
+        if frstr in d:
+            del d[frstr]
+        self.__dict__ = d
+
+class StringHolder(RFrozenClass, ABCMeta):
+
+    @property
+    @abstractmethod
+    def valid_keys(self):
+        pass
+
     def __init__(self, in_dict = None):
         super().__init__()
         if not in_dict:

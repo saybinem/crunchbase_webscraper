@@ -10,6 +10,7 @@ import global_vars
 from cbscraper.CBCompanyWebScraper import OrgEndPoint
 from cbscraper.GenericWebScraper import Error404
 from cbscraper.CBPersonData import EPersonType
+from cbscraper.CBCompanyData import CBCompanyDetails
 
 # Scrape organization advisors
 def scrapeOrgAdvisors(soup_advisors):
@@ -76,8 +77,9 @@ def scrapeOrgPastPeople(soup_past_people):
 
 # Scrape organization details
 def scrapeOrgDetails(soup):
+
     # Scrape section overview->company details
-    company_details = {}
+    company_details = CBCompanyDetails()
     company_details_tag = soup.find('div', class_="base info-tab description")
 
     if company_details_tag is not None:
@@ -85,22 +87,22 @@ def scrapeOrgDetails(soup):
         # Founded year
         tag = company_details_tag.find('dt', string='Founded:')
         if tag is not None:
-            company_details['founded'] = tag.find_next('dd').text
+            company_details.founded = tag.find_next('dd').text
 
         # Closed
         tag = company_details_tag.find('dt', string='Closed:')
         if tag is not None:
-            company_details['closed'] = tag.find_next('dd').text
+            company_details.closed = tag.find_next('dd').text
 
         # Email
         tag = company_details_tag.find('span', class_='email')
         if tag is not None:
-            company_details['email'] = tag.text
+            company_details.email = tag.text
 
         # Phone number
         tag = company_details_tag.find('span', class_='phone_number')
         if tag is not None:
-            company_details['phone_number'] = tag.text
+            company_details.phone_number = tag.text
 
         # Employees
         tag = company_details_tag.find('dt', string='Employees:')
@@ -108,16 +110,16 @@ def scrapeOrgDetails(soup):
             emp_str = tag.find_next('dd').text
             emp_arr = emp_str.split("|")
             if len(emp_arr) > 1:
-                company_details['employees_num'] = emp_arr[0].strip()
-                company_details['employees_found'] = emp_arr[1].strip()
+                company_details.employees_num = emp_arr[0].strip()
+                company_details.employees_found = emp_arr[1].strip()
             else:
-                company_details['employees_num'] = ''
-                company_details['employees_found'] = emp_arr[0].strip()
+                company_details.employees_num = ''
+                company_details.employees_found = emp_arr[0].strip()
 
         # Phone number
         tag = company_details_tag.find('span', class_='description')
         if tag is not None:
-            company_details['description'] = tag.text
+            company_details.description = tag.text
 
     return company_details
 
@@ -273,100 +275,83 @@ def scrapeOrgOverview(soup):
 
 
 # Scrape a company
-def scrapeOrg(org_data):
-    # Get variables
-    json_file = org_data['json']
-    company_id_vico = org_data['company_id_vico']
-    company_id_cb = org_data['company_id_cb']
-    completion_perc = org_data['completion_perc']
-    msg = "Company: " + company_id_cb + " (" + str(completion_perc) + "%) (" + company_id_vico + ")"
+def scrapeOrg(company_data):
+
+    msg = "Company: " + company_data.company_id_cb + " (" + str(company_data.completion_perc) + "%) (" + company_data.company_id_vico + ")"
     logging.info(msg)
 
     # If we have a JSON file and rescrape is False, use the JSON file we already have
-    if os.path.isfile(json_file):
+    if os.path.isfile(company_data.json_file):
         if not global_vars.rescrape:
             logging.warning("Organization already scraped. Returning JSON file")
-            org_data = cbscraper.GenericWebScraper.readJSONFile(json_file)
+            org_data = cbscraper.GenericWebScraper.readJSONFile(company_data.json_file)
             return org_data
         else:
-            os.unlink(json_file)
+            os.unlink(company_data.json_file)
 
     # Scrape organization
-    org = cbscraper.CBCompanyWebScraper.CBCompanyWebScraper(company_id_cb)
+    company_scraper = cbscraper.CBCompanyWebScraper.CBCompanyWebScraper(company_data.company_id_cb)
 
     # If the HTML file doesn't exist and go_on is False, skip the organization
-    htmlfile = org.genHTMLFilePath(OrgEndPoint.ENTITY)
+    htmlfile = company_scraper.genHTMLFilePath(OrgEndPoint.ENTITY)
     if not os.path.isfile(htmlfile) and not global_vars.go_on:
         logging.info("NOT WEB-SCRAPING NEW COMPANIES")
         sys.exit(0)
 
     # Scrape the company
-    company_data = {
-        'company_id_vico': company_id_vico,
-        'company_id_cb': company_id_cb
-    }
-
     error_code = ''
     try:
-        org.scrape()
+        company_scraper.scrape()
     except Error404:
         error_code = '404'
         logging.info("Error404 intercepted")
-
-    if error_code == '':
+    else:
         # Get soup of various sections
-        soup_entity = org.getEndpointSoup(OrgEndPoint.ENTITY)
-        soup_people = org.getEndpointSoup(OrgEndPoint.PEOPLE)
-        soup_adv = org.getEndpointSoup(OrgEndPoint.ADVISORS)
-        soup_past_people = org.getEndpointSoup(OrgEndPoint.PAST_PEOPLE)
+        soup_entity = company_scraper.getEndpointSoup(OrgEndPoint.ENTITY)
+        soup_people = company_scraper.getEndpointSoup(OrgEndPoint.PEOPLE)
+        soup_adv = company_scraper.getEndpointSoup(OrgEndPoint.ADVISORS)
+        soup_past_people = company_scraper.getEndpointSoup(OrgEndPoint.PAST_PEOPLE)
 
         # Data mining
-        company_details = scrapeOrgDetails(soup_entity)
-        overview = scrapeOrgOverview(soup_entity)
-        people = scrapeOrgCurrentPeople(soup_people)
-        advisors = scrapeOrgAdvisors(soup_adv)
-        past_people = scrapeOrgPastPeople(soup_past_people)
+        company_data.company_details = scrapeOrgDetails(soup_entity)
+        company_data.overview = scrapeOrgOverview(soup_entity)
+        company_data.people = scrapeOrgCurrentPeople(soup_people)
+        company_data.advisors = scrapeOrgAdvisors(soup_adv)
+        company_data.past_people = scrapeOrgPastPeople(soup_past_people)
 
-        founders_list = overview['founders']
+        founders_list =  company_data.overview['founders']
 
         # error code
-        if len(people) == 0:
+        if len( company_data.people) == 0:
             error_code += 'NoCP_'
-        if len(past_people) == 0:
+        if len( company_data.past_people) == 0:
             error_code += 'NoPP_'
-        if len(advisors) == 0:
+        if len(company_data.advisors) == 0:
             error_code += 'NoA_'
         if len(founders_list) == 0:
             error_code += 'NoF_'
 
-        # Add informations
-        company_data['overview'] = overview
-        company_data['company_details'] = company_details
-        company_data['people'] = people
-        company_data['advisors'] = advisors
-        company_data['past_people'] = past_people
-
     # Save error code
-    company_data['error'] = error_code
+    company_data.error = error_code
 
     # Write to file
-    cbscraper.GenericWebScraper.saveJSON(company_data, json_file)
+    company_data.save()
 
     return company_data
 
 
 # Scrape an organization and all its people
-def scrapeOrgAndPeople(org_data):
+def scrapeOrgAndPeople(company_data):
 
     # Scrape the company
-    company_data = scrapeOrg(org_data)
+    scrapeOrg(company_data)
 
     # Scrape persons of the company
-    if (company_data is not False and company_data['error'] != '404'):
+    if (company_data is not False and company_data.error != '404'):
 
         logging.debug("Scraping 'founders'")
         # def scrapePersonsList(company_data, key, company_id_cb = None, company_id_vico = None):
-        cbscraper.person.scrapePersonsList(company_data['overview'], EPersonType.FOUNDERS, company_data['company_id_cb'], company_data['company_id_vico'])
+        cbscraper.person.scrapePersonsList(company_data.overview, EPersonType.FOUNDERS, company_data.company_id_cb, company_data.company_id_vico)
 
         logging.debug("Scraping 'people'")
         cbscraper.person.scrapePersonsList(company_data, EPersonType.PEOPLE)

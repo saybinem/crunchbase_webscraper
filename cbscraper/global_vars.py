@@ -4,7 +4,7 @@ rescrape = True
 go_on = False #scrape unscraped companies
 
 excel_file = r"C:\data\tesi\VICO\ID Crunchbase_ID VICO.xlsx"
-vico_file = r"C:\data\tesi\VICO\VICO 4.0_REV_geocoded.hdf5"
+vico_file = r"C:\data\tesi\VICO\VICO 4.0_REV_geocoded.csv"
 
 excel_sheet = 'Firm'
 excel_col_cb = 'CB'

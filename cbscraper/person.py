@@ -8,7 +8,7 @@ import cbscraper.GenericWebScraper
 from cbscraper.GenericWebScraper import Error404
 import main_cb
 import global_vars
-from CBPersonData import CBPersonData
+from CBPersonData import CBPersonData, CBPersonDataOverview
 
 def getPersonIdFromLink(link):
     return link.split("/")[2]
@@ -146,7 +146,7 @@ def scrapePersonCurrentJobs(soup):
 
 # *** Overview ***
 def scrapePersonOverview(soup):
-    overview = CBPersonData.CBPersonDataOverview()
+    overview = CBPersonDataOverview()
 
     overview_content = soup.find(id='info-card-overview-content')
 
@@ -216,17 +216,17 @@ def scrapePerson(person_data):
     logging.debug("Scraping person: '" + person_data.person_id_cb + "' of company '" + person_data.company_id_cb + "'")
 
     # Scrape
-    person = cbscraper.CBPersonWebScraper.CBPersonWebScraper(person_data.person_id_cb)
+    person_scraper = cbscraper.CBPersonWebScraper.CBPersonWebScraper(person_data.person_id_cb)
     try:
-        person.scrape()
+        person_scraper.scrape()
     except Error404:
         person_data.error = '404'
         logging.error("scrape() raised a 404 error")
     else:
         # The try ... except statement has an optional else clause, which, when present, must follow all except clauses.
         # It is useful for code that must be executed if the try clause does not raise an exception
-        soup = person.soup_entity
-        inv_soup = person.soup_inv
+        soup = person_scraper.soup_entity
+        inv_soup = person_scraper.soup_inv
 
         # Scrape
         person_data.person_details = scrapePersonDetails(soup)
@@ -273,19 +273,19 @@ def scrapePersonsList(company_data, key, company_id_cb = None, company_id_vico =
 
     for p in p_list:
         person_id = getPersonIdFromLink(p[1])
-        json_file = "./data/person/json/" + person_id + ".json"
+        person_json_file = "./data/person/json/" + person_id + ".json"
 
         if person_id in global_vars.already_scraped:
-            logging.warning("The person '" + person_id + "' has already been scraped. Just adding new type")
-            person_data = CBPersonData(json_file)
+            logging.debug("The person '" + person_id + "' has already been scraped. Just adding new type")
+            person_data = CBPersonData(person_json_file)
             person_data.setType(key)
-            person_data.save()
+            person_data.save(overwrite=True)
         else:
             person_data = CBPersonData()
             person_data.person_id_cb = person_id
             person_data.company_id_cb = company_id_cb
             person_data.company_id_vico = company_id_vico
-            person_data.json_file = json_file
+            person_data.json_file = person_json_file
             person_data.setType(key)
             scrapePerson(person_data)
             global_vars.already_scraped.append(person_data.person_id_cb)
