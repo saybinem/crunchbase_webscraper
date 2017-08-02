@@ -2,6 +2,7 @@ import logging
 import logging
 import os
 import sys
+import pprint
 
 import cbscraper.CBCompanyWebScraper
 import cbscraper.GenericWebScraper
@@ -10,7 +11,7 @@ import global_vars
 from cbscraper.CBCompanyWebScraper import OrgEndPoint
 from cbscraper.GenericWebScraper import Error404
 from cbscraper.CBPersonData import EPersonType
-from cbscraper.CBCompanyData import CBCompanyDetails
+from cbscraper.CBCompanyDetails import CBCompanyDetails
 
 # Scrape organization advisors
 def scrapeOrgAdvisors(soup_advisors):
@@ -314,12 +315,14 @@ def scrapeOrg(company_data):
 
         # Data mining
         company_data.company_details = scrapeOrgDetails(soup_entity)
+
         company_data.overview = scrapeOrgOverview(soup_entity)
+        company_data.founders = company_data.overview['founders']
+        del company_data.overview['founders']
+
         company_data.people = scrapeOrgCurrentPeople(soup_people)
         company_data.advisors = scrapeOrgAdvisors(soup_adv)
         company_data.past_people = scrapeOrgPastPeople(soup_past_people)
-
-        founders_list =  company_data.overview['founders']
 
         # error code
         if len( company_data.people) == 0:
@@ -328,7 +331,7 @@ def scrapeOrg(company_data):
             error_code += 'NoPP_'
         if len(company_data.advisors) == 0:
             error_code += 'NoA_'
-        if len(founders_list) == 0:
+        if len(company_data.founders) == 0:
             error_code += 'NoF_'
 
     # Save error code
@@ -351,7 +354,7 @@ def scrapeOrgAndPeople(company_data):
 
         logging.debug("Scraping 'founders'")
         # def scrapePersonsList(company_data, key, company_id_cb = None, company_id_vico = None):
-        cbscraper.person.scrapePersonsList(company_data.overview, EPersonType.FOUNDERS, company_data.company_id_cb, company_data.company_id_vico)
+        cbscraper.person.scrapePersonsList(company_data, EPersonType.FOUNDERS)
 
         logging.debug("Scraping 'people'")
         cbscraper.person.scrapePersonsList(company_data, EPersonType.PEOPLE)

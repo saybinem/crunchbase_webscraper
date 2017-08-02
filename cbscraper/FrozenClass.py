@@ -1,4 +1,6 @@
 from abc import ABCMeta, abstractmethod
+import logging
+import pprint
 
 class FrozenClass():
 
@@ -38,7 +40,7 @@ class RFrozenClass():
 
     def _genTypeErrorMsg(self, key, value):
         return "While trying:\n " \
-               + str(key) + " (" + str(type(key)) + ") \n = \n " \
+               + str(key) + " (" + str(getattr(self, key)) + ", " + str(type(getattr(self, key))) + ") \n = \n " \
                + str(value) + " (" + str(type(value)) + ") \n " \
                + "For " + str(self) \
                + " which is a R-frozen class, "
@@ -47,7 +49,10 @@ class RFrozenClass():
         if self.__isfrozen:
             if not hasattr(self, key):
                 raise TypeError(self._genTypeErrorMsg(key, value)+ "no new attributes allowed")
-            if type(getattr(self, key)) != type(value):
+            att = getattr(self, key)
+            if not isinstance(value, type(att)):
+                logging.info("att='" + str(att) + "'")
+                logging.info(pprint.pformat(self.__dict__, indent=4))
                 raise TypeError(self._genTypeErrorMsg(key, value)+ "can't change attribute type")
         object.__setattr__(self, key, value)
 
@@ -62,12 +67,7 @@ class RFrozenClass():
             del d[frstr]
         self.__dict__ = d
 
-class StringHolder(RFrozenClass, ABCMeta):
-
-    @property
-    @abstractmethod
-    def valid_keys(self):
-        pass
+class StringHolder(RFrozenClass):
 
     def __init__(self, in_dict = None):
         super().__init__()

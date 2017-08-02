@@ -42,10 +42,12 @@ def main():
     buildDirs()
 
     # VICO DB
+    logging.info("Reading VICO db")
     vico_frame = pandas.read_csv(global_vars.vico_file, index_col='CompanyID', header=0, low_memory=False)
     valid_vico_ids = list(vico_frame.index)
 
     # Get list of companies
+    logging.info("Reading map")
     vico_to_cb_map = pandas.read_excel(global_vars.excel_file, index_col=global_vars.excel_col_vico, header=0, sheetname=global_vars.excel_sheet)
 
     # Build job list
@@ -76,15 +78,12 @@ def main():
         # Calculate percentage completion
         completion_perc = round((counter / ids_len) * 100, 2)
         counter += 1
-
         json_file = os.path.join(global_vars.company_json_dir, company_id_cb + ".json")
-
         company_data = CBCompanyData()
         company_data.company_id_cb = company_id_cb
         company_data.company_id_vico = company_id_vico
         company_data.json_file = json_file
         company_data.completion_perc = completion_perc
-
         jobs_list.append(company_data)
 
     # Duplicates count

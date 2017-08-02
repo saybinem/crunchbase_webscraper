@@ -53,7 +53,7 @@ class CBPersonData(FrozenClass.RFrozenClass):
     def __init__(self, infile=None):
         super().__init__()
         if infile is not None:
-            self.load(infile)
+            self._load(infile)
         else:
             self.json_file = str()
             self.person_id_cb = str()
@@ -99,7 +99,7 @@ class CBPersonData(FrozenClass.RFrozenClass):
         #logging.info(GenericWebScraper.jsonPretty(self.getDict()))
         GenericWebScraper.saveJSON(out_dict, self.json_file)
 
-    def load(self, json_file):
+    def _load(self, json_file):
         in_dict = GenericWebScraper.readJSONFile(json_file)
         ov = CBPersonDataOverview(in_dict['overview'])
         in_dict['overview'] = ov

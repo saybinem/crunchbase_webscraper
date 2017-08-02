@@ -258,15 +258,12 @@ def scrapePerson(person_data):
 # Give a company, scrape current people, past people and advisors
 # company_data = a dict returned by cbscraper.company.scrapeOrganization()
 # key = the dictionary key that contains the list of lists of company persons
-def scrapePersonsList(company_data, key, company_id_cb = None, company_id_vico = None):
+def scrapePersonsList(company_data, key):
 
-    if company_id_cb is None:
-        company_id_cb = company_data['company_id_cb']
+    company_id_cb = company_data.company_id_cb
+    company_id_vico = company_data.company_id_vico
 
-    if company_id_vico is None:
-        company_id_vico = company_data['company_id_vico']
-
-    p_list = company_data[key]
+    p_list = getattr(company_data, key)
 
     if not p_list:
         logging.debug("List "+key+" is empty for "+company_id_cb)
