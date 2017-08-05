@@ -1,7 +1,7 @@
 import os
-import FrozenClass
-import GenericWebScraper
-import cbscraper
+from cbscraper import FrozenClass
+from cbscraper import GenericWebScraper
+from cbscraper import CBCompanyDetails
 
 class CBCompanyData(FrozenClass.RFrozenClass):
     def __init__(self, infile=None):
@@ -14,7 +14,7 @@ class CBCompanyData(FrozenClass.RFrozenClass):
             self.company_id_cb = str()
             self.completion_perc = float()
             self.overview = dict()
-            self.company_details = cbscraper.CBCompanyDetails.CBCompanyDetails()
+            self.company_details = CBCompanyDetails.CBCompanyDetails()
             self.people = list()
             self.advisors = list()
             self.past_people = list()
@@ -36,5 +36,5 @@ class CBCompanyData(FrozenClass.RFrozenClass):
     def _load(self, json_file):
         in_dict = GenericWebScraper.readJSONFile(json_file)
         self.setDict(in_dict)
-        self.company_details = CBCompanyDetails(in_dict['company_details'])
+        self.company_details = CBCompanyDetails.CBCompanyDetails(in_dict['company_details'])
         self.json_file = json_file
