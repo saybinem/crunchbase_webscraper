@@ -1,4 +1,4 @@
-from cbscraper import FrozenClass
+
 from cbscraper import GenericWebScraper
 from enum import Enum, unique
 import os
@@ -12,69 +12,53 @@ class EPersonType(str, Enum):
     FOUNDERS = 'founders'
 
 
-class CBPersonDataOverviewSocial(FrozenClass.StringHolder):
-    valid_keys = {'facebook', 'linkedin', 'twitter'}
-
-
-class CBPersonDataOverviewPrimaryRole(FrozenClass.StringHolder):
-    valid_keys = {'role', 'firm'}
-
-
-class CBPersonDataOverview(FrozenClass.RFrozenClass):
-    def __init__(self, in_dict=None):
+class CBPersonDataOverviewSocial():
+    def __init__(self):
         super().__init__()
-        if not in_dict:
-            self.primary_role = CBPersonDataOverviewPrimaryRole()
-            self.social = CBPersonDataOverviewSocial()
-            self.born = ''
-            self.gender = ''
-            self.location = ''
-        else:
-            valid_keys = {'primary_role', 'social', 'born', 'gender', 'location'}
-            assert (set(in_dict.keys()) == valid_keys)
-            assert (type(in_dict['born'] == str))
-            assert (type(in_dict['gender'] == str))
-            assert (type(in_dict['location'] == str))
-            self.setDict(in_dict)
-            pr = CBPersonDataOverviewPrimaryRole(in_dict['primary_role'])
-            self.primary_role = pr
-            soc = CBPersonDataOverviewSocial(in_dict['social'])
-            self.social = soc
-        self._freeze()
+        self.facebook = str()
+        self.linkedin = str()
+        self.twitter = str()
+        #self._freeze()
 
-    def serialize(self):
-        out_dict = self.getDict()
-        out_dict['primary_role'] = self.primary_role.serialize()
-        out_dict['social'] = self.social.serialize()
-        return out_dict
-
-
-class CBPersonData(FrozenClass.RFrozenClass):
-    def __init__(self, infile=None):
+class CBPersonDataOverviewPrimaryRole():
+    def __init(self):
         super().__init__()
-        if infile is not None:
-            self._load(infile)
-        else:
-            self.json_file = str()
-            self.person_id_cb = str()
-            self.company_id_cb = str()
-            self.company_id_vico = str()
-            self.name = str()
-            self.person_details = str()
-            self.error = str()
-            self.stat_code = str()
-            self.overview = CBPersonDataOverview()
-            self.current_jobs = list()
-            self.past_jobs = list()
-            self.advisory_roles = list()
-            self.education = list()
-            self.investments = list()
-            # person type list
-            self.is_founder = False
-            self.is_current_people = False
-            self.is_past = False
-            self.is_adv = False
-        self._freeze()
+        self.role=''
+        self.firm=''
+        #self._freeze()
+
+class CBPersonDataOverview():
+    def __init__(self):
+        super().__init__()
+        self.primary_role = CBPersonDataOverviewPrimaryRole()
+        self.social = CBPersonDataOverviewSocial()
+        self.born = ''
+        self.gender = ''
+        self.location = ''
+        #self._freeze()
+
+class CBPersonData(object):
+    def __init__(self):
+        super().__init__()
+        self.person_id_cb = str()
+        self.company_id_cb = str()
+        self.company_id_vico = str()
+        self.name = str()
+        self.person_details = str()
+        self.error = str()
+        self.stat_code = str()
+        self.overview = CBPersonDataOverview()
+        self.current_jobs = list()
+        self.past_jobs = list()
+        self.advisory_roles = list()
+        self.education = list()
+        self.investments = list()
+        # person type list
+        self.is_founder = False
+        self.is_current_people = False
+        self.is_past = False
+        self.is_adv = False
+        #self._freeze()
 
     def setType(self, type):
         if type==EPersonType.FOUNDERS:
@@ -89,22 +73,11 @@ class CBPersonData(FrozenClass.RFrozenClass):
             logging.critical(str(type)+" not in EPersonType")
             assert(False)
 
-    def save(self, overwrite=False):
-        assert(self.json_file != '')
+    def save(self, outfile, overwrite=False):
+        assert(outfile != '')
         if not overwrite:
-            assert(not os.path.isfile(self.json_file))
-        out_dict = self.getDict()
-        out_dict['overview'] = self.overview.serialize()
-        del out_dict['json_file']
-        #logging.info(GenericWebScraper.jsonPretty(self.getDict()))
-        GenericWebScraper.saveJSON(out_dict, self.json_file)
-
-    def _load(self, json_file):
-        in_dict = GenericWebScraper.readJSONFile(json_file)
-        ov = CBPersonDataOverview(in_dict['overview'])
-        in_dict['overview'] = ov
-        self.setDict(in_dict)
-        self.json_file = json_file
+            assert(not os.path.isfile(outfile))
+        GenericWebScraper.saveJSON(self, outfile)
 
     def hasLILink(self):
         return self.overview.social.linkedin == ''

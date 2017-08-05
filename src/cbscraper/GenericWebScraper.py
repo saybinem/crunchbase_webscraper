@@ -8,6 +8,9 @@ from abc import ABCMeta, abstractmethod
 from email.mime.text import MIMEText
 from enum import Enum
 
+import jsonpickle
+import pickle
+
 import bs4 as bs
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
@@ -18,9 +21,10 @@ from selenium.webdriver.remote.remote_connection import LOGGER
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 from fake_useragent import UserAgent
-import pickle
-
 ua = UserAgent()
+
+import cbscraper.CBPersonData
+
 
 # Non modifiable globals
 _browser = None
@@ -28,15 +32,33 @@ n_requests = 0
 
 #FUNCTIONS
 
-def readJSONFile(json_file):
-    assert(os.path.isfile(json_file))
-    with open(json_file, 'r', encoding='utf-8') as fileh:
-        data = json.load(fileh)
-    return data
+usepickle = True
 
-def saveJSON(dict_data, json_file):
-    with open(json_file, 'w', encoding="utf-8") as fileh:
-        fileh.write(jsonPretty(dict_data))
+def readJSONFile(file):
+    assert(os.path.isfile(file))
+    if usepickle:
+        file += '.pkl'
+        with open(file, 'rb') as fileh:
+            ob = pickle.load(fileh)
+    else:
+        file += '.json'
+        with open(file, 'r', encoding="utf-8") as fileh:
+            #logging.debug(cont)
+            cont = fileh.read()
+            ob = jsonpickle.decode(cont)
+    return ob
+
+def saveJSON(data, file):
+    if usepickle:
+        file += '.pkl'
+        with open(file, 'wb') as fileh:
+            pickle.dump(data, fileh, pickle.HIGHEST_PROTOCOL)
+    else:
+        file += '.json'
+        with open(file, 'w', encoding="utf-8") as fileh:
+            #logging.info(data.__dict__)
+            data_str = jsonpickle.encode(data)
+            fileh.write(data_str)
 
 def myTextStrip(str):
     return str.replace('\n', '').strip()

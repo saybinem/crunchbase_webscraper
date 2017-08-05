@@ -18,21 +18,14 @@ class FrozenClass():
             raise TypeError(self._genTypeErrorMsg(key, value)+ "no new attributes allowed")
         object.__setattr__(self, key, value)
 
-    def getDict(self):
-        d = self.__dict__.copy()
-        del d['_FrozenClass__isfrozen']
-        return d
-
-    def setDict(self, d):
-        frstr = '_FrozenClass__isfrozen'
-        if frstr in d:
-            del d[frstr]
-        self.__dict__ = d
-
 
 class RFrozenClass():
 
+    __constructor_called = False
     __isfrozen = False
+
+    def __init__(self):
+        self.__constructor_called = True
 
     def _freeze(self):
         #logging.info("Setting __isfrozen to true in "+str(self))
@@ -46,26 +39,16 @@ class RFrozenClass():
                + " which is a R-frozen class, "
 
     def __setattr__(self, key, value):
-        if self.__isfrozen:
+        if self.__constructor_called and self.__isfrozen:
             if not hasattr(self, key):
                 raise TypeError(self._genTypeErrorMsg(key, value)+ "no new attributes allowed")
+
             att = getattr(self, key)
             if not isinstance(value, type(att)):
                 logging.info("att='" + str(att) + "'")
                 logging.info(pprint.pformat(self.__dict__, indent=4))
                 raise TypeError(self._genTypeErrorMsg(key, value)+ "can't change attribute type")
         object.__setattr__(self, key, value)
-
-    def getDict(self):
-        d = self.__dict__.copy()
-        del d['_RFrozenClass__isfrozen']
-        return d
-
-    def setDict(self, d):
-        frstr = '_RFrozenClass__isfrozen'
-        if frstr in d:
-            del d[frstr]
-        self.__dict__ = d
 
 class StringHolder(RFrozenClass):
 

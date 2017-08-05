@@ -1,17 +1,16 @@
 import logging
-import logging
 import os
 import sys
-import pprint
 
 import cbscraper.CBCompanyWebScraper
 import cbscraper.GenericWebScraper
 import cbscraper.person
-import global_vars
-from cbscraper.CBCompanyWebScraper import OrgEndPoint
-from cbscraper.GenericWebScraper import Error404
-from cbscraper.CBPersonData import EPersonType
+from cbscraper import global_vars
 from cbscraper.CBCompanyDetails import CBCompanyDetails
+from cbscraper.CBCompanyWebScraper import OrgEndPoint
+from cbscraper.CBPersonData import EPersonType
+from cbscraper.GenericWebScraper import Error404
+
 
 # Scrape organization advisors
 def scrapeOrgAdvisors(soup_advisors):
@@ -78,7 +77,6 @@ def scrapeOrgPastPeople(soup_past_people):
 
 # Scrape organization details
 def scrapeOrgDetails(soup):
-
     # Scrape section overview->company details
     company_details = CBCompanyDetails()
     company_details_tag = soup.find('div', class_="base info-tab description")
@@ -277,8 +275,8 @@ def scrapeOrgOverview(soup):
 
 # Scrape a company
 def scrapeOrg(company_data):
-
-    msg = "Company: " + company_data.company_id_cb + " (" + str(company_data.completion_perc) + "%) (" + company_data.company_id_vico + ")"
+    msg = "Company: " + company_data.company_id_cb + " (" + str(
+        company_data.completion_perc) + "%) (" + company_data.company_id_vico + ")"
     logging.info(msg)
 
     # If we have a JSON file and rescrape is False, use the JSON file we already have
@@ -325,9 +323,9 @@ def scrapeOrg(company_data):
         company_data.past_people = scrapeOrgPastPeople(soup_past_people)
 
         # error code
-        if len( company_data.people) == 0:
+        if len(company_data.people) == 0:
             error_code += 'NoCP_'
-        if len( company_data.past_people) == 0:
+        if len(company_data.past_people) == 0:
             error_code += 'NoPP_'
         if len(company_data.advisors) == 0:
             error_code += 'NoA_'
@@ -338,14 +336,14 @@ def scrapeOrg(company_data):
     company_data.error = error_code
 
     # Write to file
-    company_data.save()
+    out_file = os.path.join(global_vars.company_json_dir, company_data.company_id_cb)
+    company_data.save(out_file)
 
     return company_data
 
 
 # Scrape an organization and all its people
 def scrapeOrgAndPeople(company_data):
-
     # Scrape the company
     scrapeOrg(company_data)
 

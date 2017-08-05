@@ -6,9 +6,8 @@ import cbscraper.DateInterval
 import cbscraper.CBPersonWebScraper
 import cbscraper.GenericWebScraper
 from cbscraper.GenericWebScraper import Error404
-import main_cb
-import global_vars
-from CBPersonData import CBPersonData, CBPersonDataOverview
+from cbscraper import global_vars
+from cbscraper.CBPersonData import CBPersonData, CBPersonDataOverview
 
 def getPersonIdFromLink(link):
     return link.split("/")[2]
@@ -250,7 +249,8 @@ def scrapePerson(person_data):
             person_data.stat_code += 'NoInv_'
 
     # Save to JSON file
-    person_data.save()
+    person_out_file = "./data/person/json/" + person_data.person_id
+    person_data.save(person_out_file)
 
     # Return
     return person_data
@@ -270,11 +270,10 @@ def scrapePersonsList(company_data, key):
 
     for p in p_list:
         person_id = getPersonIdFromLink(p[1])
-        person_json_file = "./data/person/json/" + person_id + ".json"
 
         if person_id in global_vars.already_scraped:
             logging.debug("The person '" + person_id + "' has already been scraped. Just adding new type")
-            person_data = CBPersonData(person_json_file)
+            person_data = cbscraper.GenericWebScraper.readJSONFile(person_json_file)
             person_data.setType(key)
             person_data.save(overwrite=True)
         else:
@@ -282,7 +281,6 @@ def scrapePersonsList(company_data, key):
             person_data.person_id_cb = person_id
             person_data.company_id_cb = company_id_cb
             person_data.company_id_vico = company_id_vico
-            person_data.json_file = person_json_file
             person_data.setType(key)
             scrapePerson(person_data)
             global_vars.already_scraped.append(person_data.person_id_cb)
