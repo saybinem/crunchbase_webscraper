@@ -1,5 +1,5 @@
-import FrozenClass
-import GenericWebScraper
+from cbscraper import FrozenClass
+from cbscraper import GenericWebScraper
 from enum import Enum, unique
 import os
 import logging

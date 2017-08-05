@@ -2,7 +2,9 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../gen_company_table" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../gen_person_table" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../linkedin_scraper" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../process_person_table" vcs="Git" />
   </component>
 </project>

@@ -1,3 +1,5 @@
+# only ignore txt files in the current directory
+/*.txt
 *.log
 *.log.1
 *.log.2
