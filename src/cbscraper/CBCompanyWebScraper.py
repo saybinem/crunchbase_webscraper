@@ -5,6 +5,7 @@ import os
 import cbscraper.CBWebScraper
 import cbscraper.GenericWebScraper
 from cbscraper.GenericWebScraper import Error404
+import selenium.common.exceptions
 
 class OrgEndPoint(Enum):
     ENTITY = 1
@@ -53,7 +54,11 @@ class CBCompanyWebScraper(cbscraper.CBWebScraper.CBWebScraper):
         else:
             logging.debug("Opening entity page")
             self.openURL(self.cb_url + self.id)
-            self.waitForClass(OrgEndPoint.ENTITY)
+            try:
+                self.waitForClass(OrgEndPoint.ENTITY)
+            except selenium.common.exceptions.TimeoutException:
+                logging.error("Timeout exception. Retry")
+                return self.goToEntityPage()
         self.entity_page = True
         self.prev_page_is_entity = False
 
