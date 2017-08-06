@@ -114,7 +114,7 @@ def setLoggers():
     # console handler
     console_handler = logging.StreamHandler()
     console_handler.setFormatter(fmt)
-    console_handler.setLevel(logging.INFO)
+    console_handler.setLevel(logging.DEBUG)
     logging.getLogger().addHandler(console_handler)
 
     # log file handler

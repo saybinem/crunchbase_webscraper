@@ -1,7 +1,7 @@
 #GLOBALS
-remove_existing_json = True
-rescrape = True
-go_on = False #scrape unscraped companies
+remove_existing_json = False
+rescrape = False
+go_on = True #scrape unscraped companies
 
 excel_file = r"C:\data\tesi\VICO\ID Crunchbase_ID VICO.xlsx"
 vico_file = r"C:\data\tesi\VICO\VICO 4.0_REV_geocoded.csv"

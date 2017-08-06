@@ -5,7 +5,9 @@ import sys
 import cbscraper.CBCompanyWebScraper
 import cbscraper.GenericWebScraper
 import cbscraper.person
+
 from cbscraper import global_vars
+from cbscraper.CBCompanyData import CBCompanyData
 from cbscraper.CBCompanyDetails import CBCompanyDetails
 from cbscraper.CBCompanyWebScraper import OrgEndPoint
 from cbscraper.CBPersonData import EPersonType
@@ -275,15 +277,16 @@ def scrapeOrgOverview(soup):
 
 # Scrape a company
 def scrapeOrg(company_data):
-    msg = "Company: " + company_data.company_id_cb + " (" + str(
-        company_data.completion_perc) + "%) (" + company_data.company_id_vico + ")"
+    msg = "Company: " + company_data.company_id_cb + " (" + str(company_data.completion_perc) + "%) (" + company_data.company_id_vico + ")"
     logging.info(msg)
 
     # If we have a JSON file and rescrape is False, use the JSON file we already have
-    if os.path.isfile(company_data.json_file):
+    out_file = CBCompanyData.genPathFromID(company_data.company_id_cb)
+
+    if os.path.isfile(out_file):
         if not global_vars.rescrape:
-            logging.warning("Organization already scraped. Returning JSON file")
-            org_data = cbscraper.GenericWebScraper.readJSONFile(company_data.json_file)
+            logging.debug("Organization already scraped. Returning JSON file")
+            org_data = cbscraper.GenericWebScraper.readJSONFile(out_file)
             return org_data
         else:
             os.unlink(company_data.json_file)
@@ -336,7 +339,6 @@ def scrapeOrg(company_data):
     company_data.error = error_code
 
     # Write to file
-    out_file = os.path.join(global_vars.company_json_dir, company_data.company_id_cb)
     company_data.save(out_file)
 
     return company_data

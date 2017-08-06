@@ -4,7 +4,7 @@ import re
 
 import cbscraper.DateInterval
 import cbscraper.CBPersonWebScraper
-import cbscraper.GenericWebScraper
+from cbscraper import GenericWebScraper
 from cbscraper.GenericWebScraper import Error404
 from cbscraper import global_vars
 from cbscraper.CBPersonData import CBPersonData, CBPersonDataOverview
@@ -208,7 +208,9 @@ def scrapePersonDetails(soup):
 # *** Scrape a single person (e.g. "/person/gavin-ray") ***
 def scrapePerson(person_data):
 
-    if (os.path.isfile(person_data.json_file) and not global_vars.rescrape):
+    person_out_file = CBPersonData.genPathFromId(person_data.person_id_cb)
+
+    if (os.path.isfile(person_out_file) and not global_vars.rescrape):
         logging.info("Person \"" + person_data.person_id_cb + "\" already scraped and not re-scraping because global vars say so")
         return True
 
@@ -249,7 +251,6 @@ def scrapePerson(person_data):
             person_data.stat_code += 'NoInv_'
 
     # Save to JSON file
-    person_out_file = "./data/person/json/" + person_data.person_id
     person_data.save(person_out_file)
 
     # Return
@@ -273,7 +274,8 @@ def scrapePersonsList(company_data, key):
 
         if person_id in global_vars.already_scraped:
             logging.debug("The person '" + person_id + "' has already been scraped. Just adding new type")
-            person_data = cbscraper.GenericWebScraper.readJSONFile(person_json_file)
+            person_data_file = CBPersonData.genPathFromId(person_id)
+            person_data = cbscraper.GenericWebScraper.readJSONFile(person_data_file)
             person_data.setType(key)
             person_data.save(overwrite=True)
         else:

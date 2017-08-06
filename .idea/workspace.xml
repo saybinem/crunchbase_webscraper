@@ -5,24 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8ffd353f-9675-4efa-a6a6-3ad054850fe0" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../gen_company_table/gen_stats.do" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../gen_company_table/stats/hcntot.do" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../gen_company_table/stats/hcntothist.do" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../gen_company_table/stats/hcsummarydropped.do" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/crunchbase_scraper.iml" afterPath="$PROJECT_DIR$/.idea/crunchbase_scraper.iml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cbscraper/FrozenClass.py" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run.bat" afterPath="$PROJECT_DIR$/run.bat" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cbscraper/CBCompanyData.py" afterPath="$PROJECT_DIR$/src/cbscraper/CBCompanyData.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cbscraper/CBCompanyDetails.py" afterPath="$PROJECT_DIR$/src/cbscraper/CBCompanyDetails.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cbscraper/CBPersonData.py" afterPath="$PROJECT_DIR$/src/cbscraper/CBPersonData.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cbscraper/FrozenClass.py" afterPath="$PROJECT_DIR$/src/cbscraper/FrozenClass.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cbscraper/CBWebScraper.py" afterPath="$PROJECT_DIR$/src/cbscraper/CBWebScraper.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cbscraper/GenericWebScraper.py" afterPath="$PROJECT_DIR$/src/cbscraper/GenericWebScraper.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cbscraper/company.py" afterPath="$PROJECT_DIR$/src/cbscraper/company.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cbscraper/global_vars.py" afterPath="$PROJECT_DIR$/src/cbscraper/global_vars.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cbscraper/person.py" afterPath="$PROJECT_DIR$/src/cbscraper/person.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main_cb.py" afterPath="$PROJECT_DIR$/src/main_cb.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gen_person_table/src/main.py" afterPath="$PROJECT_DIR$/../gen_person_table/src/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gen_person_table/src/write_cb.py" afterPath="$PROJECT_DIR$/../gen_person_table/src/write_cb.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/src/LIPersonData.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/LIPersonData.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/src/global_vars.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/global_vars.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/src/main_in.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/main_in.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -34,10 +32,10 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/crunchbase_scraper$process_person_table.coverage" NAME="process_person_table Coverage Results" MODIFIED="1501682556963" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$main_cb.coverage" NAME="main_cb Coverage Results" MODIFIED="1499407818191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/crunchbase_scraper$linkedin_scraper.coverage" NAME="linkedin_scraper Coverage Results" MODIFIED="1500737880255" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../linkedin_scraper" />
+    <SUITE FILE_PATH="coverage/crunchbase_scraper$linkedin_scraper.coverage" NAME="linkedin_scraper Coverage Results" MODIFIED="1501950844202" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../linkedin_scraper" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$gen_company_table.coverage" NAME="gen_company_table Coverage Results" MODIFIED="1500734150498" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../gen_company_table" />
-    <SUITE FILE_PATH="coverage/crunchbase_scraper$gen_person_table.coverage" NAME="gen_person_table Coverage Results" MODIFIED="1501943389188" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../gen_person_table" />
-    <SUITE FILE_PATH="coverage/crunchbase_scraper$crunchbase_scraper.coverage" NAME="crunchbase_scraper Coverage Results" MODIFIED="1501948831017" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/crunchbase_scraper$gen_person_table.coverage" NAME="gen_person_table Coverage Results" MODIFIED="1501957920624" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../gen_person_table" />
+    <SUITE FILE_PATH="coverage/crunchbase_scraper$crunchbase_scraper.coverage" NAME="crunchbase_scraper Coverage Results" MODIFIED="1502013118548" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -47,50 +45,18 @@
     <option name="SHOW_TABLE_DETAILS" value="true" />
     <option name="SHOW_EMPTY_GROUPS" value="false" />
     <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <expand />
+    <select />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="main_cb.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main_cb.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="93" column="38" lean-forward="true" selection-start-line="93" selection-start-column="38" selection-end-line="93" selection-end-column="38" />
-              <folding>
-                <element signature="e#0#14#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="company.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cbscraper/company.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="339" column="31" lean-forward="true" selection-start-line="339" selection-start-column="31" selection-end-line="339" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GenericWebScraper.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GenericWebScraper.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cbscraper/GenericWebScraper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="483">
-              <caret line="56" column="22" lean-forward="false" selection-start-line="56" selection-start-column="22" selection-end-line="56" selection-end-column="22" />
+            <state relative-caret-position="7077">
+              <caret line="340" column="68" lean-forward="false" selection-start-line="340" selection-start-column="68" selection-end-line="340" selection-end-column="68" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CBPersonData.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cbscraper/CBPersonData.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="403">
-              <caret line="79" column="49" lean-forward="true" selection-start-line="79" selection-start-column="49" selection-end-line="79" selection-end-column="49" />
-              <folding>
-                <element signature="e#1#40#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -99,8 +65,20 @@
       <file leaf-file-name="person.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cbscraper/person.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="250" column="23" lean-forward="true" selection-start-line="250" selection-start-column="23" selection-end-line="250" selection-end-column="23" />
+            <state relative-caret-position="214">
+              <caret line="276" column="67" lean-forward="false" selection-start-line="276" selection-start-column="67" selection-end-line="276" selection-end-column="67" />
+              <folding>
+                <element signature="e#0#14#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="company.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/cbscraper/company.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="283" column="70" lean-forward="true" selection-start-line="283" selection-start-column="70" selection-end-line="283" selection-end-column="70" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -111,11 +89,33 @@
       <file leaf-file-name="CBCompanyData.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cbscraper/CBCompanyData.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="25" column="48" lean-forward="false" selection-start-line="25" selection-start-column="48" selection-end-line="25" selection-end-column="48" />
+            <state relative-caret-position="382">
+              <caret line="35" column="8" lean-forward="false" selection-start-line="35" selection-start-column="8" selection-end-line="35" selection-end-column="84" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CBPersonData.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cbscraper/CBPersonData.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="424">
+              <caret line="91" column="68" lean-forward="true" selection-start-line="91" selection-start-column="68" selection-end-line="91" selection-end-column="68" />
+              <folding>
+                <element signature="e#1#40#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="global_vars.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cbscraper/global_vars.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="12" column="38" lean-forward="true" selection-start-line="12" selection-start-column="38" selection-end-line="12" selection-end-column="38" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -131,10 +131,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>open</find>
-      <find>processURL</find>
-      <find>cb2lin</find>
-      <find>cb2link</find>
       <find>type</find>
       <find>saveEx</find>
       <find>Checking for</find>
@@ -161,6 +157,10 @@
       <find>company_details</find>
       <find>Details=</find>
       <find>NOT WEB-SCRAPING NEW COMPANIES</find>
+      <find>Firefox</find>
+      <find>setLogg</find>
+      <find>detected</find>
+      <find>detectedAs</find>
     </findStrings>
     <replaceStrings>
       <replace>soup</replace>
@@ -187,21 +187,15 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/cbscraper/common.py" />
-        <option value="$PROJECT_DIR$/../linkedin_scraper/src/cb2linkedin.py" />
         <option value="$PROJECT_DIR$/../company_table/main.py" />
         <option value="$PROJECT_DIR$/../person_table/main.py" />
         <option value="$PROJECT_DIR$/cbscraper/CompanyScraper.py" />
         <option value="$PROJECT_DIR$/cbscraper/CrunchbaseScraper.py" />
         <option value="C:/IntelPython35/Lib/site-packages/pandas/core/indexing.py" />
         <option value="$PROJECT_DIR$/cbscraper/PersonScraper.py" />
-        <option value="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py" />
         <option value="$PROJECT_DIR$/cbscraper/CBData.py" />
         <option value="$PROJECT_DIR$/../gen_person_table/write_cb.py" />
         <option value="$PROJECT_DIR$/cbscraper/GenericScraper.py" />
-        <option value="$PROJECT_DIR$/../linkedin_scraper/src/global_vars.py" />
-        <option value="$PROJECT_DIR$/../linkedin_scraper/src/main_in.py" />
-        <option value="$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py" />
         <option value="$PROJECT_DIR$/../gen_company_table/main.py" />
         <option value="$PROJECT_DIR$/../gen_person_table/write_li.py" />
         <option value="$PROJECT_DIR$/../process_person_table/globals.py" />
@@ -228,16 +222,22 @@
         <option value="$PROJECT_DIR$/../gen_person_table/src/licols.py" />
         <option value="$PROJECT_DIR$/../gen_person_table/src/write_li.py" />
         <option value="$PROJECT_DIR$/../gen_person_table/src/write_cb.py" />
-        <option value="$PROJECT_DIR$/../gen_person_table/src/main.py" />
-        <option value="$PROJECT_DIR$/../linkedin_scraper/src/LIPersonData.py" />
         <option value="$PROJECT_DIR$/src/cbscraper/FrozenClass.py" />
         <option value="$PROJECT_DIR$/src/cbscraper/CBCompanyDetails.py" />
-        <option value="$PROJECT_DIR$/src/cbscraper/CBPersonData.py" />
-        <option value="$PROJECT_DIR$/src/cbscraper/CBCompanyData.py" />
+        <option value="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py" />
+        <option value="$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py" />
+        <option value="$PROJECT_DIR$/../linkedin_scraper/src/main_in.py" />
+        <option value="$PROJECT_DIR$/../linkedin_scraper/src/global_vars.py" />
+        <option value="$PROJECT_DIR$/../linkedin_scraper/src/LIPersonData.py" />
+        <option value="$PROJECT_DIR$/../gen_person_table/src/main.py" />
+        <option value="$PROJECT_DIR$/src/cbscraper/global_vars.py" />
         <option value="$PROJECT_DIR$/src/main_cb.py" />
-        <option value="$PROJECT_DIR$/src/cbscraper/company.py" />
-        <option value="$PROJECT_DIR$/src/cbscraper/person.py" />
+        <option value="$PROJECT_DIR$/src/cbscraper/CBWebScraper.py" />
         <option value="$PROJECT_DIR$/src/cbscraper/GenericWebScraper.py" />
+        <option value="$PROJECT_DIR$/src/cbscraper/person.py" />
+        <option value="$PROJECT_DIR$/src/cbscraper/CBCompanyData.py" />
+        <option value="$PROJECT_DIR$/src/cbscraper/CBPersonData.py" />
+        <option value="$PROJECT_DIR$/src/cbscraper/company.py" />
       </list>
     </option>
   </component>
@@ -271,8 +271,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -291,19 +289,12 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="cbscraper" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="crunchbase_scraper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="linkedin_scraper" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="crunchbase_scraper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="linkedin_scraper" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -493,8 +484,8 @@
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
-        <env name="PATH" value="C:\data\bin" />
         <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="PATH" value="C:\data\bin" />
       </envs>
       <option name="SDK_HOME" value="C:\Python36\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -610,13 +601,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1498207171857</updated>
-    </task>
-    <task id="LOCAL-00054" summary="improvements">
-      <created>1499576586450</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1499576586450</updated>
     </task>
     <task id="LOCAL-00055" summary="improvements">
       <created>1499578520277</created>
@@ -954,7 +938,14 @@
       <option name="project" value="LOCAL" />
       <updated>1501941909609</updated>
     </task>
-    <option name="localTasksCounter" value="103" />
+    <task id="LOCAL-00103" summary="improvements">
+      <created>1501950331020</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1501950331020</updated>
+    </task>
+    <option name="localTasksCounter" value="104" />
     <servers />
   </component>
   <component name="TodoView">
@@ -974,12 +965,11 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3091733" sideWeight="0.5021482" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32842582" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30882353" sideWeight="0.49785176" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30882353" sideWeight="0.49785176" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1895811" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19226637" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297414" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32918552" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921588" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.216971" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3997735" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -989,6 +979,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32918552" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -1052,63 +1043,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://C:/IntelPython35/Lib/site-packages/xlwt/Row.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/IntelPython35/Lib/json/encoder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="178" column="0" lean-forward="false" selection-start-line="178" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/main_in.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="141" column="0" lean-forward="false" selection-start-line="141" selection-start-column="0" selection-end-line="141" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/global_vars.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="27" lean-forward="false" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="203" column="36" lean-forward="false" selection-start-line="203" selection-start-column="36" selection-end-line="203" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/IntelPython35/Lib/site-packages/pandas/core/indexes/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="2433" column="0" lean-forward="false" selection-start-line="2433" selection-start-column="0" selection-end-line="2433" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cbscraper/GenericScraper.py" />
-    <entry file="file://$PROJECT_DIR$/../gen_company_table/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../process_person_table/global_vars.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="13" column="62" lean-forward="false" selection-start-line="13" selection-start-column="62" selection-end-line="13" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../gen_person_table/write_li.py" />
     <entry file="file://$PROJECT_DIR$/../process_person_table/step1.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -1199,43 +1133,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../gen_person_table/src/write_cb.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="738">
-          <caret line="92" column="48" lean-forward="false" selection-start-line="92" selection-start-column="48" selection-end-line="92" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../gen_person_table/src/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="487">
-          <caret line="116" column="37" lean-forward="false" selection-start-line="116" selection-start-column="37" selection-end-line="116" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1670">
-          <caret line="438" column="71" lean-forward="false" selection-start-line="438" selection-start-column="71" selection-end-line="438" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/LIPersonData.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="23" column="56" lean-forward="true" selection-start-line="23" selection-start-column="56" selection-end-line="23" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cbscraper/CBCompanyWebScraper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cbscraper/global_vars.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1247,7 +1145,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="183">
           <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1255,7 +1152,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="326">
           <caret line="148" column="0" lean-forward="false" selection-start-line="148" selection-start-column="0" selection-end-line="148" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1263,20 +1159,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="183">
           <caret line="230" column="0" lean-forward="false" selection-start-line="230" selection-start-column="0" selection-end-line="230" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cbscraper/FrozenClass.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cbscraper/FrozenClass.py" />
     <entry file="file://$PROJECT_DIR$/src/cbscraper/CBCompanyDetails.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -1285,48 +1171,121 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cbscraper/CBCompanyData.py">
+    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="25" column="48" lean-forward="false" selection-start-line="25" selection-start-column="48" selection-end-line="25" selection-end-column="48" />
+        <state relative-caret-position="147">
+          <caret line="7" column="47" lean-forward="false" selection-start-line="7" selection-start-column="47" selection-end-line="7" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1296">
+          <caret line="207" column="35" lean-forward="true" selection-start-line="207" selection-start-column="35" selection-end-line="207" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/main_in.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="120" column="47" lean-forward="false" selection-start-line="120" selection-start-column="47" selection-end-line="120" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/global_vars.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="22" column="77" lean-forward="false" selection-start-line="22" selection-start-column="77" selection-end-line="22" selection-end-column="77" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main_cb.py">
+    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/LIPersonData.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#34#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../gen_person_table/src/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2142">
+          <caret line="113" column="20" lean-forward="false" selection-start-line="113" selection-start-column="20" selection-end-line="113" selection-end-column="20" />
+          <folding>
+            <element signature="e#27#41#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../gen_person_table/src/write_cb.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="427">
+          <caret line="92" column="48" lean-forward="false" selection-start-line="92" selection-start-column="48" selection-end-line="92" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cbscraper/DateInterval.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="93" column="38" lean-forward="true" selection-start-line="93" selection-start-column="38" selection-end-line="93" selection-end-column="38" />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main_cb.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="367">
+          <caret line="142" column="0" lean-forward="false" selection-start-line="142" selection-start-column="0" selection-end-line="142" selection-end-column="0" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cbscraper/company.py">
+    <entry file="file://$PROJECT_DIR$/src/cbscraper/CBWebScraper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="339" column="31" lean-forward="true" selection-start-line="339" selection-start-column="31" selection-end-line="339" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cbscraper/CBPersonData.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="79" column="49" lean-forward="true" selection-start-line="79" selection-start-column="49" selection-end-line="79" selection-end-column="49" />
+        <state relative-caret-position="210">
+          <caret line="10" column="35" lean-forward="false" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
           <folding>
-            <element signature="e#1#40#0" expanded="true" />
+            <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cbscraper/person.py">
+    <entry file="file://C:/Python36/Lib/site-packages/selenium/webdriver/remote/errorhandler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="250" column="23" lean-forward="true" selection-start-line="250" selection-start-column="23" selection-end-line="250" selection-end-column="23" />
+        <state relative-caret-position="368">
+          <caret line="193" column="0" lean-forward="false" selection-start-line="193" selection-start-column="0" selection-end-line="193" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python36/Lib/site-packages/selenium/webdriver/remote/webdriver.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="97" column="0" lean-forward="false" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python36/Lib/site-packages/selenium/webdriver/firefox/webdriver.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="151" column="0" lean-forward="false" selection-start-line="151" selection-start-column="0" selection-end-line="151" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cbscraper/CBPersonWebScraper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="67" column="0" lean-forward="false" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
@@ -1335,10 +1294,58 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cbscraper/GenericWebScraper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="56" column="22" lean-forward="false" selection-start-line="56" selection-start-column="22" selection-end-line="56" selection-end-column="22" />
+        <state relative-caret-position="7077">
+          <caret line="340" column="68" lean-forward="false" selection-start-line="340" selection-start-column="68" selection-end-line="340" selection-end-column="68" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cbscraper/person.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="276" column="67" lean-forward="false" selection-start-line="276" selection-start-column="67" selection-end-line="276" selection-end-column="67" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cbscraper/global_vars.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="12" column="38" lean-forward="true" selection-start-line="12" selection-start-column="38" selection-end-line="12" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cbscraper/CBCompanyData.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="382">
+          <caret line="35" column="8" lean-forward="false" selection-start-line="35" selection-start-column="8" selection-end-line="35" selection-end-column="84" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cbscraper/CBPersonData.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="424">
+          <caret line="91" column="68" lean-forward="true" selection-start-line="91" selection-start-column="68" selection-end-line="91" selection-end-column="68" />
+          <folding>
+            <element signature="e#1#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cbscraper/company.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="283" column="70" lean-forward="true" selection-start-line="283" selection-start-column="70" selection-end-line="283" selection-end-column="70" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>

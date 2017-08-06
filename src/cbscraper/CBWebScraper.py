@@ -8,6 +8,7 @@ from selenium.common.exceptions import NoSuchElementException
 
 class CBWebScraper(cbscraper.GenericWebScraper.GenericScraper):
 
+    browser_type = EBrowser.FIREFOX
     is_firefox_user_profile = True
     screenshot_folder = ''    
     
@@ -54,7 +55,7 @@ class CBWebScraper(cbscraper.GenericWebScraper.GenericScraper):
             return True
         return False
 
-    def detectedAsRobot(self, filecont):
+    def detectedAsRobot(self):
         logging.info("We were detected as robots. Refreshing the page")
         self.browserRefresh()
         self.randSleep(10, 15)
@@ -73,4 +74,4 @@ class CBWebScraper(cbscraper.GenericWebScraper.GenericScraper):
         if not detected:
             logging.info("Detection escaped")
             return True
-        return self.detectedAsRobot(filecont)
+        return self.detectedAsRobot()

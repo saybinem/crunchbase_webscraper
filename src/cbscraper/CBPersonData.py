@@ -3,6 +3,7 @@ from cbscraper import GenericWebScraper
 from enum import Enum, unique
 import os
 import logging
+from cbscraper import global_vars
 
 @unique
 class EPersonType(str, Enum):
@@ -84,3 +85,9 @@ class CBPersonData(object):
 
     def getLILink(self):
         return self.overview.social.linkedin
+
+    @staticmethod
+    def genPathFromId(person_id_cb):
+        partial = os.path.join(global_vars.person_json_dir, person_id_cb)
+        person_out_file = GenericWebScraper.genFullFilename(partial)
+        return person_out_file

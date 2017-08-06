@@ -19,6 +19,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.remote.remote_connection import LOGGER
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 
 from fake_useragent import UserAgent
 ua = UserAgent()
@@ -37,25 +38,30 @@ usepickle = True
 def readJSONFile(file):
     assert(os.path.isfile(file))
     if usepickle:
-        file += '.pkl'
         with open(file, 'rb') as fileh:
             ob = pickle.load(fileh)
     else:
-        file += '.json'
         with open(file, 'r', encoding="utf-8") as fileh:
             #logging.debug(cont)
             cont = fileh.read()
             ob = jsonpickle.decode(cont)
     return ob
 
-def saveJSON(data, file):
+def genFullFilename(filename):
     if usepickle:
-        file += '.pkl'
-        with open(file, 'wb') as fileh:
+        filename += '.pkl'
+    else:
+        filename += '.json'
+    return filename
+
+#filename DOES NOT INCLUDE EXTENSION
+def saveJSON(data, filename):
+    filename = genFullFilename(filename)
+    if usepickle:
+        with open(filename, 'wb') as fileh:
             pickle.dump(data, fileh, pickle.HIGHEST_PROTOCOL)
     else:
-        file += '.json'
-        with open(file, 'w', encoding="utf-8") as fileh:
+        with open(filename, 'w', encoding="utf-8") as fileh:
             #logging.info(data.__dict__)
             data_str = jsonpickle.encode(data)
             fileh.write(data_str)
@@ -82,6 +88,7 @@ class EBrowser(Enum):
     FIREFOX = 1
     PHANTOMJS = 2
     CHROME = 3
+    OPERA = 4
 
 #CLASS GENERIC SCRAPER
 class GenericScraper(metaclass=ABCMeta):
@@ -105,6 +112,7 @@ class GenericScraper(metaclass=ABCMeta):
     max_requests_per_browser_instance = 10000
     browser_user_profile = True
     firefox_profile_path = r"C:\Users\raffa\AppData\Roaming\Mozilla\Firefox\Profiles\4ai6x5sv.default"
+    firefox_binary = r"C:\Program Files\Mozilla Firefox\firefox.exe"
     browser_type = EBrowser.FIREFOX
     phantomjs_path = r"C:\data\programmi\phantomjs-2.1.1-windows\bin\phantomjs.exe"
 
@@ -322,12 +330,15 @@ class GenericScraper(metaclass=ABCMeta):
 
             #Firefox
             if self.browser_type == EBrowser.FIREFOX:
+
+                binary = FirefoxBinary(self.firefox_binary)
+
                 #see http://selenium-python.readthedocs.io/faq.html#how-to-auto-save-files-using-custom-firefox-profile
                 if self.browser_user_profile:
                     profile = webdriver.FirefoxProfile(self.firefox_profile_path)
                 else:
                     profile = webdriver.FirefoxProfile()
-                _browser = webdriver.Firefox(firefox_profile=profile)
+                _browser = webdriver.Firefox(firefox_binary=binary, firefox_profile=profile)
                 self.sleep(1)
                 _browser.set_window_position(0, 0)
 
@@ -345,6 +356,12 @@ class GenericScraper(metaclass=ABCMeta):
             #CROME
             elif self.browser_type == EBrowser.CHROME:
                 _browser = webdriver.Chrome()
+                self.sleep(1)
+                _browser.set_window_position(0, 0)
+
+            # OPERA
+            elif self.browser_type == EBrowser.OPERA:
+                _browser = webdriver.Opera()
                 self.sleep(1)
                 _browser.set_window_position(0, 0)
 
