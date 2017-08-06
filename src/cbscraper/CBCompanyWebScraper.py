@@ -77,8 +77,8 @@ class CBCompanyWebScraper(cbscraper.CBWebScraper.CBWebScraper):
                 try:
                     self.goToEntityPage()
                 except cbscraper.GenericWebScraper.Error404:
-                    logging.error("Caught error 404. Returning False")
-                    return False
+                    logging.error("Caught error 404. Re-raising")
+                    raise
                 finally:
                     # Write HTML to file and get screenshot even if we get a 404 error
                     entity_html = self.getBrowserPageSource(endpoint)

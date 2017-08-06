@@ -277,7 +277,7 @@ def scrapePersonsList(company_data, key):
             person_data_file = CBPersonData.genPathFromId(person_id)
             person_data = cbscraper.GenericWebScraper.readJSONFile(person_data_file)
             person_data.setType(key)
-            person_data.save(overwrite=True)
+            person_data.save(person_data_file, overwrite=True)
         else:
             person_data = CBPersonData()
             person_data.person_id_cb = person_id

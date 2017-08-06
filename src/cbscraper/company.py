@@ -346,8 +346,9 @@ def scrapeOrg(company_data):
 
 # Scrape an organization and all its people
 def scrapeOrgAndPeople(company_data):
+
     # Scrape the company
-    scrapeOrg(company_data)
+    company_data = scrapeOrg(company_data)
 
     # Scrape persons of the company
     if (company_data is not False and company_data.error != '404'):

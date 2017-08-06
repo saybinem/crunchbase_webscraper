@@ -36,7 +36,9 @@ n_requests = 0
 usepickle = True
 
 def readJSONFile(file):
-    assert(os.path.isfile(file))
+    if not os.path.isfile(file):
+        logging.critical("File not found '"+file+"'")
+        assert(False)
     if usepickle:
         with open(file, 'rb') as fileh:
             ob = pickle.load(fileh)
@@ -56,7 +58,6 @@ def genFullFilename(filename):
 
 #filename DOES NOT INCLUDE EXTENSION
 def saveJSON(data, filename):
-    filename = genFullFilename(filename)
     if usepickle:
         with open(filename, 'wb') as fileh:
             pickle.dump(data, fileh, pickle.HIGHEST_PROTOCOL)
