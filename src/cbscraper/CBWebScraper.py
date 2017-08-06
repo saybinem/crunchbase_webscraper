@@ -8,6 +8,9 @@ from selenium.common.exceptions import NoSuchElementException
 
 class CBWebScraper(cbscraper.GenericWebScraper.GenericScraper):
 
+    postload_sleep_min = 10  # Time to wait after the successful location of an element. Used in waitForPresenceCondition()
+    postload_sleep_max = 20
+
     browser_type = EBrowser.FIREFOX
     is_firefox_user_profile = True
     screenshot_folder = ''    

@@ -5,6 +5,7 @@ import cbscraper
 from cbscraper.GenericWebScraper import Error404
 import os
 from selenium.webdriver.common.by import By
+import selenium.common.exceptions
 
 class PersonEndPoint(Enum):
     ENTITY = 1
@@ -68,6 +69,9 @@ class CBPersonWebScraper(cbscraper.CBWebScraper.CBWebScraper):
             self.openURL(self.cb_url + self.id)
             try:
                 self.entityWait()
+            except selenium.common.exceptions.TimeoutException:
+                logging.critical("Timeout eception during self.entityWait(). Try again")
+                self.goToEntityPage()
             except Error404:
                 logging.debug("Error 404")
                 raise

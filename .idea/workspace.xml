@@ -5,22 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8ffd353f-9675-4efa-a6a6-3ad054850fe0" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cbscraper/FrozenClass.py" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cbscraper/CBCompanyData.py" afterPath="$PROJECT_DIR$/src/cbscraper/CBCompanyData.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cbscraper/CBPersonData.py" afterPath="$PROJECT_DIR$/src/cbscraper/CBPersonData.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cbscraper/CBPersonWebScraper.py" afterPath="$PROJECT_DIR$/src/cbscraper/CBPersonWebScraper.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cbscraper/CBWebScraper.py" afterPath="$PROJECT_DIR$/src/cbscraper/CBWebScraper.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cbscraper/GenericWebScraper.py" afterPath="$PROJECT_DIR$/src/cbscraper/GenericWebScraper.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cbscraper/company.py" afterPath="$PROJECT_DIR$/src/cbscraper/company.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cbscraper/global_vars.py" afterPath="$PROJECT_DIR$/src/cbscraper/global_vars.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cbscraper/person.py" afterPath="$PROJECT_DIR$/src/cbscraper/person.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main_cb.py" afterPath="$PROJECT_DIR$/src/main_cb.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gen_person_table/src/main.py" afterPath="$PROJECT_DIR$/../gen_person_table/src/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/src/LIPersonData.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/LIPersonData.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinScraper.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/src/global_vars.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/global_vars.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/src/main_in.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/main_in.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -35,7 +22,7 @@
     <SUITE FILE_PATH="coverage/crunchbase_scraper$linkedin_scraper.coverage" NAME="linkedin_scraper Coverage Results" MODIFIED="1501950844202" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../linkedin_scraper" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$gen_company_table.coverage" NAME="gen_company_table Coverage Results" MODIFIED="1500734150498" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../gen_company_table" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$gen_person_table.coverage" NAME="gen_person_table Coverage Results" MODIFIED="1501957920624" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../gen_person_table" />
-    <SUITE FILE_PATH="coverage/crunchbase_scraper$crunchbase_scraper.coverage" NAME="crunchbase_scraper Coverage Results" MODIFIED="1502013118548" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/crunchbase_scraper$crunchbase_scraper.coverage" NAME="crunchbase_scraper Coverage Results" MODIFIED="1502027389829" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -50,72 +37,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="GenericWebScraper.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cbscraper/GenericWebScraper.py">
+      <file leaf-file-name="CBWebScraper.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/cbscraper/CBWebScraper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7077">
-              <caret line="340" column="68" lean-forward="false" selection-start-line="340" selection-start-column="68" selection-end-line="340" selection-end-column="68" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="person.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cbscraper/person.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="214">
-              <caret line="276" column="67" lean-forward="false" selection-start-line="276" selection-start-column="67" selection-end-line="276" selection-end-column="67" />
+            <state relative-caret-position="126">
+              <caret line="11" column="27" lean-forward="false" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="company.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/cbscraper/company.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="283" column="70" lean-forward="true" selection-start-line="283" selection-start-column="70" selection-end-line="283" selection-end-column="70" />
-              <folding>
-                <element signature="e#0#14#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CBCompanyData.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cbscraper/CBCompanyData.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="382">
-              <caret line="35" column="8" lean-forward="false" selection-start-line="35" selection-start-column="8" selection-end-line="35" selection-end-column="84" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CBPersonData.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cbscraper/CBPersonData.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="424">
-              <caret line="91" column="68" lean-forward="true" selection-start-line="91" selection-start-column="68" selection-end-line="91" selection-end-column="68" />
-              <folding>
-                <element signature="e#1#40#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="global_vars.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cbscraper/global_vars.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="12" column="38" lean-forward="true" selection-start-line="12" selection-start-column="38" selection-end-line="12" selection-end-column="38" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -131,7 +60,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>type</find>
       <find>saveEx</find>
       <find>Checking for</find>
       <find>click</find>
@@ -161,6 +89,7 @@
       <find>setLogg</find>
       <find>detected</find>
       <find>detectedAs</find>
+      <find>Caught error 404</find>
     </findStrings>
     <replaceStrings>
       <replace>soup</replace>
@@ -187,8 +116,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/../company_table/main.py" />
-        <option value="$PROJECT_DIR$/../person_table/main.py" />
         <option value="$PROJECT_DIR$/cbscraper/CompanyScraper.py" />
         <option value="$PROJECT_DIR$/cbscraper/CrunchbaseScraper.py" />
         <option value="C:/IntelPython35/Lib/site-packages/pandas/core/indexing.py" />
@@ -232,12 +159,14 @@
         <option value="$PROJECT_DIR$/../gen_person_table/src/main.py" />
         <option value="$PROJECT_DIR$/src/cbscraper/global_vars.py" />
         <option value="$PROJECT_DIR$/src/main_cb.py" />
-        <option value="$PROJECT_DIR$/src/cbscraper/CBWebScraper.py" />
-        <option value="$PROJECT_DIR$/src/cbscraper/GenericWebScraper.py" />
-        <option value="$PROJECT_DIR$/src/cbscraper/person.py" />
         <option value="$PROJECT_DIR$/src/cbscraper/CBCompanyData.py" />
         <option value="$PROJECT_DIR$/src/cbscraper/CBPersonData.py" />
+        <option value="$PROJECT_DIR$/src/cbscraper/person.py" />
+        <option value="$PROJECT_DIR$/src/cbscraper/GenericWebScraper.py" />
         <option value="$PROJECT_DIR$/src/cbscraper/company.py" />
+        <option value="$PROJECT_DIR$/src/cbscraper/CBCompanyWebScraper.py" />
+        <option value="$PROJECT_DIR$/src/cbscraper/CBPersonWebScraper.py" />
+        <option value="$PROJECT_DIR$/src/cbscraper/CBWebScraper.py" />
       </list>
     </option>
   </component>
@@ -602,20 +531,6 @@
       <option name="presentableId" value="Default" />
       <updated>1498207171857</updated>
     </task>
-    <task id="LOCAL-00055" summary="improvements">
-      <created>1499578520277</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1499578520277</updated>
-    </task>
-    <task id="LOCAL-00056" summary="improvements">
-      <created>1499588637261</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1499588637261</updated>
-    </task>
     <task id="LOCAL-00057" summary="improvements">
       <created>1499594515497</created>
       <option name="number" value="00057" />
@@ -945,7 +860,21 @@
       <option name="project" value="LOCAL" />
       <updated>1501950331020</updated>
     </task>
-    <option name="localTasksCounter" value="104" />
+    <task id="LOCAL-00104" summary="improvements">
+      <created>1502013129725</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1502013129725</updated>
+    </task>
+    <task id="LOCAL-00105" summary="improvements">
+      <created>1502015784935</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1502015784935</updated>
+    </task>
+    <option name="localTasksCounter" value="106" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1133,14 +1062,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cbscraper/CBCompanyWebScraper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/IntelPython35/Lib/site-packages/jsonpickle/unpickler.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="183">
@@ -1197,7 +1118,7 @@
         <state relative-caret-position="462">
           <caret line="22" column="77" lean-forward="false" selection-start-line="22" selection-start-column="77" selection-end-line="22" selection-end-column="77" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1243,17 +1164,7 @@
         <state relative-caret-position="367">
           <caret line="142" column="0" lean-forward="false" selection-start-line="142" selection-start-column="0" selection-end-line="142" selection-end-column="0" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cbscraper/CBWebScraper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="10" column="35" lean-forward="false" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
+            <element signature="e#0#14#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1282,36 +1193,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cbscraper/CBPersonWebScraper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="67" column="0" lean-forward="false" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cbscraper/GenericWebScraper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7077">
-          <caret line="340" column="68" lean-forward="false" selection-start-line="340" selection-start-column="68" selection-end-line="340" selection-end-column="68" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cbscraper/person.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="276" column="67" lean-forward="false" selection-start-line="276" selection-start-column="67" selection-end-line="276" selection-end-column="67" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cbscraper/global_vars.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -1330,20 +1211,68 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/cbscraper/person.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="886">
+          <caret line="279" column="47" lean-forward="false" selection-start-line="279" selection-start-column="47" selection-end-line="279" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/cbscraper/CBPersonData.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
-          <caret line="91" column="68" lean-forward="true" selection-start-line="91" selection-start-column="68" selection-end-line="91" selection-end-column="68" />
+        <state relative-caret-position="483">
+          <caret line="80" column="49" lean-forward="true" selection-start-line="80" selection-start-column="49" selection-end-line="80" selection-end-column="49" />
           <folding>
             <element signature="e#1#40#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/cbscraper/CBCompanyWebScraper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="633">
+          <caret line="80" column="25" lean-forward="false" selection-start-line="80" selection-start-column="25" selection-end-line="80" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/cbscraper/company.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="283" column="70" lean-forward="true" selection-start-line="283" selection-start-column="70" selection-end-line="283" selection-end-column="70" />
+        <state relative-caret-position="204">
+          <caret line="300" column="19" lean-forward="true" selection-start-line="300" selection-start-column="19" selection-end-line="300" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cbscraper/CBPersonWebScraper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1533">
+          <caret line="73" column="37" lean-forward="false" selection-start-line="73" selection-start-column="37" selection-end-line="73" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cbscraper/GenericWebScraper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="103" column="0" lean-forward="false" selection-start-line="103" selection-start-column="0" selection-end-line="104" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cbscraper/CBWebScraper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="11" column="27" lean-forward="false" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
