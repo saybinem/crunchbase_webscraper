@@ -4,6 +4,8 @@ from enum import Enum, unique
 import os
 import logging
 from cbscraper import global_vars
+import pprint
+import json
 
 @unique
 class EPersonType(str, Enum):
@@ -91,3 +93,10 @@ class CBPersonData(object):
         partial = os.path.join(global_vars.person_json_dir, person_id_cb)
         person_out_file = GenericWebScraper.genFullFilename(partial)
         return person_out_file
+        
+    def __repr__(self):
+        out = self.__dict__.copy()
+        out['overview'] = self.overview.__dict__.copy()
+        out['overview']['primary_role'] = self.overview.primary_role.__dict__.copy()
+        out['overview']['social'] = self.overview.social.__dict__.copy()
+        return json.dumps(out, indent=4)

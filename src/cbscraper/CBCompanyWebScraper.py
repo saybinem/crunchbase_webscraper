@@ -6,6 +6,7 @@ import cbscraper.CBWebScraper
 import cbscraper.GenericWebScraper
 from cbscraper.GenericWebScraper import Error404
 import selenium.common.exceptions
+import cbscraper.global_vars
 
 class OrgEndPoint(Enum):
     ENTITY = 1
@@ -16,8 +17,8 @@ class OrgEndPoint(Enum):
 
 class CBCompanyWebScraper(cbscraper.CBWebScraper.CBWebScraper):
 
-    html_basepath = './data/company/html'
-    screenshot_folder = './data/company/screenshots'
+    html_basepath = cbscraper.global_vars.company_html_dir
+    screenshot_folder = cbscraper.global_vars.company_screens_dir
 
     class_wait = {
         OrgEndPoint.ENTITY: 'entity',

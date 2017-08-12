@@ -149,7 +149,7 @@ def scrapeOrgOverviewStats(soup):
         dt_acq = t_overview_stats.find('dt', string='Acquisitions')
         if dt_acq is not None:
             dd_acq = dt_acq.find_next_sibling('dd')
-            stats['acquisitions']['num'] = dd_acq.string
+            stats['acquisitions']['num'] = dd_acq.text # .string returns bs4.NavigableString, .text returns a python str
 
         # IPO (https://www.crunchbase.com/organization/onxeo#/entity)
         dt_ipo = t_overview_stats.find('dt', string='IPO / Stock')
@@ -157,10 +157,10 @@ def scrapeOrgOverviewStats(soup):
             dd_ipo = dt_ipo.find_next_sibling('dd')
             a1 = dd_ipo.a
             a2 = a1.find_next_sibling('a')
-            stats['ipo']['fate'] = a1.string
+            stats['ipo']['fate'] = a1.text # convert bs4.NavigableString to python str
             stats['ipo']['fate_link'] = a1.get('href')
-            stats['ipo']['date'] = str(a1.next_sibling)
-            stats['ipo']['ticker'] = a2.string
+            stats['ipo']['date'] = str(a1.next_sibling) #.next_sibling is a NavigableString. We need to convert it to a Python string
+            stats['ipo']['ticker'] = a2.text # convert bs4.NavigableString to python str
 
         # Status
         dt_status = t_overview_stats.find('dt', string='Status')
@@ -173,12 +173,12 @@ def scrapeOrgOverviewStats(soup):
             # a1 = dd_status.a
 
             # if a1 is not None:
-            #     overview['stats']['status']['fate'] = a1.string
+            #     overview['stats']['status']['fate'] = a1.text
             #     a2 = a1.find_next_sibling('a')
-            #     overview['stats']['status']['by'] = a2.string
-            #     overview['stats']['status']['date'] = dd_status.find('span', string='on').next_sibling.string
+            #     overview['stats']['status']['by'] = a2.text
+            #     overview['stats']['status']['date'] = dd_status.find('span', string='on').next_sibling.text
             # else:
-            #     overview['stats']['status']['fate'] = dd_status.string
+            #     overview['stats']['status']['fate'] = dd_status.text
 
         # Total Equity Funding (TEF)
         dt_total_equity_funding = t_overview_stats.find('dt', string='Total Equity Funding')
@@ -289,7 +289,7 @@ def scrapeOrg(company_data):
             org_data = cbscraper.GenericWebScraper.readJSONFile(out_file)
             return org_data
         else:
-            os.unlink(company_data.json_file)
+            os.unlink(out_file)
 
     # Scrape organization
     company_scraper = cbscraper.CBCompanyWebScraper.CBCompanyWebScraper(company_data.company_id_cb)

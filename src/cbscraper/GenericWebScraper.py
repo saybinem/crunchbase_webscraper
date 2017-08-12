@@ -25,7 +25,7 @@ from fake_useragent import UserAgent
 ua = UserAgent()
 
 import cbscraper.CBPersonData
-
+from cbscraper import global_vars
 
 # Non modifiable globals
 _browser = None
@@ -33,13 +33,13 @@ n_requests = 0
 
 #FUNCTIONS
 
-usepickle = True
+
 
 def readJSONFile(file):
     if not os.path.isfile(file):
         logging.critical("File not found '"+file+"'")
         assert(False)
-    if usepickle:
+    if global_vars.usepickle:
         with open(file, 'rb') as fileh:
             ob = pickle.load(fileh)
     else:
@@ -50,7 +50,7 @@ def readJSONFile(file):
     return ob
 
 def genFullFilename(filename):
-    if usepickle:
+    if global_vars.usepickle:
         filename += '.pkl'
     else:
         filename += '.json'
@@ -58,7 +58,7 @@ def genFullFilename(filename):
 
 #filename DOES NOT INCLUDE EXTENSION
 def saveJSON(data, filename):
-    if usepickle:
+    if global_vars.usepickle:
         with open(filename, 'wb') as fileh:
             pickle.dump(data, fileh, pickle.HIGHEST_PROTOCOL)
     else:
@@ -304,7 +304,7 @@ class GenericScraper(metaclass=ABCMeta):
             condition = EC.presence_of_element_located((by, value))
             WebDriverWait(self.getBrowser(), self.wait_timeout).until(condition)
         except TimeoutException as e:
-            logging.critical("Timed out waiting for page element. Fatal. Exiting")
+            logging.critical("Timed out waiting for page element")
             raise e
         except Exception as e:
             logging.critical("Unexpected exception waiting for page element. Exiting")

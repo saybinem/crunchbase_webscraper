@@ -16,12 +16,13 @@ from cbscraper import global_vars
 
 # make data dirs if they do not exists
 def buildDirs():
-    os.makedirs("./data/person/html", exist_ok=True)
-    os.makedirs("./data/person/json", exist_ok=True)
-    os.makedirs("./data/person/screenshots", exist_ok=True)
-    os.makedirs("./data/company/html", exist_ok=True)
-    os.makedirs("./data/company/json", exist_ok=True)
-    os.makedirs("./data/company/screenshots", exist_ok=True)
+    os.makedirs(global_vars.person_html_dir, exist_ok=True)
+    os.makedirs(global_vars.person_json_dir, exist_ok=True)
+    os.makedirs(global_vars.person_screens_dir, exist_ok=True)
+
+    os.makedirs(global_vars.company_html_dir, exist_ok=True)
+    os.makedirs(global_vars.company_json_dir, exist_ok=True)
+    os.makedirs(global_vars.company_screens_dir, exist_ok=True)
 
 
 def writeListToFile(file, list):

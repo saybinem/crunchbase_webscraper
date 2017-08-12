@@ -4,6 +4,7 @@ from cbscraper import GenericWebScraper
 from cbscraper import CBCompanyDetails
 import json
 from cbscraper import global_vars
+import copy
 
 class CBCompanyData():
     def __init__(self):
@@ -26,8 +27,9 @@ class CBCompanyData():
         GenericWebScraper.saveJSON(self, outfile)
 
     def __repr__(self):
-        out_dict = self.__dict__
-        out_dict['company_details'] = self.company_details.__dict__
+        out_dict = copy.copy(self.__dict__)
+        if "company_details" in out_dict:
+            out_dict['company_details'] = copy.copy(self.company_details.__dict__)
         out_str = json.dumps(out_dict, sort_keys=True, indent=4)
         return out_str
 

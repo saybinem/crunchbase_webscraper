@@ -1,11 +1,12 @@
 import logging
 from enum import Enum
-
 import cbscraper
 from cbscraper.GenericWebScraper import Error404
 import os
 from selenium.webdriver.common.by import By
 import selenium.common.exceptions
+import cbscraper.global_vars
+import cbscraper.CBWebScraper
 
 class PersonEndPoint(Enum):
     ENTITY = 1
@@ -13,8 +14,9 @@ class PersonEndPoint(Enum):
 
 
 class CBPersonWebScraper(cbscraper.CBWebScraper.CBWebScraper):
-    html_basepath = './data/person/html'
-    screenshot_folder = './data/person/screenshots'
+
+    html_basepath = cbscraper.global_vars.person_html_dir
+    screenshot_folder = cbscraper.global_vars.person_screens_dir
 
     # Name of the class to wait for when we load a page
     class_wait = {
