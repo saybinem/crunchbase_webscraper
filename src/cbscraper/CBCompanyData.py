@@ -13,7 +13,7 @@ class CBCompanyOverviewStatsTEF():
         self.funding_rounds = str()
         self.funding_investors = str()
 
-def CBCompanyOverviewStatsIPO():
+class CBCompanyOverviewStatsIPO():
     def __init__(self):
         super().__init__()
         self.fate = str()
@@ -21,7 +21,7 @@ def CBCompanyOverviewStatsIPO():
         self.date = str()
         self.ticker = str()
 
-def CBCompanyOverviewStatsAcqusitions():
+class CBCompanyOverviewStatsAcqusitions():
     def __init__(self):
         super().__init__()
         self.num = -1
@@ -33,8 +33,7 @@ class CBCompanyOverviewStats():
         self.ipo = CBCompanyOverviewStatsIPO()
         self.status = ''
         self.tef = CBCompanyOverviewStatsTEF()
-        #Most Recent Funding
-        self.mrf = str()
+        self.mrf = str() #Most Recent Funding
 
 class CBCompanyOverviewSocial():
     def __init__(self):
@@ -69,8 +68,8 @@ class CBCompanyData():
         self.company_id_vico = str()
         self.company_id_cb = str()
         self.completion_perc = float()
-        self.overview = dict()
-        self.company_details = CBCompanyDetails()
+        self.overview = CBCompanyOverview()
+        self.details = CBCompanyDetails()
         self.people = list()
         self.advisors = list()
         self.past_people = list()

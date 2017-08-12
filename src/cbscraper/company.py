@@ -121,7 +121,7 @@ def scrapeOrgOverviewStats(company_data, soup):
         dt_acq = t_overview_stats.find('dt', string='Acquisitions')
         if dt_acq is not None:
             dd_acq = dt_acq.find_next_sibling('dd')
-            company_data.stats.acquisitions.num = dd_acq.text # .string returns bs4.NavigableString, .text returns a python str
+            company_data.overview.stats.acquisitions.num = dd_acq.text # .string returns bs4.NavigableString, .text returns a python str
 
         # IPO (https://www.crunchbase.com/organization/onxeo#/entity)
         dt_ipo = t_overview_stats.find('dt', string='IPO / Stock')
@@ -129,16 +129,16 @@ def scrapeOrgOverviewStats(company_data, soup):
             dd_ipo = dt_ipo.find_next_sibling('dd')
             a1 = dd_ipo.a
             a2 = a1.find_next_sibling('a')
-            company_data.stats.ipo.fate = a1.text # convert bs4.NavigableString to python str
-            company_data.stats.ipo.fate_link = a1.get('href')
-            company_data.stats.ipo.date = str(a1.next_sibling) #.next_sibling is a NavigableString. We need to convert it to a Python string
-            company_data.stats.ipo.ticker = a2.text # convert bs4.NavigableString to python str
+            company_data.overview.stats.ipo.fate = a1.text # convert bs4.NavigableString to python str
+            company_data.overview.stats.ipo.fate_link = a1.get('href')
+            company_data.overview.stats.ipo.date = str(a1.next_sibling) #.next_sibling is a NavigableString. We need to convert it to a Python string
+            company_data.overview.stats.ipo.ticker = a2.text # convert bs4.NavigableString to python str
 
         # Status
         dt_status = t_overview_stats.find('dt', string='Status')
         if dt_status is not None:
             dd_status = dt_status.find_next_sibling('dd')
-            company_data.stats.status = dd_status.get_text()
+            company_data.overview.stats.status = dd_status.get_text()
 
             # DEBUG
             # logging.info("dd_status='"+str(dd_status)+"'")
@@ -161,19 +161,19 @@ def scrapeOrgOverviewStats(company_data, soup):
 
             founding_amount = dd_total_equity_funding.find('span', class_="funding_amount")
             if founding_amount is not None:
-                company_data.stats.tef.funding_amount = founding_amount.text
+                company_data.overview.stats.tef.funding_amount = founding_amount.text
 
             founding_rounds = dd_total_equity_funding.find('span', class_="funding_rounds")
             if founding_rounds is not None:
-                company_data.stats.tef.funding_rounds = founding_rounds.text
-                company_data.stats.tef.funding_investors = dd_total_equity_funding.a.text
+                company_data.overview.stats.tef.funding_rounds = founding_rounds.text
+                company_data.overview.stats.tef.funding_investors = dd_total_equity_funding.a.text
 
         # Most Recent Funding
         dt_most_recent_funding = t_overview_stats.find('dt', string='Most Recent Funding')
         if dt_most_recent_funding is not None:
             dd_most_recent_funding = dt_most_recent_funding.find_next_sibling('dd')
 
-            company_data.stats.mrf = dd_most_recent_funding.get_text()
+            company_data.overview.stats.mrf = dd_most_recent_funding.get_text()
 
             # overview['stats']['mrf'] = {}
             # funding_type = dd_most_recent_funding.find('span', class_='funding-type')
@@ -204,7 +204,7 @@ def scrapeOrgOverview(company_data, soup):
         for link in dd_founders.find_all('a'):
             name = link.attrs['data-name']
             id = link.attrs['data-permalink']
-            company_data.overview.founders.append([name, id])
+            company_data.founders.append([name, id])
 
     # Categories
     tag = soup.find('dt', string='Categories:')
