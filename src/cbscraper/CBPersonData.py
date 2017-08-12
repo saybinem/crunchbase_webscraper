@@ -21,14 +21,12 @@ class CBPersonDataOverviewSocial():
         self.facebook = str()
         self.linkedin = str()
         self.twitter = str()
-        #self._freeze()
 
 class CBPersonDataOverviewPrimaryRole():
     def __init(self):
         super().__init__()
         self.role=''
         self.firm=''
-        #self._freeze()
 
 class CBPersonDataOverview():
     def __init__(self):

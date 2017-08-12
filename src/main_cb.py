@@ -115,7 +115,7 @@ def setLoggers():
     # console handler
     console_handler = logging.StreamHandler()
     console_handler.setFormatter(fmt)
-    console_handler.setLevel(logging.DEBUG)
+    console_handler.setLevel(global_vars.console_log_level)
     logging.getLogger().addHandler(console_handler)
 
     # log file handler
@@ -134,11 +134,6 @@ if __name__ == "__main__":
     # SET VARS
     jsonpickle.set_preferred_backend('simplejson')
     jsonpickle.set_encoder_options('simplejson', indent=4)
-
-    logging.info("Recursion limit: "+str(sys.getrecursionlimit()))
-    sys.setrecursionlimit(30000)
-    logging.info("Recursion limit: " + str(sys.getrecursionlimit()))
-    #sys.exit(0)
 
     #MAIN
     main()
