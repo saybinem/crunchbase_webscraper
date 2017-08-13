@@ -1,8 +1,7 @@
 #GLOBALS
 import logging
 
-remove_existing_json = True
-rescrape = True
+remove_existing_json = False
 go_on = True #scrape unscraped companies
 
 excel_file = r"C:\data\tesi\VICO\ID Crunchbase_ID VICO.xlsx"

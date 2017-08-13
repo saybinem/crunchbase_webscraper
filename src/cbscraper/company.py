@@ -232,16 +232,13 @@ def scrapeOrg(company_data):
     msg = "Company: " + company_data.company_id_cb + " (" + str(company_data.completion_perc) + "%) (" + company_data.company_id_vico + ")"
     logging.info(msg)
 
-    # If we have a JSON file and rescrape is False, use the JSON file we already have
+    # If we have a JSON file, use the JSON file we already have
     out_file = CBCompanyData.genPathFromID(company_data.company_id_cb)
 
     if os.path.isfile(out_file):
-        if not global_vars.rescrape:
-            logging.debug("Organization already scraped. Returning JSON file")
-            org_data = cbscraper.GenericWebScraper.readJSONFile(out_file)
-            return org_data
-        else:
-            os.unlink(out_file)
+        logging.debug("Organization already scraped. Returning JSON file")
+        org_data = cbscraper.GenericWebScraper.readJSONFile(out_file)
+        return org_data
 
     # Scrape organization
     company_scraper = cbscraper.CBCompanyWebScraper.CBCompanyWebScraper(company_data.company_id_cb)

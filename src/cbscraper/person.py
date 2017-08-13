@@ -210,8 +210,8 @@ def scrapePerson(person_data):
 
     person_out_file = CBPersonData.genPathFromId(person_data.person_id_cb)
 
-    if (os.path.isfile(person_out_file) and not global_vars.rescrape):
-        logging.info("Person \"" + person_data.person_id_cb + "\" already scraped and not re-scraping because global vars say so")
+    if (os.path.isfile(person_out_file)):
+        logging.info("Person \"" + person_data.person_id_cb + "\" already scraped")
         return True
 
     logging.debug("Scraping person: '" + person_data.person_id_cb + "' of company '" + person_data.company_id_cb + "'")
