@@ -6,10 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="8ffd353f-9675-4efa-a6a6-3ad054850fe0" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cbscraper/CBWebScraper.py" afterPath="$PROJECT_DIR$/src/cbscraper/CBWebScraper.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cbscraper/GenericWebScraper.py" afterPath="$PROJECT_DIR$/src/cbscraper/GenericWebScraper.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinWebScraper.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinWebScraper.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,7 +19,7 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/crunchbase_scraper$process_person_table.coverage" NAME="process_person_table Coverage Results" MODIFIED="1501682556963" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$main_cb.coverage" NAME="main_cb Coverage Results" MODIFIED="1499407818191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/crunchbase_scraper$linkedin_scraper.coverage" NAME="linkedin_scraper Coverage Results" MODIFIED="1502714414708" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../linkedin_scraper" />
+    <SUITE FILE_PATH="coverage/crunchbase_scraper$linkedin_scraper.coverage" NAME="linkedin_scraper Coverage Results" MODIFIED="1502717710845" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../linkedin_scraper" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$gen_company_table.coverage" NAME="gen_company_table Coverage Results" MODIFIED="1500734150498" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../gen_company_table" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$gen_person_table.coverage" NAME="gen_person_table Coverage Results" MODIFIED="1502088421635" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../gen_person_table" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$crunchbase_scraper.coverage" NAME="crunchbase_scraper Coverage Results" MODIFIED="1502557809585" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -42,12 +40,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="person_scraper.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py">
+      <file leaf-file-name="LinkedinWebScraper.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/LinkedinWebScraper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="3" column="40" lean-forward="false" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
-              <folding />
+            <state relative-caret-position="171">
+              <caret line="306" column="94" lean-forward="true" selection-start-line="306" selection-start-column="94" selection-end-line="306" selection-end-column="94" />
+              <folding>
+                <element signature="e#0#14#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GenericWebScraper.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cbscraper/GenericWebScraper.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="321">
+              <caret line="311" column="26" lean-forward="true" selection-start-line="311" selection-start-column="26" selection-end-line="311" selection-end-column="26" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -63,14 +75,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>waitForPresen</find>
-      <find>seeMoreIn</find>
-      <find>Caught un-handled exception. Re-trying again</find>
-      <find>getBrowserPage</find>
-      <find>recursiveLinkClick</find>
-      <find>GenericScraper</find>
-      <find>screensho</find>
-      <find>screenso</find>
       <find>filename</find>
       <find>error</find>
       <find>inv_list</find>
@@ -93,6 +97,14 @@
       <find>time_next_email</find>
       <find>out_json_path</find>
       <find>rescrape</find>
+      <find>Caught un-handled exception. Sending email and exiting</find>
+      <find>sleep(</find>
+      <find>Loop links identified by CSS selector</find>
+      <find>caught un</find>
+      <find>seeMoreInline</find>
+      <find>clickLink</find>
+      <find>recursiveLinkClick</find>
+      <find>waitForPresence</find>
     </findStrings>
     <replaceStrings>
       <replace>soup</replace>
@@ -165,11 +177,11 @@
         <option value="$PROJECT_DIR$/src/cbscraper/person.py" />
         <option value="$PROJECT_DIR$/src/cbscraper/company.py" />
         <option value="$PROJECT_DIR$/../linkedin_scraper/src/global_vars.py" />
+        <option value="$PROJECT_DIR$/src/cbscraper/CBWebScraper.py" />
+        <option value="$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py" />
         <option value="$PROJECT_DIR$/../linkedin_scraper/src/main_in.py" />
         <option value="$PROJECT_DIR$/src/cbscraper/GenericWebScraper.py" />
-        <option value="$PROJECT_DIR$/src/cbscraper/CBWebScraper.py" />
         <option value="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinWebScraper.py" />
-        <option value="$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py" />
       </list>
     </option>
   </component>
@@ -206,6 +218,21 @@
       <pane id="ProjectPane">
         <subPane>
           <expand>
+            <path>
+              <item name="crunchbase_scraper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="crunchbase_scraper" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="crunchbase_scraper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="crunchbase_scraper" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="crunchbase_scraper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="crunchbase_scraper" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="cbscraper" type="462c0819:PsiDirectoryNode" />
+            </path>
             <path>
               <item name="crunchbase_scraper" type="b2602c69:ProjectViewProjectNode" />
               <item name="linkedin_scraper" type="462c0819:PsiDirectoryNode" />
@@ -527,13 +554,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1498207171857</updated>
-    </task>
-    <task id="LOCAL-00064" summary="improvements">
-      <created>1500122567475</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1500122567475</updated>
     </task>
     <task id="LOCAL-00065" summary="improvements">
       <created>1500123144864</created>
@@ -871,7 +891,14 @@
       <option name="project" value="LOCAL" />
       <updated>1502634699176</updated>
     </task>
-    <option name="localTasksCounter" value="113" />
+    <task id="LOCAL-00113" summary="improvements">
+      <created>1502714424540</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1502714424540</updated>
+    </task>
+    <option name="localTasksCounter" value="114" />
     <servers />
   </component>
   <component name="TodoView">
@@ -891,13 +918,13 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3091733" sideWeight="0.5021482" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32842582" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30882353" sideWeight="0.49785176" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30882353" sideWeight="0.49785176" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22126746" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22126746" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921588" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32918552" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14769065" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14769065" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3997735" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297414" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1200,31 +1227,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/main_in.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1075">
-          <caret line="56" column="0" lean-forward="false" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
-          <folding>
-            <element signature="e#23#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/LIPersonData.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="199">
           <caret line="10" column="26" lean-forward="false" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cbscraper/GenericWebScraper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="98" column="21" lean-forward="true" selection-start-line="98" selection-start-column="21" selection-end-line="98" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1236,21 +1243,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/LinkedinWebScraper.py">
+    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        <state relative-caret-position="-825">
+          <caret line="3" column="40" lean-forward="false" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/main_in.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="825">
+          <caret line="46" column="49" lean-forward="false" selection-start-line="46" selection-start-column="49" selection-end-line="46" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cbscraper/GenericWebScraper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="311" column="26" lean-forward="true" selection-start-line="311" selection-start-column="26" selection-end-line="311" selection-end-column="26" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py">
+    <entry file="file://$PROJECT_DIR$/../linkedin_scraper/src/LinkedinWebScraper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="3" column="40" lean-forward="false" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
-          <folding />
+        <state relative-caret-position="171">
+          <caret line="306" column="94" lean-forward="true" selection-start-line="306" selection-start-column="94" selection-end-line="306" selection-end-column="94" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

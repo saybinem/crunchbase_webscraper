@@ -166,7 +166,8 @@ class GenericWebScraper(metaclass=ABCMeta):
         self.getBrowser().save_screenshot(filename)
 
     def sleep(self, sec):
-        logging.info("Sleeping for " + str(sec) + " seconds ...")
+        if(sec >= 6):
+            logging.info("Sleeping for " + str(sec) + " seconds ...")
         time.sleep(sec)
 
     def randSleep(self, min, max):
@@ -270,7 +271,7 @@ class GenericWebScraper(metaclass=ABCMeta):
         msg = "Waiting for in-visibility of "
         msg += condition_str
         msg += " in URL='" + url + "'"
-        logging.info(msg)
+        logging.debug(msg)
         try:
             condition = EC.invisibility_of_element_located((by, value))
             WebDriverWait(self.getBrowser(), self.wait_timeout).until(condition)
@@ -285,12 +286,14 @@ class GenericWebScraper(metaclass=ABCMeta):
 
     # Post-load sleep, Check if there are 404 errors, Wait for the presence of an element in a web page
     def waitForPresenceCondition(self, by, value, sleep = True, check_for_errors = True):
+
         # Post-loading sleep
         if sleep:
             self.randSleep(self.postload_sleep_min, self.postload_sleep_max)
         else:
             logging.debug("NOT sleeping")
         html_code = self.getBrowserPageSource()
+
         # Check for errors
         if check_for_errors:
             # Check for 404
@@ -301,11 +304,12 @@ class GenericWebScraper(metaclass=ABCMeta):
             # Check for robot detection
             if self.wasRobotDetected(html_code):
                 self.detectedAsRobot()
+
         # Wait for the presence in the DOM of a tag with a given class
         condition_str = "(" + str(by) + "," + value + ")"
         url = self.getBrowserURL()
         msg = "Waiting for presence of " + condition_str + " in URL='" + url + "'"
-        logging.info(msg)
+        logging.debug(msg)
         try:
             condition = EC.presence_of_element_located((by, value))
             WebDriverWait(self.getBrowser(), self.wait_timeout).until(condition)
@@ -368,6 +372,7 @@ class GenericWebScraper(metaclass=ABCMeta):
             elif self.browser_type == EBrowser.CHROME_HEADLESS:
                 chrome_options = ChromeOptions()
                 chrome_options.add_argument("--headless")
+                chrome_options.add_argument("--window-size=1280,1696")
                 chrome_options.binary_location = self.chrome_binary
                 _browser = webdriver.Chrome(chrome_options=chrome_options)
                 self.sleep(1)
@@ -387,16 +392,6 @@ class GenericWebScraper(metaclass=ABCMeta):
         if curr_endpoint is not None:
             self.writeHTMLFile(html, curr_endpoint)
         return html
-
-    # Click on a link and handle exception
-    def clickLink(self, link):
-        try:
-            link.click()
-        except TimeoutException:
-            logging.error("Timeout exception after a click. Continuing")
-        except:
-            logging.critical("Unhandled exception after a click. Dying")
-            raise
 
     # Getters / Setters for HTML
     def getEndpointHTML(self, endpoint):
@@ -425,6 +420,7 @@ class GenericWebScraper(metaclass=ABCMeta):
         self.getBrowser()
 
     def goBack(self):
+        logging.info("Going back")
         try:
             self.getBrowser().set_page_load_timeout(self.back_timeout)
             self.getBrowser().back()
@@ -466,6 +462,7 @@ class GenericWebScraper(metaclass=ABCMeta):
         server.quit()
 
     def browserRefresh(self):
+        logging.info("Refreshing the page")
         try:
             self.getBrowser().refresh()
         except Exception as e:
@@ -477,9 +474,9 @@ class GenericWebScraper(metaclass=ABCMeta):
 
     # Scroll down the page
     def scrollDownAllTheWay(self):
+        logging.info("Scrolling the page all the way down")
         old_page = self.getBrowserPageSource()
         while True:
-            logging.debug("Scrolling loop")
             for i in range(2):
                 self.jsScrollDown(500)
                 #self.jsScrollToBottom()
@@ -491,7 +488,19 @@ class GenericWebScraper(metaclass=ABCMeta):
                 break
         return True
 
+    # Click on a link and handle exception
+    def clickLink(self, link):
+        logging.info("Clicking tag_name='"+str(link.tag_name)+"' text='"+str(link.text)+"' href='"+str(link.get_attribute("href"))+"'")
+        try:
+            link.click()
+        except TimeoutException:
+            logging.error("Timeout exception after a click. Continuing")
+        except:
+            logging.critical("Unhandled exception after a click. Dying")
+            raise
+
     def jsClick(self, element):
+        logging.debug("jsClick on '" + element.text + "' which points to '" + element.get_attribute("href") + "'")
         self.getBrowser().execute_script("arguments[0].click();", element)
 
     def jsScrollToTop(self):
