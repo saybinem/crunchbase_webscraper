@@ -20,6 +20,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.remote.remote_connection import LOGGER
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
+from selenium.webdriver.chrome.options import Options as ChromeOptions
 
 from fake_useragent import UserAgent
 ua = UserAgent()
@@ -90,9 +91,10 @@ class EBrowser(Enum):
     PHANTOMJS = 2
     CHROME = 3
     OPERA = 4
+    CHROME_HEADLESS = 5
 
-#CLASS GENERIC SCRAPER
-class GenericScraper(metaclass=ABCMeta):
+#CLASS GENERIC WEB SCRAPER
+class GenericWebScraper(metaclass=ABCMeta):
 
     # SLEEP VARIABLES
     wait_robot_min = 10 * 60
@@ -112,10 +114,14 @@ class GenericScraper(metaclass=ABCMeta):
     # OTHER VARIABLES
     max_requests_per_browser_instance = 10000
     browser_user_profile = True
+    browser_type = EBrowser.FIREFOX
+
     firefox_profile_path = r"C:\Users\raffa\AppData\Roaming\Mozilla\Firefox\Profiles\4ai6x5sv.default"
     firefox_binary = r"C:\Program Files\Mozilla Firefox\firefox.exe"
-    browser_type = EBrowser.FIREFOX
-    phantomjs_path = r"C:\data\programmi\phantomjs-2.1.1-windows\bin\phantomjs.exe"
+
+    chrome_binary = "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+
+    phantomjs_binary = r"C:\data\programmi\phantomjs-2.1.1-windows\bin\phantomjs.exe"
 
     # internal variables
 
@@ -329,11 +335,9 @@ class GenericScraper(metaclass=ABCMeta):
             # Use selenium
             logging.info("Creating Selenium webdriver using "+str(self.browser_type))
 
-            #Firefox
+            # FIREFOX
             if self.browser_type == EBrowser.FIREFOX:
-
                 binary = FirefoxBinary(self.firefox_binary)
-
                 #see http://selenium-python.readthedocs.io/faq.html#how-to-auto-save-files-using-custom-firefox-profile
                 if self.browser_user_profile:
                     profile = webdriver.FirefoxProfile(self.firefox_profile_path)
@@ -343,7 +347,7 @@ class GenericScraper(metaclass=ABCMeta):
                 self.sleep(1)
                 _browser.set_window_position(0, 0)
 
-            #PHANTOM JS
+            # PHANTOMJS
             elif self.browser_type == EBrowser.PHANTOMJS:
                 dcap = dict(DesiredCapabilities.PHANTOMJS)
                 useragent = ua.random
@@ -354,9 +358,18 @@ class GenericScraper(metaclass=ABCMeta):
                 _browser.set_window_size(1920, 1080)
                 self.sleep(1)
 
-            #CROME
+            # CHROME
             elif self.browser_type == EBrowser.CHROME:
                 _browser = webdriver.Chrome()
+                self.sleep(1)
+                _browser.set_window_position(0, 0)
+
+            # CHROME (headless)
+            elif self.browser_type == EBrowser.CHROME_HEADLESS:
+                chrome_options = ChromeOptions()
+                chrome_options.add_argument("--headless")
+                chrome_options.binary_location = self.chrome_binary
+                _browser = webdriver.Chrome(chrome_options=chrome_options)
                 self.sleep(1)
                 _browser.set_window_position(0, 0)
 

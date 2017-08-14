@@ -6,7 +6,7 @@ import cbscraper.GenericWebScraper
 from selenium.common.exceptions import NoSuchElementException
 
 
-class CBWebScraper(cbscraper.GenericWebScraper.GenericScraper):
+class CBWebScraper(cbscraper.GenericWebScraper.GenericWebScraper):
 
     postload_sleep_min = 10  # Time to wait after the successful location of an element. Used in waitForPresenceCondition()
     postload_sleep_max = 20
