@@ -1,6 +1,7 @@
 import json
 import logging
 import os
+import pickle
 import random
 import smtplib
 import time
@@ -8,47 +9,43 @@ from abc import ABCMeta, abstractmethod
 from email.mime.text import MIMEText
 from enum import Enum
 
-import jsonpickle
-import pickle
-
 import bs4 as bs
+import jsonpickle
+from fake_useragent import UserAgent
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.remote.remote_connection import LOGGER
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
-from selenium.webdriver.chrome.options import Options as ChromeOptions
+from selenium.webdriver.remote.remote_connection import LOGGER
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
-from fake_useragent import UserAgent
 ua = UserAgent()
 
-import cbscraper.CBPersonData
 from cbscraper import global_vars
 
 # Non modifiable globals
 _browser = None
 n_requests = 0
 
-#FUNCTIONS
 
-
-
+# FUNCTIONS
 def readJSONFile(file):
     if not os.path.isfile(file):
-        logging.critical("File not found '"+file+"'")
-        assert(False)
+        logging.critical("File not found '" + file + "'")
+        assert (False)
     if global_vars.usepickle:
         with open(file, 'rb') as fileh:
             ob = pickle.load(fileh)
     else:
         with open(file, 'r', encoding="utf-8") as fileh:
-            #logging.debug(cont)
+            # logging.debug(cont)
             cont = fileh.read()
             ob = jsonpickle.decode(cont)
     return ob
+
 
 def genFullFilename(filename):
     if global_vars.usepickle:
@@ -57,35 +54,42 @@ def genFullFilename(filename):
         filename += '.json'
     return filename
 
-#filename DOES NOT INCLUDE EXTENSION
+
+# filename DOES INCLUDE EXTENSION
 def saveJSON(data, filename):
     if global_vars.usepickle:
         with open(filename, 'wb') as fileh:
             pickle.dump(data, fileh, pickle.HIGHEST_PROTOCOL)
     else:
         with open(filename, 'w', encoding="utf-8") as fileh:
-            #logging.info(data.__dict__)
+            # logging.info(data.__dict__)
             data_str = jsonpickle.encode(data)
             fileh.write(data_str)
+
 
 def myTextStrip(str):
     return str.replace('\n', '').strip()
 
+
 def jsonPretty(dict_data):
     return json.dumps(dict_data, sort_keys=True, indent=4, separators=(',', ': '), ensure_ascii=False)
 
-#CLASS ERROR404
+
+# CLASS ERROR404
 
 class ErrorNoLink(Exception):
     pass
 
+
 class Error404(Exception):
     pass
+
 
 class ErrorInvalidLink(Exception):
     pass
 
-#ENUM BROWSER
+
+# ENUM BROWSER
 class EBrowser(Enum):
     FIREFOX = 1
     PHANTOMJS = 2
@@ -93,9 +97,9 @@ class EBrowser(Enum):
     OPERA = 4
     CHROME_HEADLESS = 5
 
-#CLASS GENERIC WEB SCRAPER
-class GenericWebScraper(metaclass=ABCMeta):
 
+# CLASS GENERIC WEB SCRAPER
+class GenericWebScraper(metaclass=ABCMeta):
     # SLEEP VARIABLES
     wait_robot_min = 10 * 60
     wait_robot_max = 15 * 60
@@ -137,7 +141,7 @@ class GenericWebScraper(metaclass=ABCMeta):
     def class_wait(self):
         pass
 
-    # a strin containing the directory of HTML files
+    # a string containing the directory of HTML files
     @property
     @abstractmethod
     def html_basepath(self):
@@ -159,14 +163,14 @@ class GenericWebScraper(metaclass=ABCMeta):
         self.endpoint_html = dict()
         self.endpoint_soup = dict()
         self.id = id
-        LOGGER.setLevel(logging.WARNING) #remove Selenium logging
+        LOGGER.setLevel(logging.WARNING)  # remove Selenium logging
 
     def saveScreenshot(self, filename):
-        logging.info("Saving current page screenshot in '"+filename+"'")
+        logging.info("Saving current page screenshot in '" + filename + "'")
         self.getBrowser().save_screenshot(filename)
 
     def sleep(self, sec):
-        if(sec >= 6):
+        if (sec >= 6):
             logging.info("Sleeping for " + str(sec) + " seconds ...")
         time.sleep(sec)
 
@@ -193,7 +197,7 @@ class GenericWebScraper(metaclass=ABCMeta):
         except TimeoutException:
             logging.warning("Timeout exception during page load. Moving on.")
         except Exception as e:
-            logging.error("Unexpected exception during page load. "+str(e))
+            logging.error("Unexpected exception during page load. " + str(e))
             self.randSleep(self.get_error_sleep_min, self.get_error_sleep_max)
             return self.openURL(url)
         else:
@@ -219,7 +223,7 @@ class GenericWebScraper(metaclass=ABCMeta):
     def removeHTMLFile(self, endpoint):
         htmlfile = self.genHTMLFilePath(endpoint)
         if os.path.isfile(htmlfile):
-            logging.debug("Removing HTML file for endpoint "+str(endpoint))
+            logging.debug("Removing HTML file for endpoint " + str(endpoint))
             os.remove(htmlfile)
 
     # Get saved HTML code
@@ -285,7 +289,7 @@ class GenericWebScraper(metaclass=ABCMeta):
             logging.debug("Element " + condition_str + " is now invisible in URL='" + url + "'")
 
     # Post-load sleep, Check if there are 404 errors, Wait for the presence of an element in a web page
-    def waitForPresenceCondition(self, by, value, sleep = True, check_for_errors = True):
+    def waitForPresenceCondition(self, by, value, sleep=True, check_for_errors=True):
 
         # Post-loading sleep
         if sleep:
@@ -337,12 +341,12 @@ class GenericWebScraper(metaclass=ABCMeta):
         global _browser
         if _browser is None:
             # Use selenium
-            logging.info("Creating Selenium webdriver using "+str(self.browser_type))
+            logging.info("Creating Selenium webdriver using " + str(self.browser_type))
 
             # FIREFOX
             if self.browser_type == EBrowser.FIREFOX:
                 binary = FirefoxBinary(self.firefox_binary)
-                #see http://selenium-python.readthedocs.io/faq.html#how-to-auto-save-files-using-custom-firefox-profile
+                # see http://selenium-python.readthedocs.io/faq.html#how-to-auto-save-files-using-custom-firefox-profile
                 if self.browser_user_profile:
                     profile = webdriver.FirefoxProfile(self.firefox_profile_path)
                 else:
@@ -356,7 +360,7 @@ class GenericWebScraper(metaclass=ABCMeta):
                 dcap = dict(DesiredCapabilities.PHANTOMJS)
                 useragent = ua.random
                 dcap["phantomjs.page.settings.userAgent"] = useragent
-                logging.info("Useragent='"+useragent+"'")
+                logging.info("Useragent='" + useragent + "'")
                 _browser = webdriver.PhantomJS(executable_path=self.phantomjs_path, desired_capabilities=dcap)
                 self.sleep(1)
                 _browser.set_window_size(1920, 1080)
@@ -479,8 +483,8 @@ class GenericWebScraper(metaclass=ABCMeta):
         while True:
             for i in range(2):
                 self.jsScrollDown(500)
-                #self.jsScrollToBottom()
-                self.randSleep(2,3)
+                # self.jsScrollToBottom()
+                self.randSleep(2, 3)
             new_page = self.getBrowserPageSource()
             if new_page != old_page:
                 old_page = new_page
@@ -490,7 +494,9 @@ class GenericWebScraper(metaclass=ABCMeta):
 
     # Click on a link and handle exception
     def clickLink(self, link):
-        logging.info("Clicking tag_name='"+str(link.tag_name)+"' text='"+str(link.text).replace("\n"," imp")+"' href='"+str(link.get_attribute("href"))+"'")
+        logging.info("Clicking tag_name='" + str(link.tag_name) + "' text='" + str(link.text).replace("\n",
+                                                                                                      " imp") + "' href='" + str(
+            link.get_attribute("href")) + "'")
         try:
             link.click()
         except TimeoutException:
