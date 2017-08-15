@@ -490,7 +490,7 @@ class GenericWebScraper(metaclass=ABCMeta):
 
     # Click on a link and handle exception
     def clickLink(self, link):
-        logging.info("Clicking tag_name='"+str(link.tag_name)+"' text='"+str(link.text)+"' href='"+str(link.get_attribute("href"))+"'")
+        logging.info("Clicking tag_name='"+str(link.tag_name)+"' text='"+str(link.text).replace("\n"," imp")+"' href='"+str(link.get_attribute("href"))+"'")
         try:
             link.click()
         except TimeoutException:
