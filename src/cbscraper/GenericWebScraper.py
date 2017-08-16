@@ -21,10 +21,10 @@ from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium.webdriver.remote.remote_connection import LOGGER
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+import global_vars
 
 ua = UserAgent()
 
-from cbscraper import global_vars
 
 # Non modifiable globals
 _browser = None
@@ -36,35 +36,20 @@ def readJSONFile(file):
     if not os.path.isfile(file):
         logging.critical("File not found '" + file + "'")
         assert (False)
-    if global_vars.usepickle:
-        with open(file, 'rb') as fileh:
-            ob = pickle.load(fileh)
-    else:
-        with open(file, 'r', encoding="utf-8") as fileh:
-            # logging.debug(cont)
-            cont = fileh.read()
-            ob = jsonpickle.decode(cont)
+    with open(file, 'r', encoding="utf-8") as fileh:
+        # logging.debug(cont)
+        cont = fileh.read()
+        ob = jsonpickle.decode(cont)
     return ob
-
-
-def genFullFilename(filename):
-    if global_vars.usepickle:
-        filename += '.pkl'
-    else:
-        filename += '.json'
-    return filename
 
 
 # filename DOES INCLUDE EXTENSION
 def saveJSON(data, filename):
-    if global_vars.usepickle:
-        with open(filename, 'wb') as fileh:
-            pickle.dump(data, fileh, pickle.HIGHEST_PROTOCOL)
-    else:
-        with open(filename, 'w', encoding="utf-8") as fileh:
-            # logging.info(data.__dict__)
-            data_str = jsonpickle.encode(data)
-            fileh.write(data_str)
+    with open(filename, 'w', encoding="utf-8") as fileh:
+        # logging.info(data.__dict__)
+        data_str = jsonpickle.encode(data)
+        fileh.write(data_str)
+        #logging.info("Writing "+filename)
 
 
 def myTextStrip(str):
@@ -270,7 +255,7 @@ class GenericWebScraper(metaclass=ABCMeta):
         else:
             logging.debug("Element " + condition_str + " is now invisible in URL='" + url + "'")
 
-    # Post-load sleep, Check if there are 404 errors, Wait for the presence of an element in a web page
+    # Wait for the presence of an element in a web page
     def waitForPresenceCondition(self, by, value):
 
         # Wait for the presence in the DOM of a tag with a given class
@@ -290,8 +275,8 @@ class GenericWebScraper(metaclass=ABCMeta):
         else:
             logging.debug("Element " + condition_str + " found in URL='" + url + "'")
 
-    def waitForClass(self, endpoint, sleep=True):
-        return self.waitForPresenceCondition(By.CLASS_NAME, self.class_wait[endpoint], sleep)
+    def waitForClass(self, endpoint):
+        return self.waitForPresenceCondition(By.CLASS_NAME, self.class_wait[endpoint])
 
     @staticmethod
     def makeSoupFromHTML(html):
@@ -355,11 +340,8 @@ class GenericWebScraper(metaclass=ABCMeta):
         return _browser
 
     # Get the HTML source code of a web page. If curr_endpoint is not None, write the HTML code to a file
-    def getBrowserPageSource(self, curr_endpoint=None):
-        html = self.getBrowser().page_source
-        if curr_endpoint is not None:
-            self.writeHTMLFile(html, curr_endpoint)
-        return html
+    def getBrowserPageSource(self):
+        return self.getBrowser().page_source
 
     # Getters / Setters for HTML
     def getEndpointHTML(self, endpoint):

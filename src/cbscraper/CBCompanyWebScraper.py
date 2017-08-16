@@ -51,17 +51,43 @@ class CBCompanyWebScraper(cbscraper.CBWebScraper.CBWebScraper):
         elif self.prev_page_is_entity:
             logging.debug("Going back to entity page")
             self.goBack()
+            # We cannot have 404 error here.
+            # This is a page that follows the entity page (e.g. the past_people page)
+            # If the entity page is a 404 page, we couldn't have ngot to this point
             self.waitForClass(OrgEndPoint.ENTITY)
         else:
             logging.debug("Opening entity page")
             self.openURL(self.cb_url + self.id)
             try:
+                html = self.getBrowserPageSource()
+                soup = self.makeSoupFromHTML(html)
+                if self.is404(soup):
+                    raise Error404
                 self.waitForClass(OrgEndPoint.ENTITY)
             except selenium.common.exceptions.TimeoutException:
                 logging.error("Timeout exception. Retry")
                 return self.goToEntityPage()
         self.entity_page = True
         self.prev_page_is_entity = False
+
+    # Get endpoint 'Entity' from a saved HTML file
+    def getEntityEndpointFromHTMLFile(self):
+        entity_html = self.getHTMLFile(OrgEndPoint.ENTITY)
+        if entity_html:
+            entity_soup = self.makeSoupFromHTML(entity_html)
+            is404 = self.is404(entity_soup)
+            if is404:
+                logging.info("HTML file contains error 404")
+                raise Error404
+            robot = self.wasRobotDetected(entity_soup)
+            if robot:
+                logging.info("HTML file contains robot detection. Re-download")
+                os.unlink(self.genHTMLFilePath(OrgEndPoint.ENTITY))
+            else:
+                logging.debug("Content retrieved from HTML file")
+        else:
+            logging.debug("No HTML file")
+        return entity_html
 
     # Scrape an organization
     def scrape(self):
@@ -70,24 +96,21 @@ class CBCompanyWebScraper(cbscraper.CBWebScraper.CBWebScraper):
         self.prev_page_is_entity = False
 
         # Get endpoint 'entity'
-        endpoint = OrgEndPoint.ENTITY
-        entity_html = self.getHTMLFile(endpoint)
+        entity_html = self.getEntityEndpointFromHTMLFile()
+
         if not entity_html:
             try:
                 self.goToEntityPage()
-            except cbscraper.GenericWebScraper.Error404:
+            except Error404:
                 logging.error("Caught error 404. Re-raising")
                 raise
             finally:
                 # Write HTML to file and get screenshot even if we get a 404 error
-                entity_html = self.getBrowserPageSource(endpoint)
+                entity_html = self.getBrowserPageSource()
+                self.writeHTMLFile(entity_html, OrgEndPoint.ENTITY)
                 self.saveScreenshot(os.path.join(self.screenshot_folder, self.id + ".png"))
-        else:
-            entity_soup = self.makeSoupFromHTML(entity_html)
-            is404 = self.is404(entity_soup)
-            logging.debug("Content retrieved from HTML file")
 
-        # Make the soup
+        # Set endpoint 'entity''s HTML and soup
         self.setEndpointHTML(OrgEndPoint.ENTITY, entity_html)
         entity_soup = self.makeSoupFromHTML(entity_html)
         self.setEndpointSoup(OrgEndPoint.ENTITY, entity_soup)
@@ -102,10 +125,13 @@ class CBCompanyWebScraper(cbscraper.CBWebScraper.CBWebScraper):
                     link = self.getBrowserLink(endpoint)
                     logging.info("Clicking on '" + link.get_attribute('title') + "' link")
                     self.clickLink(link)
+                    self.randSleep(self.postload_sleep_min, self.postload_sleep_max)
+                    # No need to check for 404 since we obtained the link from the webpage
                     self.waitForClass(endpoint)
                     self.entity_page = False
                     self.prev_page_is_entity = True
-                    html = self.getBrowserPageSource(endpoint)
+                    html = self.getBrowserPageSource()
+                    self.writeHTMLFile(html, endpoint)
                 self.setEndpointHTML(endpoint, html)
         # Make the soup of downloaded HTML pages
         self.makeAllSoup()
@@ -113,6 +139,11 @@ class CBCompanyWebScraper(cbscraper.CBWebScraper.CBWebScraper):
         return True
 
     def makeAllSoup(self):
+        """
+        Make the soup for all endpoints
+        If an endpoint is missing, its soup is set equal to the 'entity' endpoint soup, which acts as a fallback
+        :return:
+        """
         for endpoint in OrgEndPoint:
             soup = self.getEndpointSoup(endpoint)
             if soup is False:

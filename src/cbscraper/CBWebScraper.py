@@ -13,8 +13,7 @@ class CBWebScraper(cbscraper.GenericWebScraper.GenericWebScraper):
 
     browser_type = EBrowser.FIREFOX
     is_firefox_user_profile = True
-    screenshot_folder = ''    
-    
+
     # map an endpoint to an <a> tag title attribute
     @property
     @abstractmethod
@@ -35,15 +34,13 @@ class CBWebScraper(cbscraper.GenericWebScraper.GenericWebScraper):
         return soup.find('div', id='error-404') is not None
 
     # ROBOT detection
-    def wasRobotDetected(self, hmtl_code):
-        if (hmtl_code.find('"ROBOTS"') >= 0 and hmtl_code.find('"NOINDEX, NOFOLLOW"') >= 0):
+    def wasRobotDetected(self, soup):
+        html_code = str(soup).lower()
+        if ("robots" in html_code and "noindex, nofollow" in html_code):
             logging.error("Robot detected by test 1")
             return True
-        if (hmtl_code.find('"robots"') >= 0 and hmtl_code.find('"noindex, nofollow"') >= 0):
+        if 'Pardon Our Interruption...' in html_code:
             logging.error("Robot detected by test 2")
-            return True
-        if (hmtl_code.find('Pardon Our Interruption...') >= 0):
-            logging.error("Robot detected by test 3")
             return True
         return False
 

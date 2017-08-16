@@ -44,7 +44,7 @@ class CBPersonWebScraper(cbscraper.CBWebScraper.CBWebScraper):
 
     def entityWait(self):
         self.waitForClass(PersonEndPoint.ENTITY)
-        self.waitForPresenceCondition(By.ID, 'profile_header_heading', sleep=False)
+        self.waitForPresenceCondition(By.ID, 'profile_header_heading')
 
     # Have the browser go to the page of the 'entity' ednpoint (overview page)
     def goToEntityPage(self):
@@ -108,7 +108,8 @@ class CBPersonWebScraper(cbscraper.CBWebScraper.CBWebScraper):
                 raise
             finally:
                 # SAVE HTML TO FILE (EVEN IF WE HAVE A 404 ERROR)
-                entity_html = self.getBrowserPageSource(endpoint)
+                entity_html = self.getBrowserPageSource()
+                self.writeHTMLFile(entity_html, endpoint)
                 self.saveScreenshot(os.path.join(self.screenshot_folder, self.id + ".png"))
             
         self.setEndpointHTML(PersonEndPoint.ENTITY, entity_html)
