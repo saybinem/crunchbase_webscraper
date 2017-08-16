@@ -124,6 +124,7 @@ class GenericWebScraper(metaclass=ABCMeta):
     firefox_binary = r"C:\Program Files\Mozilla Firefox\firefox.exe"
 
     chrome_binary = "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+    chrome_headless_screen_size = (1000, 6000)
 
     phantomjs_binary = r"C:\data\programmi\phantomjs-2.1.1-windows\bin\phantomjs.exe"
 
@@ -329,7 +330,8 @@ class GenericWebScraper(metaclass=ABCMeta):
     def waitForClass(self, endpoint, sleep=True):
         return self.waitForPresenceCondition(By.CLASS_NAME, self.class_wait[endpoint], sleep)
 
-    def makeSoupFromHTML(self, html):
+    @staticmethod
+    def makeSoupFromHTML(html):
         return bs.BeautifulSoup(html, 'lxml')
 
     # Browser functions
@@ -376,7 +378,7 @@ class GenericWebScraper(metaclass=ABCMeta):
             elif self.browser_type == EBrowser.CHROME_HEADLESS:
                 chrome_options = ChromeOptions()
                 chrome_options.add_argument("--headless")
-                chrome_options.add_argument("--window-size=1280,1696")
+                chrome_options.add_argument("--window-size={},{}".format(self.chrome_headless_screen_size[0], self.chrome_headless_screen_size[1]))
                 chrome_options.binary_location = self.chrome_binary
                 _browser = webdriver.Chrome(chrome_options=chrome_options)
                 self.sleep(1)
