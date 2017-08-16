@@ -148,16 +148,8 @@ class GenericWebScraper(metaclass=ABCMeta):
     def html_basepath(self):
         pass
 
-    @abstractmethod
-    def wasRobotDetected(self, filecont):
-        pass
-
-    @abstractmethod
-    def is404(self, html):
-        pass
-
-    @abstractmethod
-    def detectedAsRobot(self, filecont):
+    @staticmethod
+    def is404(soup):
         pass
 
     def __init__(self, id):
@@ -255,19 +247,8 @@ class GenericWebScraper(metaclass=ABCMeta):
                 logging.error("Unhandled exception while reading HTML file")
                 raise
             else:
-                # Check if the page served was the one for robots
-                if (self.wasRobotDetected(html_code)):
-                    logging.warning("Pre-saved file contains robot. Removing it")
-                    fileh.close()
-                    os.unlink(htmlfile)
-                    return False
-                # Check for 404 error
-                elif self.is404(html_code):
-                    logging.debug("Pre-saved file contains 404 error")
-                    raise Error404("Error 404 in '" + htmlfile + "'")
-                else:
-                    logging.debug("Returning content from pre-saved file '" + htmlfile + "'")
-                    return html_code
+                logging.debug("Returning content from pre-saved file '" + htmlfile + "'")
+                return html_code
 
     # Post-load sleep, Check if there are 404 errors, Wait for the presence of an element in a web page
     def waitForInvisibility(self, by, value):
@@ -290,25 +271,7 @@ class GenericWebScraper(metaclass=ABCMeta):
             logging.debug("Element " + condition_str + " is now invisible in URL='" + url + "'")
 
     # Post-load sleep, Check if there are 404 errors, Wait for the presence of an element in a web page
-    def waitForPresenceCondition(self, by, value, sleep=True, check_for_errors=True):
-
-        # Post-loading sleep
-        if sleep:
-            self.randSleep(self.postload_sleep_min, self.postload_sleep_max)
-        else:
-            logging.debug("NOT sleeping")
-        html_code = self.getBrowserPageSource()
-
-        # Check for errors
-        if check_for_errors:
-            # Check for 404
-            if self.is404(html_code):
-                msg = "404 error on page '" + self.getBrowserURL() + "'"
-                logging.info(msg)
-                raise Error404(msg)
-            # Check for robot detection
-            if self.wasRobotDetected(html_code):
-                self.detectedAsRobot()
+    def waitForPresenceCondition(self, by, value):
 
         # Wait for the presence in the DOM of a tag with a given class
         condition_str = "(" + str(by) + "," + value + ")"
@@ -382,7 +345,6 @@ class GenericWebScraper(metaclass=ABCMeta):
                 chrome_options.binary_location = self.chrome_binary
                 _browser = webdriver.Chrome(chrome_options=chrome_options)
                 self.sleep(1)
-                _browser.set_window_position(0, 0)
 
             # OPERA
             elif self.browser_type == EBrowser.OPERA:

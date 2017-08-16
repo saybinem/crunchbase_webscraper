@@ -71,26 +71,21 @@ class CBCompanyWebScraper(cbscraper.CBWebScraper.CBWebScraper):
 
         # Get endpoint 'entity'
         endpoint = OrgEndPoint.ENTITY
-        entity_html = False
-
-        try:
-            entity_html = self.getHTMLFile(endpoint)
-        except Error404 as e:
-            logging.debug("Detected 404 in HTML file")
-            raise
+        entity_html = self.getHTMLFile(endpoint)
+        if not entity_html:
+            try:
+                self.goToEntityPage()
+            except cbscraper.GenericWebScraper.Error404:
+                logging.error("Caught error 404. Re-raising")
+                raise
+            finally:
+                # Write HTML to file and get screenshot even if we get a 404 error
+                entity_html = self.getBrowserPageSource(endpoint)
+                self.saveScreenshot(os.path.join(self.screenshot_folder, self.id + ".png"))
         else:
-            if not entity_html:
-                try:
-                    self.goToEntityPage()
-                except cbscraper.GenericWebScraper.Error404:
-                    logging.error("Caught error 404. Re-raising")
-                    raise
-                finally:
-                    # Write HTML to file and get screenshot even if we get a 404 error
-                    entity_html = self.getBrowserPageSource(endpoint)
-                    self.saveScreenshot(os.path.join(self.screenshot_folder, self.id + ".png"))
-            else:
-                logging.debug("Content retrieved from HTML file")
+            entity_soup = self.makeSoupFromHTML(entity_html)
+            is404 = self.is404(entity_soup)
+            logging.debug("Content retrieved from HTML file")
 
         # Make the soup
         self.setEndpointHTML(OrgEndPoint.ENTITY, entity_html)

@@ -30,20 +30,9 @@ class CBWebScraper(cbscraper.GenericWebScraper.GenericWebScraper):
         return self.getEndpointSoup(start_point).find('a', attrs={'title': self.link_map[link_point]})
 
     # return false if we obtained a missing link
-    def is404(self, html=None):
-        if html is None:
-            try:
-                self.getBrowser().find_element_by_id('error-404')
-            except NoSuchElementException:
-                return False
-            except:
-                logging.critical("Unexpected exception in is404()")
-                raise
-            else:
-                return True
-        else:
-            soup = self.makeSoupFromHTML(html)
-            return soup.find('div', id='error-404') is not None
+    @staticmethod
+    def is404(soup):
+        return soup.find('div', id='error-404') is not None
 
     # ROBOT detection
     def wasRobotDetected(self, hmtl_code):
