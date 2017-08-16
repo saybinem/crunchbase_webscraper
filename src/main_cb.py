@@ -12,6 +12,7 @@ import simplejson
 import pandas
 from cbscraper.CBCompanyData import CBCompanyData
 from cbscraper import global_vars
+from cbscraper import GenericWebScraper
 
 
 # make data dirs if they do not exists
@@ -128,12 +129,6 @@ def setLoggers():
     logging.info("Starting at: " + time.strftime("%Y-%m-%d"))
 
 if __name__ == "__main__":
-
     setLoggers()
-
-    # SET VARS
-    jsonpickle.set_preferred_backend('simplejson')
-    jsonpickle.set_encoder_options('simplejson', indent=4)
-
-    #MAIN
+    GenericWebScraper.iniJSONPickle()
     main()

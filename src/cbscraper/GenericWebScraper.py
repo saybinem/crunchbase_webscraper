@@ -32,6 +32,11 @@ n_requests = 0
 
 
 # FUNCTIONS
+
+def iniJSONPickle():
+    jsonpickle.set_preferred_backend('simplejson')
+    jsonpickle.set_encoder_options('simplejson', indent=4, sort_keys=True)
+
 def readJSONFile(file):
     if not os.path.isfile(file):
         logging.critical("File not found '" + file + "'")
@@ -46,11 +51,9 @@ def readJSONFile(file):
 # filename DOES INCLUDE EXTENSION
 def saveJSON(data, filename):
     with open(filename, 'w', encoding="utf-8") as fileh:
-        # logging.info(data.__dict__)
+        #logging.debug("Writing '"+filename+"'")
         data_str = jsonpickle.encode(data)
         fileh.write(data_str)
-        #logging.info("Writing "+filename)
-
 
 def myTextStrip(str):
     return str.replace('\n', '').strip()
@@ -115,26 +118,41 @@ class GenericWebScraper(metaclass=ABCMeta):
 
     # internal variables
 
-    # map a remote endpoint to HTML file suffix
     @property
     @abstractmethod
     def htmlfile_suffix(self):
+        """
+        A dictionary that maps a remote endpoint to HTML file suffix
+        E.g. CompanyEndPoint.ADVISORS -> "_advisors" (so that the resulting HTML file is 'google_advisors.html')
+        :return:
+        """
         pass
 
-    # map an endpoint to a class to wait for
     @property
     @abstractmethod
     def class_wait(self):
+        """
+        A dictionary which maps an endpoint to a CSS class that characterize its HTML DOM
+        :return:
+        """
         pass
 
-    # a string containing the directory of HTML files
     @property
     @abstractmethod
     def html_basepath(self):
+        """
+        A string containing the directory of HTML files
+        :return:
+        """
         pass
 
     @staticmethod
     def is404(soup):
+        """
+        Check if the page contains a 404 error
+        :param soup: A BeautifulSoup of the webpage
+        :return: True if error 404 is found, False otherwise
+        """
         pass
 
     def __init__(self, id):
@@ -153,6 +171,7 @@ class GenericWebScraper(metaclass=ABCMeta):
         time.sleep(sec)
 
     def randSleep(self, min, max):
+        #logging.debug("randSleep({},{}) called".format(min,max))
         sec = random.randint(min, max)
         self.sleep(sec)
 
@@ -237,11 +256,8 @@ class GenericWebScraper(metaclass=ABCMeta):
 
     # Post-load sleep, Check if there are 404 errors, Wait for the presence of an element in a web page
     def waitForInvisibility(self, by, value):
-        condition_str = "(" + str(by) + "," + value + ")"
         url = self.getBrowserURL()
-        msg = "Waiting for in-visibility of "
-        msg += condition_str
-        msg += " in URL='" + url + "'"
+        msg = "Waiting for in-visibility of ({},{}) in URL='{}'".format(by, value, url)
         logging.debug(msg)
         try:
             condition = EC.invisibility_of_element_located((by, value))
@@ -253,15 +269,14 @@ class GenericWebScraper(metaclass=ABCMeta):
             logging.error("Unexpected exception waiting for element invisibility. Exiting")
             raise
         else:
-            logging.debug("Element " + condition_str + " is now invisible in URL='" + url + "'")
+            msg = "Element ({},{}) is now invisible in URL='{}'".format(by, value, url)
+            logging.debug(msg)
 
     # Wait for the presence of an element in a web page
     def waitForPresenceCondition(self, by, value):
-
         # Wait for the presence in the DOM of a tag with a given class
-        condition_str = "(" + str(by) + "," + value + ")"
         url = self.getBrowserURL()
-        msg = "Waiting for presence of " + condition_str + " in URL='" + url + "'"
+        msg = "Waiting for presence of ({},{}) in URL='{}'".format(by, value, url)
         logging.debug(msg)
         try:
             condition = EC.presence_of_element_located((by, value))
@@ -273,7 +288,8 @@ class GenericWebScraper(metaclass=ABCMeta):
             logging.critical("Unexpected exception waiting for page element. Exiting")
             raise e
         else:
-            logging.debug("Element " + condition_str + " found in URL='" + url + "'")
+            msg = "Element ({},{}) is present in URL='{}'".format(by, value, url)
+            logging.debug(msg)
 
     def waitForClass(self, endpoint):
         return self.waitForPresenceCondition(By.CLASS_NAME, self.class_wait[endpoint])
