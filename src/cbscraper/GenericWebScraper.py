@@ -31,6 +31,21 @@ n_requests = 0
 
 # FUNCTIONS
 
+def csv2stata(infile):
+    stata_exe = "C:\Program Files (x86)\Stata13\StataMP-64.exe"
+
+    in_base = os.path.basename(infile)
+    in_name = os.path.splitext(in_base)[0]
+    do_file = in_name + ".do"
+
+    do_cont = 'import delimited using "' + in_base + '", delimiters(",") bindquotes(strict) \n'
+    do_cont += 'save "' + in_name + '" \n' #very import the last new line
+
+    with open(do_file, 'w') as file:
+        file.write(do_cont)
+
+    subprocess.call([stata_exe, "/e", "do", do_file])
+
 def iniJSONPickle():
     jsonpickle.set_preferred_backend('simplejson')
     jsonpickle.set_encoder_options('simplejson', indent=4, sort_keys=True)
