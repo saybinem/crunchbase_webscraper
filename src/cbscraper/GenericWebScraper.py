@@ -1,7 +1,6 @@
 import json
 import logging
 import os
-import pickle
 import random
 import smtplib
 import time
@@ -17,14 +16,13 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium.webdriver.remote.remote_connection import LOGGER
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-import global_vars
 
 ua = UserAgent()
-
 
 # Non modifiable globals
 _browser = None
@@ -36,6 +34,7 @@ n_requests = 0
 def iniJSONPickle():
     jsonpickle.set_preferred_backend('simplejson')
     jsonpickle.set_encoder_options('simplejson', indent=4, sort_keys=True)
+
 
 def readJSONFile(file):
     if not os.path.isfile(file):
@@ -51,9 +50,10 @@ def readJSONFile(file):
 # filename DOES INCLUDE EXTENSION
 def saveJSON(data, filename):
     with open(filename, 'w', encoding="utf-8") as fileh:
-        #logging.debug("Writing '"+filename+"'")
+        # logging.debug("Writing '"+filename+"'")
         data_str = jsonpickle.encode(data)
         fileh.write(data_str)
+
 
 def myTextStrip(str):
     return str.replace('\n', '').strip()
@@ -171,7 +171,7 @@ class GenericWebScraper(metaclass=ABCMeta):
         time.sleep(sec)
 
     def randSleep(self, min, max):
-        #logging.debug("randSleep({},{}) called".format(min,max))
+        # logging.debug("randSleep({},{}) called".format(min,max))
         sec = random.randint(min, max)
         self.sleep(sec)
 
@@ -334,15 +334,18 @@ class GenericWebScraper(metaclass=ABCMeta):
 
             # CHROME
             elif self.browser_type == EBrowser.CHROME:
-                _browser = webdriver.Chrome()
+                chrome_options = ChromeOptions()
+                chrome_options.add_argument("--start-maximized")
+                chrome_options.binary_location = self.chrome_binary
+                _browser = webdriver.Chrome(chrome_options=chrome_options)
                 self.sleep(1)
-                _browser.set_window_position(0, 0)
 
             # CHROME (headless)
             elif self.browser_type == EBrowser.CHROME_HEADLESS:
                 chrome_options = ChromeOptions()
                 chrome_options.add_argument("--headless")
-                chrome_options.add_argument("--window-size={},{}".format(self.chrome_headless_screen_size[0], self.chrome_headless_screen_size[1]))
+                chrome_options.add_argument("--window-size={},{}".format(self.chrome_headless_screen_size[0],
+                                                                         self.chrome_headless_screen_size[1]))
                 chrome_options.binary_location = self.chrome_binary
                 _browser = webdriver.Chrome(chrome_options=chrome_options)
                 self.sleep(1)
@@ -456,9 +459,9 @@ class GenericWebScraper(metaclass=ABCMeta):
 
     # Click on a link and handle exception
     def clickLink(self, link):
-        logging.info("Clicking tag_name='" + str(link.tag_name) + "' text='" + str(link.text).replace("\n",
-                                                                                                      " imp") + "' href='" + str(
-            link.get_attribute("href")) + "'")
+        logging.info("Clicking tag_name='" + str(link.tag_name) + \
+                     "' text='" + str(link.text).replace("\n", " imp") + \
+                     "' href='" + str(link.get_attribute("href")) + "'")
         try:
             link.click()
         except TimeoutException:
@@ -477,3 +480,7 @@ class GenericWebScraper(metaclass=ABCMeta):
     def jsScrollToBottom(self):
         script = 'window.scrollTo(0, document.body.scrollHeight);'
         self.getBrowser().execute_script(script)
+
+    def openNewTab(self):
+        body = self.getBrowser().find_element_by_tag_name("body")
+        body.send_keys(Keys.CONTROL + 't')
