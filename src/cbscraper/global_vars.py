@@ -1,7 +1,7 @@
 #GLOBALS
 import logging
 
-remove_existing_json = False
+remove_existing_json = True
 go_on = True #scrape unscraped companies
 
 excel_file = r"C:\data\tesi\VICO\ID Crunchbase_ID VICO.xlsx"
@@ -18,9 +18,6 @@ company_screens_dir = './data/company/screenshots'
 person_json_dir = "./data/person/json"
 person_html_dir = './data/person/html'
 person_screens_dir = './data/person/screenshots'
-
-# If False, use jsonpickle. If True, use Python's standard pickle
-usepickle = False
 
 console_log_level = logging.INFO
 

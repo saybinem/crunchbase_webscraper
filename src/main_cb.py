@@ -70,7 +70,7 @@ def main():
     already_in_job = set()  # list of companies which we have put in job
     duplicates = list()  # list of duplicates companies
 
-    for company_id_vico, row in vico_to_cb_map.iterrows():
+    for counter, (company_id_vico, row) in enumerate(vico_to_cb_map.iterrows()):
 
         company_id_cb = row[global_vars.excel_col_cb].replace("/organization/", "")
 
@@ -87,12 +87,10 @@ def main():
         already_in_job.add(company_id_vico)
 
         # Calculate percentage completion
-        completion_perc = round((counter / ids_len) * 100, 2)
-        counter += 1
         company_data = CBCompanyData()
         company_data.company_id_cb = company_id_cb
         company_data.company_id_vico = company_id_vico
-        company_data.completion_perc = completion_perc
+        company_data.completion_perc = counter / ids_len
         jobs_list.append(company_data)
 
     # Duplicates count

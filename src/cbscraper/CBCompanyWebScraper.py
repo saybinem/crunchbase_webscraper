@@ -18,7 +18,7 @@ class OrgEndPoint(Enum):
 class CBCompanyWebScraper(cbscraper.CBWebScraper.CBWebScraper):
 
     html_basepath = cbscraper.global_vars.company_html_dir
-    screenshot_folder = cbscraper.global_vars.company_screens_dir
+    screenshot_basepath = cbscraper.global_vars.company_screens_dir
 
     class_wait = {
         OrgEndPoint.ENTITY: 'entity',
@@ -101,6 +101,7 @@ class CBCompanyWebScraper(cbscraper.CBWebScraper.CBWebScraper):
         if not entity_html:
             try:
                 self.goToEntityPage()
+                self.randSleep(self.postload_sleep_min, self.postload_sleep_max)
             except Error404:
                 logging.error("Caught error 404. Re-raising")
                 raise
@@ -108,7 +109,7 @@ class CBCompanyWebScraper(cbscraper.CBWebScraper.CBWebScraper):
                 # Write HTML to file and get screenshot even if we get a 404 error
                 entity_html = self.getBrowserPageSource()
                 self.writeHTMLFile(entity_html, OrgEndPoint.ENTITY)
-                self.saveScreenshot(os.path.join(self.screenshot_folder, self.id + ".png"))
+                self.saveScreenshotEndpoint(OrgEndPoint.ENTITY)
 
         # Set endpoint 'entity''s HTML and soup
         self.setEndpointHTML(OrgEndPoint.ENTITY, entity_html)
@@ -132,6 +133,7 @@ class CBCompanyWebScraper(cbscraper.CBWebScraper.CBWebScraper):
                     self.prev_page_is_entity = True
                     html = self.getBrowserPageSource()
                     self.writeHTMLFile(html, endpoint)
+                    self.saveScreenshotEndpoint(endpoint)
                 self.setEndpointHTML(endpoint, html)
         # Make the soup of downloaded HTML pages
         self.makeAllSoup()

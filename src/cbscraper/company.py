@@ -11,7 +11,9 @@ from cbscraper.CBCompanyData import CBCompanyData, CBCompanyDetails, CBCompanyOv
 from cbscraper.CBCompanyWebScraper import OrgEndPoint
 from cbscraper.CBPersonData import EPersonType
 from cbscraper.GenericWebScraper import Error404
-
+from cbscraper.CBCompanyWebScraper import CBCompanyWebScraper
+from cbscraper.CBPersonWebScraper import CBPersonWebScraper
+import cbscraper.GenericWebScraper as GenericWebScraper
 
 # Scrape organization advisors
 def scrapeOrgAdvisors(company_data, soup_advisors):
@@ -62,8 +64,8 @@ def scrapeOrgPastPeople(company_data, soup_past_people):
             if h5_tag is not None:
                 role = h5_tag.text
             # Normalize and append
-            name = cbscraper.GenericWebScraper.myTextStrip(name)
-            role = cbscraper.GenericWebScraper.myTextStrip(role)
+            name = GenericWebScraper.myTextStrip(name)
+            role = GenericWebScraper.myTextStrip(role)
             company_data.past_people.append([name, link, role])
 
 
@@ -187,6 +189,8 @@ def scrapeOrgOverviewStats(company_data, soup):
 # Scarpe organization "overview" section
 def scrapeOrgOverview(company_data, soup):
 
+    company_data.name = soup.find('h1', id='profile_header_heading').text
+
     # Headquarters
     tag = soup.find('dt', string='Headquarters:')
     if tag is not None:
@@ -229,7 +233,7 @@ def scrapeOrgOverview(company_data, soup):
 
 # Scrape a company
 def scrapeOrg(company_data):
-    msg = "Company: " + company_data.company_id_cb + " (" + str(company_data.completion_perc) + "%) (" + company_data.company_id_vico + ")"
+    msg = "Company: {} ({:.2%}) ({})".format(company_data.company_id_cb, company_data.completion_perc, company_data.company_id_vico)
     logging.info(msg)
 
     # If we have a JSON file, use the JSON file we already have
@@ -237,11 +241,11 @@ def scrapeOrg(company_data):
 
     if os.path.isfile(out_file):
         logging.debug("Organization already scraped. Returning JSON file")
-        org_data = cbscraper.GenericWebScraper.readJSONFile(out_file)
+        org_data = GenericWebScraper.readJSONFile(out_file)
         return org_data
 
     # Scrape organization
-    company_scraper = cbscraper.CBCompanyWebScraper.CBCompanyWebScraper(company_data.company_id_cb)
+    company_scraper = CBCompanyWebScraper(company_data.company_id_cb)
 
     # If the HTML file doesn't exist and go_on is False, skip the organization
     htmlfile = company_scraper.genHTMLFilePath(OrgEndPoint.ENTITY)

@@ -161,6 +161,15 @@ class GenericWebScraper(metaclass=ABCMeta):
         """
         pass
 
+    @property
+    @abstractmethod
+    def screenshot_basepath(self):
+        """
+        A string containing the directory of screenshot files
+        :return:
+        """
+        pass
+
     @staticmethod
     def is404(soup):
         """
@@ -179,6 +188,10 @@ class GenericWebScraper(metaclass=ABCMeta):
     def saveScreenshot(self, filename):
         logging.info("Saving current page screenshot in '" + filename + "'")
         self.getBrowser().save_screenshot(filename)
+
+    def saveScreenshotEndpoint(self, endpoint):
+        filename = self.genScreenshotFilePath(endpoint)
+        self.saveScreenshot(filename)
 
     def sleep(self, sec):
         if (sec >= 6):
@@ -228,8 +241,18 @@ class GenericWebScraper(metaclass=ABCMeta):
             raise RuntimeError("The endpoint you passed is not mapped anywhere")
         path = os.path.join(self.html_basepath, self.id + self.htmlfile_suffix[endpoint] + ".html")
         path = os.path.abspath(path)
-        path = os.path.normpath(
-            path)  # normalize path which has mixed slashes (e.g. C:\data/ciao -> c:/data/cia0). Only a visual perk for the logs
+        # normalize path which has mixed slashes (e.g. C:\data/ciao -> c:/data/cia0). Only a visual perk for the logs
+        path = os.path.normpath(path)
+        return path
+
+    # Get the file path of local Screenshots file from remote endpoint
+    def genScreenshotFilePath(self, endpoint):
+        if endpoint not in self.htmlfile_suffix:
+            raise RuntimeError("The endpoint you passed is not mapped anywhere")
+        path = os.path.join(self.screenshot_basepath, self.id + self.htmlfile_suffix[endpoint] + ".png")
+        path = os.path.abspath(path)
+        # normalize path which has mixed slashes (e.g. C:\data/ciao -> c:/data/cia0). Only a visual perk for the logs
+        path = os.path.normpath(path)
         return path
 
     def removeHTMLFile(self, endpoint):

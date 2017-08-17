@@ -67,13 +67,13 @@ class CBCompanyData():
         super().__init__()
         self.company_id_vico = str()
         self.company_id_cb = str()
+        self.name = str() #company name
         self.completion_perc = float()
         self.overview = CBCompanyOverview()
         self.details = CBCompanyDetails()
         self.people = list()
         self.advisors = list()
         self.past_people = list()
-        self.founders = list()
         self.error = str()
         self.founders = list() #founders list are part of overview, but are here for convienece reason in scraping persons
 
@@ -91,6 +91,5 @@ class CBCompanyData():
 
     @staticmethod
     def genPathFromID(company_id_cb):
-        partial_out_file = os.path.join(global_vars.company_json_dir, company_id_cb)
-        out_file = GenericWebScraper.genFullFilename(partial_out_file)
+        out_file = os.path.join(global_vars.company_json_dir, company_id_cb+".json")
         return out_file

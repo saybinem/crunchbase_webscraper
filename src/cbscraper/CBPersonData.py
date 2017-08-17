@@ -88,9 +88,8 @@ class CBPersonData(object):
 
     @staticmethod
     def genPathFromId(person_id_cb):
-        partial = os.path.join(global_vars.person_json_dir, person_id_cb)
-        person_out_file = GenericWebScraper.genFullFilename(partial)
-        return person_out_file
+        out_file = os.path.join(global_vars.person_json_dir, person_id_cb+".json")
+        return out_file
         
     def __repr__(self):
         out = self.__dict__.copy()
