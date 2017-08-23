@@ -58,7 +58,7 @@ def main():
 
     # Get list of companies
     logging.info("Reading map")
-    vico_to_cb_map = pandas.read_excel(global_vars.excel_file, index_col=global_vars.excel_col_vico, header=0,
+    vico_to_cb_map = pandas.read_excel(global_vars.cb_vico_map_file, index_col=global_vars.excel_col_vico, header=0,
                                        sheetname=global_vars.excel_sheet)
 
     # Build job list

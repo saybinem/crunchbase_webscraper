@@ -233,25 +233,31 @@ def scrapeOrgOverview(company_data, soup):
 
 # Scrape a company
 def scrapeOrg(company_data):
-    msg = "Company: {} ({:.2%}) ({})".format(company_data.company_id_cb, company_data.completion_perc, company_data.company_id_vico)
-    logging.info(msg)
+
+    msg = "Company: {} ({:.2%}) ({})".format(company_data.company_id_cb, company_data.completion_perc,
+                                             company_data.company_id_vico)
 
     # If we have a JSON file, use the JSON file we already have
     out_file = CBCompanyData.genPathFromID(company_data.company_id_cb)
 
     if os.path.isfile(out_file):
-        logging.debug("Organization already scraped. Returning JSON file")
+        logging.info(msg+ "already scraped. Returning JSON file".format(company_data.company_id_cb))
         org_data = GenericWebScraper.readJSONFile(out_file)
         return org_data
+    else:
+        logging.info(msg)
 
     # Scrape organization
     company_scraper = CBCompanyWebScraper(company_data.company_id_cb)
 
     # If the HTML file doesn't exist and go_on is False, skip the organization
     htmlfile = company_scraper.genHTMLFilePath(OrgEndPoint.ENTITY)
-    if not os.path.isfile(htmlfile) and not global_vars.go_on:
-        logging.info("NOT WEB-SCRAPING NEW COMPANIES")
-        sys.exit(0)
+    if not os.path.isfile(htmlfile):
+        if global_vars.new_companies <= 0:
+            logging.info("NOT WEB-SCRAPING NEW COMPANIES")
+            sys.exit(0)
+        else:
+            global_vars.new_companies -= 1
 
     # Scrape the company
     error_code = ''
@@ -318,4 +324,4 @@ def scrapeOrgAndPeople(company_data):
         cbscraper.person.scrapePersonsList(company_data, EPersonType.PAST_PEOPLE)
 
     else:
-        logging.error("scrapeOrganization() returned False. This means there is no company_data")
+        logging.debug("scrapeOrganization() returned False. This means there is no company_data")

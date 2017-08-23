@@ -21,6 +21,7 @@ from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium.webdriver.remote.remote_connection import LOGGER
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+import subprocess
 
 ua = UserAgent()
 
@@ -330,6 +331,11 @@ class GenericWebScraper(metaclass=ABCMeta):
             logging.debug(msg)
 
     def waitForClass(self, endpoint):
+        """
+        Alias for self.waitForPresenceCondition(By.CLASS_NAME, self.class_wait[endpoint])
+        :param endpoint:
+        :return:
+        """
         return self.waitForPresenceCondition(By.CLASS_NAME, self.class_wait[endpoint])
 
     @staticmethod

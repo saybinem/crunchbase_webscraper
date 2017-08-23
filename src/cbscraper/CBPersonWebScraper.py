@@ -16,7 +16,7 @@ class PersonEndPoint(Enum):
 class CBPersonWebScraper(cbscraper.CBWebScraper.CBWebScraper):
 
     html_basepath = cbscraper.global_vars.person_html_dir
-    screenshot_folder = cbscraper.global_vars.person_screens_dir
+    screenshot_basepath = cbscraper.global_vars.person_screens_dir
 
     # Name of the class to wait for when we load a page
     class_wait = {
@@ -85,24 +85,25 @@ class CBPersonWebScraper(cbscraper.CBWebScraper.CBWebScraper):
                 self.prev_page_is_entity = False
                 return True
 
-    # Scrape an organization
+    # Scrape an CB person
     def scrape(self):
         #logging.info("Start scraping " + self.id)
 
         # Get endpoint 'entity'
         endpoint = PersonEndPoint.ENTITY
-        entity_html = False
-        #try to get it from file
+
+        # Try to get it from file
         try:
             entity_html = self.getHTMLFile(endpoint)
         except Error404 as e:
             logging.debug("HTML file contain 404 error")
             raise
 
-        #try to get it from the web
+        # Try to get it from the web
         if entity_html is False:
             try:
                 self.goToEntityPage()
+                self.randSleep(self.postload_sleep_min, self.postload_sleep_max)
             except Error404 as e:
                 logging.debug("Page contain 404 error")
                 raise
@@ -110,7 +111,7 @@ class CBPersonWebScraper(cbscraper.CBWebScraper.CBWebScraper):
                 # SAVE HTML TO FILE (EVEN IF WE HAVE A 404 ERROR)
                 entity_html = self.getBrowserPageSource()
                 self.writeHTMLFile(entity_html, endpoint)
-                self.saveScreenshot(os.path.join(self.screenshot_folder, self.id + ".png"))
+                self.saveScreenshotEndpoint(endpoint)
             
         self.setEndpointHTML(PersonEndPoint.ENTITY, entity_html)
         entity_soup = self.makeSoupFromHTML(entity_html)
@@ -123,13 +124,16 @@ class CBPersonWebScraper(cbscraper.CBWebScraper.CBWebScraper):
                 html = self.getHTMLFile(endpoint)
                 if not html:
                     self.goToEntityPage()
+                    self.randSleep(self.postload_sleep_min, self.postload_sleep_max)
                     link = self.getBrowserLink(endpoint)
                     logging.info("Clicking on '" + link.get_attribute('title') + "' link")
                     self.clickLink(link)
                     self.waitForClass(endpoint)
                     self.entity_page = False
                     self.prev_page_is_entity = True
-                    html = self.getBrowserPageSource(endpoint)
+                    html = self.getBrowserPageSource()
+                    self.writeHTMLFile(html, endpoint)
+                    self.saveScreenshotEndpoint(endpoint)
                 self.setEndpointHTML(endpoint, html)
         # Make the soup of downloaded HTML pages
         self.makeAllSoup()

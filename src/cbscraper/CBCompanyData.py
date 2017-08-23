@@ -93,3 +93,8 @@ class CBCompanyData():
     def genPathFromID(company_id_cb):
         out_file = os.path.join(global_vars.company_json_dir, company_id_cb+".json")
         return out_file
+
+    def __getstate__(self):
+        odict = self.__dict__
+        del odict['completion_perc']
+        return odict

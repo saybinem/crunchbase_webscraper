@@ -1,10 +1,10 @@
 #GLOBALS
 import logging
 
-remove_existing_json = True
-go_on = True #scrape unscraped companies
+remove_existing_json = False
+new_companies = 10 # scrape unscraped companies
 
-excel_file = r"C:\data\tesi\VICO\ID Crunchbase_ID VICO.xlsx"
+cb_vico_map_file = r"C:\data\tesi\VICO\ID Crunchbase_ID VICO.xlsx"
 vico_file = r"C:\data\tesi\VICO\VICO 4.0_REV_geocoded.csv"
 
 excel_sheet = 'Firm'

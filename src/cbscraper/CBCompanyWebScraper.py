@@ -53,7 +53,7 @@ class CBCompanyWebScraper(cbscraper.CBWebScraper.CBWebScraper):
             self.goBack()
             # We cannot have 404 error here.
             # This is a page that follows the entity page (e.g. the past_people page)
-            # If the entity page is a 404 page, we couldn't have ngot to this point
+            # If the entity page is a 404 page, we couldn't have got to this point
             self.waitForClass(OrgEndPoint.ENTITY)
         else:
             logging.debug("Opening entity page")
@@ -123,6 +123,7 @@ class CBCompanyWebScraper(cbscraper.CBWebScraper.CBWebScraper):
                 html = self.getHTMLFile(endpoint)
                 if not html:
                     self.goToEntityPage()
+                    self.randSleep(self.postload_sleep_min, self.postload_sleep_max)
                     link = self.getBrowserLink(endpoint)
                     logging.info("Clicking on '" + link.get_attribute('title') + "' link")
                     self.clickLink(link)

@@ -211,10 +211,10 @@ def scrapePerson(person_data):
     person_out_file = CBPersonData.genPathFromId(person_data.person_id_cb)
 
     if (os.path.isfile(person_out_file)):
-        logging.info("Person \"" + person_data.person_id_cb + "\" already scraped")
+        logging.debug("Person \"" + person_data.person_id_cb + "\" already scraped")
         return True
 
-    logging.debug("Scraping person: '" + person_data.person_id_cb + "' of company '" + person_data.company_id_cb + "'")
+    logging.info("Scraping person: '" + person_data.person_id_cb + "' of company '" + person_data.company_id_cb + "'")
 
     # Scrape
     person_scraper = cbscraper.CBPersonWebScraper.CBPersonWebScraper(person_data.person_id_cb)
@@ -273,7 +273,7 @@ def scrapePersonsList(company_data, key):
         person_id = getPersonIdFromLink(p[1])
 
         if person_id in global_vars.already_scraped:
-            logging.debug("The person '" + person_id + "' has already been scraped. Just adding new type")
+            logging.debug("The person '" + person_id + "' has already been scraped in this session. Just adding new type")
             person_data_file = CBPersonData.genPathFromId(person_id)
             person_data = cbscraper.GenericWebScraper.readJSONFile(person_data_file)
             person_data.setType(key)
