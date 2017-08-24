@@ -85,7 +85,7 @@ class CBCompanyData():
     def __repr__(self):
         out_dict = copy.copy(self.__dict__)
         if "company_details" in out_dict:
-            out_dict['company_details'] = copy.copy(self.company_details.__dict__)
+            out_dict['company_details'] = copy.copy(self.details.__dict__)
         out_str = json.dumps(out_dict, sort_keys=True, indent=4)
         return out_str
 

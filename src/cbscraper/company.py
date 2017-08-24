@@ -241,7 +241,7 @@ def scrapeOrg(company_data):
     out_file = CBCompanyData.genPathFromID(company_data.company_id_cb)
 
     if os.path.isfile(out_file):
-        logging.info(msg+ "already scraped. Returning JSON file".format(company_data.company_id_cb))
+        logging.info(msg + " already scraped. Returning JSON file".format(company_data.company_id_cb))
         org_data = GenericWebScraper.readJSONFile(out_file)
         return org_data
     else:
