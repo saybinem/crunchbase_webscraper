@@ -49,7 +49,7 @@ def csv2stata(infile):
 
 def iniJSONPickle():
     jsonpickle.set_preferred_backend('simplejson')
-    jsonpickle.set_encoder_options('simplejson', indent=4, sort_keys=True)
+    jsonpickle.set_encoder_options('simplejson', indent=4, sort_keys=True, ensure_ascii=False)
 
 
 def readJSONFile(file):
