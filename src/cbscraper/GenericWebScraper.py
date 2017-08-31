@@ -65,9 +65,8 @@ def readJSONFile(file):
 
 # filename DOES INCLUDE EXTENSION
 def saveJSON(data, filename):
+    data_str = jsonpickle.encode(data)
     with open(filename, 'w', encoding="utf-8") as fileh:
-        # logging.debug("Writing '"+filename+"'")
-        data_str = jsonpickle.encode(data)
         fileh.write(data_str)
 
 
