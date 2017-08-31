@@ -21,8 +21,8 @@ def scrapeOrgAdvisors(company_data, soup_advisors):
     for div_advisors in soup_advisors.find_all('div', class_='advisors'):
         for info_block in div_advisors.find_all('div', class_='info-block'):
             follow_card = info_block.find('a', class_='follow_card')
-            name = follow_card.get('data-name')
-            link = follow_card.get('data-permalink')
+            name = follow_card.get('tagged_data-name')
+            link = follow_card.get('tagged_data-permalink')
             primary_role = info_block.h5.text  # the primary role of this person (may not be related to the company at hand)
             role_in_bod = info_block.h6.text  # his role in our company's BoD
 
@@ -40,7 +40,7 @@ def scrapeOrgCurrentPeople(company_data, soup_people):
         for info_block in div_people.find_all('div', class_='info-block'):
             h4 = info_block.find('h4')
             a = h4.a
-            name = a.get('data-name')
+            name = a.get('tagged_data-name')
             link = a.get('href')
             role = info_block.find('h5').text
             name = cbscraper.GenericWebScraper.myTextStrip(name)
@@ -55,7 +55,7 @@ def scrapeOrgPastPeople(company_data, soup_past_people):
             # Get name and link
             h4 = info_block.find('h4')
             a = h4.a
-            name = a.get('data-name')
+            name = a.get('tagged_data-name')
             # logging.info("Found " + name)
             link = a.get('href')
             # Get role
@@ -206,8 +206,8 @@ def scrapeOrgOverview(company_data, soup):
     if tag is not None:
         dd_founders = tag.find_next('dd')
         for link in dd_founders.find_all('a'):
-            name = link.attrs['data-name']
-            id = link.attrs['data-permalink']
+            name = link.attrs['tagged_data-name']
+            id = link.attrs['tagged_data-permalink']
             company_data.founders.append([name, id])
 
     # Categories
@@ -304,7 +304,7 @@ def scrapeOrg(company_data):
 def scrapeOrgAndPeople(company_data):
 
     # Scrape the company
-    # scrapeOrg can return a new company data structure in case it reads the company from file
+    # scrapeOrg can return a new company tagged_data structure in case it reads the company from file
     company_data = scrapeOrg(company_data)
 
     # Scrape persons of the company

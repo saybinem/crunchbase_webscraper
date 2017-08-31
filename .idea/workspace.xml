@@ -5,12 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8ffd353f-9675-4efa-a6a6-3ad054850fe0" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../process_person_table/src/extract_edu_list.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../process_person_table/src/funcs.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../process_person_table/src/extract_edu_exp.py" afterPath="$PROJECT_DIR$/../process_person_table/src/extract_exp_list.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../process_person_table/src/edu_bayes.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../process_person_table/src/edu_dicts.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cbscraper/GenericWebScraper.py" afterPath="$PROJECT_DIR$/src/cbscraper/GenericWebScraper.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cbscraper/company.py" afterPath="$PROJECT_DIR$/src/cbscraper/company.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cbscraper/global_vars.py" afterPath="$PROJECT_DIR$/src/cbscraper/global_vars.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cbscraper/person.py" afterPath="$PROJECT_DIR$/src/cbscraper/person.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main_cb.py" afterPath="$PROJECT_DIR$/src/main_cb.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/src/extract_edu_list.py" afterPath="$PROJECT_DIR$/../process_person_table/src/extract_edu_list.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/src/extract_exp_list.py" afterPath="$PROJECT_DIR$/../process_person_table/src/extract_exp_list.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/src/funcs.py" afterPath="$PROJECT_DIR$/../process_person_table/src/funcs.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/src/global_vars.py" afterPath="$PROJECT_DIR$/../process_person_table/src/global_vars.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/src/main.py" afterPath="$PROJECT_DIR$/../process_person_table/src/main.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,12 +26,13 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/crunchbase_scraper$process_person_table.coverage" NAME="process_person_table Coverage Results" MODIFIED="1503860240364" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
+    <SUITE FILE_PATH="coverage/crunchbase_scraper$process_person_table.coverage" NAME="process_person_table Coverage Results" MODIFIED="1504162804410" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$main_cb.coverage" NAME="main_cb Coverage Results" MODIFIED="1499407818191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$extract_edu_exp.coverage" NAME="extract_edu_exp Coverage Results" MODIFIED="1503592242968" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$linkedin_scraper.coverage" NAME="linkedin_scraper Coverage Results" MODIFIED="1503592956014" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../linkedin_scraper" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$gen_company_table.coverage" NAME="gen_company_table Coverage Results" MODIFIED="1503578433470" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../gen_company_table" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$gen_person_table.coverage" NAME="gen_person_table Coverage Results" MODIFIED="1503591829840" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../gen_person_table" />
+    <SUITE FILE_PATH="coverage/crunchbase_scraper$edu_bayes.coverage" NAME="edu_bayes Coverage Results" MODIFIED="1504162696089" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$crunchbase_scraper.coverage" NAME="crunchbase_scraper Coverage Results" MODIFIED="1503592316540" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
@@ -44,60 +51,36 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../process_person_table/src/main.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="655">
-              <caret line="47" column="32" lean-forward="false" selection-start-line="47" selection-start-column="32" selection-end-line="47" selection-end-column="32" />
-              <folding>
-                <element signature="e#24#38#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="extract_exp_list.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../process_person_table/src/extract_exp_list.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="625">
-              <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#14#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="global_vars.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../process_person_table/src/global_vars.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="4" column="12" lean-forward="false" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
-              <folding>
-                <element signature="e#0#14#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="funcs.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../process_person_table/src/funcs.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="169">
-              <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="extract_edu_list.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="extract_edu_list.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../process_person_table/src/extract_edu_list.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="10" column="47" lean-forward="false" selection-start-line="10" selection-start-column="47" selection-end-line="10" selection-end-column="47" />
+            <state relative-caret-position="314">
+              <caret line="126" column="103" lean-forward="true" selection-start-line="126" selection-start-column="77" selection-end-line="126" selection-end-column="103" />
+              <folding>
+                <element signature="e#0#42#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="edu_dicts.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../process_person_table/src/edu_dicts.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1325">
+              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="extract_exp_list.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../process_person_table/src/extract_exp_list.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="107">
+              <caret line="14" column="18" lean-forward="false" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+              <folding>
+                <element signature="e#0#14#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -113,14 +96,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>openURL</find>
-      <find>postload_sleep_min</find>
-      <find>randSleep(</find>
-      <find>postload</find>
-      <find>recursiveLinkCli</find>
-      <find>waitForInvi</find>
-      <find>handle</find>
-      <find>clickLi</find>
       <find>handleCap</find>
       <find>education</find>
       <find>Writing header</find>
@@ -143,6 +118,14 @@
       <find>multimedia</find>
       <find>ingénierie</find>
       <find>music</find>
+      <find>laurea</find>
+      <find>commerce</find>
+      <find>computer scien</find>
+      <find>english</find>
+      <find>classifySent</find>
+      <find>iter</find>
+      <find>getEn</find>
+      <find>medica</find>
     </findStrings>
     <replaceStrings>
       <replace>soup</replace>
@@ -170,8 +153,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/../process_person_table/main.py" />
-        <option value="$PROJECT_DIR$/../process_person_table/step3.py" />
         <option value="$PROJECT_DIR$/cbscraper/GenericWebScraper.py" />
         <option value="$PROJECT_DIR$/cbscraper/CBWebScraper.py" />
         <option value="$PROJECT_DIR$/cbscraper/CBCompanyWebScraper.py" />
@@ -216,11 +197,13 @@
         <option value="$PROJECT_DIR$/../linkedin_scraper/src/main_in.py" />
         <option value="$PROJECT_DIR$/../linkedin_scraper/src/global_vars.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/extract_edu_exp.py" />
-        <option value="$PROJECT_DIR$/../process_person_table/src/extract_exp_list.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/main.py" />
-        <option value="$PROJECT_DIR$/../process_person_table/src/funcs.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/global_vars.py" />
+        <option value="$PROJECT_DIR$/../process_person_table/src/funcs.py" />
+        <option value="$PROJECT_DIR$/../process_person_table/src/edu_bayes.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/extract_edu_list.py" />
+        <option value="$PROJECT_DIR$/../process_person_table/src/edu_dicts.py" />
+        <option value="$PROJECT_DIR$/../process_person_table/src/extract_exp_list.py" />
       </list>
     </option>
   </component>
@@ -253,8 +236,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -271,13 +252,15 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
     <property name="run.code.analysis.last.selected.profile" value="aDefault" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../process_person_table/src/extract_edu_exp.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../process_person_table/src/edu_bayes.py" />
     <property name="settings.editor.splitter.proportion" value="0.2375297" />
   </component>
   <component name="RecentsManager">
@@ -477,6 +460,24 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
+    <configuration name="edu_bayes" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\IntelPython35\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../process_person_table" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="process_person_table" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../process_person_table/src/edu_bayes.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
     <configuration name="gen_company_table" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -550,12 +551,13 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <list size="5">
+    <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Python.linkedin_scraper" />
       <item index="1" class="java.lang.String" itemvalue="Python.gen_company_table" />
       <item index="2" class="java.lang.String" itemvalue="Python.process_person_table" />
-      <item index="3" class="java.lang.String" itemvalue="Python.gen_person_table" />
-      <item index="4" class="java.lang.String" itemvalue="Python.crunchbase_scraper" />
+      <item index="3" class="java.lang.String" itemvalue="Python.edu_bayes" />
+      <item index="4" class="java.lang.String" itemvalue="Python.gen_person_table" />
+      <item index="5" class="java.lang.String" itemvalue="Python.crunchbase_scraper" />
     </list>
     <recent_temporary>
       <list size="1">
@@ -580,13 +582,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1498207171857</updated>
-    </task>
-    <task id="LOCAL-00079" summary="Improvements">
-      <created>1500500532248</created>
-      <option name="number" value="00079" />
-      <option name="presentableId" value="LOCAL-00079" />
-      <option name="project" value="LOCAL" />
-      <updated>1500500532249</updated>
     </task>
     <task id="LOCAL-00080" summary="Improvements">
       <created>1500537011980</created>
@@ -924,7 +919,14 @@
       <option name="project" value="LOCAL" />
       <updated>1503671431540</updated>
     </task>
-    <option name="localTasksCounter" value="128" />
+    <task id="LOCAL-00128" summary="improvements">
+      <created>1503860254952</created>
+      <option name="number" value="00128" />
+      <option name="presentableId" value="LOCAL-00128" />
+      <option name="project" value="LOCAL" />
+      <updated>1503860254953</updated>
+    </task>
+    <option name="localTasksCounter" value="129" />
     <servers />
   </component>
   <component name="TodoView">
@@ -941,15 +943,14 @@
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32918552" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3091733" sideWeight="0.5021482" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3567384" sideWeight="0.28249195" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32842582" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35746607" sideWeight="0.49785176" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3567384" sideWeight="0.7175081" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17024705" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18528464" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921588" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32918552" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20204741" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39932126" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -959,6 +960,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32842582" sideWeight="0.49785176" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -1026,8 +1028,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/cbscraper/CBCompanyData.py" />
-    <entry file="file://$PROJECT_DIR$/cbscraper/person.py" />
     <entry file="file://$PROJECT_DIR$/cbscraper/CBPersonData.py" />
     <entry file="file://$PROJECT_DIR$/cbscraper/company.py" />
     <entry file="file://$PROJECT_DIR$/../gen_person_table/main.py" />
@@ -1131,7 +1131,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
           <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1266,7 +1265,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="226">
           <caret line="51" column="87" lean-forward="false" selection-start-line="51" selection-start-column="87" selection-end-line="51" selection-end-column="87" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1323,26 +1321,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="655">
           <caret line="47" column="32" lean-forward="false" selection-start-line="47" selection-start-column="32" selection-end-line="47" selection-end-column="32" />
-          <folding>
-            <element signature="e#24#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../process_person_table/src/extract_exp_list.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="625">
-          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../process_person_table/src/global_vars.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="4" column="12" lean-forward="false" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+        <state relative-caret-position="50">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
@@ -1351,19 +1336,49 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../process_person_table/src/funcs.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
+        <state relative-caret-position="1850">
+          <caret line="79" column="23" lean-forward="false" selection-start-line="79" selection-start-column="23" selection-end-line="79" selection-end-column="23" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../process_person_table/src/edu_bayes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../process_person_table/src/extract_edu_list.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="10" column="47" lean-forward="false" selection-start-line="10" selection-start-column="47" selection-end-line="10" selection-end-column="47" />
+        <state relative-caret-position="314">
+          <caret line="126" column="103" lean-forward="true" selection-start-line="126" selection-start-column="77" selection-end-line="126" selection-end-column="103" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../process_person_table/src/edu_dicts.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1325">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../process_person_table/src/extract_exp_list.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="107">
+          <caret line="14" column="18" lean-forward="false" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

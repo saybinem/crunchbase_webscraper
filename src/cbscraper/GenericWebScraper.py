@@ -242,7 +242,7 @@ class GenericWebScraper(metaclass=ABCMeta):
             raise RuntimeError("The endpoint you passed is not mapped anywhere")
         path = os.path.join(self.html_basepath, self.id + self.htmlfile_suffix[endpoint] + ".html")
         path = os.path.abspath(path)
-        # normalize path which has mixed slashes (e.g. C:\data/ciao -> c:/data/cia0). Only a visual perk for the logs
+        # normalize path which has mixed slashes (e.g. C:\tagged_data/ciao -> c:/tagged_data/cia0). Only a visual perk for the logs
         path = os.path.normpath(path)
         return path
 
@@ -252,7 +252,7 @@ class GenericWebScraper(metaclass=ABCMeta):
             raise RuntimeError("The endpoint you passed is not mapped anywhere")
         path = os.path.join(self.screenshot_basepath, self.id + self.htmlfile_suffix[endpoint] + ".png")
         path = os.path.abspath(path)
-        # normalize path which has mixed slashes (e.g. C:\data/ciao -> c:/data/cia0). Only a visual perk for the logs
+        # normalize path which has mixed slashes (e.g. C:\tagged_data/ciao -> c:/tagged_data/cia0). Only a visual perk for the logs
         path = os.path.normpath(path)
         return path
 

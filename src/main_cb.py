@@ -15,7 +15,7 @@ from cbscraper import global_vars
 from cbscraper import GenericWebScraper
 
 
-# make data dirs if they do not exists
+# make tagged_data dirs if they do not exists
 def buildDirs():
     os.makedirs(global_vars.person_html_dir, exist_ok=True)
     os.makedirs(global_vars.person_json_dir, exist_ok=True)

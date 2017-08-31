@@ -11,13 +11,13 @@ excel_sheet = 'Firm'
 excel_col_cb = 'CB'
 excel_col_vico = 'VICO'
 
-company_json_dir = "./data/company/json"
-company_html_dir = './data/company/html'
-company_screens_dir = './data/company/screenshots'
+company_json_dir = "./tagged_data/company/json"
+company_html_dir = './tagged_data/company/html'
+company_screens_dir = './tagged_data/company/screenshots'
 
-person_json_dir = "./data/person/json"
-person_html_dir = './data/person/html'
-person_screens_dir = './data/person/screenshots'
+person_json_dir = "./tagged_data/person/json"
+person_html_dir = './tagged_data/person/html'
+person_screens_dir = './tagged_data/person/screenshots'
 
 console_log_level = logging.INFO
 

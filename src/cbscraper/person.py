@@ -88,7 +88,7 @@ def scrapePersonAdvisoryRoles(soup):
                 role = info_block.h5.text
                 company_tag = info_block.h4.a
                 company_name = company_tag.text
-                company_id = company_tag['data-permalink']
+                company_id = company_tag['tagged_data-permalink']
                 date = info_block.find('h5', class_='date')
                 date_start, date_end = '', ''
                 if (date is not None):
@@ -118,7 +118,7 @@ def scrapePersonPastJobs(soup):
             company_cell = info_row.find('div', class_='company')
             company_tag = company_cell.a
             company_name = company_tag.text
-            company_id = company_tag['data-permalink']
+            company_id = company_tag['tagged_data-permalink']
             past_jobs.append([company_name, title, date_start, date_end, company_id])
             # logging.info("Found past job: "+str(past_job_dict))
     return past_jobs
@@ -132,7 +132,7 @@ def scrapePersonCurrentJobs(soup):
         role = info_block.h4.text
         follow_card = info_block.find('a', class_='follow_card')
         company_name = follow_card.text
-        company_id = follow_card['data-permalink']
+        company_id = follow_card['tagged_data-permalink']
         date = info_block.find('h5', class_='date')
         date_start, date_end = '', ''
         if (date is not None):
@@ -179,15 +179,15 @@ def scrapePersonOverview(soup):
         if tag:
             social_links = tag.findNext('dd')
 
-            a_tag = social_links.find('a', {'data-icons': 'facebook'})
+            a_tag = social_links.find('a', {'tagged_data-icons': 'facebook'})
             if a_tag is not None:
                 overview.social.facebook = a_tag.get('href')
 
-            a_tag = social_links.find('a', {'data-icons': 'linkedin'})
+            a_tag = social_links.find('a', {'tagged_data-icons': 'linkedin'})
             if a_tag is not None:
                 overview.social.linkedin = a_tag.get('href')
 
-            a_tag = social_links.find('a', {'data-icons': 'twitter'})
+            a_tag = social_links.find('a', {'tagged_data-icons': 'twitter'})
             if a_tag is not None:
                 overview.social.twitter = a_tag.get('href')
 
