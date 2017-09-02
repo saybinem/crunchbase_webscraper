@@ -2,6 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../gen_company_table" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../gen_person_table" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../linkedin_scraper" vcs="Git" />

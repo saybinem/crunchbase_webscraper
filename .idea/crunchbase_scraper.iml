@@ -12,6 +12,7 @@
     <orderEntry type="module" module-name="gen_company_table" />
     <orderEntry type="module" module-name="gen_person_table" />
     <orderEntry type="module" module-name="process_person_table" />
+    <orderEntry type="module" module-name="qs_world_rankings" />
   </component>
   <component name="TestRunnerService">
     <option name="projectConfiguration" value="Nosetests" />

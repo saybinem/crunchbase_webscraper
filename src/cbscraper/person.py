@@ -180,19 +180,21 @@ def scrapePersonOverview(soup):
             overview.location = tag.find_next('dd').text
 
         # Social links
-
         tag = overview_content.find('dt', text=re.compile('Social:.*'))
         if tag:
             social_links = tag.findNext('dd')
 
+            # Facebook
             a_tag = social_links.find('a', {'tagged_data-icons': 'facebook'})
             if a_tag is not None:
                 overview.social.facebook = a_tag.get('href')
 
+            # LinkedIn
             a_tag = social_links.find('a', {'tagged_data-icons': 'linkedin'})
             if a_tag is not None:
                 overview.social.linkedin = a_tag.get('href')
 
+            # Twitter
             a_tag = social_links.find('a', {'tagged_data-icons': 'twitter'})
             if a_tag is not None:
                 overview.social.twitter = a_tag.get('href')
