@@ -18,21 +18,24 @@ def scrapePersonInvestments(inv_soup):
     inv_div = inv_soup.find('div', class_='investments')
     if inv_div is not None:
         for tr in inv_div.table.tbody.find_all('tr'):
+
             # Date
             td1 = tr.find('td')
             date = td1.text
+
             # Invested in
             td2 = td1.find_next('td')
-            invested_in_link = td2.a.get('href')
-            invested_in_text = td2.text
+            invested_in_link = td2.a.get('href') #link
+            invested_in_text = td2.text #name of the company
+
             # Round
             td3 = td2.find_next('td')
-            round_text = td3.text
-            round_link = td3.a.get('href')
+
+            round_link = td3.a.get('href') #link to round CB page
             
-            round_arr = round_text.split("/")
-            round_amount = round_arr[0].strip()
-            round_series = round_arr[1].strip()
+            round_arr = td3.text.split("/")
+            round_amount = round_arr[0].strip() #amount invested
+            round_series = round_arr[1].strip() #series
             
             # Details
             td4 = td3.find_next('td')
@@ -40,10 +43,12 @@ def scrapePersonInvestments(inv_soup):
             details_link = ''
             if (td4.a is not None):
                 details_link = td4.a.get('href')
-            # append
+
+            # append to output list
             inv_list.append(
                 [date, invested_in_link, invested_in_text, round_link, round_amount, round_series, details_link, details_text])
             # logging.info("Found investment: "+date + " "+invested_in_text + " " + round_text + " " + details_text)
+
     return inv_list
 
 # *** Education ***
@@ -74,6 +79,7 @@ def scrapePersonEducation(soup):
             # Put in list
             edu_items = [institute, subject, date_start, date_end]
             education_list.append(edu_items)
+
     return education_list
 
 # *** Advisory roles ***
@@ -158,7 +164,7 @@ def scrapePersonOverview(soup):
             overview.primary_role.role = role_arr[0].strip()
             overview.primary_role.firm = role_arr[1].strip()
 
-        # Born date
+        # Date of birth
         tag = overview_content.find('dt', string='Born:')
         if tag is not None:
             overview.born = tag.find_next('dd').text
@@ -202,8 +208,11 @@ def scrapePersonDetails(soup):
         person_details = div_description.text
         if "Click/Touch UPDATE above to add Details" in person_details:
             person_details = ""
-
     return person_details
+
+# Name of the person
+def scrapePersonName(soup):
+    return soup.find(id="profile_header_heading").text
 
 # *** Scrape a single person (e.g. "/person/gavin-ray") ***
 def scrapePerson(person_data):
@@ -230,6 +239,7 @@ def scrapePerson(person_data):
         inv_soup = person_scraper.soup_inv
 
         # Scrape
+        person_data.name = scrapePersonName(soup)
         person_data.person_details = scrapePersonDetails(soup)
         person_data.overview = scrapePersonOverview(soup)
         person_data.current_jobs = scrapePersonCurrentJobs(soup)

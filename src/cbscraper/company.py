@@ -15,103 +15,6 @@ from cbscraper.CBCompanyWebScraper import CBCompanyWebScraper
 from cbscraper.CBPersonWebScraper import CBPersonWebScraper
 import cbscraper.GenericWebScraper as GenericWebScraper
 
-# Scrape organization advisors
-def scrapeOrgAdvisors(company_data, soup_advisors):
-    # Scrape page "advisors" (get both main advisors and additional ones with the same code)
-    for div_advisors in soup_advisors.find_all('div', class_='advisors'):
-        for info_block in div_advisors.find_all('div', class_='info-block'):
-            follow_card = info_block.find('a', class_='follow_card')
-            name = follow_card.get('tagged_data-name')
-            link = follow_card.get('tagged_data-permalink')
-            primary_role = info_block.h5.text  # the primary role of this person (may not be related to the company at hand)
-            role_in_bod = info_block.h6.text  # his role in our company's BoD
-
-            name = cbscraper.GenericWebScraper.myTextStrip(name)
-            primary_role = cbscraper.GenericWebScraper.myTextStrip(primary_role)
-            role_in_bod = cbscraper.GenericWebScraper.myTextStrip(role_in_bod)
-
-            company_data.advisors.append([name, link, role_in_bod, primary_role])
-
-
-
-# Scrape organization current people
-def scrapeOrgCurrentPeople(company_data, soup_people):
-    for div_people in soup_people.find_all('div', class_='people'):
-        for info_block in div_people.find_all('div', class_='info-block'):
-            h4 = info_block.find('h4')
-            a = h4.a
-            name = a.get('tagged_data-name')
-            link = a.get('href')
-            role = info_block.find('h5').text
-            name = cbscraper.GenericWebScraper.myTextStrip(name)
-            role = cbscraper.GenericWebScraper.myTextStrip(role)
-            company_data.people.append([name, link, role])
-
-
-# Scrape organization past people
-def scrapeOrgPastPeople(company_data, soup_past_people):
-    for div_people in soup_past_people.find_all('div', class_='past_people'):
-        for info_block in div_people.find_all('div', class_='info-block'):
-            # Get name and link
-            h4 = info_block.find('h4')
-            a = h4.a
-            name = a.get('tagged_data-name')
-            # logging.info("Found " + name)
-            link = a.get('href')
-            # Get role
-            role = ''
-            h5_tag = info_block.find('h5')
-            if h5_tag is not None:
-                role = h5_tag.text
-            # Normalize and append
-            name = GenericWebScraper.myTextStrip(name)
-            role = GenericWebScraper.myTextStrip(role)
-            company_data.past_people.append([name, link, role])
-
-
-# Scrape organization details
-def scrapeOrgDetails(company_data, soup):
-    # Scrape section overview->company details
-    company_details_tag = soup.find('div', class_="base info-tab description")
-
-    if company_details_tag is not None:
-
-        # Founded year
-        tag = company_details_tag.find('dt', string='Founded:')
-        if tag is not None:
-            company_data.details.founded = tag.find_next('dd').text
-
-        # Closed
-        tag = company_details_tag.find('dt', string='Closed:')
-        if tag is not None:
-            company_data.details.closed = tag.find_next('dd').text
-
-        # Email
-        tag = company_details_tag.find('span', class_='email')
-        if tag is not None:
-            company_data.details.email = tag.text
-
-        # Phone number
-        tag = company_details_tag.find('span', class_='phone_number')
-        if tag is not None:
-            company_data.details.phone_number = tag.text
-
-        # Employees
-        tag = company_details_tag.find('dt', string='Employees:')
-        if tag is not None:
-            emp_str = tag.find_next('dd').text
-            emp_arr = emp_str.split("|")
-            if len(emp_arr) > 1:
-                company_data.details.employees_num = emp_arr[0].strip()
-                company_data.details.employees_found = emp_arr[1].strip()
-            else:
-                company_data.details.employees_num = ''
-                company_data.details.employees_found = emp_arr[0].strip()
-
-        # Phone number
-        tag = company_details_tag.find('span', class_='description')
-        if tag is not None:
-            company_data.details.description = tag.text
 
 # Scraper overview statistics
 def scrapeOrgOverviewStats(company_data, soup):
@@ -145,7 +48,6 @@ def scrapeOrgOverviewStats(company_data, soup):
             # DEBUG
             # logging.info("dd_status='"+str(dd_status)+"'")
             # a1 = dd_status.a
-
             # if a1 is not None:
             #     overview['stats']['status']['fate'] = a1.text
             #     a2 = a1.find_next_sibling('a')
@@ -189,6 +91,7 @@ def scrapeOrgOverviewStats(company_data, soup):
 # Scarpe organization "overview" section
 def scrapeOrgOverview(company_data, soup):
 
+    # Company name
     company_data.name = soup.find('h1', id='profile_header_heading').text
 
     # Headquarters
@@ -221,15 +124,115 @@ def scrapeOrgOverview(company_data, soup):
     if tag is not None:
         company_data.overview.website = tag.find_next('dd').text
 
-    # Social
+    # Social links (Facebook, Twitter, LinkedIn)
     tag = soup.find('dd', class_="social-links")
     if tag is not None:
+        facebook = tag.find('a', class_="facebook")
+        if facebook is not None:
+            company_data.overview.social.facebook = facebook.get('href')
         twitter = tag.find('a', class_="twitter")
         if twitter is not None:
             company_data.overview.social.twitter = twitter.get('href')
         linkedin = tag.find('a', class_="linkedin")
         if linkedin is not None:
             company_data.overview.social.linkedin = linkedin.get('href')
+
+
+# Scrape organization details
+def scrapeOrgDetails(company_data, soup):
+    # Scrape section "Company Details"
+    company_details_tag = soup.find('div', class_="base info-tab description")
+
+    if company_details_tag is not None:
+
+        # Founded year
+        tag = company_details_tag.find('dt', string='Founded:')
+        if tag is not None:
+            company_data.details.founded = tag.find_next('dd').text
+
+        # Closed
+        tag = company_details_tag.find('dt', string='Closed:')
+        if tag is not None:
+            company_data.details.closed = tag.find_next('dd').text
+
+        # Email
+        tag = company_details_tag.find('span', class_='email')
+        if tag is not None:
+            company_data.details.email = tag.text
+
+        # Phone number
+        tag = company_details_tag.find('span', class_='phone_number')
+        if tag is not None:
+            company_data.details.phone_number = tag.text
+
+        # Employees
+        tag = company_details_tag.find('dt', string='Employees:')
+        if tag is not None:
+            emp_str = tag.find_next('dd').text
+            emp_arr = emp_str.split("|")
+            if len(emp_arr) > 1:
+                company_data.details.employees_num = emp_arr[0].strip()
+                company_data.details.employees_found = emp_arr[1].strip()
+            else:
+                company_data.details.employees_num = ''
+                company_data.details.employees_found = emp_arr[0].strip()
+
+        # Description
+        tag = company_details_tag.find('span', class_='description')
+        if tag is not None:
+            company_data.details.description = tag.text
+
+
+# Scrape organization advisors
+def scrapeOrgAdvisors(company_data, soup_advisors):
+    # Scrape page "advisors" (get both main advisors and additional ones with the same code)
+    for div_advisors in soup_advisors.find_all('div', class_='advisors'):
+        for info_block in div_advisors.find_all('div', class_='info-block'):
+            follow_card = info_block.find('a', class_='follow_card')
+            name = follow_card.get('tagged_data-name')
+            link = follow_card.get('tagged_data-permalink')
+            primary_role = info_block.h5.text  # the primary role of this person (may not be related to the company at hand)
+            role_in_bod = info_block.h6.text  # his role in our company's BoD
+
+            name = cbscraper.GenericWebScraper.myTextStrip(name)
+            primary_role = cbscraper.GenericWebScraper.myTextStrip(primary_role)
+            role_in_bod = cbscraper.GenericWebScraper.myTextStrip(role_in_bod)
+
+            company_data.advisors.append([name, link, role_in_bod, primary_role])
+
+# Scrape organization current people
+def scrapeOrgCurrentPeople(company_data, soup_people):
+    for div_people in soup_people.find_all('div', class_='people'):
+        for info_block in div_people.find_all('div', class_='info-block'):
+            h4 = info_block.find('h4')
+            a = h4.a
+            name = a.get('tagged_data-name')
+            link = a.get('href')
+            role = info_block.find('h5').text
+            name = cbscraper.GenericWebScraper.myTextStrip(name)
+            role = cbscraper.GenericWebScraper.myTextStrip(role)
+            company_data.people.append([name, link, role])
+
+# Scrape organization past people
+def scrapeOrgPastPeople(company_data, soup_past_people):
+    for div_people in soup_past_people.find_all('div', class_='past_people'):
+        for info_block in div_people.find_all('div', class_='info-block'):
+            # Get name and link
+            h4 = info_block.find('h4')
+            a = h4.a
+            name = a.get('tagged_data-name')
+            # logging.info("Found " + name)
+            link = a.get('href')
+            # Get role
+            role = ''
+            h5_tag = info_block.find('h5')
+            if h5_tag is not None:
+                role = h5_tag.text
+            # Normalize and append
+            name = GenericWebScraper.myTextStrip(name)
+            role = GenericWebScraper.myTextStrip(role)
+            company_data.past_people.append([name, link, role])
+
 
 # Scrape a company
 def scrapeOrg(company_data):
