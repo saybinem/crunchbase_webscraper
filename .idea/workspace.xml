@@ -4,79 +4,8 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8ffd353f-9675-4efa-a6a6-3ad054850fe0" name="Default" comment="extract list of experiences">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/ranking.xlsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/.idea/inspectionProfiles/profiles_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/.idea/qs_world_rankings.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/.idea/workspace.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Accounting.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Agriculture.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Anatomy.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Anthropology.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Archaeology.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Architecture.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Art &amp; Design.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Arts &amp; Humanities.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Biological.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Business.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Chemistry.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Communication.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Computer Science.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Dentistry.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Development Studies.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Earth &amp; Marine Sciences.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Economics &amp; Econometrics.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Education.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Engineering &amp; Technology.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Engineering - Chemical.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Engineering - Civil.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Engineering - Electrical.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Engineering - Mechanical.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Engineering - Mineral.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/English Language.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Environmental Sciences.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Geography.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/History$.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Hospitality.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Law.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Life Sciences &amp; Medicine.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Linguistics.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Materials Science.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Mathematics.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Medicine.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Modern Languages.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Natural Sciences.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Nursing.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Performing Arts.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Pharmacy.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Philosophy.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Physics.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Politics.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Psychology.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Social Policy.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Social Sciences &amp; Management.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Sociology.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Sports-related Subjects.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Statistics.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Theology.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/Veterinary Science.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/data/global.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../progetti_miei/python/qs_world_rankings/reader.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../process_person_table/src/edu_school_rank.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/crunchbase_scraper.iml" afterPath="$PROJECT_DIR$/.idea/crunchbase_scraper.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+    <list default="true" id="8ffd353f-9675-4efa-a6a6-3ad054850fe0" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cbscraper/person.py" afterPath="$PROJECT_DIR$/src/cbscraper/person.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinWebScraper.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinWebScraper.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/src/edu_dicts.py" afterPath="$PROJECT_DIR$/../process_person_table/src/edu_dicts.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/src/extract_edu_list.py" afterPath="$PROJECT_DIR$/../process_person_table/src/extract_edu_list.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/src/funcs.py" afterPath="$PROJECT_DIR$/../process_person_table/src/funcs.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/src/main.py" afterPath="$PROJECT_DIR$/../process_person_table/src/main.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -635,13 +564,6 @@
       <option name="presentableId" value="Default" />
       <updated>1498207171857</updated>
     </task>
-    <task id="LOCAL-00083" summary="Improvements">
-      <created>1500551640275</created>
-      <option name="number" value="00083" />
-      <option name="presentableId" value="LOCAL-00083" />
-      <option name="project" value="LOCAL" />
-      <updated>1500551640275</updated>
-    </task>
     <task id="LOCAL-00084" summary="Improvements">
       <created>1500631794855</created>
       <option name="number" value="00084" />
@@ -978,7 +900,14 @@
       <option name="project" value="LOCAL" />
       <updated>1504357257856</updated>
     </task>
-    <option name="localTasksCounter" value="132" />
+    <task id="LOCAL-00132" summary="QS qorld raking">
+      <created>1504387895671</created>
+      <option name="number" value="00132" />
+      <option name="presentableId" value="LOCAL-00132" />
+      <option name="project" value="LOCAL" />
+      <updated>1504387895672</updated>
+    </task>
+    <option name="localTasksCounter" value="133" />
     <servers />
   </component>
   <component name="TodoView">
@@ -994,10 +923,10 @@
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32918552" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35633484" sideWeight="0.28839958" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3295583" sideWeight="0.5021482" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3295583" sideWeight="0.49785176" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32842582" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3567384" sideWeight="0.7116004" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3567384" sideWeight="0.7089152" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19602577" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1071,7 +1000,8 @@
     <MESSAGE value="bugfix gen_person_table non scriveva education and experience di LinkedIn" />
     <MESSAGE value="improvements" />
     <MESSAGE value="extract list of experiences" />
-    <option name="LAST_COMMIT_MESSAGE" value="extract list of experiences" />
+    <MESSAGE value="QS qorld raking" />
+    <option name="LAST_COMMIT_MESSAGE" value="QS qorld raking" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
