@@ -3,6 +3,12 @@ import os, errno, subprocess, jsonpickle, logging, json
 # FUNCTIONS
 
 from operator import itemgetter
+import natsort
+
+def sortDFColumns(frame):
+    frame = frame.reindex_axis(natsort.natsorted(frame.columns, alg=natsort.ns.IGNORECASE), axis=1)
+    return frame
+
 def column(matrix,i):
     f = itemgetter(i)
     return map(f,matrix)
