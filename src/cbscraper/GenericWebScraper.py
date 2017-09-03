@@ -22,85 +22,13 @@ from selenium.webdriver.remote.remote_connection import LOGGER
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 import subprocess
+import errno
 
 ua = UserAgent()
 
 # Non modifiable globals
 _browser = None
 n_requests = 0
-
-
-# FUNCTIONS
-
-# Print iterations progress
-def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█'):
-    """
-    Call in a loop to create terminal progress bar
-    @params:
-        iteration   - Required  : current iteration (Int)
-        total       - Required  : total iterations (Int)
-        prefix      - Optional  : prefix string (Str)
-        suffix      - Optional  : suffix string (Str)
-        decimals    - Optional  : positive number of decimals in percent complete (Int)
-        length      - Optional  : character length of bar (Int)
-        fill        - Optional  : bar fill character (Str)
-    """
-    percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
-    filledLength = int(length * iteration // total)
-    bar = fill * filledLength + '-' * (length - filledLength)
-    print('\r%s |%s| %s%% %s' % (prefix, bar, percent, suffix), end = '\r')
-    # Print New Line on Complete
-    if iteration == total:
-        print()
-
-def csv2stata(infile):
-    stata_exe = "C:\Program Files (x86)\Stata13\StataMP-64.exe"
-
-    in_base = os.path.basename(infile)
-    in_name = os.path.splitext(in_base)[0]
-    do_file = in_name + ".do"
-
-    do_cont = 'import delimited using "' + in_base + '", delimiters(",") bindquotes(strict) \n'
-    do_cont += 'save "' + in_name + '" \n' #very import the last new line
-
-    with open(do_file, 'w') as file:
-        file.write(do_cont)
-
-    subprocess.call([stata_exe, "/e", "do", do_file])
-
-def iniJSONPickle():
-    jsonpickle.set_preferred_backend('simplejson')
-    jsonpickle.set_encoder_options('simplejson', indent=4, sort_keys=True, ensure_ascii=False)
-
-
-def readJSONFile(file):
-    if not os.path.isfile(file):
-        logging.critical("File not found '" + file + "'")
-        assert (False)
-    with open(file, 'r', encoding="utf-8") as fileh:
-        # logging.debug(cont)
-        cont = fileh.read()
-        ob = jsonpickle.decode(cont)
-    return ob
-
-
-# filename DOES INCLUDE EXTENSION
-def saveJSON(data, filename, overwrite=True):
-    if not overwrite and os.path.isfile(filename):
-        return False
-    data_str = jsonpickle.encode(data)
-    with open(filename, 'w', encoding="utf-8") as fileh:
-        fileh.write(data_str)
-    return True
-
-
-def myTextStrip(str):
-    return str.replace('\n', '').strip()
-
-
-def jsonPretty(dict_data):
-    return json.dumps(dict_data, sort_keys=True, indent=4, separators=(',', ': '), ensure_ascii=False)
-
 
 # CLASS ERROR404
 
