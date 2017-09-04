@@ -30,7 +30,10 @@ ua = UserAgent()
 _browser = None
 n_requests = 0
 
-# CLASS ERROR404
+# ERROR EXCEPTIONS
+
+class ErrorCorruptedHTMLFile(Exception):
+    pass
 
 class ErrorNoLink(Exception):
     pass
@@ -212,6 +215,16 @@ class GenericWebScraper(metaclass=ABCMeta):
         if os.path.isfile(htmlfile):
             logging.debug("Removing HTML file for endpoint " + str(endpoint))
             os.remove(htmlfile)
+
+    # Remove a HTML file refering to a endpoint
+    def removeHTMLFIle(self, endpoint):
+        htmlfile = self.genHTMLFilePath(endpoint)
+        # Check if HTML file exists
+        if not os.path.isfile(htmlfile):
+            logging.debug("HTML file '" + htmlfile + "' not found. Returning False")
+            return False
+        os.unlink(htmlfile)
+        return True
 
     # Get saved HTML code
     # Raises a Error404 exception if the file contains an error 404 page
