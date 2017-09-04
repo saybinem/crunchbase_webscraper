@@ -4,6 +4,7 @@ from cbscraper import GenericWebScraper
 import json
 from cbscraper import global_vars
 import copy
+import cbscraper.funcs
 
 #Total Equity Funding
 class CBCompanyOverviewStatsTEF():
@@ -80,7 +81,7 @@ class CBCompanyData():
     def save(self, outfile, overwrite=False):
         if not overwrite:
             assert (not os.path.isfile(outfile))
-        GenericWebScraper.saveJSON(self, outfile)
+        cbscraper.funcs.saveJSON(self, outfile)
 
     def __repr__(self):
         out_dict = copy.copy(self.__dict__)
