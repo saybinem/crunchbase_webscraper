@@ -82,7 +82,7 @@ class GenericWebScraper(metaclass=ABCMeta):
     firefox_binary = r"C:\Program Files\Mozilla Firefox\firefox.exe"
 
     chrome_binary = "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
-    chrome_headless_screen_size = (1000, 6000)
+    chrome_headless_screen_size = (1000, 7000)
 
     phantomjs_binary = r"C:\data\programmi\phantomjs-2.1.1-windows\bin\phantomjs.exe"
 
