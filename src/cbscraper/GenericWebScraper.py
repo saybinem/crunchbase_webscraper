@@ -9,21 +9,18 @@ from email.mime.text import MIMEText
 from enum import Enum
 
 import bs4 as bs
-import jsonpickle
 from fake_useragent import UserAgent
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.chrome.options import Options as ChromeOptions
-from selenium.webdriver.opera.options import Options as OperaOptions
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
+from selenium.webdriver.opera.options import Options as OperaOptions
 from selenium.webdriver.remote.remote_connection import LOGGER
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-import subprocess
-import errno
 
 ua = UserAgent()
 
@@ -31,10 +28,12 @@ ua = UserAgent()
 _browser = None
 n_requests = 0
 
+
 # ERROR EXCEPTIONS
 
 class ErrorCorruptedHTMLFile(Exception):
     pass
+
 
 class ErrorNoLink(Exception):
     pass
@@ -171,7 +170,7 @@ class GenericWebScraper(metaclass=ABCMeta):
     # Open an url in web browser
     def openURL(self, url):
         self.addBrowserRequest()
-        browser = self.getBrowser() # create browser instance
+        browser = self.getBrowser()  # create browser instance
         logging.debug("Setting load_timeout='{}'".format(self.load_timeout))
         browser.set_page_load_timeout(self.load_timeout)
         try:
