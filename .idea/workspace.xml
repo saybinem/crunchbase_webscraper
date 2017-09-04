@@ -7,7 +7,7 @@
     <list default="true" id="8ffd353f-9675-4efa-a6a6-3ad054850fe0" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gen_person_table/src/write_li.py" afterPath="$PROJECT_DIR$/../gen_person_table/src/write_li.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../linkedin_scraper/src/LIPersonData.py" afterPath="$PROJECT_DIR$/../linkedin_scraper/src/LIPersonData.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/src/step1.py" afterPath="$PROJECT_DIR$/../process_person_table/src/step1.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -43,14 +43,54 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="write_li.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="write_li.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../gen_person_table/src/write_li.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="462">
-              <caret line="60" column="82" lean-forward="false" selection-start-line="60" selection-start-column="82" selection-end-line="60" selection-end-column="82" />
+              <caret line="60" column="32" lean-forward="false" selection-start-line="60" selection-start-column="24" selection-end-line="60" selection-end-column="32" />
               <folding>
                 <element signature="e#0#34#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../gen_company_table/src/main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1555">
+              <caret line="10" column="35" lean-forward="true" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="extract_edu_list.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../process_person_table/src/extract_edu_list.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2171">
+              <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="extract_exp_list.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../process_person_table/src/extract_exp_list.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="585">
+              <caret line="80" column="24" lean-forward="true" selection-start-line="80" selection-start-column="24" selection-end-line="80" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="step1.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../process_person_table/src/step1.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="220">
+              <caret line="143" column="43" lean-forward="false" selection-start-line="143" selection-start-column="43" selection-end-line="143" selection-end-column="43" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -118,7 +158,7 @@
     </dirStrings>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../gen_person_table" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../process_person_table" />
     <option name="WARN_ABOUT_DETACHED_HEAD" value="false" />
   </component>
   <component name="IdeDocumentHistory">
@@ -167,7 +207,6 @@
         <option value="$PROJECT_DIR$/../process_person_table/src/main.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/extract_exp_list.py" />
         <option value="$PROJECT_DIR$/../linkedin_scraper/src/person_scraper.py" />
-        <option value="$PROJECT_DIR$/../process_person_table/src/step1.py" />
         <option value="$PROJECT_DIR$/../gen_company_table/src/gvars.py" />
         <option value="$PROJECT_DIR$/../gen_company_table/src/main.py" />
         <option value="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinPersonWebScraper.py" />
@@ -175,6 +214,7 @@
         <option value="$PROJECT_DIR$/../linkedin_scraper/src/LinkedinCompanyWebScraper.py" />
         <option value="$PROJECT_DIR$/../linkedin_scraper/src/LIPersonData.py" />
         <option value="$PROJECT_DIR$/../gen_person_table/src/write_li.py" />
+        <option value="$PROJECT_DIR$/../process_person_table/src/step1.py" />
       </list>
     </option>
   </component>
@@ -217,24 +257,6 @@
             <path>
               <item name="crunchbase_scraper" type="b2602c69:ProjectViewProjectNode" />
               <item name="gen_company_table" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="crunchbase_scraper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gen_person_table" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="crunchbase_scraper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gen_person_table" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="crunchbase_scraper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="linkedin_scraper" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="crunchbase_scraper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="linkedin_scraper" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -600,13 +622,6 @@
       <option name="presentableId" value="Default" />
       <updated>1498207171857</updated>
     </task>
-    <task id="LOCAL-00106" summary="improvements">
-      <created>1502027396799</created>
-      <option name="number" value="00106" />
-      <option name="presentableId" value="LOCAL-00106" />
-      <option name="project" value="LOCAL" />
-      <updated>1502027396799</updated>
-    </task>
     <task id="LOCAL-00107" summary="improvements">
       <created>1502040270312</created>
       <option name="number" value="00107" />
@@ -943,7 +958,14 @@
       <option name="project" value="LOCAL" />
       <updated>1504542703224</updated>
     </task>
-    <option name="localTasksCounter" value="155" />
+    <task id="LOCAL-00155" summary="Improvements">
+      <created>1504543181343</created>
+      <option name="number" value="00155" />
+      <option name="presentableId" value="LOCAL-00155" />
+      <option name="project" value="LOCAL" />
+      <updated>1504543181343</updated>
+    </task>
+    <option name="localTasksCounter" value="156" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1247,7 +1269,7 @@
         <state relative-caret-position="330">
           <caret line="15" column="19" lean-forward="false" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
           <folding>
-            <element signature="e#0#12#0" expanded="true" />
+            <element signature="e#0#12#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1329,7 +1351,7 @@
         <state relative-caret-position="292">
           <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
           <folding>
-            <element signature="e#24#38#0" expanded="true" />
+            <element signature="e#24#38#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1339,32 +1361,8 @@
         <state relative-caret-position="242">
           <caret line="74" column="0" lean-forward="true" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
+            <element signature="e#0#14#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../process_person_table/src/extract_edu_list.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../process_person_table/src/extract_exp_list.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="80" column="24" lean-forward="true" selection-start-line="80" selection-start-column="24" selection-end-line="80" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../process_person_table/src/step1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="103" column="30" lean-forward="true" selection-start-line="103" selection-start-column="30" selection-end-line="103" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1372,14 +1370,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="22">
           <caret line="1" column="11" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../gen_company_table/src/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="91" column="29" lean-forward="false" selection-start-line="91" selection-start-column="29" selection-end-line="91" selection-end-column="29" />
           <folding />
         </state>
       </provider>
@@ -1399,7 +1389,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
+            <element signature="e#0#14#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1432,13 +1422,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../process_person_table/src/extract_edu_list.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2171">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../process_person_table/src/extract_exp_list.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="585">
+          <caret line="80" column="24" lean-forward="true" selection-start-line="80" selection-start-column="24" selection-end-line="80" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../gen_company_table/src/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1555">
+          <caret line="10" column="35" lean-forward="true" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../gen_person_table/src/write_li.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="462">
-          <caret line="60" column="82" lean-forward="false" selection-start-line="60" selection-start-column="82" selection-end-line="60" selection-end-column="82" />
+          <caret line="60" column="32" lean-forward="false" selection-start-line="60" selection-start-column="24" selection-end-line="60" selection-end-column="32" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../process_person_table/src/step1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="143" column="43" lean-forward="false" selection-start-line="143" selection-start-column="43" selection-end-line="143" selection-end-column="43" />
+          <folding />
         </state>
       </provider>
     </entry>
