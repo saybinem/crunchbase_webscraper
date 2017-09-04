@@ -1,27 +1,45 @@
-import os, errno, subprocess, jsonpickle, logging, json
+import errno
+import json
+import jsonpickle
+import logging
+import os
+import shutil
+import subprocess
+from operator import itemgetter
+
+import natsort
+
 
 # FUNCTIONS
 
-from operator import itemgetter
-import natsort
+def remDir(dir):
+    # Remove folder
+    if os.path.isdir(dir):
+        shutil.rmtree(dir)
+    # Independently of wheter it already existed or not
+    os.makedirs(dir, exist_ok=True)
+
 
 def sortDFColumns(frame):
     frame = frame.reindex_axis(natsort.natsorted(frame.columns, alg=natsort.ns.IGNORECASE), axis=1)
     return frame
 
-def column(matrix,i):
+
+def column(matrix, i):
     f = itemgetter(i)
-    return map(f,matrix)
+    return map(f, matrix)
+
 
 def silentRemove(filename):
     try:
         os.remove(filename)
-    except OSError as e: # this would be "except OSError, e:" before Python 2.6
-        if e.errno != errno.ENOENT: # errno.ENOENT = no such file or directory
-            raise # re-raise exception if a different error occurred
+    except OSError as e:  # this would be "except OSError, e:" before Python 2.6
+        if e.errno != errno.ENOENT:  # errno.ENOENT = no such file or directory
+            raise  # re-raise exception if a different error occurred
+
 
 # Print iterations progress
-def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█'):
+def printProgressBar(iteration, total, prefix='', suffix='', decimals=1, length=100, fill='█'):
     """
     Call in a loop to create terminal progress bar
     @params:
@@ -36,10 +54,11 @@ def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, 
     percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
     filledLength = int(length * iteration // total)
     bar = fill * filledLength + '-' * (length - filledLength)
-    print('\r%s |%s| %s%% %s' % (prefix, bar, percent, suffix), end = '\r')
+    print('\r%s |%s| %s%% %s' % (prefix, bar, percent, suffix), end='\r')
     # Print New Line on Complete
     if iteration == total:
         print()
+
 
 def csv2stata(infile):
     stata_exe = "C:\Program Files (x86)\Stata13\StataMP-64.exe"
@@ -49,12 +68,13 @@ def csv2stata(infile):
     do_file = in_name + ".do"
 
     do_cont = 'import delimited using "' + in_base + '", delimiters(",") bindquotes(strict) \n'
-    do_cont += 'save "' + in_name + '" \n' #very import the last new line
+    do_cont += 'save "' + in_name + '" \n'  # very import the last new line
 
     with open(do_file, 'w') as file:
         file.write(do_cont)
 
     subprocess.call([stata_exe, "/e", "do", do_file])
+
 
 def iniJSONPickle():
     jsonpickle.set_preferred_backend('simplejson')
