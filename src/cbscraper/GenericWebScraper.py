@@ -14,6 +14,7 @@ from fake_useragent import UserAgent
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.chrome.options import Options as ChromeOptions
+from selenium.webdriver.opera.options import Options as OperaOptions
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.keys import Keys
@@ -170,18 +171,22 @@ class GenericWebScraper(metaclass=ABCMeta):
     # Open an url in web browser
     def openURL(self, url):
         self.addBrowserRequest()
-        self.getBrowser().set_page_load_timeout(self.load_timeout)
+        browser = self.getBrowser() # create browser instance
+        logging.debug("Setting load_timeout='{}'".format(self.load_timeout))
+        browser.set_page_load_timeout(self.load_timeout)
         try:
             logging.debug("Calling browser.get('" + url + "')")
-            self.getBrowser().get(url)
+            browser.get(url)
         except TimeoutException:
             logging.warning("Timeout exception during page load. Moving on.")
         except Exception as e:
             logging.error("Unexpected exception during page load. " + str(e))
+            logging.error("Trying again")
             self.randSleep(self.get_error_sleep_min, self.get_error_sleep_max)
             return self.openURL(url)
         else:
             logging.debug("browser.get('" + url + "') returned without exceptions")
+        return None
 
     # Write HTML to file
     def writeHTMLFile(self, html, endpoint):
@@ -346,7 +351,7 @@ class GenericWebScraper(metaclass=ABCMeta):
                 chrome_options.add_argument("--start-maximized")
                 chrome_options.binary_location = self.chrome_binary
                 _browser = webdriver.Chrome(chrome_options=chrome_options)
-                self.sleep(1)
+                self.sleep(3)
 
             # CHROME (headless)
             elif self.browser_type == EBrowser.CHROME_HEADLESS:
@@ -360,9 +365,10 @@ class GenericWebScraper(metaclass=ABCMeta):
 
             # OPERA
             elif self.browser_type == EBrowser.OPERA:
-                _browser = webdriver.Opera()
-                self.sleep(1)
-                _browser.set_window_position(0, 0)
+                opera_options = OperaOptions()
+                opera_options.binary_location = r"C:\Program Files\Opera\launcher.exe"
+                _browser = webdriver.Opera(opera_options=opera_options)
+                self.sleep(5)
 
         return _browser
 
