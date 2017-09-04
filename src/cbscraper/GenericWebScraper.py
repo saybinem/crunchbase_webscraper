@@ -71,7 +71,7 @@ class GenericWebScraper(metaclass=ABCMeta):
     # LOAD TIMEOUTS VARIABLES
     back_timeout = 20  # seconds before declaring loading timeout after going back
     load_timeout = 40  # for set_page_load_timeout in openURL()
-    wait_timeout = 3 * 60  # for WebDriverWait in waitForPresenceCondition()
+    wait_timeout = 3 * 60  # used by waitForPresenceCondition() and waitForInvisibility()
 
     # OTHER VARIABLES
     max_requests_per_browser_instance = 10000
@@ -269,12 +269,14 @@ class GenericWebScraper(metaclass=ABCMeta):
         try:
             condition = EC.invisibility_of_element_located((by, value))
             WebDriverWait(self.getBrowser(), self.wait_timeout).until(condition)
-        except TimeoutException:
-            logging.critical("Timed out waiting for element invisibility. Exiting")
-            raise
-        except:
-            logging.error("Unexpected exception waiting for element invisibility. Exiting")
-            raise
+        except TimeoutException as e:
+            msg2 = "Timed out exception {}:\n{}".format(msg, repr(e))
+            logging.critical(msg2)
+            raise TimeoutException(msg2)
+        except Exception as e:
+            msg2 = "Unhandled exception {}:\n{}".format(msg, repr(e))
+            logging.critical(msg2)
+            raise Exception(msg2)
         else:
             msg = "Element ({},{}) is now invisible in URL='{}'".format(by, value, url)
             logging.debug(msg)
@@ -289,11 +291,13 @@ class GenericWebScraper(metaclass=ABCMeta):
             condition = EC.presence_of_element_located((by, value))
             WebDriverWait(self.getBrowser(), self.wait_timeout).until(condition)
         except TimeoutException as e:
-            logging.critical("Timed out waiting for page element")
-            raise e
+            msg2 = "Timed out exception {}:\n{}".format(msg, repr(e))
+            logging.critical(msg2)
+            raise TimeoutException(msg2)
         except Exception as e:
-            logging.critical("Unexpected exception waiting for page element. Exiting")
-            raise e
+            msg2 = "Unhandled exception {}:\n{}".format(msg, repr(e))
+            logging.critical(msg2)
+            raise Exception(msg2)
         else:
             msg = "Element ({},{}) is present in URL='{}'".format(by, value, url)
             logging.debug(msg)
