@@ -8,9 +8,12 @@ import subprocess
 from operator import itemgetter
 
 import natsort
-
+import math
 
 # FUNCTIONS
+
+def isNan(num):
+    return isinstance(num, float) and math.isnan(num)
 
 def remDir(dir):
     # Remove folder
