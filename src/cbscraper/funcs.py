@@ -9,8 +9,31 @@ from operator import itemgetter
 
 import natsort
 import math
+import time
 
 # FUNCTIONS
+
+def loggerSetup(log_file, console_level=logging.INFO, file_level=logging.DEBUG):
+
+    # formatter
+    log_format_str = "[%(asctime)s:%(levelname)s:%(filename)s:%(lineno)d:%(funcName)s] %(message)s"
+    fmt = logging.Formatter(log_format_str, datefmt='%H:%M:%S')
+
+    # console log handler
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(console_level)
+    console_handler.setFormatter(fmt)
+    logging.getLogger().addHandler(console_handler)
+
+    # file log handler
+    filehandler = logging.FileHandler(log_file, 'w', encoding="utf8")
+    console_handler.setLevel(file_level)
+    console_handler.setFormatter(fmt)
+    logging.getLogger().addHandler(filehandler)
+
+    # root logger
+    logging.getLogger().setLevel(logging.DEBUG)
+    logging.info("Starting at: " + time.strftime("%Y-%m-%d"))
 
 def isNan(num):
     return isinstance(num, float) and math.isnan(num)
