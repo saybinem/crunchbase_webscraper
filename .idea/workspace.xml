@@ -6,11 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8ffd353f-9675-4efa-a6a6-3ad054850fe0" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cbscraper/funcs.py" afterPath="$PROJECT_DIR$/src/cbscraper/funcs.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/.gitignore" afterPath="$PROJECT_DIR$/../process_person_table/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/edu_list_unclassified.txt" afterPath="$PROJECT_DIR$/../process_person_table/edu_list_unclassified.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/src/edu_school_rank.py" afterPath="$PROJECT_DIR$/../process_person_table/src/edu_school_rank.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/src/main.py" afterPath="$PROJECT_DIR$/../process_person_table/src/main.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -591,13 +586,6 @@
       <option name="presentableId" value="Default" />
       <updated>1498207171857</updated>
     </task>
-    <task id="LOCAL-00129" summary="extract list of experiences">
-      <created>1504195940195</created>
-      <option name="number" value="00129" />
-      <option name="presentableId" value="LOCAL-00129" />
-      <option name="project" value="LOCAL" />
-      <updated>1504195940195</updated>
-    </task>
     <task id="LOCAL-00130" summary="extract list of experiences">
       <created>1504199608348</created>
       <option name="number" value="00130" />
@@ -934,7 +922,14 @@
       <option name="project" value="LOCAL" />
       <updated>1505544446314</updated>
     </task>
-    <option name="localTasksCounter" value="178" />
+    <task id="LOCAL-00178" summary="Improvements">
+      <created>1505552702165</created>
+      <option name="number" value="00178" />
+      <option name="presentableId" value="LOCAL-00178" />
+      <option name="project" value="LOCAL" />
+      <updated>1505552702165</updated>
+    </task>
+    <option name="localTasksCounter" value="179" />
     <servers />
   </component>
   <component name="TodoView">
