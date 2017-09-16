@@ -13,6 +13,7 @@ import time
 
 # FUNCTIONS
 
+
 def loggerSetup(log_file, console_level=logging.INFO, file_level=logging.DEBUG):
 
     # formatter
@@ -26,10 +27,10 @@ def loggerSetup(log_file, console_level=logging.INFO, file_level=logging.DEBUG):
     logging.getLogger().addHandler(console_handler)
 
     # file log handler
-    filehandler = logging.FileHandler(log_file, 'w', encoding="utf8")
-    console_handler.setLevel(file_level)
-    console_handler.setFormatter(fmt)
-    logging.getLogger().addHandler(filehandler)
+    file_handler = logging.FileHandler(log_file, 'w', encoding="utf8")
+    file_handler.setLevel(file_level)
+    file_handler.setFormatter(fmt)
+    logging.getLogger().addHandler(file_handler)
 
     # root logger
     logging.getLogger().setLevel(logging.DEBUG)
