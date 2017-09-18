@@ -42,6 +42,8 @@ class ErrorNoLink(Exception):
 class Error404(Exception):
     pass
 
+class ErrorEmptyPage(Exception):
+    pass
 
 class ErrorInvalidLink(Exception):
     pass

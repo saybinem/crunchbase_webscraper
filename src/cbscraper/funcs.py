@@ -108,7 +108,7 @@ def iniJSONPickle():
     jsonpickle.set_encoder_options('simplejson', indent=4, sort_keys=True, ensure_ascii=False)
 
 
-def readJSONFile(file, fatal_on_not_found=True, default=None, fatal_on_decode_error=True):
+def readJSONFile(file, fatal_on_not_found=True, default_return=None, fatal_on_decode_error=True):
     try:
         fileh = open(file, 'r', encoding="utf-8")
     except FileNotFoundError:
@@ -116,7 +116,7 @@ def readJSONFile(file, fatal_on_not_found=True, default=None, fatal_on_decode_er
             logging.critical("File not found '" + file + "'")
             assert (False)
         else:
-            return default
+            return default_return
     else:
         # logging.debug(cont)
         cont = fileh.read()
@@ -128,7 +128,7 @@ def readJSONFile(file, fatal_on_not_found=True, default=None, fatal_on_decode_er
                 logging.critical("Decode error in '" + file + "'")
                 raise
             else:
-                return default
+                return default_return
         else:
             return obj
 

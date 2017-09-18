@@ -6,13 +6,8 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/data" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.5.2 (C:\IntelPython35\python.exe)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.6.2 (C:\IntelPython36\python.exe)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="linkedin_scraper" />
-    <orderEntry type="module" module-name="gen_company_table" />
-    <orderEntry type="module" module-name="gen_person_table" />
-    <orderEntry type="module" module-name="process_person_table" />
-    <orderEntry type="module" module-name="qs_world_rankings" />
   </component>
   <component name="TestRunnerService">
     <option name="projectConfiguration" value="Nosetests" />
