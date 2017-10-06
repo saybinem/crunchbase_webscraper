@@ -5,40 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8ffd353f-9675-4efa-a6a6-3ad054850fe0" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../process_person_table/edu_titles_to_en_map.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../process_person_table/gen_stats.do" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../process_person_table/src/edu_bayes.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../process_person_table/step1_score_map.json" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../process_person_table/12dicts-6.0.2/American/2of12.txt" afterPath="$PROJECT_DIR$/../process_person_table/data/12dicts-6.0.2/American/2of12.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../process_person_table/12dicts-6.0.2/American/2of12inf.txt" afterPath="$PROJECT_DIR$/../process_person_table/data/12dicts-6.0.2/American/2of12inf.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../process_person_table/12dicts-6.0.2/American/3esl.txt" afterPath="$PROJECT_DIR$/../process_person_table/data/12dicts-6.0.2/American/3esl.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../process_person_table/12dicts-6.0.2/American/6of12.txt" afterPath="$PROJECT_DIR$/../process_person_table/data/12dicts-6.0.2/American/6of12.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../process_person_table/12dicts-6.0.2/International/2of4brif.txt" afterPath="$PROJECT_DIR$/../process_person_table/data/12dicts-6.0.2/International/2of4brif.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../process_person_table/12dicts-6.0.2/International/3of6all.txt" afterPath="$PROJECT_DIR$/../process_person_table/data/12dicts-6.0.2/International/3of6all.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../process_person_table/12dicts-6.0.2/International/3of6game.txt" afterPath="$PROJECT_DIR$/../process_person_table/data/12dicts-6.0.2/International/3of6game.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../process_person_table/12dicts-6.0.2/International/5d+2a.txt" afterPath="$PROJECT_DIR$/../process_person_table/data/12dicts-6.0.2/International/5d+2a.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../process_person_table/12dicts-6.0.2/Lemmatized/2+2+3cmn.txt" afterPath="$PROJECT_DIR$/../process_person_table/data/12dicts-6.0.2/Lemmatized/2+2+3cmn.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../process_person_table/12dicts-6.0.2/Lemmatized/2+2+3frq.txt" afterPath="$PROJECT_DIR$/../process_person_table/data/12dicts-6.0.2/Lemmatized/2+2+3frq.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../process_person_table/12dicts-6.0.2/Lemmatized/2+2+3lem.txt" afterPath="$PROJECT_DIR$/../process_person_table/data/12dicts-6.0.2/Lemmatized/2+2+3lem.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../process_person_table/12dicts-6.0.2/Lemmatized/fin.txt" afterPath="$PROJECT_DIR$/../process_person_table/data/12dicts-6.0.2/Lemmatized/fin.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../process_person_table/12dicts-6.0.2/Lemmatized/proc.py" afterPath="$PROJECT_DIR$/../process_person_table/data/12dicts-6.0.2/Lemmatized/proc.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../process_person_table/12dicts-6.0.2/ReadMe.html" afterPath="$PROJECT_DIR$/../process_person_table/data/12dicts-6.0.2/ReadMe.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../process_person_table/12dicts-6.0.2/Special/2of5core.txt" afterPath="$PROJECT_DIR$/../process_person_table/data/12dicts-6.0.2/Special/2of5core.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../process_person_table/12dicts-6.0.2/Special/6phrase.txt" afterPath="$PROJECT_DIR$/../process_person_table/data/12dicts-6.0.2/Special/6phrase.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../process_person_table/12dicts-6.0.2/Special/neol2016.txt" afterPath="$PROJECT_DIR$/../process_person_table/data/12dicts-6.0.2/Special/neol2016.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../process_person_table/12dicts-6.0.2/agid.txt" afterPath="$PROJECT_DIR$/../process_person_table/data/12dicts-6.0.2/agid.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../process_person_table/12dicts-6.0.2/alllists.html" afterPath="$PROJECT_DIR$/../process_person_table/data/12dicts-6.0.2/alllists.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../process_person_table/edu_list_unclassified.txt" afterPath="$PROJECT_DIR$/../process_person_table/out/edu_list_unclassified.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../process_person_table/src/edu_school_rank.py" afterPath="$PROJECT_DIR$/../process_person_table/src/edu_rank.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../process_person_table/src/extract_edu_list.py" afterPath="$PROJECT_DIR$/../process_person_table/src/edu_list.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../process_person_table/src/extract_exp_list.py" afterPath="$PROJECT_DIR$/../process_person_table/src/exp_list.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../process_person_table/src/step1.py" afterPath="$PROJECT_DIR$/../process_person_table/src/find_exp.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../process_person_table/int/nace_to_latex.tex" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../process_person_table/src/nace_map_to_latex_table.py" afterPath="$PROJECT_DIR$/../process_person_table/src/nace_to_latex.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../process_person_table/src/step2.py" afterPath="$PROJECT_DIR$/../process_person_table/src/find_events.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gen_company_table/src/gvars.py" afterPath="$PROJECT_DIR$/../gen_company_table/src/gvars.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gen_company_table/src/main.py" afterPath="$PROJECT_DIR$/../gen_company_table/src/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/src/edu_sklearn.py" afterPath="$PROJECT_DIR$/../process_person_table/src/edu_sklearn.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/src/gvars.py" afterPath="$PROJECT_DIR$/../process_person_table/src/gvars.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/src/step2.py" afterPath="$PROJECT_DIR$/../process_person_table/src/step2.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -88,13 +58,45 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="edu_rank.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="edu_rank.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../process_person_table/src/edu_rank.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-1672">
               <caret line="11" column="38" lean-forward="false" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="industry_classifier.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../process_person_table/src/industry_classifier.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2455">
+              <caret line="9" column="42" lean-forward="false" selection-start-line="9" selection-start-column="42" selection-end-line="9" selection-end-column="42" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="nace_to_latex.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../process_person_table/src/nace_to_latex.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="88">
+              <caret line="4" column="35" lean-forward="false" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="find_events.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../process_person_table/src/find_events.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-5377">
+              <caret line="20" column="18" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="18" />
+              <folding>
+                <element signature="e#83#98#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -202,7 +204,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/cbscraper/global_vars.py" />
         <option value="$PROJECT_DIR$/../gen_company_table/src/country.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/extract_edu_exp.py" />
         <option value="$PROJECT_DIR$/src/cbscraper/company.py" />
@@ -240,9 +241,7 @@
         <option value="$PROJECT_DIR$/../process_person_table/src/main.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/extract_exp_list.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/edu_dicts.py" />
-        <option value="$PROJECT_DIR$/../process_person_table/src/nace_map_to_latex_table.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/funcs.py" />
-        <option value="$PROJECT_DIR$/../process_person_table/src/industry_classifier.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/step2.py" />
         <option value="$PROJECT_DIR$/../gen_company_table/src/gvars.py" />
         <option value="$PROJECT_DIR$/../gen_company_table/src/main.py" />
@@ -253,6 +252,9 @@
         <option value="$PROJECT_DIR$/../process_person_table/src/exp_list.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/edu_list.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/edu_rank.py" />
+        <option value="$PROJECT_DIR$/../process_person_table/src/industry_classifier.py" />
+        <option value="$PROJECT_DIR$/../process_person_table/src/nace_map_to_latex_table.py" />
+        <option value="$PROJECT_DIR$/../process_person_table/src/find_events.py" />
       </list>
     </option>
   </component>
@@ -312,11 +314,6 @@
               <item name="process_person_table" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="crunchbase_scraper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="process_person_table" type="462c0819:PsiDirectoryNode" />
-              <item name="stats" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -335,10 +332,10 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\data\tesi\software\process_person_table\data" />
-      <recent name="C:\data\tesi\software\process_person_table\int" />
-      <recent name="C:\data\tesi\software\process_person_table\stats" />
       <recent name="C:\data\tesi\software\process_person_table\out" />
+      <recent name="C:\data\tesi\software\process_person_table\int" />
+      <recent name="C:\data\tesi\software\process_person_table\data" />
+      <recent name="C:\data\tesi\software\process_person_table\stats" />
       <recent name="C:\data\tesi\software\process_person_table\temp" />
     </key>
   </component>
@@ -689,7 +686,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="process_person_table" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../process_person_table/src/nace_map_to_latex_table.py" />
+      <option name="SCRIPT_NAME" value="C:\data\tesi\software\process_person_table\src\nace_to_latex.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -725,7 +722,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="process_person_table" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../process_person_table/src/step2.py" />
+      <option name="SCRIPT_NAME" value="C:\data\tesi\software\process_person_table\src\find_events.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -766,13 +763,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1498207171857</updated>
-    </task>
-    <task id="LOCAL-00137" summary="simplification">
-      <created>1504443742374</created>
-      <option name="number" value="00137" />
-      <option name="presentableId" value="LOCAL-00137" />
-      <option name="project" value="LOCAL" />
-      <updated>1504443742374</updated>
     </task>
     <task id="LOCAL-00138" summary="simplification">
       <created>1504477165624</created>
@@ -1110,7 +1100,14 @@
       <option name="project" value="LOCAL" />
       <updated>1506327468690</updated>
     </task>
-    <option name="localTasksCounter" value="186" />
+    <task id="LOCAL-00186" summary="Rearrangements">
+      <created>1507289104410</created>
+      <option name="number" value="00186" />
+      <option name="presentableId" value="LOCAL-00186" />
+      <option name="project" value="LOCAL" />
+      <updated>1507289104410</updated>
+    </task>
+    <option name="localTasksCounter" value="187" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1124,6 +1121,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32918552" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3567384" sideWeight="0.2964554" order="7" side_tool="true" content_ui="tabs" />
@@ -1131,7 +1129,7 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32842582" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36651585" sideWeight="0.70354456" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20784102" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20784102" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921588" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32692307" sideWeight="0.49785176" order="1" side_tool="false" content_ui="tabs" />
@@ -1180,7 +1178,6 @@
       <path value="$PROJECT_DIR$/../linkedin2excel" />
       <path value="$PROJECT_DIR$/../person_table" />
     </ignored-roots>
-    <MESSAGE value="classe CompanyScraper" />
     <MESSAGE value="handle 404 errors" />
     <MESSAGE value="remo pydev project" />
     <MESSAGE value="classe PersonScraper" />
@@ -1205,7 +1202,8 @@
     <MESSAGE value="Download linkedin company link and logo. Support for corrupted HTML file" />
     <MESSAGE value="Improvements in exception managment" />
     <MESSAGE value="Improvements" />
-    <option name="LAST_COMMIT_MESSAGE" value="Improvements" />
+    <MESSAGE value="Rearrangements" />
+    <option name="LAST_COMMIT_MESSAGE" value="Rearrangements" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1365,13 +1363,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../process_person_table/src/step2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="114" column="33" lean-forward="false" selection-start-line="114" selection-start-column="33" selection-end-line="114" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cbscraper/CBCompanyData.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="572">
@@ -1408,22 +1399,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="110">
           <caret line="5" column="46" lean-forward="false" selection-start-line="5" selection-start-column="46" selection-end-line="5" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../process_person_table/src/industry_classifier.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="13" column="33" lean-forward="false" selection-start-line="13" selection-start-column="33" selection-end-line="13" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../process_person_table/src/nace_map_to_latex_table.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="13" column="63" lean-forward="false" selection-start-line="13" selection-start-column="63" selection-end-line="13" selection-end-column="63" />
           <folding />
         </state>
       </provider>
@@ -1552,6 +1527,32 @@
           <caret line="11" column="38" lean-forward="false" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../process_person_table/src/industry_classifier.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2455">
+          <caret line="9" column="42" lean-forward="false" selection-start-line="9" selection-start-column="42" selection-end-line="9" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../process_person_table/src/nace_to_latex.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" column="35" lean-forward="false" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../process_person_table/src/find_events.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5377">
+          <caret line="20" column="18" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="18" />
+          <folding>
+            <element signature="e#83#98#0" expanded="true" />
           </folding>
         </state>
       </provider>
