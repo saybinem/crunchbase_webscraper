@@ -70,28 +70,32 @@ def main():
     already_in_job = set()  # list of companies which we have put in job
     duplicates = list()  # list of duplicates companies
 
-    for counter, (company_id_vico, row) in enumerate(vico_to_cb_map.iterrows()):
+    for counter, (company_id_vico, vico_to_cb_row) in enumerate(vico_to_cb_map.iterrows()):
 
-        company_id_cb = row[global_vars.excel_col_cb].replace("/organization/", "")
+        company_id_cb = vico_to_cb_row[global_vars.excel_col_cb].replace("/organization/", "")
 
         # Check if the ID is in the VICO DB
         if not company_id_vico in valid_vico_ids:
-            #logging.debug(company_id_vico + " (" + company_id_vico + ") is not in VICO db. Skipping")
-            not_found.add(company_id_vico)
+            not_found.add((company_id_vico, company_id_cb))
             continue
 
-        # Check if we already processed this company
+        # Check if we have already processed this company
         if company_id_vico in already_in_job:
             duplicates.append(company_id_vico)
             continue
-        already_in_job.add(company_id_vico)
+        else:
+            already_in_job.add(company_id_vico)
 
-        # Calculate percentage completion
+        # Append this company to the jobs list
         company_data = CBCompanyData()
         company_data.company_id_cb = company_id_cb
         company_data.company_id_vico = company_id_vico
         company_data.completion_perc = counter / ids_len
         jobs_list.append(company_data)
+
+    # Not found
+    logging.info("{} companies were skipped because they are in the VICO-CB map but they are not in the VICO DB. They are:".format(len(not_found)))
+    logging.info(not_found)
 
     # Duplicates count
     logging.info("Found " + str(len(duplicates)) + " duplicates")
@@ -119,8 +123,10 @@ def setLoggers():
     logging.getLogger().addHandler(console_handler)
 
     # log file handler
+    log_file = 'cbscraper.log'
+    cbscraper.funcs.silentRemove(log_file)
     #handler = logging.handlers.RotatingFileHandler('cbscraper.log', maxBytes=1024000, backupCount=5)
-    handler = logging.FileHandler('cbscraper.log')
+    handler = logging.FileHandler(log_file)
     handler.setFormatter(fmt)
     logging.getLogger().addHandler(handler)
 

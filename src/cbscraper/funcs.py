@@ -13,28 +13,34 @@ import time
 
 # FUNCTIONS
 
-
-def loggerSetup(log_file, console_level=logging.INFO, file_level=logging.DEBUG):
-
-    # formatter
-    log_format_str = "[%(asctime)s:%(levelname)s:%(filename)s:%(lineno)d:%(funcName)s] %(message)s"
+def loggerSetup(log_file):
+    #log_format_str = "[%(asctime)s:%(levelname)s:%(filename)s:%(lineno)d:%(funcName)s] %(message)s"
+    log_format_str = "[%(levelname)s:%(filename)s:%(lineno)d:%(funcName)s] %(message)s"
     fmt = logging.Formatter(log_format_str, datefmt='%H:%M:%S')
 
     # console log handler
     console_handler = logging.StreamHandler()
-    console_handler.setLevel(console_level)
+    console_handler.setLevel(logging.INFO)
     console_handler.setFormatter(fmt)
     logging.getLogger().addHandler(console_handler)
 
     # file log handler
-    file_handler = logging.FileHandler(log_file, 'w', encoding="utf8")
-    file_handler.setLevel(file_level)
-    file_handler.setFormatter(fmt)
-    logging.getLogger().addHandler(file_handler)
+    if log_file is not None:
+        silentRemove(log_file)
+        file_handler = logging.FileHandler(log_file, encoding="utf8")
+        file_handler.setLevel(logging.DEBUG)
+        file_handler.setFormatter(fmt)
+        logging.getLogger().addHandler(file_handler)
 
     # root logger
     logging.getLogger().setLevel(logging.DEBUG)
     logging.info("Starting at: " + time.strftime("%Y-%m-%d"))
+
+def setup(log_file, output_file):
+    loggerSetup(log_file)
+    silentRemove(output_file)
+    # Initialize JSON pickle
+    iniJSONPickle()
 
 def isNan(num):
     return isinstance(num, float) and math.isnan(num)
