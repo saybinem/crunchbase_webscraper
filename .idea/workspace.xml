@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8ffd353f-9675-4efa-a6a6-3ad054850fe0" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gen_person_table/src/main.py" afterPath="$PROJECT_DIR$/../gen_person_table/src/main.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/src/comp_hc_h0.py" afterPath="$PROJECT_DIR$/../process_person_table/src/comp_hc_h0.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -830,13 +830,6 @@
       <option name="presentableId" value="Default" />
       <updated>1498207171857</updated>
     </task>
-    <task id="LOCAL-00194" summary="Improvements">
-      <created>1507317228590</created>
-      <option name="number" value="00194" />
-      <option name="presentableId" value="LOCAL-00194" />
-      <option name="project" value="LOCAL" />
-      <updated>1507317228590</updated>
-    </task>
     <task id="LOCAL-00195" summary="Improvements">
       <created>1507319328704</created>
       <option name="number" value="00195" />
@@ -1173,7 +1166,14 @@
       <option name="project" value="LOCAL" />
       <updated>1507570312401</updated>
     </task>
-    <option name="localTasksCounter" value="243" />
+    <task id="LOCAL-00243" summary="person_table column order">
+      <created>1507576476515</created>
+      <option name="number" value="00243" />
+      <option name="presentableId" value="LOCAL-00243" />
+      <option name="project" value="LOCAL" />
+      <updated>1507576476515</updated>
+    </task>
+    <option name="localTasksCounter" value="244" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1193,7 +1193,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3567384" sideWeight="0.2964554" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29445073" sideWeight="0.49301827" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32842582" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3438914" sideWeight="0.70354456" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3438914" sideWeight="0.70354456" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23039742" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1244,8 +1244,6 @@
       <path value="$PROJECT_DIR$/../linkedin2excel" />
       <path value="$PROJECT_DIR$/../person_table" />
     </ignored-roots>
-    <MESSAGE value="goBack() function" />
-    <MESSAGE value="bug fix in which he waited 2 times" />
     <MESSAGE value="improvmenets" />
     <MESSAGE value="send email in case of robots" />
     <MESSAGE value="classe GenericScraper" />
@@ -1269,7 +1267,9 @@
     <MESSAGE value="Improvements" />
     <MESSAGE value="cbscraper person tagged_data -&gt; data" />
     <MESSAGE value="cbscraper fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="cbscraper fixes" />
+    <MESSAGE value="person_table column order" />
+    <MESSAGE value="restoring old comp_hc_h0" />
+    <option name="LAST_COMMIT_MESSAGE" value="restoring old comp_hc_h0" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
