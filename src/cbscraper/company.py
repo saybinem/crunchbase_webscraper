@@ -14,7 +14,7 @@ from cbscraper.GenericWebScraper import Error404
 from cbscraper.CBCompanyWebScraper import CBCompanyWebScraper
 from cbscraper.CBPersonWebScraper import CBPersonWebScraper
 import cbscraper.GenericWebScraper as GenericWebScraper
-
+import cbscraper.funcs
 
 # Scraper overview statistics
 def scrapeOrgOverviewStats(company_data, soup):
@@ -109,8 +109,8 @@ def scrapeOrgOverview(company_data, soup):
     if tag is not None:
         dd_founders = tag.find_next('dd')
         for link in dd_founders.find_all('a'):
-            name = link.attrs['tagged_data-name']
-            id = link.attrs['tagged_data-permalink']
+            name = link.attrs['data-name']
+            id = link.attrs['data-permalink']
             company_data.founders.append([name, id])
 
     # Categories
@@ -189,14 +189,14 @@ def scrapeOrgAdvisors(company_data, soup_advisors):
     for div_advisors in soup_advisors.find_all('div', class_='advisors'):
         for info_block in div_advisors.find_all('div', class_='info-block'):
             follow_card = info_block.find('a', class_='follow_card')
-            name = follow_card.get('tagged_data-name')
-            link = follow_card.get('tagged_data-permalink')
+            name = follow_card.get('data-name')
+            link = follow_card.get('data-permalink')
             primary_role = info_block.h5.text  # the primary role of this person (may not be related to the company at hand)
             role_in_bod = info_block.h6.text  # his role in our company's BoD
 
-            name = cbscraper.GenericWebScraper.myTextStrip(name)
-            primary_role = cbscraper.GenericWebScraper.myTextStrip(primary_role)
-            role_in_bod = cbscraper.GenericWebScraper.myTextStrip(role_in_bod)
+            name = cbscraper.funcs.myTextStrip(name)
+            primary_role = cbscraper.funcs.myTextStrip(primary_role)
+            role_in_bod = cbscraper.funcs.myTextStrip(role_in_bod)
 
             company_data.advisors.append([name, link, role_in_bod, primary_role])
 
@@ -206,11 +206,11 @@ def scrapeOrgCurrentPeople(company_data, soup_people):
         for info_block in div_people.find_all('div', class_='info-block'):
             h4 = info_block.find('h4')
             a = h4.a
-            name = a.get('tagged_data-name')
+            name = a.get('data-name')
             link = a.get('href')
             role = info_block.find('h5').text
-            name = cbscraper.GenericWebScraper.myTextStrip(name)
-            role = cbscraper.GenericWebScraper.myTextStrip(role)
+            name = cbscraper.funcs.myTextStrip(name)
+            role = cbscraper.funcs.myTextStrip(role)
             company_data.people.append([name, link, role])
 
 # Scrape organization past people
@@ -220,7 +220,7 @@ def scrapeOrgPastPeople(company_data, soup_past_people):
             # Get name and link
             h4 = info_block.find('h4')
             a = h4.a
-            name = a.get('tagged_data-name')
+            name = a.get('data-name')
             # logging.info("Found " + name)
             link = a.get('href')
             # Get role
@@ -229,8 +229,8 @@ def scrapeOrgPastPeople(company_data, soup_past_people):
             if h5_tag is not None:
                 role = h5_tag.text
             # Normalize and append
-            name = GenericWebScraper.myTextStrip(name)
-            role = GenericWebScraper.myTextStrip(role)
+            name = cbscraper.funcs.myTextStrip(name)
+            role = cbscraper.funcs.myTextStrip(role)
             company_data.past_people.append([name, link, role])
 
 
@@ -245,7 +245,7 @@ def scrapeOrg(company_data):
 
     if os.path.isfile(out_file):
         logging.info(msg + " already scraped. Returning JSON file".format(company_data.company_id_cb))
-        org_data = GenericWebScraper.readJSONFile(out_file)
+        org_data = cbscraper.funcs.readJSONFile(out_file)
         return org_data
     else:
         logging.info(msg)
@@ -257,7 +257,8 @@ def scrapeOrg(company_data):
     htmlfile = company_scraper.genHTMLFilePath(OrgEndPoint.ENTITY)
     if not os.path.isfile(htmlfile):
         if global_vars.new_companies <= 0:
-            logging.info("NOT WEB-SCRAPING NEW COMPANIES")
+            logging.fatal("File '{}' not found and new_companies='{}' <= 0".format(htmlfile, global_vars.new_companies))
+            logging.fatal("NOT WEB-SCRAPING NEW COMPANIES")
             sys.exit(0)
         else:
             global_vars.new_companies -= 1
@@ -307,7 +308,7 @@ def scrapeOrg(company_data):
 def scrapeOrgAndPeople(company_data):
 
     # Scrape the company
-    # scrapeOrg can return a new company tagged_data structure in case it reads the company from file
+    # scrapeOrg can return a new company data structure in case it reads the company from file
     company_data = scrapeOrg(company_data)
 
     # Scrape persons of the company

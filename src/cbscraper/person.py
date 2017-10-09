@@ -8,6 +8,7 @@ from cbscraper import GenericWebScraper
 from cbscraper.GenericWebScraper import Error404
 from cbscraper import global_vars
 from cbscraper.CBPersonData import CBPersonData, CBPersonDataOverview
+import cbscraper.funcs
 
 def getPersonIdFromLink(link):
     return link.split("/")[2]
@@ -287,7 +288,7 @@ def scrapePersonsList(company_data, key):
         if person_id in global_vars.already_scraped:
             logging.debug("The person '" + person_id + "' has already been scraped in this session. Just adding new type")
             person_data_file = CBPersonData.genPathFromId(person_id)
-            person_data = cbscraper.GenericWebScraper.readJSONFile(person_data_file)
+            person_data = cbscraper.funcs.readJSONFile(person_data_file)
             person_data.setType(key)
             person_data.save(person_data_file, overwrite=True)
         else:
