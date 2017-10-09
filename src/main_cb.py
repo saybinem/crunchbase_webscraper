@@ -108,7 +108,8 @@ def main():
     logging.info("ENDED!")
 
 def setLoggers():
-    log_format_str = "[%(asctime)s:%(levelname)s:%(filename)s:%(lineno)d:%(funcName)s] %(message)s"
+    #log_format_str = "[%(asctime)s:%(levelname)s:%(filename)s:%(lineno)d:%(funcName)s] %(message)s"
+    log_format_str = "[%(levelname)s:%(filename)s:%(lineno)d:%(funcName)s] %(message)s"
     fmt = logging.Formatter(log_format_str, datefmt='%H:%M:%S')
 
     # console handler
@@ -118,9 +119,10 @@ def setLoggers():
     logging.getLogger().addHandler(console_handler)
 
     # log file handler
-    # handler = logging.handlers.RotatingFileHandler('cbscraper.log', maxBytes=1024000, backupCount=5)
-    # handler.setFormatter(fmt)
-    # logging.getLogger().addHandler(handler)
+    #handler = logging.handlers.RotatingFileHandler('cbscraper.log', maxBytes=1024000, backupCount=5)
+    handler = logging.FileHandler('cbscraper.log')
+    handler.setFormatter(fmt)
+    logging.getLogger().addHandler(handler)
 
     # root logger
     logging.getLogger().setLevel(logging.DEBUG)

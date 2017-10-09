@@ -259,7 +259,8 @@ def scrapeOrg(company_data):
         if global_vars.new_companies <= 0:
             logging.fatal("File '{}' not found and new_companies='{}' <= 0".format(htmlfile, global_vars.new_companies))
             logging.fatal("NOT WEB-SCRAPING NEW COMPANIES")
-            sys.exit(0)
+            #sys.exit(0)
+            return None
         else:
             global_vars.new_companies -= 1
 
@@ -312,7 +313,7 @@ def scrapeOrgAndPeople(company_data):
     company_data = scrapeOrg(company_data)
 
     # Scrape persons of the company
-    if (company_data is not False and company_data.error != '404'):
+    if (company_data and company_data.error != '404'):
 
         logging.debug("Scraping 'founders'")
         # def scrapePersonsList(company_data, key, company_id_cb = None, company_id_vico = None):
@@ -328,4 +329,4 @@ def scrapeOrgAndPeople(company_data):
         cbscraper.person.scrapePersonsList(company_data, EPersonType.PAST_PEOPLE)
 
     else:
-        logging.debug("scrapeOrganization() returned False. This means there is no company_data")
+        logging.debug("scrapeOrganization() returned False OR a 404 error. This means there is no company_data")

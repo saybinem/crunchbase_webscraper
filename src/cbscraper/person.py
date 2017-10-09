@@ -215,7 +215,11 @@ def scrapePersonDetails(soup):
 
 # Name of the person
 def scrapePersonName(soup):
-    return soup.find(id="profile_header_heading").text
+    prof_head = soup.find(id="profile_header_heading")
+    if prof_head:
+        return prof_head.text
+    else:
+        return ''
 
 # *** Scrape a single person (e.g. "/person/gavin-ray") ***
 def scrapePerson(person_data):

@@ -1,7 +1,7 @@
 #GLOBALS
 import logging
 
-remove_existing_json = True
+remove_existing_json = False
 
 # The numer of new companies to scrape
 new_companies = 0
