@@ -2,7 +2,7 @@
 import logging
 
 remove_existing_json = False
-new_companies = 0 # scrape unscraped companies
+new_companies = True # scrape unscraped companies
 
 cb_vico_map_file = r"C:\data\tesi\VICO\ID Crunchbase_ID VICO.xlsx"
 vico_file = r"C:\data\tesi\VICO\VICO 4.0_REV_geocoded.csv"

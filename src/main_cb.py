@@ -13,7 +13,7 @@ import pandas
 from cbscraper.CBCompanyData import CBCompanyData
 from cbscraper import global_vars
 from cbscraper import GenericWebScraper
-
+import cbscraper.funcs
 
 # make tagged_data dirs if they do not exists
 def buildDirs():
@@ -128,5 +128,5 @@ def setLoggers():
 
 if __name__ == "__main__":
     setLoggers()
-    GenericWebScraper.iniJSONPickle()
+    cbscraper.funcs.iniJSONPickle()
     main()
