@@ -6,6 +6,7 @@ import logging
 from cbscraper import global_vars
 import pprint
 import json
+import cbscraper.funcs
 
 @unique
 class EPersonType(str, Enum):
@@ -78,7 +79,7 @@ class CBPersonData(object):
         assert(outfile != '')
         if not overwrite:
             assert(not os.path.isfile(outfile))
-        GenericWebScraper.saveJSON(self, outfile)
+        cbscraper.funcs.saveJSON(self, outfile)
 
     def hasLILink(self):
         return self.overview.social.linkedin == ''
