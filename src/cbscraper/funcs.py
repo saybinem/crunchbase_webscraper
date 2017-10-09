@@ -119,8 +119,9 @@ def readJSONFile(file, fatal_on_not_found=True, default_return=None, fatal_on_de
         fileh = open(file, 'r', encoding="utf-8")
     except FileNotFoundError:
         if fatal_on_not_found:
-            logging.critical("File not found '" + file + "'")
-            assert (False)
+            msg = "File not found '" + file + "'"
+            #logging.critical(msg)
+            raise Exception(msg)
         else:
             return default_return
     else:
