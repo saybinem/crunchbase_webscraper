@@ -38,7 +38,8 @@ def loggerSetup(log_file):
 
 def setup(log_file, output_file):
     loggerSetup(log_file)
-    silentRemove(output_file)
+    if output_file:
+        silentRemove(output_file)
     # Initialize JSON pickle
     iniJSONPickle()
 
