@@ -14,6 +14,10 @@ import time
 # FUNCTIONS
 
 def loggerSetup(log_file):
+
+    #Reset logging handlers
+    logging.getLogger().handlers = []
+
     #log_format_str = "[%(asctime)s:%(levelname)s:%(filename)s:%(lineno)d:%(funcName)s] %(message)s"
     log_format_str = "[%(levelname)s:%(filename)s:%(lineno)d:%(funcName)s] %(message)s"
     fmt = logging.Formatter(log_format_str, datefmt='%H:%M:%S')
