@@ -109,15 +109,25 @@ def sortDFColumns(frame, first_cols=[]):
             raise Exception("{} is not in the DataFrame ({})".format(c, list(frame)))
         col_map[c] = str(i+1)
 
+    logging.info("Column map: {}".format(col_map))
+
+    logging.info("Columns before renaming: {}".format(frame.columns))
+
     # Rename columns
     frame.rename(columns=col_map, inplace=True)
+
+    logging.info("Columns after renaming: {}".format(frame.columns))
 
     # Sort columns
     frame = frame.reindex_axis(natsort.natsorted(frame.columns, alg=natsort.ns.IGNORECASE), axis=1)
 
+    logging.info("Columns after sorting: {}".format(frame.columns))
+
     # Rename columns back
     inv_map = {v:k for k,v in col_map.items()}
     frame.rename(columns=inv_map, inplace=True)
+
+    logging.info("Columns after renaming back: {}".format(frame.columns))
 
     return frame
 
