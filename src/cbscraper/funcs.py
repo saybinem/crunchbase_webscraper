@@ -10,6 +10,7 @@ from operator import itemgetter
 import natsort
 import math
 import time
+import datetime
 
 # FUNCTIONS
 
@@ -47,8 +48,43 @@ def setup(log_file, output_file):
     # Initialize JSON pickle
     iniJSONPickle()
 
+def isValid(indata):
+    # !!! REMEMBER THAT bool(math.nan) RETURNS TRUE. NAN IS TRUE !!!
+    return not isNan(indata)
+
 def isNan(num):
     return isinstance(num, float) and math.isnan(num)
+
+def str2date(instr):
+    """
+    Converts a string in the form of "YEAR-MONTH-DAY" or "current" to a datetime.datetime object
+    Correctly handles NaN and None
+    :param instr: The date to convert from in string format
+    :return: the datetime.date object or None if the conversion fails
+    """
+    #already a date
+    if isinstance(instr, datetime.date):
+        return instr
+
+    # detects None
+    if instr is None:
+        return None
+    #detect NaN
+    if isinstance(instr, float) and math.isnan(instr):
+        return None
+    #current
+    if instr == "current":
+        return datetime.datetime.now().date()
+    #assume year-month-day
+    try:
+        res = datetime.datetime.strptime(instr, "%Y-%m-%d").date()
+    except TypeError:
+        logging.critical("TypeError: instr='{}' ({})".format(instr, type(instr)))
+        raise
+    except ValueError:
+        logging.critical("ValueError: instr='{}' ({})".format(instr, type(instr)))
+        raise
+    return res
 
 def remDir(dir):
     # Remove folder
