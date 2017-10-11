@@ -58,8 +58,31 @@ def remDir(dir):
     os.makedirs(dir, exist_ok=True)
 
 
-def sortDFColumns(frame):
+def sortDFColumns(frame, first_cols=[]):
+    """
+    Sort the columns of a dataframe
+    :param frame: The pandas.DataFrame
+    :param first_cols: A list of columns to put first
+    :return: The sorted DataFrame
+    """
+
+    # Build a dict col->cardinal number
+    col_map = dict()
+    for i, c in enumerate(first_cols):
+        if c not in frame:
+            raise Exception("{} is not in the DataFrame ({})".format(c, list(frame)))
+        col_map[c] = i+1
+
+    # Rename columns
+    frame.rename(columns=col_map, inplace=True)
+
+    # Sort columns
     frame = frame.reindex_axis(natsort.natsorted(frame.columns, alg=natsort.ns.IGNORECASE), axis=1)
+
+    # Rename columns back
+    inv_map = {v:k for k,v in col_map.items()}
+    frame.rename(columns=inv_map, inplace=True)
+
     return frame
 
 
