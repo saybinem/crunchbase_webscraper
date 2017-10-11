@@ -107,7 +107,7 @@ def sortDFColumns(frame, first_cols=[]):
     for i, c in enumerate(first_cols):
         if c not in frame:
             raise Exception("{} is not in the DataFrame ({})".format(c, list(frame)))
-        col_map[c] = i+1
+        col_map[c] = str(i+1)
 
     # Rename columns
     frame.rename(columns=col_map, inplace=True)
