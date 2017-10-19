@@ -12,6 +12,13 @@ import math
 import time
 import datetime
 
+class DatetimeEncoder(json.JSONEncoder):
+    def default(self, obj):
+        try:
+            return super(DatetimeEncoder, obj).default(obj)
+        except TypeError:
+            return str(obj)
+
 # FUNCTIONS
 
 def loggerSetup(log_file):
@@ -219,4 +226,4 @@ def myTextStrip(str):
 
 
 def jsonPretty(dict_data):
-    return json.dumps(dict_data, sort_keys=True, indent=4, separators=(',', ': '), ensure_ascii=False)
+    return json.dumps(dict_data, sort_keys=True, indent=4, separators=(',', ': '), ensure_ascii=False, cls=DatetimeEncoder)
