@@ -8,7 +8,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/src/CCompanyHC.py" afterPath="$PROJECT_DIR$/../process_person_table/src/CCompanyHC.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/src/CPersonHCSection.py" afterPath="$PROJECT_DIR$/../process_person_table/src/CPersonHCSection.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/src/comp_hc_round.py" afterPath="$PROJECT_DIR$/../process_person_table/src/comp_hc_round.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/src/funcs.py" afterPath="$PROJECT_DIR$/../process_person_table/src/funcs.py" />
     </list>
     <ignored path="../gen_company_table/company_table.do" />
     <ignored path="../gen_company_table/company_table.R" />
@@ -35,7 +35,7 @@
     <SUITE FILE_PATH="coverage/crunchbase_scraper$hc_before_date.coverage" NAME="hc_before_date Coverage Results" MODIFIED="1507321338044" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$find_exp.coverage" NAME="find_exp Coverage Results" MODIFIED="1508261801990" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$crunchbase_scraper.coverage" NAME="crunchbase_scraper Coverage Results" MODIFIED="1507565461618" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/crunchbase_scraper$comp_hc_round.coverage" NAME="comp_hc_round Coverage Results" MODIFIED="1508426294531" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
+    <SUITE FILE_PATH="coverage/crunchbase_scraper$comp_hc_round.coverage" NAME="comp_hc_round Coverage Results" MODIFIED="1508426338813" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$inv_rounds.coverage" NAME="inv_rounds Coverage Results" MODIFIED="1507294810426" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$h0_hc.coverage" NAME="h0_hc Coverage Results" MODIFIED="1508084916491" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$linkedin_scraper.coverage" NAME="linkedin_scraper Coverage Results" MODIFIED="1507570306192" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../linkedin_scraper" />
@@ -68,7 +68,7 @@
       <file leaf-file-name="funcs_hc.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../process_person_table/src/funcs_hc.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
+            <state relative-caret-position="5918">
               <caret line="269" column="0" lean-forward="false" selection-start-line="269" selection-start-column="0" selection-end-line="269" selection-end-column="0" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
@@ -77,24 +77,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CCompanyHC.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../process_person_table/src/CCompanyHC.py">
+      <file leaf-file-name="funcs.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../process_person_table/src/funcs.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="226" column="35" lean-forward="false" selection-start-line="226" selection-start-column="35" selection-end-line="226" selection-end-column="35" />
+            <state relative-caret-position="286">
+              <caret line="28" column="14" lean-forward="false" selection-start-line="28" selection-start-column="14" selection-end-line="28" selection-end-column="14" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CPersonHCSection.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../process_person_table/src/CPersonHCSection.py">
+      <file leaf-file-name="CCompanyHC.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../process_person_table/src/CCompanyHC.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="17" column="37" lean-forward="false" selection-start-line="17" selection-start-column="37" selection-end-line="17" selection-end-column="37" />
-              <folding>
-                <element signature="e#0#14#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="198">
+              <caret line="182" column="56" lean-forward="true" selection-start-line="182" selection-start-column="56" selection-end-line="182" selection-end-column="56" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -105,6 +103,18 @@
             <state relative-caret-position="167">
               <caret line="148" column="0" lean-forward="false" selection-start-line="148" selection-start-column="0" selection-end-line="148" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CPersonHCSection.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../process_person_table/src/CPersonHCSection.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="167">
+              <caret line="118" column="0" lean-forward="false" selection-start-line="118" selection-start-column="0" selection-end-line="130" selection-end-column="45" />
+              <folding>
+                <element signature="e#0#14#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -120,7 +130,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>self.time_vars[&quot;total&quot;]</find>
       <find>added</find>
       <find>setup</find>
       <find>logging.</find>
@@ -146,10 +155,11 @@
       <find>insertRan</find>
       <find>setTimeTot</find>
       <find>TimeTot</find>
+      <find>getColumnsListforHC</find>
       <find>setUniRank</find>
       <find>time_tot</find>
       <find>addIf</find>
-      <find>getColumnsListforHC</find>
+      <find>convEmp</find>
     </findStrings>
     <replaceStrings>
       <replace>soup</replace>
@@ -229,12 +239,12 @@
         <option value="$PROJECT_DIR$/../process_person_table/src/exp_list.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/CHCType.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/CPersonHC.py" />
-        <option value="$PROJECT_DIR$/../process_person_table/src/funcs.py" />
         <option value="$PROJECT_DIR$/src/cbscraper/funcs.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/funcs_hc.py" />
-        <option value="$PROJECT_DIR$/../process_person_table/src/CCompanyHC.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/comp_hc_round.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/CPersonHCSection.py" />
+        <option value="$PROJECT_DIR$/../process_person_table/src/funcs.py" />
+        <option value="$PROJECT_DIR$/../process_person_table/src/CCompanyHC.py" />
       </list>
     </option>
   </component>
@@ -821,13 +831,6 @@
       <option name="presentableId" value="Default" />
       <updated>1498207171857</updated>
     </task>
-    <task id="LOCAL-00318" summary="New company HC algorithm">
-      <created>1508160029151</created>
-      <option name="number" value="00318" />
-      <option name="presentableId" value="LOCAL-00318" />
-      <option name="project" value="LOCAL" />
-      <updated>1508160029151</updated>
-    </task>
     <task id="LOCAL-00319" summary="New company HC algorithm">
       <created>1508160567880</created>
       <option name="number" value="00319" />
@@ -1164,7 +1167,14 @@
       <option name="project" value="LOCAL" />
       <updated>1508425586414</updated>
     </task>
-    <option name="localTasksCounter" value="367" />
+    <task id="LOCAL-00367" summary="Improvements">
+      <created>1508426305708</created>
+      <option name="number" value="00367" />
+      <option name="presentableId" value="LOCAL-00367" />
+      <option name="project" value="LOCAL" />
+      <updated>1508426305708</updated>
+    </task>
+    <option name="localTasksCounter" value="368" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1184,7 +1194,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3567384" sideWeight="0.2964554" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29445073" sideWeight="0.49301827" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32842582" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3223982" sideWeight="0.70354456" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3223982" sideWeight="0.70354456" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16272825" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1580,14 +1590,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../process_person_table/src/funcs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="180" column="32" lean-forward="false" selection-start-line="180" selection-start-column="32" selection-end-line="180" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main_cb.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="253">
@@ -1604,24 +1606,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../process_person_table/src/CCompanyHC.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="226" column="35" lean-forward="false" selection-start-line="226" selection-start-column="35" selection-end-line="226" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../process_person_table/src/funcs_hc.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="269" column="0" lean-forward="false" selection-start-line="269" selection-start-column="0" selection-end-line="269" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../process_person_table/src/comp_hc_round.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="167">
@@ -1630,13 +1614,39 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../process_person_table/src/funcs_hc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5918">
+          <caret line="269" column="0" lean-forward="false" selection-start-line="269" selection-start-column="0" selection-end-line="269" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../process_person_table/src/funcs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="28" column="14" lean-forward="false" selection-start-line="28" selection-start-column="14" selection-end-line="28" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../process_person_table/src/CPersonHCSection.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="17" column="37" lean-forward="false" selection-start-line="17" selection-start-column="37" selection-end-line="17" selection-end-column="37" />
+        <state relative-caret-position="167">
+          <caret line="118" column="0" lean-forward="false" selection-start-line="118" selection-start-column="0" selection-end-line="130" selection-end-column="45" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../process_person_table/src/CCompanyHC.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="182" column="56" lean-forward="true" selection-start-line="182" selection-start-column="56" selection-end-line="182" selection-end-column="56" />
+          <folding />
         </state>
       </provider>
     </entry>
