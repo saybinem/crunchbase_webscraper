@@ -79,8 +79,8 @@
       <file leaf-file-name="CCompanyHC.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../process_person_table/src/CCompanyHC.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="148" column="86" lean-forward="false" selection-start-line="148" selection-start-column="86" selection-end-line="148" selection-end-column="86" />
+            <state relative-caret-position="167">
+              <caret line="65" column="18" lean-forward="false" selection-start-line="65" selection-start-column="8" selection-end-line="65" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -89,8 +89,8 @@
       <file leaf-file-name="CPersonHCSection.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../process_person_table/src/CPersonHCSection.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="326">
-              <caret line="218" column="47" lean-forward="false" selection-start-line="218" selection-start-column="47" selection-end-line="218" selection-end-column="47" />
+            <state relative-caret-position="167">
+              <caret line="143" column="43" lean-forward="false" selection-start-line="143" selection-start-column="35" selection-end-line="143" selection-end-column="43" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -119,9 +119,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>FoSClass</find>
-      <find>insertRanking</find>
-      <find>getFounder</find>
       <find>self.time_vars[&quot;total&quot;]</find>
       <find>added</find>
       <find>setup</find>
@@ -133,7 +130,6 @@
       <find>addTotalTime is returning</find>
       <find>convEmptyToZe</find>
       <find>setTimeV</find>
-      <find>setTimeTot</find>
       <find>CompanyHC</find>
       <find>getContribution</find>
       <find>getContrib</find>
@@ -149,6 +145,10 @@
       <find>getColumnsListforHC</find>
       <find>insertRan</find>
       <find>addIf</find>
+      <find>setUniRank</find>
+      <find>setTimeTot</find>
+      <find>TimeTot</find>
+      <find>time_tot</find>
     </findStrings>
     <replaceStrings>
       <replace>soup</replace>
@@ -820,13 +820,6 @@
       <option name="presentableId" value="Default" />
       <updated>1498207171857</updated>
     </task>
-    <task id="LOCAL-00316" summary="New company HC algorithm">
-      <created>1508159584800</created>
-      <option name="number" value="00316" />
-      <option name="presentableId" value="LOCAL-00316" />
-      <option name="project" value="LOCAL" />
-      <updated>1508159584800</updated>
-    </task>
     <task id="LOCAL-00317" summary="New company HC algorithm">
       <created>1508159908335</created>
       <option name="number" value="00317" />
@@ -1163,7 +1156,14 @@
       <option name="project" value="LOCAL" />
       <updated>1508421688997</updated>
     </task>
-    <option name="localTasksCounter" value="365" />
+    <task id="LOCAL-00365" summary="Improvements">
+      <created>1508424458103</created>
+      <option name="number" value="00365" />
+      <option name="presentableId" value="LOCAL-00365" />
+      <option name="project" value="LOCAL" />
+      <updated>1508424458103</updated>
+    </task>
+    <option name="localTasksCounter" value="366" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1623,16 +1623,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../process_person_table/src/CCompanyHC.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="148" column="86" lean-forward="false" selection-start-line="148" selection-start-column="86" selection-end-line="148" selection-end-column="86" />
+        <state relative-caret-position="167">
+          <caret line="65" column="18" lean-forward="false" selection-start-line="65" selection-start-column="8" selection-end-line="65" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../process_person_table/src/CPersonHCSection.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="218" column="47" lean-forward="false" selection-start-line="218" selection-start-column="47" selection-end-line="218" selection-end-column="47" />
+        <state relative-caret-position="167">
+          <caret line="143" column="43" lean-forward="false" selection-start-line="143" selection-start-column="35" selection-end-line="143" selection-end-column="43" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
