@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="8ffd353f-9675-4efa-a6a6-3ad054850fe0" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/src/CCompanyHC.py" afterPath="$PROJECT_DIR$/../process_person_table/src/CCompanyHC.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/src/CPersonHCSection.py" afterPath="$PROJECT_DIR$/../process_person_table/src/CPersonHCSection.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/src/funcs_hc.py" afterPath="$PROJECT_DIR$/../process_person_table/src/funcs_hc.py" />
     </list>
     <ignored path="../gen_company_table/company_table.do" />
     <ignored path="../gen_company_table/company_table.R" />
@@ -64,7 +64,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="funcs_hc.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="funcs_hc.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../process_person_table/src/funcs_hc.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="170">
@@ -76,11 +76,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CCompanyHC.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CCompanyHC.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../process_person_table/src/CCompanyHC.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
-              <caret line="141" column="46" lean-forward="false" selection-start-line="141" selection-start-column="46" selection-end-line="141" selection-end-column="46" />
+            <state relative-caret-position="153">
+              <caret line="161" column="27" lean-forward="true" selection-start-line="161" selection-start-column="27" selection-end-line="161" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -89,8 +89,8 @@
       <file leaf-file-name="CPersonHCSection.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../process_person_table/src/CPersonHCSection.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="18" column="33" lean-forward="false" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
+            <state relative-caret-position="214">
+              <caret line="316" column="51" lean-forward="false" selection-start-line="316" selection-start-column="51" selection-end-line="316" selection-end-column="51" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -129,7 +129,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>of class_row contains</find>
       <find>col_pre</find>
       <find>toBool</find>
       <find>Triboo</find>
@@ -159,6 +158,7 @@
       <find>getContribution</find>
       <find>getContrib</find>
       <find>factor</find>
+      <find>finalize</find>
     </findStrings>
     <replaceStrings>
       <replace>soup</replace>
@@ -240,9 +240,9 @@
         <option value="$PROJECT_DIR$/../process_person_table/src/funcs.py" />
         <option value="$PROJECT_DIR$/src/cbscraper/funcs.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/comp_hc_round.py" />
-        <option value="$PROJECT_DIR$/../process_person_table/src/CCompanyHC.py" />
-        <option value="$PROJECT_DIR$/../process_person_table/src/CPersonHCSection.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/funcs_hc.py" />
+        <option value="$PROJECT_DIR$/../process_person_table/src/CPersonHCSection.py" />
+        <option value="$PROJECT_DIR$/../process_person_table/src/CCompanyHC.py" />
       </list>
     </option>
   </component>
@@ -844,13 +844,6 @@
       <option name="presentableId" value="Default" />
       <updated>1498207171857</updated>
     </task>
-    <task id="LOCAL-00304" summary="bugfix">
-      <created>1508082878174</created>
-      <option name="number" value="00304" />
-      <option name="presentableId" value="LOCAL-00304" />
-      <option name="project" value="LOCAL" />
-      <updated>1508082878174</updated>
-    </task>
     <task id="LOCAL-00305" summary="bugfix">
       <created>1508085286761</created>
       <option name="number" value="00305" />
@@ -1187,7 +1180,14 @@
       <option name="project" value="LOCAL" />
       <updated>1508399582569</updated>
     </task>
-    <option name="localTasksCounter" value="353" />
+    <task id="LOCAL-00353" summary="Improvements">
+      <created>1508400398198</created>
+      <option name="number" value="00353" />
+      <option name="presentableId" value="LOCAL-00353" />
+      <option name="project" value="LOCAL" />
+      <updated>1508400398198</updated>
+    </task>
+    <option name="localTasksCounter" value="354" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1634,24 +1634,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../process_person_table/src/CCompanyHC.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="141" column="46" lean-forward="false" selection-start-line="141" selection-start-column="46" selection-end-line="141" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../process_person_table/src/CPersonHCSection.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="18" column="33" lean-forward="false" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../process_person_table/src/funcs_hc.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -1659,6 +1641,24 @@
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../process_person_table/src/CPersonHCSection.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="316" column="51" lean-forward="false" selection-start-line="316" selection-start-column="51" selection-end-line="316" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../process_person_table/src/CCompanyHC.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="161" column="27" lean-forward="true" selection-start-line="161" selection-start-column="27" selection-end-line="161" selection-end-column="27" />
+          <folding />
         </state>
       </provider>
     </entry>
