@@ -76,12 +76,15 @@ def str2date(instr):
     # detects None
     if instr is None:
         return None
+
     #detect NaN
     if isinstance(instr, float) and math.isnan(instr):
         return None
+
     #current
     if instr == "current":
         return datetime.datetime.now().date()
+
     #assume year-month-day
     try:
         res = datetime.datetime.strptime(instr, "%Y-%m-%d").date()
