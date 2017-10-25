@@ -1,4 +1,5 @@
 import datetime
+import logging
 
 month_dict = {
     #ITA
@@ -136,11 +137,23 @@ def processDate(date):
         year = now.year
         #return "current"
 
-    elif date.isnumeric():
+    elif date.isnumeric() and len(date)==4:
         # We only have the year
         day = 1
         month = 1
         year = int(date)
+
+    elif date.isnumeric() and len(date)==3:
+        # We have a mistyped year
+        if date[0:2]=='20':
+            date_before = date
+            date = date[0:2] + "0" + date[2]
+            day = 1
+            month = 1
+            year = int(date)
+            logging.info("Mistyped {} corrected into {}".format(date_before, date))
+        else:
+            raise Exception("Unrecognized mistyped year: {}".format(date))
 
     elif date in ['', "unknown"]:
         # missing date

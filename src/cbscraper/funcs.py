@@ -50,7 +50,13 @@ def imposeDateConstraint(start_date, end_date):
 
     return start_date, end_date
 
-def loggerSetup(log_file):
+__glo_log_file = None
+
+def getCurrentLogFile():
+    return __glo_log_file
+
+def loggerSetup(log_file, remove_old_log=True):
+    global __glo_log_file
 
     #Reset logging handlers
     logging.getLogger().handlers = []
@@ -67,11 +73,13 @@ def loggerSetup(log_file):
 
     # file log handler
     if log_file is not None:
-        silentRemove(log_file)
-        file_handler = logging.FileHandler(log_file, encoding="utf8")
+        if remove_old_log:
+            silentRemove(log_file)
+        file_handler = logging.FileHandler(log_file, mode='a', encoding="utf8")
         file_handler.setLevel(logging.DEBUG)
         file_handler.setFormatter(fmt)
         logging.getLogger().addHandler(file_handler)
+        __glo_log_file = log_file
 
     # root logger
     logging.getLogger().setLevel(logging.DEBUG)
