@@ -17,16 +17,12 @@ month_dict = {
 
     #ENG (partial)
     "jan":1,
-    "feb":2,
-    "mar":3,
-    "apr":4,
     "may":5,
     "jun":6,
     "jul":7,
     "aug":8,
     "sep":9,
     "oct":10,
-    "nov":11,
     "dec":12,
 
 }
@@ -48,15 +44,20 @@ month_sub = {
 }
 
 def processDate(date):
+    """
+    Gets a string and returns a datetime.time object
+    :param date:
+    :return:
+    """
     # print("ORIGINAL_DATE: "+date+" => ",end='')
 
     date = date.lower()
     now = datetime.datetime.now()
 
     #output variables
-    day = ''
-    month = ''
-    year = ''
+    day = None
+    month = None
+    year = None
 
     # Get the first 3 letters
     first3 = date[0:3].lower()
@@ -98,10 +99,10 @@ def processDate(date):
             exit()
 
     elif date == "presente" or date == "current" or date=="present":
-        #day = now.day
-        #month = now.month
-        #year = now.year
-        return "current"
+        day = now.day
+        month = now.month
+        year = now.year
+        #return "current"
 
     elif date.isnumeric():
         day = 1
@@ -112,11 +113,10 @@ def processDate(date):
         pass
 
     else:
-        print("ERRORE: FORMATO DATA NON TROVATO: '" + date + "'")
-        exit()
+        raise Exception("ERRORE: FORMATO DATA NON TROVATO: '" + date + "'")
 
-    if year == '':
-        return ''
+    if year is None:
+        return None
     else:
         # print("year="+str(year)+" month="+str(month)+" day="+str(day))
         return datetime.date(year, month, day)
