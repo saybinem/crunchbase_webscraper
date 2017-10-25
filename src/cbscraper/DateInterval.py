@@ -28,6 +28,7 @@ month_dict = {
 }
 
 month_sub = {
+
     # ENG (full)
     "january": "jan",
     "february": "feb",
@@ -41,6 +42,21 @@ month_sub = {
     "october": "oct",
     "november": "nov",
     "december": "dec",
+
+    #ITA
+    "gennaio": "jan",
+    "febbraio": "feb",
+    "marzo": "mar",
+    "aprile": "apr",
+    "maggio": "may",
+    "giugno": "jun",
+    "luglio": "jul",
+    "agosto": "aug",
+    "settembre": "sep",
+    "ottobre": "oct",
+    "novembre": "nov",
+    "dicembre": "dec",
+
 }
 
 def processDate(date):
@@ -70,51 +86,56 @@ def processDate(date):
     if first3 in month_dict:
 
         if len(date) == 3:
-            #we only have the month. We hp. current year
-            day = 1
-            month = int(month_dict[first3])
-            year = now.year
+            # We only have the month -> missing
+            #day = 1
+            #month = int(month_dict[first3])
+            #year = now.year
+            pass
 
-        elif date[3] == " " and date[4].isnumeric() and "," not in date:
+        elif date[3] == " " and len(date)==8 and date[4:8].isnumeric() and ("," not in date):
             # e.g. "dic 2014"
+            #       01234567
             day = 1
             month = int(month_dict[first3])
-            year = int(date[3:].strip(" ,"))
+            year = int(date[3:])
 
-        elif date[3] == " " and date[4].isnumeric() and "," in date:
+        elif date[3] == " " and len(date)==12 and date[4:6].isnumeric() and (date[6] == ",") and date[8:12].isnumeric():
             # e.g. "Jul 26, 2015"
             comma = date.find(",")
             day = int(date[4:comma])
             month = int(month_dict[first3])
-            year = int(date[comma + 1:].strip(" ,"))
+            year = int(date[comma + 1:])
 
-        elif date[3] == "," and date[4] == " ":
+        elif date[3] == "," and len(date) == 9 and date[4] == " " and date[5:9].isnumeric():
             # e.g. "Sep, 2013"
+            #       012345678
             day = 1
             month = int(month_dict[first3])
-            year = int(date[3:].strip(" ,"))
+            year = int(date[5:])
 
         else:
-            print("ERRORE: FORMATO DATA NON RICONOSCIUTO: " + date)
-            exit()
+            raise Exception("ERRORE: PRIME TRE LETTERE SONO UN MESE MA FORMATO DATA NON RICONOSCIUTO: " + date)
 
-    elif date == "presente" or date == "current" or date=="present":
+    elif date in ["presente", "current", "present"]:
         day = now.day
         month = now.month
         year = now.year
         #return "current"
 
     elif date.isnumeric():
+        # We only have the year
         day = 1
         month = 1
         year = int(date)
 
-    elif date == '' or date == "unknown":
+    elif date in ['', "unknown"]:
+        # missing date
         pass
 
     else:
         raise Exception("ERRORE: FORMATO DATA NON TROVATO: '" + date + "'")
 
+    # RETURN
     if year is None:
         return None
     else:
