@@ -25,7 +25,7 @@ def imposeDateConstraint(start_date, end_date):
     assert(isinstance(start_date, datetime.date))
     assert(isinstance(end_date, datetime.date))
     if start_date > end_date:
-        logging.info("ERROR: start_date='{}' is after end_date='{}'. Swapping them".format(start_date, end_date))
+        logging.error("ERROR: start_date='{}' is after end_date='{}'. Swapping them".format(start_date, end_date))
         return end_date, start_date
     return start_date, end_date
 
