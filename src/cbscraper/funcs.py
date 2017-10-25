@@ -55,7 +55,7 @@ __glo_log_file = None
 def getCurrentLogFile():
     return __glo_log_file
 
-def loggerSetup(log_file, remove_old_log=True):
+def loggerSetup(log_file, remove_old_log=True, print_start_date = True):
     global __glo_log_file
 
     #Reset logging handlers
@@ -83,7 +83,8 @@ def loggerSetup(log_file, remove_old_log=True):
 
     # root logger
     logging.getLogger().setLevel(logging.DEBUG)
-    logging.info("Starting at: " + time.strftime("%Y-%m-%d"))
+    if print_start_date:
+        logging.info("Starting at: " + time.strftime("%Y-%m-%d"))
 
 def setup(log_file, output_file):
     loggerSetup(log_file)
