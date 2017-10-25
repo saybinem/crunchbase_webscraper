@@ -92,6 +92,11 @@ def processDate(date):
             #year = now.year
             pass
 
+        elif date[3] == " " and len(date)==6 and date[4:6].isnumeric() and ("," not in date):
+            # e.g. 'aug 31'
+            #       012345
+            pass
+
         elif date[3] == " " and len(date)==8 and date[4:8].isnumeric() and ("," not in date):
             # e.g. "dic 2014"
             #       01234567
@@ -99,8 +104,17 @@ def processDate(date):
             month = int(month_dict[first3])
             year = int(date[3:])
 
-        elif date[3] == " " and len(date)==12 and date[4:6].isnumeric() and (date[6] == ",") and date[8:12].isnumeric():
+        elif date[3] == " " and len(date)==12 and date[4:6].isnumeric() and date[6]=="," and date[7]==" " and date[8:12].isnumeric():
             # e.g. "Jul 26, 2015"
+                   #0123456789
+            comma = date.find(",")
+            day = int(date[4:comma])
+            month = int(month_dict[first3])
+            year = int(date[comma + 1:])
+
+        elif date[3] == " " and len(date)==11 and date[4].isnumeric() and (date[5] == ",") and date[6]==" " and date[7:11].isnumeric():
+            # e.g. "nov 1, 2011"
+                   #0123456789
             comma = date.find(",")
             day = int(date[4:comma])
             month = int(month_dict[first3])
