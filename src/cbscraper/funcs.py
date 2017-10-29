@@ -208,6 +208,12 @@ def printProgressBar(iteration, total, prefix='', suffix='', decimals=1, length=
 def csv2stata(infile):
     stata_exe = "C:\Program Files (x86)\Stata13\StataMP-64.exe"
 
+    if not os.path.isfile(stata_exe):
+        raise Exception("STATA not found: {}".format(stata_exe))
+
+    if not os.path.isfile(infile):
+        raise Exception("Input file not found: {}".format(infile))
+
     in_base = os.path.basename(infile)
     in_name = os.path.splitext(in_base)[0]
     do_file = in_name + ".do"
