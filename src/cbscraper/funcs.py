@@ -214,9 +214,10 @@ def csv2stata(infile):
     if not os.path.isfile(infile):
         raise Exception("Input file not found: {}".format(infile))
 
-    in_base = os.path.basename(infile)
+    infile = os.path.abspath(infile)
+    root_dir, in_base = os.path.split(infile)
     in_name = os.path.splitext(in_base)[0]
-    do_file = in_name + ".do"
+    do_file = os.path.join(root_dir, in_name + ".do")
 
     do_cont = 'import delimited using "' + in_base + '", delimiters(",") bindquotes(strict) \n'
     do_cont += 'save "' + in_name + '" \n'  # very import the last new line
