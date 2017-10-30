@@ -223,7 +223,9 @@ def csv2stata(infile):
     root_dir, in_base = os.path.split(infile)
     in_name = os.path.splitext(in_base)[0]
     do_file = os.path.join(root_dir, in_name + ".do")
+    dta_file = os.path.join (root_dir, in_name + ".dta")
     silentRemove(do_file)
+    silentRemove (dta_file)
 
     do_cont = 'import delimited using "' + in_base + '", delimiters(",") bindquotes(strict) \n'
     do_cont += 'save "' + in_name + '" \n'  # very import the last new line
