@@ -21,6 +21,11 @@ class DatetimeEncoder(json.JSONEncoder):
 
 # FUNCTIONS
 
+def assertType(var_name, var_val, var_type):
+    if not isinstance (var_val, var_type):
+        raise Exception ("Unrecognized type of {}={} ({}). Expected type: {}"
+                         .format (var_name, var_val, type (var_val), var_type))
+
 def imposeDateConstraint(start_date, end_date):
     """
     Make sures that start_date is after end_date
@@ -218,6 +223,7 @@ def csv2stata(infile):
     root_dir, in_base = os.path.split(infile)
     in_name = os.path.splitext(in_base)[0]
     do_file = os.path.join(root_dir, in_name + ".do")
+    silentRemove(do_file)
 
     do_cont = 'import delimited using "' + in_base + '", delimiters(",") bindquotes(strict) \n'
     do_cont += 'save "' + in_name + '" \n'  # very import the last new line
