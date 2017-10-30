@@ -225,7 +225,7 @@ def csv2stata(infile):
     do_file = os.path.join(root_dir, in_name + ".do")
     dta_file = os.path.join (root_dir, in_name + ".dta")
     silentRemove(do_file)
-    silentRemove (dta_file)
+    silentRemove(dta_file)
 
     do_cont = 'import delimited using "' + in_base + '", delimiters(",") bindquotes(strict) \n'
     do_cont += 'save "' + in_name + '" \n'  # very import the last new line
@@ -233,7 +233,10 @@ def csv2stata(infile):
     with open(do_file, 'w') as file:
         file.write(do_cont)
 
-    subprocess.call([stata_exe, "/e", "do", do_file])
+    command_line = "\"" + stata_exe + "\" /e do " + do_file
+    logging.info(command_line)
+    os.system(command_line)
+    #subprocess.call([])
 
 
 def iniJSONPickle():
