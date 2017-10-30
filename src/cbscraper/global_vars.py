@@ -24,6 +24,3 @@ person_html_dir = './data/person/html'
 person_screens_dir = './data/person/screenshots'
 
 console_log_level = logging.INFO
-
-# GLOBAL TO NOT MODIFY
-already_scraped = dict() #person ids that have already been scraped

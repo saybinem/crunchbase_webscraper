@@ -285,26 +285,15 @@ def scrapePersonsList(company_data, key):
         logging.debug("List "+key+" is empty for "+company_id_cb)
 
     for p in p_list:
+
         person_id = getPersonIdFromLink(p[1])
         person_out_file = CBPersonData.genPathFromId (person_id, company_id_cb)
 
-        if person_id in global_vars.already_scraped:
-            if os.path.isfile(person_out_file):
-                logging.warning("The person '" + person_id + "' has already been scraped for this company. Just adding new type")
-                person_data = cbscraper.funcs.readJSONFile(person_out_file)
-                person_data.setType(key)
-                person_data.save(person_out_file, overwrite=True)
-            else:
-                logging.warning("The person '" + person_id + "' has already been scraped, but for another company")
-                first_company = global_vars.already_scraped[person_id]['first_company']
-                real_file = CBPersonData.genPathFromId (person_id, first_company)
-                assert(os.path.isfile(real_file))
-                person_data = cbscraper.funcs.readJSONFile(real_file)
-                person_data.resetCompanySpecific()
-                person_data.company_id_cb = company_id_cb
-                person_data.company_id_vico = company_id_vico
-                person_data.setType(key)
-                person_data.save(person_out_file, overwrite=True)
+        if os.path.isfile(person_out_file):
+            logging.warning("The person '" + person_id + "' has already been scraped for this company. Just adding new type")
+            person_data = cbscraper.funcs.readJSONFile(person_out_file)
+            person_data.setType(key)
+            person_data.save(person_out_file, overwrite=True)
 
         else:
             person_data = CBPersonData()
@@ -313,4 +302,3 @@ def scrapePersonsList(company_data, key):
             person_data.company_id_vico = company_id_vico
             person_data.setType(key)
             scrapePerson(person_data, person_out_file)
-            global_vars.already_scraped[person_data.person_id_cb] = {'first_company':company_id_cb}
