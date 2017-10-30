@@ -62,6 +62,12 @@ class CBPersonData(object):
         self.is_adv = False
         #self._freeze()
 
+    def resetCompanySpecific(self):
+        self.is_founder = False
+        self.is_past = False
+        self.is_adv = False
+        self.is_current_people = False
+
     def setType(self, type):
         if type==EPersonType.FOUNDERS:
             self.is_founder = True
@@ -88,8 +94,8 @@ class CBPersonData(object):
         return self.overview.social.linkedin
 
     @staticmethod
-    def genPathFromId(person_id_cb):
-        out_file = os.path.join(global_vars.person_json_dir, person_id_cb+".json")
+    def genPathFromId(person_id_cb, company_id_cb):
+        out_file = os.path.join(global_vars.person_json_dir, person_id_cb + "__" + company_id_cb + ".json")
         return out_file
         
     def __repr__(self):

@@ -1,7 +1,7 @@
 #GLOBALS
 import logging
 
-remove_existing_json = False
+remove_existing_json = True
 
 # The numer of new companies to scrape
 new_companies = 0
@@ -26,4 +26,4 @@ person_screens_dir = './data/person/screenshots'
 console_log_level = logging.INFO
 
 # GLOBAL TO NOT MODIFY
-already_scraped = list() #person ids that have already been scraped
+already_scraped = dict() #person ids that have already been scraped

@@ -222,13 +222,10 @@ def scrapePersonName(soup):
         return ''
 
 # *** Scrape a single person (e.g. "/person/gavin-ray") ***
-def scrapePerson(person_data):
-
-    person_out_file = CBPersonData.genPathFromId(person_data.person_id_cb)
+def scrapePerson(person_data, person_out_file):
 
     if (os.path.isfile(person_out_file)):
-        logging.debug("Person \"" + person_data.person_id_cb + "\" already scraped")
-        return True
+        raise Exception("This should not happen since we already controlled for that in scraperPersonsList")
 
     logging.info("Scraping person: '" + person_data.person_id_cb + "' of company '" + person_data.company_id_cb + "'")
 
@@ -281,6 +278,7 @@ def scrapePersonsList(company_data, key):
     company_id_cb = company_data.company_id_cb
     company_id_vico = company_data.company_id_vico
 
+    #getattr(x, 'foobar') is equivalent to x.foobar
     p_list = getattr(company_data, key)
 
     if not p_list:
@@ -288,18 +286,29 @@ def scrapePersonsList(company_data, key):
 
     for p in p_list:
         person_id = getPersonIdFromLink(p[1])
+        person_out_file = CBPersonData.genPathFromId (person_id, company_id_cb)
 
         if person_id in global_vars.already_scraped:
-            logging.debug("The person '" + person_id + "' has already been scraped in this session. Just adding new type")
-            person_data_file = CBPersonData.genPathFromId(person_id)
-            person_data = cbscraper.funcs.readJSONFile(person_data_file)
-            person_data.setType(key)
-            person_data.save(person_data_file, overwrite=True)
+            if os.path.isfile(person_out_file):
+                logging.warning("The person '" + person_id + "' has already been scraped for this company. Just adding new type")
+                person_data = cbscraper.funcs.readJSONFile(person_out_file)
+                person_data.setType(key)
+                person_data.save(person_out_file, overwrite=True)
+            else:
+                logging.warning("The person '" + person_id + "' has already been scraped, but for another company")
+                first_company = global_vars.already_scraped[person_id]['first_company']
+                real_file = CBPersonData.genPathFromId (person_id, first_company)
+                assert(os.path.isfile(real_file))
+                person_data = cbscraper.funcs.readJSONFile(real_file)
+                person_data.resetCompanySpecific()
+                person_data.setType(key)
+                person_data.save(person_out_file, overwrite=True)
+
         else:
             person_data = CBPersonData()
             person_data.person_id_cb = person_id
             person_data.company_id_cb = company_id_cb
             person_data.company_id_vico = company_id_vico
             person_data.setType(key)
-            scrapePerson(person_data)
-            global_vars.already_scraped.append(person_data.person_id_cb)
+            scrapePerson(person_data, person_out_file)
+            global_vars.already_scraped[person_data.person_id_cb] = {'first_company':company_id_cb}
