@@ -301,6 +301,8 @@ def scrapePersonsList(company_data, key):
                 assert(os.path.isfile(real_file))
                 person_data = cbscraper.funcs.readJSONFile(real_file)
                 person_data.resetCompanySpecific()
+                person_data.company_id_cb = company_id_cb
+                person_data.company_id_vico = company_id_vico
                 person_data.setType(key)
                 person_data.save(person_out_file, overwrite=True)
 

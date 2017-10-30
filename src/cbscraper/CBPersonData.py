@@ -63,6 +63,8 @@ class CBPersonData(object):
         #self._freeze()
 
     def resetCompanySpecific(self):
+        self.company_id_cb = ''
+        self.company_id_vico = ''
         self.is_founder = False
         self.is_past = False
         self.is_adv = False
@@ -83,6 +85,9 @@ class CBPersonData(object):
 
     def save(self, outfile, overwrite=False):
         assert(outfile != '')
+        assert(self.company_id_cb != '')
+        assert(self.company_id_vico != '')
+        assert(self.person_id_cb != '')
         if not overwrite:
             assert(not os.path.isfile(outfile))
         cbscraper.funcs.saveJSON(self, outfile)
