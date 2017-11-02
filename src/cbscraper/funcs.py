@@ -107,12 +107,12 @@ def isNan(num):
 
 def str2date(instr):
     """
-    Converts a string in the form of "YEAR-MONTH-DAY" or "current" to a datetime.datetime object
+    Converts a string in the form of "YEAR-MONTH-DAY" (e.g. 2010-09-08) or "current" to a datetime.datetime object
     Correctly handles NaN and None
     :param instr: The date to convert from in string format
     :return: the datetime.date object or None if the conversion fails
     """
-    #already a date
+    # already a date
     if isinstance(instr, datetime.date):
         return instr
 
