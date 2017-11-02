@@ -229,8 +229,9 @@ def csv2stata(infile):
     silentRemove(dta_file)
     silentRemove (log_file)
 
-    do_cont = 'import delimited using "' + in_base + '", delimiters(",") bindquotes(strict) \n'
-    do_cont += 'save "' + in_name + '" \n'  # very import the last new line
+    do_cont = ' clear all'
+    do_cont += 'import delimited using "' + in_base + '", delimiters(",") bindquotes(strict) \n'
+    do_cont += 'save "' + in_name + '", replace \n'  # very import the last new line
 
     with open(do_file, 'w') as file:
         file.write(do_cont)
