@@ -26,35 +26,6 @@ def assertType(var_name, var_val, var_type):
         raise Exception ("Unrecognized type of {}={} ({}). Expected type: {}"
                          .format (var_name, var_val, type (var_val), var_type))
 
-def imposeDateConstraint(start_date, end_date):
-    """
-    Make sures that start_date is after end_date
-    :param start_date:
-    :param end_date:
-    :return:
-    """
-
-    if start_date is None or end_date is None:
-        return start_date, end_date
-
-    if not isinstance(start_date, datetime.date):
-        raise Exception("start_date='{}' ({}). Unknown type".format(start_date, type(start_date)))
-
-    if not isinstance(end_date, datetime.date):
-        raise Exception("end_date='{}' ({}). Unknown type".format(end_date, type(end_date)))
-
-    if start_date.year < 1900:
-        raise Exception("This start_date='{}' is impossible".format(start_date))
-
-    if end_date.year < 1900:
-        raise Exception("This end_date='{}' is impossible".format(end_date))
-
-    if start_date > end_date:
-        logging.error("ERROR: start_date='{}' > end_date='{}'. Swapping them".format(start_date, end_date))
-        return end_date, start_date
-
-    return start_date, end_date
-
 __glo_log_file = None
 
 def getCurrentLogFile():
