@@ -8,17 +8,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8ffd353f-9675-4efa-a6a6-3ad054850fe0" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/crunchbase_scraper.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../process_person_table/out/nace_to_latex.tex" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../process_person_table/out/regression.do" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/src/CCompanyHC.py" afterPath="$PROJECT_DIR$/../process_person_table/src/CCompanyHC.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/src/comp_hc_round.py" afterPath="$PROJECT_DIR$/../process_person_table/src/comp_hc_round.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/src/nace_to_latex.py" afterPath="$PROJECT_DIR$/../process_person_table/src/nace_to_latex.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/src/join_df.py" afterPath="$PROJECT_DIR$/../process_person_table/src/join_df.py" />
     </list>
     <ignored path="../gen_company_table/company_table.do" />
     <ignored path="../gen_company_table/company_table.R" />
@@ -35,7 +26,7 @@
     <SUITE FILE_PATH="coverage/crunchbase_scraper$inv_type.coverage" NAME="inv_type Coverage Results" MODIFIED="1509704346314" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$companies_hc.coverage" NAME="companies_hc Coverage Results" MODIFIED="1507373437974" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$nace_map_to_latex.coverage" NAME="nace_map_to_latex Coverage Results" MODIFIED="1506171208008" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
-    <SUITE FILE_PATH="coverage/crunchbase_scraper$join_df.coverage" NAME="join_df Coverage Results" MODIFIED="1509706939011" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
+    <SUITE FILE_PATH="coverage/crunchbase_scraper$join_df.coverage" NAME="join_df Coverage Results" MODIFIED="1509965985012" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$gen_person_table.coverage" NAME="gen_person_table Coverage Results" MODIFIED="1509388621165" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../gen_person_table" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$industry_classifier.coverage" NAME="industry_classifier Coverage Results" MODIFIED="1508435861503" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$find_events.coverage" NAME="find_events Coverage Results" MODIFIED="1509608962266" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
@@ -83,78 +74,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="accounting.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../process_person_table/src/accounting.py">
+      <file leaf-file-name="join_df.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../process_person_table/src/join_df.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1078">
-              <caret line="55" column="54" lean-forward="false" selection-start-line="55" selection-start-column="54" selection-end-line="55" selection-end-column="54" />
-              <folding>
-                <element signature="e#0#15#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CCompanyHC.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../process_person_table/src/CCompanyHC.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="412">
-              <caret line="126" column="37" lean-forward="false" selection-start-line="126" selection-start-column="37" selection-end-line="126" selection-end-column="37" />
+            <state relative-caret-position="384">
+              <caret line="91" column="26" lean-forward="false" selection-start-line="91" selection-start-column="26" selection-end-line="91" selection-end-column="26" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="nace_to_latex.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../process_person_table/src/nace_to_latex.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="333">
-              <caret line="55" column="16" lean-forward="false" selection-start-line="55" selection-start-column="16" selection-end-line="55" selection-end-column="16" />
-              <folding>
-                <element signature="e#0#22#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CPersonHCSection.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../process_person_table/src/CPersonHCSection.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5610">
-              <caret line="262" column="71" lean-forward="false" selection-start-line="262" selection-start-column="71" selection-end-line="262" selection-end-column="71" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="comp_hc_round.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../process_person_table/src/comp_hc_round.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
-              <caret line="12" column="14" lean-forward="false" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="edu_list.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../process_person_table/src/edu_list.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4510">
-              <caret line="217" column="115" lean-forward="false" selection-start-line="217" selection-start-column="115" selection-end-line="217" selection-end-column="115" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="funcs.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../process_person_table/src/funcs.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6050">
-              <caret line="288" column="40" lean-forward="false" selection-start-line="288" selection-start-column="40" selection-end-line="288" selection-end-column="40" />
-              <folding>
-                <element signature="e#0#14#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -275,7 +200,6 @@
         <option value="$PROJECT_DIR$/../gen_person_table/src/write_li.py" />
         <option value="$PROJECT_DIR$/../gen_person_table/src/write_cb.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/funcs_df.py" />
-        <option value="$PROJECT_DIR$/../process_person_table/src/join_df.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/vico_col_names.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/inv_type.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/funcs.py" />
@@ -285,6 +209,7 @@
         <option value="$PROJECT_DIR$/../process_person_table/src/comp_hc_round.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/CCompanyHC.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/nace_to_latex.py" />
+        <option value="$PROJECT_DIR$/../process_person_table/src/join_df.py" />
       </list>
     </option>
   </component>
@@ -368,7 +293,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.comp_hc_round">
+  <component name="RunManager" selected="Python.join_df">
     <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -986,13 +911,6 @@
       <option name="presentableId" value="Default" />
       <updated>1498207171857</updated>
     </task>
-    <task id="LOCAL-00404" summary="Improvements">
-      <created>1509361748353</created>
-      <option name="number" value="00404" />
-      <option name="presentableId" value="LOCAL-00404" />
-      <option name="project" value="LOCAL" />
-      <updated>1509361748353</updated>
-    </task>
     <task id="LOCAL-00405" summary="Improvements">
       <created>1509362448166</created>
       <option name="number" value="00405" />
@@ -1329,7 +1247,14 @@
       <option name="project" value="LOCAL" />
       <updated>1509957898890</updated>
     </task>
-    <option name="localTasksCounter" value="453" />
+    <task id="LOCAL-00453" summary="Improvemenets">
+      <created>1509964527831</created>
+      <option name="number" value="00453" />
+      <option name="presentableId" value="LOCAL-00453" />
+      <option name="project" value="LOCAL" />
+      <updated>1509964527831</updated>
+    </task>
+    <option name="localTasksCounter" value="454" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1343,13 +1268,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32918552" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36199096" sideWeight="0.18259935" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29445073" sideWeight="0.49301827" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32842582" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36199096" sideWeight="0.81740063" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36199096" sideWeight="0.81740063" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23039742" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1736,13 +1660,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../process_person_table/src/join_df.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="431">
-          <caret line="84" column="8" lean-forward="false" selection-start-line="84" selection-start-column="8" selection-end-line="84" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../process_person_table/src/vico_col_names.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -1770,7 +1687,7 @@
         <state relative-caret-position="1078">
           <caret line="55" column="54" lean-forward="false" selection-start-line="55" selection-start-column="54" selection-end-line="55" selection-end-column="54" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#0#15#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1822,8 +1739,16 @@
         <state relative-caret-position="333">
           <caret line="55" column="16" lean-forward="false" selection-start-line="55" selection-start-column="16" selection-end-line="55" selection-end-column="16" />
           <folding>
-            <element signature="e#0#22#0" expanded="true" />
+            <element signature="e#0#22#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../process_person_table/src/join_df.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="91" column="26" lean-forward="false" selection-start-line="91" selection-start-column="26" selection-end-line="91" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>
