@@ -38,7 +38,8 @@ def loggerSetup(log_file, remove_old_log=True, print_start_date = True):
     logging.getLogger().handlers = []
 
     #log_format_str = "[%(asctime)s:%(levelname)s:%(filename)s:%(lineno)d:%(funcName)s] %(message)s"
-    log_format_str = "[%(levelname)-5s:%(filename)-20s:%(lineno)-3s:%(funcName)-20s] %(message)s"
+    #log_format_str = "[%(levelname)-5s:%(filename)-20s:%(lineno)-3s:%(funcName)-20s] %(message)s"
+    log_format_str = "[%(filename)-20s:%(lineno)-3s:%(funcName)-20s] %(message)s"
     fmt = logging.Formatter(log_format_str, datefmt='%H:%M:%S')
 
     # console log handler
