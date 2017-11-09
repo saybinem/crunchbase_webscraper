@@ -6,11 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8ffd353f-9675-4efa-a6a6-3ad054850fe0" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/out/reg_1.do" afterPath="$PROJECT_DIR$/../process_person_table/out/reg_1.do" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/out/reg_pre.do" afterPath="$PROJECT_DIR$/../process_person_table/out/reg_pre.do" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/src/CCompanyHC.py" afterPath="$PROJECT_DIR$/../process_person_table/src/CCompanyHC.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/src/comp_hc_round.py" afterPath="$PROJECT_DIR$/../process_person_table/src/comp_hc_round.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../process_person_table/src/funcs.py" afterPath="$PROJECT_DIR$/../process_person_table/src/funcs.py" />
     </list>
     <ignored path="../gen_company_table/company_table.do" />
     <ignored path="../gen_company_table/company_table.R" />
@@ -42,17 +38,17 @@
     <SUITE FILE_PATH="coverage/crunchbase_scraper$find_exp.coverage" NAME="find_exp Coverage Results" MODIFIED="1509390320356" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$crunchbase_scraper.coverage" NAME="crunchbase_scraper Coverage Results" MODIFIED="1509381393028" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$vico_one_row.coverage" NAME="vico_one_row Coverage Results" MODIFIED="1509622225566" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
-    <SUITE FILE_PATH="coverage/crunchbase_scraper$comp_hc_round.coverage" NAME="comp_hc_round Coverage Results" MODIFIED="1510233569185" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
+    <SUITE FILE_PATH="coverage/crunchbase_scraper$comp_hc_round.coverage" NAME="comp_hc_round Coverage Results" MODIFIED="1510239379454" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$inv_rounds.coverage" NAME="inv_rounds Coverage Results" MODIFIED="1507294810426" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$h0_hc.coverage" NAME="h0_hc Coverage Results" MODIFIED="1508084916491" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$linkedin_scraper.coverage" NAME="linkedin_scraper Coverage Results" MODIFIED="1509383643941" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../linkedin_scraper" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$accounting.coverage" NAME="accounting Coverage Results" MODIFIED="1509976075008" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$company_classifier.coverage" NAME="company_classifier Coverage Results" MODIFIED="1505647623319" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../gen_company_table" />
-    <SUITE FILE_PATH="coverage/crunchbase_scraper$exp_list.coverage" NAME="exp_list Coverage Results" MODIFIED="1510150901192" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
+    <SUITE FILE_PATH="coverage/crunchbase_scraper$exp_list.coverage" NAME="exp_list Coverage Results" MODIFIED="1510237284900" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$comp_hc_h0.coverage" NAME="comp_hc_h0 Coverage Results" MODIFIED="1508156756423" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$vico_drop_duplicates.coverage" NAME="vico_drop_duplicates Coverage Results" MODIFIED="1508433235191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$process_person_table.coverage" NAME="process_person_table Coverage Results" MODIFIED="1505544773339" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
-    <SUITE FILE_PATH="coverage/crunchbase_scraper$edu_list.coverage" NAME="edu_list Coverage Results" MODIFIED="1510159509713" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
+    <SUITE FILE_PATH="coverage/crunchbase_scraper$edu_list.coverage" NAME="edu_list Coverage Results" MODIFIED="1510237862814" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$edu_school_rank.coverage" NAME="edu_school_rank Coverage Results" MODIFIED="1505551384223" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$step2.coverage" NAME="step2 Coverage Results" MODIFIED="1505718333829" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
     <SUITE FILE_PATH="coverage/crunchbase_scraper$edu_bayes.coverage" NAME="edu_bayes Coverage Results" MODIFIED="1504702857380" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../process_person_table" />
@@ -78,8 +74,8 @@
       <file leaf-file-name="comp_hc_round.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../process_person_table/src/comp_hc_round.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2992">
-              <caret line="14" column="11" lean-forward="false" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
+            <state relative-caret-position="250">
+              <caret line="353" column="0" lean-forward="false" selection-start-line="353" selection-start-column="0" selection-end-line="353" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -88,18 +84,18 @@
       <file leaf-file-name="CCompanyHC.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../process_person_table/src/CCompanyHC.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="61" column="39" lean-forward="false" selection-start-line="61" selection-start-column="39" selection-end-line="61" selection-end-column="39" />
+            <state relative-caret-position="404">
+              <caret line="196" column="36" lean-forward="false" selection-start-line="196" selection-start-column="36" selection-end-line="196" selection-end-column="36" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="funcs.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../process_person_table/src/funcs.py">
+        <entry file="file://$PROJECT_DIR$/src/cbscraper/funcs.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="523">
-              <caret line="55" column="35" lean-forward="false" selection-start-line="55" selection-start-column="35" selection-end-line="55" selection-end-column="35" />
+            <state relative-caret-position="360">
+              <caret line="41" column="23" lean-forward="false" selection-start-line="41" selection-start-column="23" selection-end-line="41" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -116,11 +112,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>addPerson</find>
-      <find>setBoo</find>
-      <find>evangelist</find>
-      <find>software</find>
-      <find>audit</find>
       <find>designer</find>
       <find>head</find>
       <find>compile</find>
@@ -146,6 +137,11 @@
       <find>founder</find>
       <find>founded</find>
       <find>getFoundation</find>
+      <find>founders</find>
+      <find>Founder</find>
+      <find>logger</find>
+      <find>loopEve</find>
+      <find>newUniRank</find>
     </findStrings>
     <replaceStrings>
       <replace>soup</replace>
@@ -191,8 +187,6 @@
         <option value="$PROJECT_DIR$/../process_person_table/src/vico_drop_duplicates.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/funcs_company.py" />
         <option value="$PROJECT_DIR$/src/cbscraper/DateInterval.py" />
-        <option value="$PROJECT_DIR$/../process_person_table/src/CTriBool.py" />
-        <option value="$PROJECT_DIR$/../process_person_table/src/CTimeVar.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/CPersonHC.py" />
         <option value="$PROJECT_DIR$/src/cbscraper/CBPersonData.py" />
         <option value="$PROJECT_DIR$/src/cbscraper/global_vars.py" />
@@ -210,7 +204,6 @@
         <option value="$PROJECT_DIR$/../process_person_table/src/find_events.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/vico_one_row.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/inv_rounds.py" />
-        <option value="$PROJECT_DIR$/src/cbscraper/funcs.py" />
         <option value="$PROJECT_DIR$/../gen_person_table/src/funcs.py" />
         <option value="$PROJECT_DIR$/../gen_person_table/src/write_li.py" />
         <option value="$PROJECT_DIR$/../gen_person_table/src/write_cb.py" />
@@ -223,12 +216,15 @@
         <option value="$PROJECT_DIR$/../process_person_table/src/accounting.py" />
         <option value="$PROJECT_DIR$/../gen_company_table/src/main.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/geodist.py" />
-        <option value="$PROJECT_DIR$/../process_person_table/src/exp_list.py" />
-        <option value="$PROJECT_DIR$/../process_person_table/src/CHCType.py" />
-        <option value="$PROJECT_DIR$/../process_person_table/src/edu_list.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/funcs_dicts.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/industry_classifier.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/funcs.py" />
+        <option value="$PROJECT_DIR$/../process_person_table/src/CHCType.py" />
+        <option value="$PROJECT_DIR$/../process_person_table/src/exp_list.py" />
+        <option value="$PROJECT_DIR$/../process_person_table/src/edu_list.py" />
+        <option value="$PROJECT_DIR$/../process_person_table/src/CTriBool.py" />
+        <option value="$PROJECT_DIR$/../process_person_table/src/CTimeVar.py" />
+        <option value="$PROJECT_DIR$/src/cbscraper/funcs.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/comp_hc_round.py" />
         <option value="$PROJECT_DIR$/../process_person_table/src/CCompanyHC.py" />
       </list>
@@ -931,55 +927,6 @@
       <option name="presentableId" value="Default" />
       <updated>1498207171857</updated>
     </task>
-    <task id="LOCAL-00436" summary="BUGFIX: missing classification in exp_list if we have no words for 'cont'">
-      <created>1509466492378</created>
-      <option name="number" value="00436" />
-      <option name="presentableId" value="LOCAL-00436" />
-      <option name="project" value="LOCAL" />
-      <updated>1509466492378</updated>
-    </task>
-    <task id="LOCAL-00437" summary="exp classifier iprovements">
-      <created>1509469637990</created>
-      <option name="number" value="00437" />
-      <option name="presentableId" value="LOCAL-00437" />
-      <option name="project" value="LOCAL" />
-      <updated>1509469637990</updated>
-    </task>
-    <task id="LOCAL-00438" summary="exp classifier iprovements">
-      <created>1509557412609</created>
-      <option name="number" value="00438" />
-      <option name="presentableId" value="LOCAL-00438" />
-      <option name="project" value="LOCAL" />
-      <updated>1509557412610</updated>
-    </task>
-    <task id="LOCAL-00439" summary="exp classifier iprovements">
-      <created>1509609378981</created>
-      <option name="number" value="00439" />
-      <option name="presentableId" value="LOCAL-00439" />
-      <option name="project" value="LOCAL" />
-      <updated>1509609378982</updated>
-    </task>
-    <task id="LOCAL-00440" summary="join_df convertes true and false to int">
-      <created>1509616712823</created>
-      <option name="number" value="00440" />
-      <option name="presentableId" value="LOCAL-00440" />
-      <option name="project" value="LOCAL" />
-      <updated>1509616712824</updated>
-    </task>
-    <task id="LOCAL-00441" summary="join_df convertes true and false to int">
-      <created>1509621608983</created>
-      <option name="number" value="00441" />
-      <option name="presentableId" value="LOCAL-00441" />
-      <option name="project" value="LOCAL" />
-      <updated>1509621608983</updated>
-    </task>
-    <task id="LOCAL-00442" summary="join_df convertes true and false to int">
-      <created>1509633658474</created>
-      <option name="number" value="00442" />
-      <option name="presentableId" value="LOCAL-00442" />
-      <option name="project" value="LOCAL" />
-      <updated>1509633658474</updated>
-    </task>
     <task id="LOCAL-00443" summary="join_df convertes true and false to int">
       <created>1509634531515</created>
       <option name="number" value="00443" />
@@ -1274,7 +1221,56 @@
       <option name="project" value="LOCAL" />
       <updated>1510160385721</updated>
     </task>
-    <option name="localTasksCounter" value="485" />
+    <task id="LOCAL-00485" summary="Improvemenets">
+      <created>1510233580004</created>
+      <option name="number" value="00485" />
+      <option name="presentableId" value="LOCAL-00485" />
+      <option name="project" value="LOCAL" />
+      <updated>1510233580004</updated>
+    </task>
+    <task id="LOCAL-00486" summary="Improvemenets">
+      <created>1510233822819</created>
+      <option name="number" value="00486" />
+      <option name="presentableId" value="LOCAL-00486" />
+      <option name="project" value="LOCAL" />
+      <updated>1510233822819</updated>
+    </task>
+    <task id="LOCAL-00487" summary="Improvemenets">
+      <created>1510235938036</created>
+      <option name="number" value="00487" />
+      <option name="presentableId" value="LOCAL-00487" />
+      <option name="project" value="LOCAL" />
+      <updated>1510235938036</updated>
+    </task>
+    <task id="LOCAL-00488" summary="Improvemenets">
+      <created>1510236335815</created>
+      <option name="number" value="00488" />
+      <option name="presentableId" value="LOCAL-00488" />
+      <option name="project" value="LOCAL" />
+      <updated>1510236335815</updated>
+    </task>
+    <task id="LOCAL-00489" summary="Improvemenets">
+      <created>1510237852526</created>
+      <option name="number" value="00489" />
+      <option name="presentableId" value="LOCAL-00489" />
+      <option name="project" value="LOCAL" />
+      <updated>1510237852526</updated>
+    </task>
+    <task id="LOCAL-00490" summary="bugfix M+T">
+      <created>1510238148373</created>
+      <option name="number" value="00490" />
+      <option name="presentableId" value="LOCAL-00490" />
+      <option name="project" value="LOCAL" />
+      <updated>1510238148373</updated>
+    </task>
+    <task id="LOCAL-00491" summary="bugfix M+T">
+      <created>1510239218873</created>
+      <option name="number" value="00491" />
+      <option name="presentableId" value="LOCAL-00491" />
+      <option name="project" value="LOCAL" />
+      <updated>1510239218873</updated>
+    </task>
+    <option name="localTasksCounter" value="492" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1294,11 +1290,12 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36199096" sideWeight="0.18259935" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29445073" sideWeight="0.49301827" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32842582" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25858122" sideWeight="0.81740063" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25743708" sideWeight="0.81740063" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19935344" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921588" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32608697" sideWeight="0.4935553" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21659483" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34324944" sideWeight="0.84801286" order="3" side_tool="false" content_ui="tabs" />
@@ -1308,7 +1305,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32608697" sideWeight="0.4935553" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -1345,7 +1341,6 @@
       <path value="$PROJECT_DIR$/../linkedin2excel" />
       <path value="$PROJECT_DIR$/../person_table" />
     </ignored-roots>
-    <MESSAGE value="Improvements in exception managment" />
     <MESSAGE value="Rearrangements" />
     <MESSAGE value="hc_before_date" />
     <MESSAGE value="cbscraper person tagged_data -&gt; data" />
@@ -1370,7 +1365,8 @@
     <MESSAGE value="join_df convertes true and false to int" />
     <MESSAGE value="Improvmenets" />
     <MESSAGE value="Improvemenets" />
-    <option name="LAST_COMMIT_MESSAGE" value="Improvemenets" />
+    <MESSAGE value="bugfix M+T" />
+    <option name="LAST_COMMIT_MESSAGE" value="bugfix M+T" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1406,13 +1402,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://C:/IntelPython36/Lib/site-packages/pandas/indexes/multi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="888" column="0" lean-forward="false" selection-start-line="888" selection-start-column="0" selection-end-line="888" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/IntelPython36/Lib/site-packages/pandas/indexes/base.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
@@ -1522,13 +1511,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="523">
           <caret line="45" column="36" lean-forward="false" selection-start-line="45" selection-start-column="36" selection-end-line="45" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../process_person_table/src/CTimeVar.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="438">
-          <caret line="121" column="0" lean-forward="false" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1689,28 +1671,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cbscraper/funcs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="132" column="0" lean-forward="false" selection-start-line="132" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../process_person_table/src/exp_list.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="77">
-          <caret line="84" column="0" lean-forward="false" selection-start-line="84" selection-start-column="0" selection-end-line="90" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../process_person_table/src/edu_list.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1540">
-          <caret line="16" column="32" lean-forward="false" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/IntelPython36/Lib/sre_parse.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="164">
@@ -1722,6 +1682,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
           <caret line="267" column="11" lean-forward="true" selection-start-line="267" selection-start-column="11" selection-end-line="267" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1729,14 +1692,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2769">
           <caret line="36" column="35" lean-forward="true" selection-start-line="36" selection-start-column="35" selection-end-line="36" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../process_person_table/src/CHCType.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1748,18 +1703,68 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../process_person_table/src/CHCType.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="682">
+          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../process_person_table/src/exp_list.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="319">
+          <caret line="32" column="46" lean-forward="false" selection-start-line="32" selection-start-column="46" selection-end-line="32" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../process_person_table/src/edu_list.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-132">
+          <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="81" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../process_person_table/src/CTriBool.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="63" column="25" lean-forward="false" selection-start-line="63" selection-start-column="25" selection-end-line="63" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../process_person_table/src/CTimeVar.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="658">
+          <caret line="115" column="36" lean-forward="false" selection-start-line="115" selection-start-column="36" selection-end-line="115" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cbscraper/funcs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="41" column="23" lean-forward="false" selection-start-line="41" selection-start-column="23" selection-end-line="41" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../process_person_table/src/comp_hc_round.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2992">
-          <caret line="14" column="11" lean-forward="false" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
+        <state relative-caret-position="250">
+          <caret line="353" column="0" lean-forward="false" selection-start-line="353" selection-start-column="0" selection-end-line="353" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../process_person_table/src/CCompanyHC.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="61" column="39" lean-forward="false" selection-start-line="61" selection-start-column="39" selection-end-line="61" selection-end-column="39" />
+        <state relative-caret-position="404">
+          <caret line="196" column="36" lean-forward="false" selection-start-line="196" selection-start-column="36" selection-end-line="196" selection-end-column="36" />
           <folding />
         </state>
       </provider>
