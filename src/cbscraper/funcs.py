@@ -72,7 +72,9 @@ def setup(log_file, output_file):
 
 def isValid(indata):
     # !!! REMEMBER THAT bool(math.nan) RETURNS TRUE. NAN IS TRUE !!!
-    return not isNan(indata)
+    a = not isNan(indata)
+    b = (indata is not None)
+    return (a and b)
 
 def isNan(num):
     return isinstance(num, float) and math.isnan(num)
@@ -103,6 +105,29 @@ def str2date(instr):
     #assume year-month-day
     try:
         res = datetime.datetime.strptime(instr, "%Y-%m-%d").date()
+    except TypeError:
+        logging.critical("TypeError: instr='{}' ({})".format(instr, type(instr)))
+        raise
+    except ValueError:
+        logging.critical("ValueError: instr='{}' ({})".format(instr, type(instr)))
+        raise
+    return res
+
+def str2dateVicoFormat(instr):
+    """
+    Converts a string in the form of "YEAR-MONTH-DAY" (e.g. 2010-09-08) or "current" to a datetime.datetime object
+    Correctly handles NaN and None
+    :param instr: The date to convert from in string format
+    :return: the datetime.date object or None if the conversion fails
+    """
+
+    #detect NaN
+    if isinstance(instr, float) and math.isnan(instr):
+        return None
+
+    #assume year-month-day
+    try:
+        res = datetime.datetime.strptime(instr, "%d-%m-%y").date()
     except TypeError:
         logging.critical("TypeError: instr='{}' ({})".format(instr, type(instr)))
         raise
