@@ -126,8 +126,16 @@ def str2dateVicoFormat(instr):
         return None
 
     #assume year-month-day
+    dash_arr = instr.split('-')
+    if len(dash_arr[0]) == 4:
+        dformat = "%Y-%m-%d"
+    elif len(dash_arr[2]) == 4:
+        dformat = "%d-%m-%Y"
+    else:
+        raise Exception("Format not understood for: {}".format(instr))
+    
     try:
-        res = datetime.datetime.strptime(instr, "%d-%m-%y").date()
+        res = datetime.datetime.strptime(instr, dformat).date()
     except TypeError:
         logging.critical("TypeError: instr='{}' ({})".format(instr, type(instr)))
         raise

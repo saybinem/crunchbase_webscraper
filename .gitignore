@@ -7,6 +7,5 @@
 *.log.4
 *.log.5
 __pycache__
-.idea
 *.zip
-/data/*
+/data
