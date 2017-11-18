@@ -276,6 +276,10 @@ def saveJSON(data, filename, overwrite=True):
     if not overwrite and os.path.isfile(filename):
         return False
     data_str = jsonpickle.encode(data)
+
+    dir = os.path.dirname(filename)
+    os.makedirs(dir, exist_ok=True)
+
     with open(filename, 'w', encoding="utf-8") as fileh:
         fileh.write(data_str)
     return True
