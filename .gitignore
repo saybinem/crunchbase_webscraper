@@ -6,8 +6,6 @@
 *.log.3
 *.log.4
 *.log.5
-*.html
-*.json
 __pycache__
 .idea
 *.zip
