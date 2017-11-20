@@ -8,4 +8,4 @@
 *.log.5
 __pycache__
 *.zip
-/data
+/data/
